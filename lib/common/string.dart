@@ -184,6 +184,19 @@ String uniqueLabelFor(
   }
 }
 
+String numberedName(String base, int index) =>
+    '$base-${index.toString().padLeft(2, '0')}';
+
+/// [base] itself unless [taken] holds it, which then gets the first free
+/// `-01`, `-02` and so on. [base] joins [taken] either way.
+String freeProxyName(String base, Set<String> taken) {
+  var name = base;
+  for (var index = 1; !taken.add(name); index++) {
+    name = numberedName(base, index);
+  }
+  return name;
+}
+
 extension StringNullExt on String? {
   String takeFirstValid(List<String?> others, {String defaultValue = ''}) {
     if (this != null && this!.trim().isNotEmpty) return this!.trim();

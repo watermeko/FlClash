@@ -124,7 +124,9 @@ class CoreController {
     if (proxies.isEmpty) {
       return message;
     }
-    await file.safeWriteAsString(await encodeYamlTask({'proxies': proxies}));
+    await file.safeWriteAsString(
+      await encodeYamlTask(shareLinkProfileConfig(proxies)),
+    );
     return validateConfig(path);
   }
 

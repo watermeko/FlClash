@@ -443,7 +443,7 @@ class ProfilesAction extends _$ProfilesAction {
     final label = proxies.length == 1
         ? first
         : appLocalizations.proxiesProfileLabel(first, proxies.length);
-    final config = await encodeYamlTask({'proxies': proxies});
+    final config = await encodeYamlTask(shareLinkProfileConfig(proxies));
     return profile
         .copyWith(label: profile.label.takeFirstValid([label]))
         .saveFile(

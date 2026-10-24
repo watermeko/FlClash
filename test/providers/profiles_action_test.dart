@@ -73,8 +73,12 @@ void main() {
     );
   }
 
+  Future<Map> savedConfig(Profile profile) async {
+    return loadYaml(await (await profile.file).readAsString()) as Map;
+  }
+
   Future<List<Map>> savedProxies(Profile profile) async {
-    final config = loadYaml(await (await profile.file).readAsString()) as Map;
+    final config = await savedConfig(profile);
     return [for (final proxy in config['proxies'] as List) proxy as Map];
   }
 
@@ -97,6 +101,28 @@ void main() {
         {'name': 'HK', 'type': 'vless', 'server': 'hk.example.com'},
       ]);
       verify(() => core.validateConfig(any())).called(1);
+    });
+
+    test('routes the profile through a group over its proxies', () async {
+      const link = 'vless://id@hk.example.com:443#HK';
+      decodesTo(link, [
+        {'name': 'HK', 'type': 'vless', 'server': 'hk.example.com'},
+      ]);
+
+      await container
+          .read(profilesActionProvider.notifier)
+          .addProfileFromLink(link);
+
+      final profile = container.read(profilesProvider).single;
+      final config = await savedConfig(profile);
+      expect(config['proxy-groups'], [
+        {
+          'name': shareLinksProxyGroupName,
+          'type': 'select',
+          'proxies': ['HK'],
+        },
+      ]);
+      expect(config['rules'], ['MATCH,$shareLinksProxyGroupName']);
     });
 
     test('names an unnamed proxy after its server', () async {

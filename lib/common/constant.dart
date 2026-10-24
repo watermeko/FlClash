@@ -126,6 +126,11 @@ const maxMobileWidth = 600;
 const maxLaptopWidth = 840;
 const defaultTestUrl = 'https://www.gstatic.com/generate_204';
 
+/// The group a profile made of share links routes through. It stays
+/// language-neutral because the profile file carries it, rules included, and
+/// every update of a subscription rewrites both.
+const shareLinksProxyGroupName = 'PROXY';
+
 const shareLinkSchemes = {
   'hysteria',
   'hysteria2',

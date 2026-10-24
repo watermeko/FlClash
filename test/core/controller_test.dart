@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:fl_clash/common/constant.dart';
 import 'package:fl_clash/common/exception.dart';
 import 'package:fl_clash/core/controller.dart';
 import 'package:fl_clash/core/desktop/model.dart';
@@ -9,6 +10,7 @@ import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
+import 'package:yaml/yaml.dart';
 
 class MockCoreHandlerInterface extends Mock implements CoreHandlerInterface {}
 
@@ -150,6 +152,35 @@ void main() {
         expect(await controller.validateProfile(path, 'AGE-SECRET-KEY-1A'), '');
         verifyNever(() => mock.decryptConfig(any(), any()));
         expect(File(path).readAsStringSync(), 'proxies: []');
+      });
+
+      test('turns a share-link list into a config it can route with', () async {
+        File(path).writeAsStringSync('vless://id@hk.example.com:443#HK\n');
+        var validated = 0;
+        when(
+          () => mock.validateConfig(path),
+        ).thenAnswer((_) async => validated++ == 0 ? 'no config here' : '');
+        when(() => mock.convertProxies(path)).thenAnswer(
+          (_) async => [
+            {'name': 'HK', 'type': 'vless', 'server': 'hk.example.com'},
+          ],
+        );
+
+        expect(await controller.validateProfile(path), '');
+
+        final config = loadYaml(File(path).readAsStringSync()) as Map;
+        expect(config['proxies'], [
+          {'name': 'HK', 'type': 'vless', 'server': 'hk.example.com'},
+        ]);
+        expect(config['proxy-groups'], [
+          {
+            'name': shareLinksProxyGroupName,
+            'type': 'select',
+            'proxies': ['HK'],
+          },
+        ]);
+        expect(config['rules'], ['MATCH,$shareLinksProxyGroupName']);
+        verify(() => mock.convertProxies(path)).called(1);
       });
     });
 
