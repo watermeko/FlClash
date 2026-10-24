@@ -362,7 +362,10 @@ Windows runner for the helper's `windows-service` feature. On branch pushes a
 `desktop` job also compiles a debug build per desktop platform; a tag skips it,
 since its release matrix compiles the same native code. Release builds run only
 in the public repository and start alongside the checks; `upload` publishes
-only once every build and every check job passes.
+only once every build and every check job passes. A repository other than the public one builds the same release matrix
+from `main` and by hand, because it owns no release the app links to: `fork-release` collects that `dist` into one
+rolling `ci-latest` pre-release, which a phone downloads without the Actions login an artifact needs. Without the
+keystore secrets those Android builds keep the debug key under the `.dev` id.
 
 `bash tool/check_plugins.sh` is that plugin gate, and CI runs the same script.
 It discovers every `plugins/*/pubspec.yaml`, analyzes each package, and runs
