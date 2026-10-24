@@ -60,16 +60,19 @@ final class SetupPatchProvider
             bool appendSystemDns,
             bool bypassPrivateRoute,
             PatchClashConfig patchConfig,
+            int tailscaleRevision,
           }),
           ({
             bool appendSystemDns,
             bool bypassPrivateRoute,
             PatchClashConfig patchConfig,
+            int tailscaleRevision,
           }),
           ({
             bool appendSystemDns,
             bool bypassPrivateRoute,
             PatchClashConfig patchConfig,
+            int tailscaleRevision,
           })
         >
     with
@@ -78,6 +81,7 @@ final class SetupPatchProvider
             bool appendSystemDns,
             bool bypassPrivateRoute,
             PatchClashConfig patchConfig,
+            int tailscaleRevision,
           })
         > {
   SetupPatchProvider._()
@@ -101,6 +105,7 @@ final class SetupPatchProvider
       bool appendSystemDns,
       bool bypassPrivateRoute,
       PatchClashConfig patchConfig,
+      int tailscaleRevision,
     })
   >
   $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
@@ -110,6 +115,7 @@ final class SetupPatchProvider
     bool appendSystemDns,
     bool bypassPrivateRoute,
     PatchClashConfig patchConfig,
+    int tailscaleRevision,
   })
   create(Ref ref) {
     return setupPatch(ref);
@@ -121,6 +127,7 @@ final class SetupPatchProvider
       bool appendSystemDns,
       bool bypassPrivateRoute,
       PatchClashConfig patchConfig,
+      int tailscaleRevision,
     })
     value,
   ) {
@@ -132,13 +139,14 @@ final class SetupPatchProvider
               bool appendSystemDns,
               bool bypassPrivateRoute,
               PatchClashConfig patchConfig,
+              int tailscaleRevision,
             })
           >(value),
     );
   }
 }
 
-String _$setupPatchHash() => r'283e94846903bafab1c22985b6f90d4c0e2a4697';
+String _$setupPatchHash() => r'4afd66aaeb7e33097613012159baa037b66a3948';
 
 @ProviderFor(trayState)
 final trayStateProvider = TrayStateProvider._();
@@ -1705,6 +1713,185 @@ abstract class _$RuleProvider extends $Notifier<Rule> {
             as $ClassProviderElement<
               AnyNotifier<Rule, Rule>,
               Rule,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+/// The status of the injected node, if the core has reported one.
+
+@ProviderFor(tailscaleStatus)
+final tailscaleStatusProvider = TailscaleStatusProvider._();
+
+/// The status of the injected node, if the core has reported one.
+
+final class TailscaleStatusProvider
+    extends
+        $FunctionalProvider<
+          TailscaleStatus?,
+          TailscaleStatus?,
+          TailscaleStatus?
+        >
+    with $Provider<TailscaleStatus?> {
+  /// The status of the injected node, if the core has reported one.
+  TailscaleStatusProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: _noRetry,
+        name: r'tailscaleStatusProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$tailscaleStatusHash();
+
+  @$internal
+  @override
+  $ProviderElement<TailscaleStatus?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  TailscaleStatus? create(Ref ref) {
+    return tailscaleStatus(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TailscaleStatus? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TailscaleStatus?>(value),
+    );
+  }
+}
+
+String _$tailscaleStatusHash() => r'833face59130516ddbdb533f8cd02adc802bc568';
+
+/// Whether a Tailscale outbound exists in the running config at all, which is
+/// what a page has to know before it can say anything about the node.
+
+@ProviderFor(tailscalePresent)
+final tailscalePresentProvider = TailscalePresentProvider._();
+
+/// Whether a Tailscale outbound exists in the running config at all, which is
+/// what a page has to know before it can say anything about the node.
+
+final class TailscalePresentProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  /// Whether a Tailscale outbound exists in the running config at all, which is
+  /// what a page has to know before it can say anything about the node.
+  TailscalePresentProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: _noRetry,
+        name: r'tailscalePresentProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$tailscalePresentHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return tailscalePresent(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$tailscalePresentHash() => r'1930fec59c1cb50e579d9f2e38949271fe8527df';
+
+/// Every Tailscale status the core has pushed, by proxy name.
+///
+/// The core starts a Tailscale backend as soon as an apply installs it and
+/// pushes each change after that, so a page opening later reads the ones it
+/// missed rather than waiting for the next event.
+
+@ProviderFor(Tailscales)
+final tailscalesProvider = TailscalesProvider._();
+
+/// Every Tailscale status the core has pushed, by proxy name.
+///
+/// The core starts a Tailscale backend as soon as an apply installs it and
+/// pushes each change after that, so a page opening later reads the ones it
+/// missed rather than waiting for the next event.
+final class TailscalesProvider
+    extends $NotifierProvider<Tailscales, Map<String, TailscaleStatus>> {
+  /// Every Tailscale status the core has pushed, by proxy name.
+  ///
+  /// The core starts a Tailscale backend as soon as an apply installs it and
+  /// pushes each change after that, so a page opening later reads the ones it
+  /// missed rather than waiting for the next event.
+  TailscalesProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: _noRetry,
+        name: r'tailscalesProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$tailscalesHash();
+
+  @$internal
+  @override
+  Tailscales create() => Tailscales();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Map<String, TailscaleStatus> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Map<String, TailscaleStatus>>(value),
+    );
+  }
+}
+
+String _$tailscalesHash() => r'acb60519df2744684a15180ea64207fefc4d94ba';
+
+/// Every Tailscale status the core has pushed, by proxy name.
+///
+/// The core starts a Tailscale backend as soon as an apply installs it and
+/// pushes each change after that, so a page opening later reads the ones it
+/// missed rather than waiting for the next event.
+
+abstract class _$Tailscales extends $Notifier<Map<String, TailscaleStatus>> {
+  Map<String, TailscaleStatus> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref =
+        this.ref
+            as $Ref<Map<String, TailscaleStatus>, Map<String, TailscaleStatus>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<
+                Map<String, TailscaleStatus>,
+                Map<String, TailscaleStatus>
+              >,
+              Map<String, TailscaleStatus>,
               Object?,
               Object?
             >;

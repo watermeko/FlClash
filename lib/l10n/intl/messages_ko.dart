@@ -196,21 +196,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m79(label) => "${label}은(는) 하나만 입력해야 합니다";
 
-  static String m80(value) => "최고 ${value}";
+  static String m80(count) =>
+      "${Intl.plural(count, one: '기기 1대', other: '기기 ${count}대')}";
 
-  static String m81(value) => "합계 ${value}";
+  static String m81(value) => "최고 ${value}";
 
-  static String m82(transport) => "${transport} 요청 헤더";
+  static String m82(value) => "합계 ${value}";
 
-  static String m83(label) => "${label}은(는) URL이어야 합니다";
+  static String m83(transport) => "${transport} 요청 헤더";
 
-  static String m84(count) => "${Intl.plural(count, other: '${count}년 전')}";
+  static String m84(label) => "${label}은(는) URL이어야 합니다";
 
   static String m85(count) => "${Intl.plural(count, other: '${count}년 전')}";
+
+  static String m86(count) => "${Intl.plural(count, other: '${count}년 전')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("정보"),
+    "acceptRoutes": MessageLookupByLibrary.simpleMessage("경로 수락"),
     "accessControl": MessageLookupByLibrary.simpleMessage("접근 제어"),
     "accessControlAllowDesc": MessageLookupByLibrary.simpleMessage(
       "선택한 앱만 VPN을 거칩니다",
@@ -658,6 +662,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "existsTip": m27,
     "exit": MessageLookupByLibrary.simpleMessage("종료"),
     "exitFullScreen": MessageLookupByLibrary.simpleMessage("전체 화면 종료"),
+    "exitNodeAllowLanAccess": MessageLookupByLibrary.simpleMessage(
+      "LAN 액세스 허용",
+    ),
     "exitNodes": MessageLookupByLibrary.simpleMessage("출구 노드"),
     "expectedStatus": MessageLookupByLibrary.simpleMessage("예상 상태"),
     "expireTime": MessageLookupByLibrary.simpleMessage("만료 시간"),
@@ -1520,6 +1527,47 @@ class MessageLookup extends MessageLookupByLibrary {
     "systemProxy": MessageLookupByLibrary.simpleMessage("시스템 프록시"),
     "tab": MessageLookupByLibrary.simpleMessage("탭"),
     "tabAnimation": MessageLookupByLibrary.simpleMessage("탭 애니메이션"),
+    "tailscale": MessageLookupByLibrary.simpleMessage("Tailscale"),
+    "tailscaleAccount": MessageLookupByLibrary.simpleMessage("계정"),
+    "tailscaleAddresses": MessageLookupByLibrary.simpleMessage("주소"),
+    "tailscaleAuthKey": MessageLookupByLibrary.simpleMessage("키 인증"),
+    "tailscaleAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "비워 두면 이 페이지에서 로그인합니다",
+    ),
+    "tailscaleDesc": MessageLookupByLibrary.simpleMessage(
+      "Tailnet 상태, 주소 및 로그인 방식",
+    ),
+    "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage("출구 노드"),
+    "tailscaleHealth": MessageLookupByLibrary.simpleMessage("문제"),
+    "tailscaleLogin": MessageLookupByLibrary.simpleMessage("브라우저 로그인 인증"),
+    "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage("브라우저로 로그인됨"),
+    "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
+      "브라우저에서 Tailscale 로그인 페이지를 엽니다",
+    ),
+    "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
+      "이 기기는 이미 로그인되어 있어 완료할 인증이 없습니다",
+    ),
+    "tailscaleLogout": MessageLookupByLibrary.simpleMessage("로그아웃"),
+    "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
+      "이 기기의 키를 삭제하여 다른 계정에서 사용할 수 있게 합니다",
+    ),
+    "tailscaleMachine": MessageLookupByLibrary.simpleMessage("장치 이름"),
+    "tailscaleMachines": MessageLookupByLibrary.simpleMessage("장치"),
+    "tailscaleMachinesCount": m80,
+    "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage("로그인 필요"),
+    "tailscaleNoMachines": MessageLookupByLibrary.simpleMessage("아직 장치가 없습니다"),
+    "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
+      "이 기기가 로그인하면 표시됩니다",
+    ),
+    "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("시작되지 않음"),
+    "tailscaleOff": MessageLookupByLibrary.simpleMessage("꺼짐"),
+    "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
+      "켜면 모든 프로필에 Tailscale 노드가 유지됩니다",
+    ),
+    "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("상태 새로 고침"),
+    "tailscaleRunning": MessageLookupByLibrary.simpleMessage("연결됨"),
+    "tailscaleStarting": MessageLookupByLibrary.simpleMessage("시작 중"),
+    "tailscaleStatus": MessageLookupByLibrary.simpleMessage("상태"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage("아이콘을 눌러 다시 시도"),
     "tapToAuthorize": MessageLookupByLibrary.simpleMessage("눌러서 허용"),
     "target": MessageLookupByLibrary.simpleMessage("대상"),
@@ -1549,11 +1597,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("업로드량"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxy 포트"),
     "traffic": MessageLookupByLibrary.simpleMessage("트래픽"),
-    "trafficPeak": m80,
-    "trafficTotal": m81,
+    "trafficPeak": m81,
+    "trafficTotal": m82,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("트래픽 사용량"),
     "transport": MessageLookupByLibrary.simpleMessage("전송"),
-    "transportHeaders": m82,
+    "transportHeaders": m83,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN 권한을 얻지 못해 끄기로 되돌렸습니다.",
@@ -1583,7 +1631,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("업로드"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("업로드 대역폭"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m83,
+    "urlTip": m84,
     "useHosts": MessageLookupByLibrary.simpleMessage("hosts 사용"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("시스템 hosts 사용"),
     "usedShort": MessageLookupByLibrary.simpleMessage("사용"),
@@ -1606,8 +1654,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "시스템에 기록하면 시스템 시계도 설정합니다. Android에서는 무시됩니다.",
     ),
-    "yearsAgo": m84,
-    "yearsAgoShort": m85,
+    "yearsAgo": m85,
+    "yearsAgoShort": m86,
     "yes": MessageLookupByLibrary.simpleMessage("예"),
     "zhCN": MessageLookupByLibrary.simpleMessage("중국어 간체"),
   };

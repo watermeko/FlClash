@@ -66,10 +66,17 @@ class SetupAction extends _$SetupAction {
   SetupParams get _setupParams {
     final selectedMap = ref.read(selectedMapProvider);
     final appSetting = ref.read(appSettingProvider);
+    final tailscale = ref.read(tailscaleSettingProvider);
     return SetupParams(
       selectedMap: selectedMap,
       testUrl: ref.read(patchClashConfigProvider).testUrl,
       skipCertVerify: !appSetting.checkCertificate,
+      tailscale: tailscaleInjectOf(
+        tailscale,
+        status: ref.read(
+          tailscalesProvider.select((state) => state[kTailscaleProxyName]),
+        ),
+      ),
     );
   }
 

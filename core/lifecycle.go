@@ -90,6 +90,7 @@ func updateListeners(cfg *config.Config) {
 func handleShutdown() bool {
 	handleStopLog()
 	stopRouteWatch()
+	stopTailscales()
 
 	configMu.Lock()
 	isRunning.Store(false)

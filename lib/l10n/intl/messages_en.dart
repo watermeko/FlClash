@@ -220,22 +220,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m79(label) => "${label} must be a single item";
 
-  static String m80(value) => "Peak ${value}";
+  static String m80(count) =>
+      "${Intl.plural(count, one: '1 machine', other: '${count} machines')}";
 
-  static String m81(value) => "Total ${value}";
+  static String m81(value) => "Peak ${value}";
 
-  static String m82(transport) => "${transport} Headers";
+  static String m82(value) => "Total ${value}";
 
-  static String m83(label) => "${label} must be a URL";
+  static String m83(transport) => "${transport} Headers";
 
-  static String m84(count) =>
+  static String m84(label) => "${label} must be a URL";
+
+  static String m85(count) =>
       "${Intl.plural(count, one: '1 year ago', other: '${count} years ago')}";
 
-  static String m85(count) => "${Intl.plural(count, other: '${count}y ago')}";
+  static String m86(count) => "${Intl.plural(count, other: '${count}y ago')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("About"),
+    "acceptRoutes": MessageLookupByLibrary.simpleMessage("Accept routes"),
     "accessControl": MessageLookupByLibrary.simpleMessage("Access control"),
     "accessControlAllowDesc": MessageLookupByLibrary.simpleMessage(
       "Only selected apps go through the VPN",
@@ -791,6 +795,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "existsTip": m27,
     "exit": MessageLookupByLibrary.simpleMessage("Exit"),
     "exitFullScreen": MessageLookupByLibrary.simpleMessage("Exit full screen"),
+    "exitNodeAllowLanAccess": MessageLookupByLibrary.simpleMessage(
+      "Allow LAN access",
+    ),
     "exitNodes": MessageLookupByLibrary.simpleMessage("Exit nodes"),
     "expectedStatus": MessageLookupByLibrary.simpleMessage("Expected status"),
     "expireTime": MessageLookupByLibrary.simpleMessage("Expiration time"),
@@ -1800,6 +1807,55 @@ class MessageLookup extends MessageLookupByLibrary {
     "systemProxy": MessageLookupByLibrary.simpleMessage("System proxy"),
     "tab": MessageLookupByLibrary.simpleMessage("Tab"),
     "tabAnimation": MessageLookupByLibrary.simpleMessage("Tab animation"),
+    "tailscale": MessageLookupByLibrary.simpleMessage("Tailscale"),
+    "tailscaleAccount": MessageLookupByLibrary.simpleMessage("Account"),
+    "tailscaleAddresses": MessageLookupByLibrary.simpleMessage("Addresses"),
+    "tailscaleAuthKey": MessageLookupByLibrary.simpleMessage(
+      "Key authentication",
+    ),
+    "tailscaleAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "Leave it empty to sign in from the page instead",
+    ),
+    "tailscaleDesc": MessageLookupByLibrary.simpleMessage(
+      "Tailnet status, address and how the node signed in",
+    ),
+    "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage("exit node"),
+    "tailscaleHealth": MessageLookupByLibrary.simpleMessage("Problem"),
+    "tailscaleLogin": MessageLookupByLibrary.simpleMessage("Browser sign-in"),
+    "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage(
+      "Signed in with a browser",
+    ),
+    "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
+      "Opens the Tailscale sign-in page in a browser",
+    ),
+    "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
+      "This device is already signed in, so there is nothing to finish",
+    ),
+    "tailscaleLogout": MessageLookupByLibrary.simpleMessage("Sign out"),
+    "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
+      "Drops the key this device keeps, so another account can claim it",
+    ),
+    "tailscaleMachine": MessageLookupByLibrary.simpleMessage("Machine name"),
+    "tailscaleMachines": MessageLookupByLibrary.simpleMessage("Machines"),
+    "tailscaleMachinesCount": m80,
+    "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage(
+      "Sign-in required",
+    ),
+    "tailscaleNoMachines": MessageLookupByLibrary.simpleMessage(
+      "No machines yet",
+    ),
+    "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
+      "They appear once this device is signed in",
+    ),
+    "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("Not started"),
+    "tailscaleOff": MessageLookupByLibrary.simpleMessage("Off"),
+    "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
+      "Turn this on to keep a Tailscale node in every profile",
+    ),
+    "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("Refresh status"),
+    "tailscaleRunning": MessageLookupByLibrary.simpleMessage("Connected"),
+    "tailscaleStarting": MessageLookupByLibrary.simpleMessage("Starting"),
+    "tailscaleStatus": MessageLookupByLibrary.simpleMessage("Status"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage(
       "Tap the icon to retry",
     ),
@@ -1831,11 +1887,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("Uploaded"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxy port"),
     "traffic": MessageLookupByLibrary.simpleMessage("Traffic"),
-    "trafficPeak": m80,
-    "trafficTotal": m81,
+    "trafficPeak": m81,
+    "trafficTotal": m82,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("Traffic usage"),
     "transport": MessageLookupByLibrary.simpleMessage("Transport"),
-    "transportHeaders": m82,
+    "transportHeaders": m83,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN could not be authorized, so it was turned off.",
@@ -1867,7 +1923,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("Upload"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("Upload bandwidth"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m83,
+    "urlTip": m84,
     "useHosts": MessageLookupByLibrary.simpleMessage("Use hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("Use system hosts"),
     "usedShort": MessageLookupByLibrary.simpleMessage("used"),
@@ -1892,8 +1948,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "Write to system also sets the system clock; Android ignores it.",
     ),
-    "yearsAgo": m84,
-    "yearsAgoShort": m85,
+    "yearsAgo": m85,
+    "yearsAgoShort": m86,
     "yes": MessageLookupByLibrary.simpleMessage("Yes"),
     "zhCN": MessageLookupByLibrary.simpleMessage("Simplified Chinese"),
   };

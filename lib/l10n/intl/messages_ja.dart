@@ -195,21 +195,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m79(label) => "${label}は1項目のみ指定できます";
 
-  static String m80(value) => "ピーク ${value}";
+  static String m80(count) =>
+      "${Intl.plural(count, one: '1 台のデバイス', other: '${count} 台のデバイス')}";
 
-  static String m81(value) => "累計 ${value}";
+  static String m81(value) => "ピーク ${value}";
 
-  static String m82(transport) => "${transport} リクエストヘッダー";
+  static String m82(value) => "累計 ${value}";
 
-  static String m83(label) => "${label}はURLである必要があります";
+  static String m83(transport) => "${transport} リクエストヘッダー";
 
-  static String m84(count) => "${count} 年前";
+  static String m84(label) => "${label}はURLである必要があります";
 
   static String m85(count) => "${count} 年前";
+
+  static String m86(count) => "${count} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("アプリについて"),
+    "acceptRoutes": MessageLookupByLibrary.simpleMessage("ルートを受け入れる"),
     "accessControl": MessageLookupByLibrary.simpleMessage("アクセス制御"),
     "accessControlAllowDesc": MessageLookupByLibrary.simpleMessage(
       "選択したアプリのみVPNを経由します",
@@ -669,6 +673,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "existsTip": m27,
     "exit": MessageLookupByLibrary.simpleMessage("終了"),
     "exitFullScreen": MessageLookupByLibrary.simpleMessage("全画面表示を終了"),
+    "exitNodeAllowLanAccess": MessageLookupByLibrary.simpleMessage(
+      "LAN アクセスを許可",
+    ),
     "exitNodes": MessageLookupByLibrary.simpleMessage("出口ノード"),
     "expectedStatus": MessageLookupByLibrary.simpleMessage("期待するステータス"),
     "expireTime": MessageLookupByLibrary.simpleMessage("有効期限"),
@@ -1547,6 +1554,47 @@ class MessageLookup extends MessageLookupByLibrary {
     "systemProxy": MessageLookupByLibrary.simpleMessage("システムプロキシ"),
     "tab": MessageLookupByLibrary.simpleMessage("タブ"),
     "tabAnimation": MessageLookupByLibrary.simpleMessage("タブアニメーション"),
+    "tailscale": MessageLookupByLibrary.simpleMessage("Tailscale"),
+    "tailscaleAccount": MessageLookupByLibrary.simpleMessage("アカウント"),
+    "tailscaleAddresses": MessageLookupByLibrary.simpleMessage("アドレス"),
+    "tailscaleAuthKey": MessageLookupByLibrary.simpleMessage("キー認証"),
+    "tailscaleAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "空欄の場合はこのページからサインインします",
+    ),
+    "tailscaleDesc": MessageLookupByLibrary.simpleMessage(
+      "Tailnet の状態・アドレス・サインイン方法",
+    ),
+    "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage("出口ノード"),
+    "tailscaleHealth": MessageLookupByLibrary.simpleMessage("問題"),
+    "tailscaleLogin": MessageLookupByLibrary.simpleMessage("ブラウザでサインイン"),
+    "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage("ブラウザでサインイン済み"),
+    "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
+      "ブラウザで Tailscale のサインインページを開きます",
+    ),
+    "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
+      "このデバイスはすでにサインインしているため、完了する手続きはありません",
+    ),
+    "tailscaleLogout": MessageLookupByLibrary.simpleMessage("サインアウト"),
+    "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
+      "このデバイスのキーを削除し、別のアカウントで引き継げるようにします",
+    ),
+    "tailscaleMachine": MessageLookupByLibrary.simpleMessage("マシン名"),
+    "tailscaleMachines": MessageLookupByLibrary.simpleMessage("マシン"),
+    "tailscaleMachinesCount": m80,
+    "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage("サインインが必要"),
+    "tailscaleNoMachines": MessageLookupByLibrary.simpleMessage("マシンはまだありません"),
+    "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
+      "このデバイスがサインインすると表示されます",
+    ),
+    "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("未起動"),
+    "tailscaleOff": MessageLookupByLibrary.simpleMessage("オフ"),
+    "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
+      "オンにするとすべてのプロファイルに Tailscale ノードを保持します",
+    ),
+    "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("状態を更新"),
+    "tailscaleRunning": MessageLookupByLibrary.simpleMessage("接続済み"),
+    "tailscaleStarting": MessageLookupByLibrary.simpleMessage("起動中"),
+    "tailscaleStatus": MessageLookupByLibrary.simpleMessage("状態"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage("アイコンをタップして再試行"),
     "tapToAuthorize": MessageLookupByLibrary.simpleMessage("タップして許可"),
     "target": MessageLookupByLibrary.simpleMessage("宛先"),
@@ -1576,11 +1624,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("アップロード量"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxyポート"),
     "traffic": MessageLookupByLibrary.simpleMessage("通信量"),
-    "trafficPeak": m80,
-    "trafficTotal": m81,
+    "trafficPeak": m81,
+    "trafficTotal": m82,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("トラフィック統計"),
     "transport": MessageLookupByLibrary.simpleMessage("トランスポート"),
-    "transportHeaders": m82,
+    "transportHeaders": m83,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN の権限を取得できなかったため、オフにしました。",
@@ -1608,7 +1656,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("アップロード"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("アップロード帯域幅"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m83,
+    "urlTip": m84,
     "useHosts": MessageLookupByLibrary.simpleMessage("Hostsを使用"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("システムのHostsを使用"),
     "usedShort": MessageLookupByLibrary.simpleMessage("使用済み"),
@@ -1631,8 +1679,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "システムに書き込むを有効にするとシステムクロックも設定します。Android では無視されます。",
     ),
-    "yearsAgo": m84,
-    "yearsAgoShort": m85,
+    "yearsAgo": m85,
+    "yearsAgoShort": m86,
     "yes": MessageLookupByLibrary.simpleMessage("はい"),
     "zhCN": MessageLookupByLibrary.simpleMessage("簡体字中国語"),
   };

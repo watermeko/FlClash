@@ -8052,6 +8052,278 @@ class AppLocalizations {
       args: [name],
     );
   }
+
+  /// `Tailscale`
+  String get tailscale {
+    return Intl.message('Tailscale', name: 'tailscale', desc: '', args: []);
+  }
+
+  /// `Accept routes`
+  String get acceptRoutes {
+    return Intl.message(
+      'Accept routes',
+      name: 'acceptRoutes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow LAN access`
+  String get exitNodeAllowLanAccess {
+    return Intl.message(
+      'Allow LAN access',
+      name: 'exitNodeAllowLanAccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status`
+  String get tailscaleStatus {
+    return Intl.message('Status', name: 'tailscaleStatus', desc: '', args: []);
+  }
+
+  /// `Not started`
+  String get tailscaleNotStarted {
+    return Intl.message(
+      'Not started',
+      name: 'tailscaleNotStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Starting`
+  String get tailscaleStarting {
+    return Intl.message(
+      'Starting',
+      name: 'tailscaleStarting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connected`
+  String get tailscaleRunning {
+    return Intl.message(
+      'Connected',
+      name: 'tailscaleRunning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign-in required`
+  String get tailscaleNeedsLogin {
+    return Intl.message(
+      'Sign-in required',
+      name: 'tailscaleNeedsLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Addresses`
+  String get tailscaleAddresses {
+    return Intl.message(
+      'Addresses',
+      name: 'tailscaleAddresses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Machine name`
+  String get tailscaleMachine {
+    return Intl.message(
+      'Machine name',
+      name: 'tailscaleMachine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Problem`
+  String get tailscaleHealth {
+    return Intl.message('Problem', name: 'tailscaleHealth', desc: '', args: []);
+  }
+
+  /// `Browser sign-in`
+  String get tailscaleLogin {
+    return Intl.message(
+      'Browser sign-in',
+      name: 'tailscaleLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh status`
+  String get tailscaleRefresh {
+    return Intl.message(
+      'Refresh status',
+      name: 'tailscaleRefresh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get tailscaleAccount {
+    return Intl.message(
+      'Account',
+      name: 'tailscaleAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Key authentication`
+  String get tailscaleAuthKey {
+    return Intl.message(
+      'Key authentication',
+      name: 'tailscaleAuthKey',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leave it empty to sign in from the page instead`
+  String get tailscaleAuthKeyTip {
+    return Intl.message(
+      'Leave it empty to sign in from the page instead',
+      name: 'tailscaleAuthKeyTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Opens the Tailscale sign-in page in a browser`
+  String get tailscaleLoginTip {
+    return Intl.message(
+      'Opens the Tailscale sign-in page in a browser',
+      name: 'tailscaleLoginTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign out`
+  String get tailscaleLogout {
+    return Intl.message(
+      'Sign out',
+      name: 'tailscaleLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drops the key this device keeps, so another account can claim it`
+  String get tailscaleLogoutTip {
+    return Intl.message(
+      'Drops the key this device keeps, so another account can claim it',
+      name: 'tailscaleLogoutTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Machines`
+  String get tailscaleMachines {
+    return Intl.message(
+      'Machines',
+      name: 'tailscaleMachines',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No machines yet`
+  String get tailscaleNoMachines {
+    return Intl.message(
+      'No machines yet',
+      name: 'tailscaleNoMachines',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `They appear once this device is signed in`
+  String get tailscaleNoMachinesTip {
+    return Intl.message(
+      'They appear once this device is signed in',
+      name: 'tailscaleNoMachinesTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `exit node`
+  String get tailscaleExitNodeInUse {
+    return Intl.message(
+      'exit node',
+      name: 'tailscaleExitNodeInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Off`
+  String get tailscaleOff {
+    return Intl.message('Off', name: 'tailscaleOff', desc: '', args: []);
+  }
+
+  /// `Turn this on to keep a Tailscale node in every profile`
+  String get tailscaleOffTip {
+    return Intl.message(
+      'Turn this on to keep a Tailscale node in every profile',
+      name: 'tailscaleOffTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This device is already signed in, so there is nothing to finish`
+  String get tailscaleLoginUnavailable {
+    return Intl.message(
+      'This device is already signed in, so there is nothing to finish',
+      name: 'tailscaleLoginUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signed in with a browser`
+  String get tailscaleLoginDone {
+    return Intl.message(
+      'Signed in with a browser',
+      name: 'tailscaleLoginDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tailnet status, address and how the node signed in`
+  String get tailscaleDesc {
+    return Intl.message(
+      'Tailnet status, address and how the node signed in',
+      name: 'tailscaleDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count, plural, =1{1 machine} other{{count} machines}}`
+  String tailscaleMachinesCount(num count) {
+    return Intl.plural(
+      count,
+      one: '1 machine',
+      other: '$count machines',
+      name: 'tailscaleMachinesCount',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

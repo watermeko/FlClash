@@ -6,6 +6,10 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
 
 abstract final class AppGlyphs {
+  /// The Tailscale mark, taken from the brand asset the other service icons
+  /// use: it is a lattice of dots, not a stroke drawing.
+  static const tailscale = Glyph.asset('assets/images/services/tailscale.svg');
+
   static const dashboard = Glyph([
     GlyphBox(3.5, 3.5, 10.5, 11.5, 2),
     GlyphBox(13.5, 3.5, 20.5, 9.5, 2),

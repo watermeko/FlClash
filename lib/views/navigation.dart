@@ -30,6 +30,12 @@ class Navigation implements NavigationPort {
             : [],
       ),
       NavigationItem(
+        glyph: AppGlyphs.tailscale,
+        label: PageLabel.tailscale,
+        builder: (_) =>
+            const TailscaleView(key: GlobalObjectKey(PageLabel.tailscale)),
+      ),
+      NavigationItem(
         glyph: AppGlyphs.profiles,
         label: PageLabel.profiles,
         builder: (_) =>

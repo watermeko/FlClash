@@ -116,10 +116,15 @@ func handleDecryptConfig(params DecryptConfigParams) (string, error) {
 // policy answers by killing the process rather than with EPERM.
 var systemTimeWritable = runtime.GOOS != "android"
 
-func loadConfig(path string) (*config.Config, error) {
+func loadConfig(path string, tailscale *TailscaleInject) (*config.Config, error) {
 	buf, err := os.ReadFile(path)
 	if err != nil {
 		return nil, err
+	}
+	if tailscale != nil {
+		if buf, err = withTailscale(buf, tailscale); err != nil {
+			return nil, err
+		}
 	}
 	cfg, err := executor.ParseWithBytes(buf)
 	if err != nil {
@@ -143,9 +148,9 @@ func runningConfigPath() string {
 func loadSetupConfig(params *SetupParams) (*config.Config, error) {
 	path := runningConfigPath()
 	if params.Base != nil {
-		return loadConfigWithBase(params.Base, path)
+		return loadConfigWithBase(params.Base, path, params.Tailscale)
 	}
-	return loadConfig(path)
+	return loadConfig(path, params.Tailscale)
 }
 
 func applyConfig(params *SetupParams) error {
@@ -173,8 +178,11 @@ func applyConfig(params *SetupParams) error {
 		cfg = fallback
 	}
 
+	previous := tunnel.AllProxies()
 	currentConfig = cfg
 	hub.ApplyConfig(cfg)
+	closeReplacedTailscales(previous)
+	startTailscales(previous)
 	patchSelectGroup(params.SelectedMap)
 	bumpRouteEpoch()
 	updateListeners(cfg)

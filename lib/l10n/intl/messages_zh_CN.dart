@@ -192,21 +192,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m79(label) => "${label}只能是一项";
 
-  static String m80(value) => "峰值 ${value}";
+  static String m80(count) =>
+      "${Intl.plural(count, one: '1 台设备', other: '${count} 台设备')}";
 
-  static String m81(value) => "累计 ${value}";
+  static String m81(value) => "峰值 ${value}";
 
-  static String m82(transport) => "${transport} 请求头";
+  static String m82(value) => "累计 ${value}";
 
-  static String m83(label) => "${label}必须为URL";
+  static String m83(transport) => "${transport} 请求头";
 
-  static String m84(count) => "${count} 年前";
+  static String m84(label) => "${label}必须为URL";
 
   static String m85(count) => "${count} 年前";
+
+  static String m86(count) => "${count} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("关于"),
+    "acceptRoutes": MessageLookupByLibrary.simpleMessage("接受子网路由"),
     "accessControl": MessageLookupByLibrary.simpleMessage("访问控制"),
     "accessControlAllowDesc": MessageLookupByLibrary.simpleMessage(
       "只允许选中应用进入VPN",
@@ -614,6 +618,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "existsTip": m27,
     "exit": MessageLookupByLibrary.simpleMessage("退出"),
     "exitFullScreen": MessageLookupByLibrary.simpleMessage("退出全屏"),
+    "exitNodeAllowLanAccess": MessageLookupByLibrary.simpleMessage("允许访问局域网"),
     "exitNodes": MessageLookupByLibrary.simpleMessage("出口节点"),
     "expectedStatus": MessageLookupByLibrary.simpleMessage("预期状态"),
     "expireTime": MessageLookupByLibrary.simpleMessage("到期时间"),
@@ -1402,6 +1407,41 @@ class MessageLookup extends MessageLookupByLibrary {
     "systemProxy": MessageLookupByLibrary.simpleMessage("系统代理"),
     "tab": MessageLookupByLibrary.simpleMessage("标签页"),
     "tabAnimation": MessageLookupByLibrary.simpleMessage("选项卡动画"),
+    "tailscale": MessageLookupByLibrary.simpleMessage("Tailscale"),
+    "tailscaleAccount": MessageLookupByLibrary.simpleMessage("账号"),
+    "tailscaleAddresses": MessageLookupByLibrary.simpleMessage("地址"),
+    "tailscaleAuthKey": MessageLookupByLibrary.simpleMessage("密钥认证"),
+    "tailscaleAuthKeyTip": MessageLookupByLibrary.simpleMessage("留空则在本页交互式登录"),
+    "tailscaleDesc": MessageLookupByLibrary.simpleMessage("Tailnet 状态、地址与登录方式"),
+    "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage("出口节点"),
+    "tailscaleHealth": MessageLookupByLibrary.simpleMessage("问题"),
+    "tailscaleLogin": MessageLookupByLibrary.simpleMessage("浏览器登录认证"),
+    "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage("已通过浏览器登录"),
+    "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
+      "在浏览器中打开 Tailscale 登录页",
+    ),
+    "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
+      "本设备已登录，无需再次认证",
+    ),
+    "tailscaleLogout": MessageLookupByLibrary.simpleMessage("登出"),
+    "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
+      "清除本设备保存的密钥，以便其他账号接管",
+    ),
+    "tailscaleMachine": MessageLookupByLibrary.simpleMessage("设备名"),
+    "tailscaleMachines": MessageLookupByLibrary.simpleMessage("设备"),
+    "tailscaleMachinesCount": m80,
+    "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage("需要登录"),
+    "tailscaleNoMachines": MessageLookupByLibrary.simpleMessage("暂无设备"),
+    "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage("本机登录后会出现"),
+    "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("未启动"),
+    "tailscaleOff": MessageLookupByLibrary.simpleMessage("已关闭"),
+    "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
+      "开启后会在每个配置中保留一个 Tailscale 节点",
+    ),
+    "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("刷新状态"),
+    "tailscaleRunning": MessageLookupByLibrary.simpleMessage("已连接"),
+    "tailscaleStarting": MessageLookupByLibrary.simpleMessage("正在启动"),
+    "tailscaleStatus": MessageLookupByLibrary.simpleMessage("状态"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage("点击图标重试"),
     "tapToAuthorize": MessageLookupByLibrary.simpleMessage("点击授权"),
     "target": MessageLookupByLibrary.simpleMessage("目标"),
@@ -1429,11 +1469,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("上传总量"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("Tproxy端口"),
     "traffic": MessageLookupByLibrary.simpleMessage("流量"),
-    "trafficPeak": m80,
-    "trafficTotal": m81,
+    "trafficPeak": m81,
+    "trafficTotal": m82,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("流量统计"),
     "transport": MessageLookupByLibrary.simpleMessage("传输协议"),
-    "transportHeaders": m82,
+    "transportHeaders": m83,
     "tun": MessageLookupByLibrary.simpleMessage("虚拟网卡"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "虚拟网卡授权失败，已关闭。",
@@ -1461,7 +1501,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("上传"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("上行带宽"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m83,
+    "urlTip": m84,
     "useHosts": MessageLookupByLibrary.simpleMessage("使用Hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("使用系统Hosts"),
     "usedShort": MessageLookupByLibrary.simpleMessage("已用"),
@@ -1484,8 +1524,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "写入系统会同时设置系统时钟，Android 上不生效。",
     ),
-    "yearsAgo": m84,
-    "yearsAgoShort": m85,
+    "yearsAgo": m85,
+    "yearsAgoShort": m86,
     "yes": MessageLookupByLibrary.simpleMessage("是"),
     "zhCN": MessageLookupByLibrary.simpleMessage("中文简体"),
   };

@@ -13,6 +13,9 @@ _SetupParams _$SetupParamsFromJson(Map<String, dynamic> json) => _SetupParams(
   base: json['base'] == null
       ? null
       : SetupBase.fromJson(json['base'] as Map<String, dynamic>),
+  tailscale: json['tailscale'] == null
+      ? null
+      : TailscaleInject.fromJson(json['tailscale'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$SetupParamsToJson(_SetupParams instance) =>
@@ -21,6 +24,7 @@ Map<String, dynamic> _$SetupParamsToJson(_SetupParams instance) =>
       'test-url': instance.testUrl,
       'skip-cert-verify': instance.skipCertVerify,
       'base': ?instance.base,
+      'tailscale': ?instance.tailscale,
     };
 
 _SetupBase _$SetupBaseFromJson(Map<String, dynamic> json) => _SetupBase(
@@ -259,6 +263,37 @@ Map<String, dynamic> _$RouteCheckToJson(_RouteCheck instance) =>
       'held': instance.held,
     };
 
+_TailscaleInject _$TailscaleInjectFromJson(Map<String, dynamic> json) =>
+    _TailscaleInject(
+      name: json['name'] as String,
+      authKey: json['auth-key'] as String? ?? '',
+      hostname: json['hostname'] as String? ?? '',
+      controlUrl: json['control-url'] as String? ?? '',
+      stateDir: json['state-dir'] as String? ?? '',
+      ephemeral: json['ephemeral'] as bool? ?? false,
+      udp: json['udp'] as bool? ?? true,
+      acceptRoutes: json['accept-routes'] as bool? ?? false,
+      exitNode: json['exit-node'] as String? ?? '',
+      exitNodeAllowLanAccess:
+          json['exit-node-allow-lan-access'] as bool? ?? false,
+      magicDnsSuffix: json['magic-dns-suffix'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$TailscaleInjectToJson(_TailscaleInject instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'auth-key': instance.authKey,
+      'hostname': instance.hostname,
+      'control-url': instance.controlUrl,
+      'state-dir': instance.stateDir,
+      'ephemeral': instance.ephemeral,
+      'udp': instance.udp,
+      'accept-routes': instance.acceptRoutes,
+      'exit-node': instance.exitNode,
+      'exit-node-allow-lan-access': instance.exitNodeAllowLanAccess,
+      'magic-dns-suffix': instance.magicDnsSuffix,
+    };
+
 _CoreEvent _$CoreEventFromJson(Map<String, dynamic> json) => _CoreEvent(
   type: $enumDecode(_$CoreEventTypeEnumMap, json['type']),
   data: json['data'],
@@ -281,6 +316,7 @@ const _$CoreEventTypeEnumMap = {
   CoreEventType.geoUpdate: 'geoUpdate',
   CoreEventType.routeChanged: 'routeChanged',
   CoreEventType.dialerLoop: 'dialerLoop',
+  CoreEventType.tailscale: 'tailscale',
 };
 
 _Delay _$DelayFromJson(Map<String, dynamic> json) => _Delay(
@@ -496,3 +532,81 @@ _ProxiesData _$ProxiesDataFromJson(Map<String, dynamic> json) => _ProxiesData(
 
 Map<String, dynamic> _$ProxiesDataToJson(_ProxiesData instance) =>
     <String, dynamic>{'proxies': instance.proxies, 'all': instance.all};
+
+_TailscaleStatus _$TailscaleStatusFromJson(Map<String, dynamic> json) =>
+    _TailscaleStatus(
+      name: json['name'] as String,
+      backendState: json['backend-state'] as String,
+      authUrl: json['auth-url'] as String? ?? '',
+      hostname: json['hostname'] as String? ?? '',
+      dnsName: json['dns-name'] as String? ?? '',
+      magicDns: json['magic-dns'] as String? ?? '',
+      online: json['online'] as bool? ?? false,
+      haveNodeKey: json['have-node-key'] as bool? ?? false,
+      authMethod: json['auth-method'] as String? ?? '',
+      ips:
+          (json['ips'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          const [],
+      health:
+          (json['health'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      exitNode: json['exit-node'] == null
+          ? null
+          : TailscalePeer.fromJson(json['exit-node'] as Map<String, dynamic>),
+      peers:
+          (json['peers'] as List<dynamic>?)
+              ?.map((e) => TailscalePeer.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$TailscaleStatusToJson(_TailscaleStatus instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'backend-state': instance.backendState,
+      'auth-url': instance.authUrl,
+      'hostname': instance.hostname,
+      'dns-name': instance.dnsName,
+      'magic-dns': instance.magicDns,
+      'online': instance.online,
+      'have-node-key': instance.haveNodeKey,
+      'auth-method': instance.authMethod,
+      'ips': instance.ips,
+      'health': instance.health,
+      'exit-node': instance.exitNode,
+      'peers': instance.peers,
+    };
+
+_TailscalePeer _$TailscalePeerFromJson(Map<String, dynamic> json) =>
+    _TailscalePeer(
+      hostname: json['hostname'] as String? ?? '',
+      dnsName: json['dns-name'] as String? ?? '',
+      os: json['os'] as String? ?? '',
+      ips:
+          (json['ips'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          const [],
+      online: json['online'] as bool? ?? false,
+      exitNodeOption: json['exit-node-option'] as bool? ?? false,
+      exitNode: json['exit-node'] as bool? ?? false,
+      relay: json['relay'] as String? ?? '',
+      curAddr: json['cur-addr'] as String? ?? '',
+      rxBytes: (json['rx-bytes'] as num?)?.toInt() ?? 0,
+      txBytes: (json['tx-bytes'] as num?)?.toInt() ?? 0,
+    );
+
+Map<String, dynamic> _$TailscalePeerToJson(_TailscalePeer instance) =>
+    <String, dynamic>{
+      'hostname': instance.hostname,
+      'dns-name': instance.dnsName,
+      'os': instance.os,
+      'ips': instance.ips,
+      'online': instance.online,
+      'exit-node-option': instance.exitNodeOption,
+      'exit-node': instance.exitNode,
+      'relay': instance.relay,
+      'cur-addr': instance.curAddr,
+      'rx-bytes': instance.rxBytes,
+      'tx-bytes': instance.txBytes,
+    };

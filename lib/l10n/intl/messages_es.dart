@@ -225,22 +225,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m79(label) => "${label} debe ser un solo elemento";
 
-  static String m80(value) => "Pico: ${value}";
+  static String m80(count) =>
+      "${Intl.plural(count, one: '1 máquina', other: '${count} máquinas')}";
 
-  static String m81(value) => "Total: ${value}";
+  static String m81(value) => "Pico: ${value}";
 
-  static String m82(transport) => "Encabezados ${transport}";
+  static String m82(value) => "Total: ${value}";
 
-  static String m83(label) => "${label} debe ser una URL";
+  static String m83(transport) => "Encabezados ${transport}";
 
-  static String m84(count) =>
+  static String m84(label) => "${label} debe ser una URL";
+
+  static String m85(count) =>
       "${Intl.plural(count, one: 'hace 1 año', other: 'hace ${count} años')}";
 
-  static String m85(count) => "${Intl.plural(count, other: 'hace ${count} a')}";
+  static String m86(count) => "${Intl.plural(count, other: 'hace ${count} a')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("Acerca de"),
+    "acceptRoutes": MessageLookupByLibrary.simpleMessage("Aceptar rutas"),
     "accessControl": MessageLookupByLibrary.simpleMessage("Control de acceso"),
     "accessControlAllowDesc": MessageLookupByLibrary.simpleMessage(
       "Solo las apps seleccionadas usan la VPN",
@@ -847,6 +851,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "exit": MessageLookupByLibrary.simpleMessage("Salir"),
     "exitFullScreen": MessageLookupByLibrary.simpleMessage(
       "Salir de pantalla completa",
+    ),
+    "exitNodeAllowLanAccess": MessageLookupByLibrary.simpleMessage(
+      "Permitir acceso a la LAN",
     ),
     "exitNodes": MessageLookupByLibrary.simpleMessage("Nodos de salida"),
     "expectedStatus": MessageLookupByLibrary.simpleMessage("Estado esperado"),
@@ -1945,6 +1952,63 @@ class MessageLookup extends MessageLookupByLibrary {
     "tabAnimation": MessageLookupByLibrary.simpleMessage(
       "Animación de pestañas",
     ),
+    "tailscale": MessageLookupByLibrary.simpleMessage("Tailscale"),
+    "tailscaleAccount": MessageLookupByLibrary.simpleMessage("Cuenta"),
+    "tailscaleAddresses": MessageLookupByLibrary.simpleMessage("Direcciones"),
+    "tailscaleAuthKey": MessageLookupByLibrary.simpleMessage(
+      "Autenticación por clave",
+    ),
+    "tailscaleAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "Déjala vacía para iniciar sesión desde esta página",
+    ),
+    "tailscaleDesc": MessageLookupByLibrary.simpleMessage(
+      "Estado del tailnet, dirección y forma de inicio de sesión",
+    ),
+    "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage(
+      "nodo de salida",
+    ),
+    "tailscaleHealth": MessageLookupByLibrary.simpleMessage("Problema"),
+    "tailscaleLogin": MessageLookupByLibrary.simpleMessage(
+      "Inicio de sesión en el navegador",
+    ),
+    "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage(
+      "Sesión iniciada con el navegador",
+    ),
+    "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
+      "Abre la página de inicio de sesión de Tailscale en un navegador",
+    ),
+    "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
+      "Este dispositivo ya ha iniciado sesión, no queda nada por completar",
+    ),
+    "tailscaleLogout": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
+    "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
+      "Elimina la clave guardada en este dispositivo para que otra cuenta pueda usarlo",
+    ),
+    "tailscaleMachine": MessageLookupByLibrary.simpleMessage(
+      "Nombre del equipo",
+    ),
+    "tailscaleMachines": MessageLookupByLibrary.simpleMessage("Máquinas"),
+    "tailscaleMachinesCount": m80,
+    "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage(
+      "Requiere inicio de sesión",
+    ),
+    "tailscaleNoMachines": MessageLookupByLibrary.simpleMessage(
+      "Aún no hay máquinas",
+    ),
+    "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
+      "Aparecen cuando este dispositivo inicia sesión",
+    ),
+    "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("Sin iniciar"),
+    "tailscaleOff": MessageLookupByLibrary.simpleMessage("Desactivado"),
+    "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
+      "Actívalo para mantener un nodo Tailscale en cada perfil",
+    ),
+    "tailscaleRefresh": MessageLookupByLibrary.simpleMessage(
+      "Actualizar estado",
+    ),
+    "tailscaleRunning": MessageLookupByLibrary.simpleMessage("Conectado"),
+    "tailscaleStarting": MessageLookupByLibrary.simpleMessage("Iniciando"),
+    "tailscaleStatus": MessageLookupByLibrary.simpleMessage("Estado"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage(
       "Toca el icono para reintentar",
     ),
@@ -1978,11 +2042,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("Subido"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("Puerto TProxy"),
     "traffic": MessageLookupByLibrary.simpleMessage("Tráfico"),
-    "trafficPeak": m80,
-    "trafficTotal": m81,
+    "trafficPeak": m81,
+    "trafficTotal": m82,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("Uso de tráfico"),
     "transport": MessageLookupByLibrary.simpleMessage("Transporte"),
-    "transportHeaders": m82,
+    "transportHeaders": m83,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "No se pudo autorizar TUN, por lo que se desactivó.",
@@ -2018,7 +2082,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Ancho de banda de subida",
     ),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m83,
+    "urlTip": m84,
     "useHosts": MessageLookupByLibrary.simpleMessage("Usar hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage(
       "Usar hosts del sistema",
@@ -2047,8 +2111,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "Escribir en el sistema también ajusta el reloj del sistema; Android lo ignora.",
     ),
-    "yearsAgo": m84,
-    "yearsAgoShort": m85,
+    "yearsAgo": m85,
+    "yearsAgoShort": m86,
     "yes": MessageLookupByLibrary.simpleMessage("Sí"),
     "zhCN": MessageLookupByLibrary.simpleMessage("Chino simplificado"),
   };

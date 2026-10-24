@@ -712,7 +712,7 @@ func TestLoadConfigTreatsAnEmptyProfileAsTheDefaults(t *testing.T) {
 		t.Fatalf("write config: %v", err)
 	}
 
-	cfg, err := loadConfig(path)
+	cfg, err := loadConfig(path, nil)
 
 	if err != nil {
 		t.Fatalf("loadConfig = %v, want no error for an empty profile", err)
@@ -723,7 +723,7 @@ func TestLoadConfigTreatsAnEmptyProfileAsTheDefaults(t *testing.T) {
 }
 
 func TestLoadConfigReportsAMissingFile(t *testing.T) {
-	_, err := loadConfig(filepath.Join(t.TempDir(), "absent.yaml"))
+	_, err := loadConfig(filepath.Join(t.TempDir(), "absent.yaml"), nil)
 
 	if err == nil {
 		t.Fatal("loadConfig accepted a path that does not exist")
@@ -739,7 +739,7 @@ func TestLoadConfigReportsMalformedYaml(t *testing.T) {
 		t.Fatalf("write config: %v", err)
 	}
 
-	if _, err := loadConfig(path); err == nil {
+	if _, err := loadConfig(path, nil); err == nil {
 		t.Fatal("loadConfig accepted malformed yaml")
 	}
 }
@@ -757,7 +757,7 @@ func TestLoadConfigKeepsTheSystemTimeWriteOnlyWhereItIsAllowed(t *testing.T) {
 	for _, writable := range []bool{true, false} {
 		systemTimeWritable = writable
 
-		cfg, err := loadConfig(path)
+		cfg, err := loadConfig(path, nil)
 
 		if err != nil {
 			t.Fatalf("loadConfig = %v", err)

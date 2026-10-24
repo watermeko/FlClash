@@ -19,11 +19,21 @@ UpdateParams updateParams(Ref ref) {
 }
 
 @riverpod
-({PatchClashConfig patchConfig, bool appendSystemDns, bool bypassPrivateRoute})
+({
+  PatchClashConfig patchConfig,
+  bool appendSystemDns,
+  bool bypassPrivateRoute,
+  int tailscaleRevision,
+})
 setupPatch(Ref ref) {
   return (
     patchConfig: ref.watch(
       patchClashConfigProvider.select((state) => state.setupOnly),
+    ),
+    // The node is written into the profile at apply time, so a change to it is
+    // an apply of its own: nothing patches a running config into one.
+    tailscaleRevision: ref.watch(
+      tailscaleSettingProvider.select((state) => state.hashCode),
     ),
     appendSystemDns: ref.watch(
       networkSettingProvider.select((state) => state.appendSystemDns),

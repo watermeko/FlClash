@@ -66,6 +66,10 @@ const (
 	clearEffectMethod              CoreMethod = "clearEffect"
 	watchRouteMethod               CoreMethod = "watchRoute"
 	checkRoutesMethod              CoreMethod = "checkRoutes"
+	tailscaleStatusMethod          CoreMethod = "tailscaleStatus"
+	startTailscaleMethod           CoreMethod = "startTailscale"
+	logoutTailscaleMethod          CoreMethod = "logoutTailscale"
+	loginTailscaleMethod           CoreMethod = "loginTailscale"
 )
 
 type MessageType string
@@ -81,6 +85,7 @@ const (
 	RouteChangedMessage   MessageType = "routeChanged"
 	DialerLoopMessage     MessageType = "dialerLoop"
 	RequestTrafficMessage MessageType = "requestTraffic"
+	TailscaleMessage      MessageType = "tailscale"
 )
 
 type Message struct {
@@ -103,11 +108,40 @@ type SetupParams struct {
 	TestURL        string            `json:"test-url"`
 	SkipCertVerify bool              `json:"skip-cert-verify"`
 	Base           *SetupBase        `json:"base,omitempty"`
+
+	// The Tailscale node the app keeps in every profile. It reaches the yaml
+	// after the base is merged, because an overlay's own proxies replace that
+	// section rather than extend it. Absent means the user left the mesh off.
+	Tailscale *TailscaleInject `json:"tailscale,omitempty"`
 }
 
 type SetupBase struct {
 	Path    string `json:"path"`
 	Overlay string `json:"overlay"`
+}
+
+// What buildProfile merges: the same base a setup applies, with the node the
+// app keeps in it, so the preview shows what the tunnel will run.
+type BuildProfileParams struct {
+	Base      *SetupBase      `json:"base"`
+	Tailscale *TailscaleInject `json:"tailscale,omitempty"`
+}
+
+// A Tailscale node as the app's settings describe it. Empty AuthKey leaves the
+// login to the interactive flow the mesh page drives.
+type TailscaleInject struct {
+	Name                   string `json:"name"`
+	AuthKey                string `json:"auth-key"`
+	Hostname               string `json:"hostname"`
+	ControlURL             string `json:"control-url"`
+	StateDir               string `json:"state-dir"`
+	Ephemeral              bool   `json:"ephemeral"`
+	UDP                    bool   `json:"udp"`
+	AcceptRoutes           bool   `json:"accept-routes"`
+	ExitNode               string `json:"exit-node"`
+	ExitNodeAllowLANAccess bool   `json:"exit-node-allow-lan-access"`
+	// The tailnet's DNS suffix, so its names resolve through the node.
+	MagicDNSSuffix string `json:"magic-dns-suffix"`
 }
 
 type ProfileBase struct {
@@ -258,6 +292,12 @@ type nodeView struct {
 	Name         string `json:"name"`
 	Type         string `json:"type"`
 	ProviderName string `json:"provider-name,omitempty"`
+}
+
+// The query names an outbound by its proxy name; a status of nil in the answer
+// means no Tailscale outbound carries it.
+type TailscaleParams struct {
+	Name string `json:"name"`
 }
 
 type GeoUpdateStatus struct {

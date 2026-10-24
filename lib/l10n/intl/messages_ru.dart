@@ -217,23 +217,27 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m79(label) => "«${label}» — только одно значение";
 
-  static String m80(value) => "Пик ${value}";
+  static String m80(count) =>
+      "${Intl.plural(count, one: '1 устройство', other: '${count} устройств')}";
 
-  static String m81(value) => "Всего ${value}";
+  static String m81(value) => "Пик ${value}";
 
-  static String m82(transport) => "Заголовки ${transport}";
+  static String m82(value) => "Всего ${value}";
 
-  static String m83(label) => "Значение «${label}» должно быть URL";
+  static String m83(transport) => "Заголовки ${transport}";
 
-  static String m84(count) =>
-      "${Intl.plural(count, one: '${count} год назад', few: '${count} года назад', many: '${count} лет назад', other: '${count} года назад')}";
+  static String m84(label) => "Значение «${label}» должно быть URL";
 
   static String m85(count) =>
+      "${Intl.plural(count, one: '${count} год назад', few: '${count} года назад', many: '${count} лет назад', other: '${count} года назад')}";
+
+  static String m86(count) =>
       "${Intl.plural(count, one: '${count} г. назад', few: '${count} г. назад', many: '${count} л. назад', other: '${count} г. назад')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
     "about": MessageLookupByLibrary.simpleMessage("О программе"),
+    "acceptRoutes": MessageLookupByLibrary.simpleMessage("Принимать маршруты"),
     "accessControl": MessageLookupByLibrary.simpleMessage("Контроль доступа"),
     "accessControlAllowDesc": MessageLookupByLibrary.simpleMessage(
       "Через VPN проходят только выбранные приложения",
@@ -822,6 +826,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "exit": MessageLookupByLibrary.simpleMessage("Выход"),
     "exitFullScreen": MessageLookupByLibrary.simpleMessage(
       "Выйти из полноэкранного режима",
+    ),
+    "exitNodeAllowLanAccess": MessageLookupByLibrary.simpleMessage(
+      "Разрешить доступ к локальной сети",
     ),
     "exitNodes": MessageLookupByLibrary.simpleMessage("Выходные узлы"),
     "expectedStatus": MessageLookupByLibrary.simpleMessage("Ожидаемый статус"),
@@ -1884,6 +1891,61 @@ class MessageLookup extends MessageLookupByLibrary {
     "systemProxy": MessageLookupByLibrary.simpleMessage("Системный прокси"),
     "tab": MessageLookupByLibrary.simpleMessage("Вкладки"),
     "tabAnimation": MessageLookupByLibrary.simpleMessage("Анимация вкладок"),
+    "tailscale": MessageLookupByLibrary.simpleMessage("Tailscale"),
+    "tailscaleAccount": MessageLookupByLibrary.simpleMessage("Аккаунт"),
+    "tailscaleAddresses": MessageLookupByLibrary.simpleMessage("Адреса"),
+    "tailscaleAuthKey": MessageLookupByLibrary.simpleMessage(
+      "Аутентификация по ключу",
+    ),
+    "tailscaleAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "Оставьте пустым, чтобы войти с этой страницы",
+    ),
+    "tailscaleDesc": MessageLookupByLibrary.simpleMessage(
+      "Состояние tailnet, адрес и способ входа",
+    ),
+    "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage(
+      "выходной узел",
+    ),
+    "tailscaleHealth": MessageLookupByLibrary.simpleMessage("Проблема"),
+    "tailscaleLogin": MessageLookupByLibrary.simpleMessage(
+      "Вход через браузер",
+    ),
+    "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage(
+      "Выполнен вход через браузер",
+    ),
+    "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
+      "Открывает страницу входа Tailscale в браузере",
+    ),
+    "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
+      "Это устройство уже авторизовано, завершать нечего",
+    ),
+    "tailscaleLogout": MessageLookupByLibrary.simpleMessage("Выйти"),
+    "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
+      "Удаляет ключ, сохранённый на этом устройстве, чтобы его мог занять другой аккаунт",
+    ),
+    "tailscaleMachine": MessageLookupByLibrary.simpleMessage("Имя машины"),
+    "tailscaleMachines": MessageLookupByLibrary.simpleMessage("Машины"),
+    "tailscaleMachinesCount": m80,
+    "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage(
+      "Требуется вход",
+    ),
+    "tailscaleNoMachines": MessageLookupByLibrary.simpleMessage(
+      "Машин пока нет",
+    ),
+    "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
+      "Они появятся после входа на этом устройстве",
+    ),
+    "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("Не запущено"),
+    "tailscaleOff": MessageLookupByLibrary.simpleMessage("Выключено"),
+    "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
+      "Включите, чтобы держать узел Tailscale в каждом профиле",
+    ),
+    "tailscaleRefresh": MessageLookupByLibrary.simpleMessage(
+      "Обновить состояние",
+    ),
+    "tailscaleRunning": MessageLookupByLibrary.simpleMessage("Подключено"),
+    "tailscaleStarting": MessageLookupByLibrary.simpleMessage("Запуск"),
+    "tailscaleStatus": MessageLookupByLibrary.simpleMessage("Состояние"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage(
       "Нажмите на значок, чтобы повторить",
     ),
@@ -1921,11 +1983,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("Отдано"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("Порт TProxy"),
     "traffic": MessageLookupByLibrary.simpleMessage("Трафик"),
-    "trafficPeak": m80,
-    "trafficTotal": m81,
+    "trafficPeak": m81,
+    "trafficTotal": m82,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("Статистика трафика"),
     "transport": MessageLookupByLibrary.simpleMessage("Транспорт"),
-    "transportHeaders": m82,
+    "transportHeaders": m83,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "Не удалось получить права для TUN, поэтому он выключен.",
@@ -1959,7 +2021,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("Отдача"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("Скорость отдачи"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m83,
+    "urlTip": m84,
     "useHosts": MessageLookupByLibrary.simpleMessage("Использовать hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage(
       "Использовать системный hosts",
@@ -1992,8 +2054,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "«Записывать в систему» также устанавливает системные часы; Android это игнорирует.",
     ),
-    "yearsAgo": m84,
-    "yearsAgoShort": m85,
+    "yearsAgo": m85,
+    "yearsAgoShort": m86,
     "yes": MessageLookupByLibrary.simpleMessage("Да"),
     "zhCN": MessageLookupByLibrary.simpleMessage("Упрощённый китайский"),
   };

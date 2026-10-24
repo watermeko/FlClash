@@ -6,6 +6,32 @@ part of '../config.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_TailscaleProps _$TailscalePropsFromJson(Map<String, dynamic> json) =>
+    _TailscaleProps(
+      inject: json['inject'] as bool? ?? false,
+      authKey: json['authKey'] as String? ?? '',
+      hostname: json['hostname'] as String? ?? '',
+      exitNode: json['exitNode'] as String? ?? '',
+      exitNodeAllowLanAccess: json['exitNodeAllowLanAccess'] as bool? ?? false,
+      acceptRoutes: json['acceptRoutes'] as bool? ?? false,
+      ephemeral: json['ephemeral'] as bool? ?? false,
+      controlUrl: json['controlUrl'] as String? ?? '',
+      udp: json['udp'] as bool? ?? true,
+    );
+
+Map<String, dynamic> _$TailscalePropsToJson(_TailscaleProps instance) =>
+    <String, dynamic>{
+      'inject': instance.inject,
+      'authKey': instance.authKey,
+      'hostname': instance.hostname,
+      'exitNode': instance.exitNode,
+      'exitNodeAllowLanAccess': instance.exitNodeAllowLanAccess,
+      'acceptRoutes': instance.acceptRoutes,
+      'ephemeral': instance.ephemeral,
+      'controlUrl': instance.controlUrl,
+      'udp': instance.udp,
+    };
+
 _Filter _$FilterFromJson(Map<String, dynamic> json) =>
     _Filter(label: json['label'] as String, regex: json['regex'] as String);
 
@@ -152,6 +178,7 @@ const _$DashboardWidgetEnumMap = {
   DashboardWidget.proxyGroups: 'proxyGroups',
   DashboardWidget.connectionStats: 'connectionStats',
   DashboardWidget.intranetIp: 'intranetIp',
+  DashboardWidget.tailscale: 'tailscale',
   DashboardWidget.memoryInfo: 'memoryInfo',
 };
 
@@ -429,6 +456,11 @@ _Config _$ConfigFromJson(Map<String, dynamic> json) => _Config(
   vpnProps: json['vpnProps'] == null
       ? defaultVpnProps
       : VpnProps.fromJson(json['vpnProps'] as Map<String, dynamic>?),
+  tailscaleProps: json['tailscaleProps'] == null
+      ? defaultTailscaleProps
+      : TailscaleProps.fromJson(
+          json['tailscaleProps'] as Map<String, dynamic>?,
+        ),
   themeProps: ThemeProps.safeFromJson(
     json['themeProps'] as Map<String, Object?>?,
   ),
@@ -459,6 +491,7 @@ Map<String, dynamic> _$ConfigToJson(_Config instance) => <String, dynamic>{
   'davProps': instance.davProps,
   'networkProps': instance.networkProps,
   'vpnProps': instance.vpnProps,
+  'tailscaleProps': instance.tailscaleProps,
   'themeProps': instance.themeProps,
   'proxiesStyleProps': instance.proxiesStyleProps,
   'windowGeometry': instance.windowProps,

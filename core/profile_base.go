@@ -74,9 +74,9 @@ func outboundsOf(mappings []map[string]any) []ProfileOutbound {
 
 // The merged config goes to the spill directory, so the host reads it as text
 // and never decodes it.
-func handleBuildProfile(base *SetupBase) (string, error) {
+func handleBuildProfile(params BuildProfileParams) (string, error) {
 	defer scheduleLoadMemoryRelease()
-	document, err := mergeProfileBase(base)
+	document, err := mergeProfileBase(params.Base, params.Tailscale)
 	if err != nil {
 		return "", err
 	}
@@ -98,8 +98,8 @@ func isMatchRule(rule string) bool {
 	return strings.EqualFold(strings.TrimSpace(kind), "MATCH")
 }
 
-func loadConfigWithBase(base *SetupBase, configPath string) (*config.Config, error) {
-	document, err := mergeProfileBase(base)
+func loadConfigWithBase(base *SetupBase, configPath string, tailscale *TailscaleInject) (*config.Config, error) {
+	document, err := mergeProfileBase(base, tailscale)
 	if err != nil {
 		return nil, err
 	}
@@ -117,7 +117,7 @@ func loadConfigWithBase(base *SetupBase, configPath string) (*config.Config, err
 	return withPlatformLimits(cfg), nil
 }
 
-func mergeProfileBase(base *SetupBase) (*yaml.Node, error) {
+func mergeProfileBase(base *SetupBase, tailscale *TailscaleInject) (*yaml.Node, error) {
 	buf, err := os.ReadFile(base.Path)
 	if err != nil {
 		return nil, err
@@ -152,6 +152,9 @@ func mergeProfileBase(base *SetupBase) (*yaml.Node, error) {
 	}
 	if rules != nil {
 		setMappingValue(root, "rules", rules)
+	}
+	if err := injectTailscale(root, tailscale); err != nil {
+		return nil, err
 	}
 	if retag {
 		retagShortIDs(root)

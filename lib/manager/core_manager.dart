@@ -197,6 +197,12 @@ class _CoreContainerState extends ConsumerState<CoreManager>
   }
 
   @override
+  void onTailscale(TailscaleStatus status) {
+    ref.read(tailscalesProvider.notifier).setStatus(status);
+    super.onTailscale(status);
+  }
+
+  @override
   void onRouteChanged(RouteSnapshot snapshot) {
     ref.read(routeTrackerProvider.notifier).applySnapshot(snapshot);
     super.onRouteChanged(snapshot);

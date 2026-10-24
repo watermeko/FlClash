@@ -6,10 +6,22 @@ import 'package:path_parsing/path_parsing.dart';
 enum GlyphRole { body, detail, line }
 
 class Glyph {
-  const Glyph(this.shapes, {this.matchTextDirection = false});
+  const Glyph(this.shapes, {this.matchTextDirection = false, this.asset})
+    : assert(
+        asset == null || shapes.length == 0,
+        'an asset glyph draws the asset, not the shapes',
+      );
+
+  /// A brand mark that is a picture rather than a stroke drawing, such as a
+  /// lattice of dots. It points into `assets/images/services`, where the other
+  /// brand marks live, and is drawn in the colour the caller asks for.
+  const Glyph.asset(String this.asset)
+    : shapes = const [],
+      matchTextDirection = false;
 
   final List<GlyphShape> shapes;
   final bool matchTextDirection;
+  final String? asset;
 
   static const size = 24.0;
   static const strokeWidth = 1.8;
