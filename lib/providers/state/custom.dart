@@ -399,26 +399,15 @@ String linkProxyName(Map<String, dynamic> definition) {
   return definition['server']?.toString() ?? definition['type'].toString();
 }
 
-String _numberedName(String base, int index) =>
-    '$base-${index.toString().padLeft(2, '0')}';
-
-String freeProxyName(String base, Set<String> taken) {
-  var name = base;
-  for (var index = 1; !taken.add(name); index++) {
-    name = _numberedName(base, index);
-  }
-  return name;
-}
-
 final _numberSuffix = RegExp(r'-\d{2,}$');
 
 String copiedProxyName(String name, Set<String> taken) {
   final base = name.replaceFirst(_numberSuffix, '');
   var index = 1;
-  while (!taken.add(_numberedName(base, index))) {
+  while (!taken.add(numberedName(base, index))) {
     index++;
   }
-  return _numberedName(base, index);
+  return numberedName(base, index);
 }
 
 /// The groups [group] reaches back to itself through, or null when it is not

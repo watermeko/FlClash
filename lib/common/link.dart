@@ -3,9 +3,28 @@ import 'dart:async';
 import 'package:app_links/app_links.dart';
 import 'package:flutter/foundation.dart';
 
+import 'constant.dart';
 import 'print.dart';
 import 'protocol.dart';
 import 'string.dart';
+
+/// A share-link list converts to proxies alone, which leaves a profile with no
+/// group to pick a node from and no rule to route through one, so the config
+/// it becomes carries a select group over those nodes, and a MATCH rule onto
+/// that group, in place of the subscription the links came from.
+Map<String, dynamic> shareLinkProfileConfig(
+  List<Map<String, dynamic>> proxies,
+) {
+  final names = [for (final proxy in proxies) '${proxy['name'] ?? ''}'];
+  final groupName = freeProxyName(shareLinksProxyGroupName, names.toSet());
+  return {
+    'proxies': proxies,
+    'proxy-groups': [
+      {'name': groupName, 'type': 'select', 'proxies': names},
+    ],
+    'rules': ['MATCH,$groupName'],
+  };
+}
 
 String? profileUrlFromQrCodes(Iterable<String?> values) {
   for (final value in values) {

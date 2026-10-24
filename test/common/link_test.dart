@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:fl_clash/common/constant.dart';
 import 'package:fl_clash/common/link.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -169,6 +170,46 @@ void main() {
         ]),
         'https://example.com/first.yaml',
       );
+    });
+  });
+
+  group('shareLinkProfileConfig', () {
+    test('routes through a group over the proxies it was given', () {
+      expect(
+        shareLinkProfileConfig([
+          {'name': 'HK', 'type': 'vless', 'server': 'hk.example.com'},
+          {'name': 'JP', 'type': 'trojan', 'server': 'jp.example.com'},
+        ]),
+        {
+          'proxies': [
+            {'name': 'HK', 'type': 'vless', 'server': 'hk.example.com'},
+            {'name': 'JP', 'type': 'trojan', 'server': 'jp.example.com'},
+          ],
+          'proxy-groups': [
+            {
+              'name': shareLinksProxyGroupName,
+              'type': 'select',
+              'proxies': ['HK', 'JP'],
+            },
+          ],
+          'rules': ['MATCH,$shareLinksProxyGroupName'],
+        },
+      );
+    });
+
+    test('moves the group off the name of a proxy', () {
+      final config = shareLinkProfileConfig([
+        {'name': shareLinksProxyGroupName, 'type': 'ss', 'server': 'ss.local'},
+      ]);
+
+      expect(config['proxy-groups'], [
+        {
+          'name': '$shareLinksProxyGroupName-01',
+          'type': 'select',
+          'proxies': [shareLinksProxyGroupName],
+        },
+      ]);
+      expect(config['rules'], ['MATCH,$shareLinksProxyGroupName-01']);
     });
   });
 }
