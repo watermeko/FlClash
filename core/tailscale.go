@@ -109,18 +109,20 @@ func startTailscales(previous map[string]constant.Proxy) {
 
 // Nothing else closes an adapter an apply replaced, which for Tailscale would
 // leave a tsnet backend running against a node key no outbound owns any more.
+//
+// Closing is waited for, not handed to a goroutine: the replacement starts as
+// soon as this returns, and two tsnet servers over one state directory fight
+// each other for the node key. That race is what control answered a fresh
+// login with "410 auth path not found" from.
 func closeReplacedTailscales(previous map[string]constant.Proxy) {
 	current := tunnel.AllProxies()
 	for name, old := range previous {
 		if old.Type() != constant.Tailscale || old == current[name] {
 			continue
 		}
-		closing, closingName := old, name
-		safeGo("closeTailscale", func() {
-			if err := closing.Close(); err != nil {
-				logError("tailscale %s did not close: %v", closingName, err)
-			}
-		})
+		if err := old.Close(); err != nil {
+			logError("tailscale %s did not close: %v", name, err)
+		}
 	}
 }
 

@@ -2,6 +2,7 @@ package core
 
 import (
 	"errors"
+	"sync"
 	"testing"
 	"time"
 
@@ -124,4 +125,44 @@ func TestStartTailscalesLeavesOtherTypesAlone(t *testing.T) {
 	if _, err := outbound.TailscaleStatusOf("direct"); err != nil {
 		t.Fatalf("a non-Tailscale proxy answered a Tailscale status: %v", err)
 	}
+}
+
+// The replacement starts as soon as the close returns, and two tsnet servers
+// over one state directory fight for the node key: control answers the loser
+// with "410 auth path not found". Closing on a goroutine is what let both run,
+// so a close still in flight when this returns is the bug.
+func TestCloseReplacedTailscalesClosesBeforeReturning(t *testing.T) {
+	dropped := &closeSpyProxy{Proxy: newTailscaleProxy(t, "dropped")}
+	tunnel.UpdateProxies(map[string]constant.Proxy{}, nil)
+	t.Cleanup(func() { tunnel.UpdateProxies(nil, nil) })
+
+	closeReplacedTailscales(map[string]constant.Proxy{"dropped": dropped})
+
+	if !dropped.closed() {
+		t.Fatal("the dropped adapter was still closing when closeReplacedTailscales returned")
+	}
+}
+
+// closeSpyProxy records that its Close ran, which is the order the caller
+// depends on rather than anything the adapter reports afterwards.
+type closeSpyProxy struct {
+	constant.Proxy
+
+	mu     sync.Mutex
+	isDone bool
+}
+
+func (p *closeSpyProxy) Close() error {
+	defer func() {
+		p.mu.Lock()
+		p.isDone = true
+		p.mu.Unlock()
+	}()
+	return p.Proxy.Close()
+}
+
+func (p *closeSpyProxy) closed() bool {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	return p.isDone
 }
