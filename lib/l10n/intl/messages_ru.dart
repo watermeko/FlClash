@@ -1922,6 +1922,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
       "Это устройство уже авторизовано, завершать нечего",
     ),
+    "tailscaleLoginUnfinished": MessageLookupByLibrary.simpleMessage(
+      "Страница входа закрыта до того, как устройство вошло в систему",
+    ),
     "tailscaleLogout": MessageLookupByLibrary.simpleMessage("Выйти"),
     "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
       "Удаляет ключ, сохранённый на этом устройстве, чтобы его мог занять другой аккаунт",

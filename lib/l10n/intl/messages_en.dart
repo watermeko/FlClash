@@ -1834,6 +1834,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
       "This device is already signed in, so there is nothing to finish",
     ),
+    "tailscaleLoginUnfinished": MessageLookupByLibrary.simpleMessage(
+      "The sign-in page closed before this device was signed in",
+    ),
     "tailscaleLogout": MessageLookupByLibrary.simpleMessage("Sign out"),
     "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
       "Drops the key this device keeps, so another account can claim it",

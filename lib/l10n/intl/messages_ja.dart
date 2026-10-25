@@ -1577,6 +1577,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
       "このデバイスはすでにサインインしているため、完了する手続きはありません",
     ),
+    "tailscaleLoginUnfinished": MessageLookupByLibrary.simpleMessage(
+      "このデバイスのサインインが完了する前にログインページが閉じられました",
+    ),
     "tailscaleLogout": MessageLookupByLibrary.simpleMessage("サインアウト"),
     "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
       "このデバイスのキーを削除し、別のアカウントで引き継げるようにします",

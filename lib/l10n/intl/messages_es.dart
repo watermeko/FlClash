@@ -1983,6 +1983,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
       "Este dispositivo ya ha iniciado sesión, no queda nada por completar",
     ),
+    "tailscaleLoginUnfinished": MessageLookupByLibrary.simpleMessage(
+      "La página de inicio de sesión se cerró antes de completar el acceso",
+    ),
     "tailscaleLogout": MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
     "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
       "Elimina la clave guardada en este dispositivo para que otra cuenta pueda usarlo",

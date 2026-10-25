@@ -1982,6 +1982,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
       "Cet appareil est déjà connecté, il n\'y a rien à terminer",
     ),
+    "tailscaleLoginUnfinished": MessageLookupByLibrary.simpleMessage(
+      "La page de connexion a été fermée avant la fin de la connexion",
+    ),
     "tailscaleLogout": MessageLookupByLibrary.simpleMessage("Se déconnecter"),
     "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
       "Supprime la clé conservée sur cet appareil pour qu\'un autre compte puisse le reprendre",

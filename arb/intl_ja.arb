@@ -991,6 +991,7 @@
   "tailscaleOffTip": "オンにするとすべてのプロファイルに Tailscale ノードを保持します",
   "tailscaleLoginUnavailable": "このデバイスはすでにサインインしているため、完了する手続きはありません",
   "tailscaleLoginPending": "ノードはまだサインインページを取得していません。しばらくしてからお試しください",
+  "tailscaleLoginUnfinished": "このデバイスのサインインが完了する前にログインページが閉じられました",
   "tailscaleReplaceBrowserLoginTip": "ブラウザでのサインインを置き換えます。この端末は Tailscale からサインアウトし、キーでサインインし直します。",
   "tailscaleReplaceAuthKeyTip": "キーを置き換えます。キーは削除され、この端末はブラウザでサインインします。",
   "tailscaleLoginDone": "ブラウザでサインイン済み",

@@ -8303,6 +8303,16 @@ class AppLocalizations {
     );
   }
 
+  /// `The sign-in page closed before this device was signed in`
+  String get tailscaleLoginUnfinished {
+    return Intl.message(
+      'The sign-in page closed before this device was signed in',
+      name: 'tailscaleLoginUnfinished',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.`
   String get tailscaleReplaceBrowserLoginTip {
     return Intl.message(

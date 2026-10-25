@@ -1,10 +1,12 @@
 import 'dart:async';
 
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
 import 'package:fl_clash/providers/providers.dart';
-import 'package:fl_clash/ui/icons/icons.dart';
 import 'package:fl_clash/l10n/l10n.dart';
+import 'package:fl_clash/ui/icons/icons.dart';
+import 'package:fl_clash/views/tailscale_login.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -352,7 +354,28 @@ class _TailscaleViewState extends ConsumerState<TailscaleView>
           .update((state) => state.copyWith(authKey: ''));
       await ref.read(coreHandlerProvider).startTailscale(kTailscaleProxyName);
     }
-    await dialogs.openUrl(url);
+    // In the app rather than in a browser: the sign-in page ends on its own
+    // success screen and hands nothing back, so a browser would leave the user
+    // to find their way here again with no way to know the login had worked.
+    if (!context.mounted) {
+      return;
+    }
+    final finished = await showTailscaleLogin(context, url);
+    if (!context.mounted) {
+      return;
+    }
+    await notifier.readAll();
+    if (!context.mounted) {
+      return;
+    }
+    // Closing the page without a signed-in node is a login that did not take,
+    // which is worth saying here rather than leaving the page on "starting".
+    if (!finished && ref.read(tailscaleStatusProvider)?.isRunning != true) {
+      context.showNotifier(
+        appLocalizations.tailscaleLoginUnfinished,
+        level: MessageLevel.warning,
+      );
+    }
   }
 
   /// A key and a browser login both hold the node, so setting one drops the
@@ -467,7 +490,7 @@ class _StatusCard extends ConsumerWidget {
             if (on) ...[
               const SizedBox(height: 8),
               Text(
-                _stateLabel(appLocalizations, status),
+                _stateLabel(appLocalizations, status, ref),
                 style: AppTextStyle.subheadline
                     .of(context)
                     .copyWith(
@@ -545,12 +568,21 @@ class _StatusCard extends ConsumerWidget {
     return null;
   }
 
-  String _stateLabel(AppLocalizations l, TailscaleStatus? status) {
+  String _stateLabel(
+    AppLocalizations l,
+    TailscaleStatus? status,
+    WidgetRef ref,
+  ) {
     if (!props.inject) {
       return l.tailscaleOff;
     }
     if (status == null) {
-      return l.tailscaleStarting;
+      // Nothing to show is not the same as a node coming up: with no core
+      // there is nothing that would answer, and "starting" would sit there for
+      // as long as the user cared to wait.
+      return ref.watch(coreStatusProvider) == CoreStatus.connected
+          ? l.tailscaleStarting
+          : l.tailscaleNotStarted;
     }
     if (status.needsLogin) {
       return l.tailscaleNeedsLogin;

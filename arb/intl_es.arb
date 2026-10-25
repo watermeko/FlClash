@@ -991,6 +991,7 @@
   "tailscaleOffTip": "Actívalo para mantener un nodo Tailscale en cada perfil",
   "tailscaleLoginUnavailable": "Este dispositivo ya ha iniciado sesión, no queda nada por completar",
   "tailscaleLoginPending": "El nodo aún no ha facilitado una página de inicio de sesión, inténtalo de nuevo en un momento",
+  "tailscaleLoginUnfinished": "La página de inicio de sesión se cerró antes de completar el acceso",
   "tailscaleReplaceBrowserLoginTip": "Esto sustituye el inicio de sesión con el navegador: el dispositivo cierra la sesión de Tailscale y vuelve a entrar con la clave.",
   "tailscaleReplaceAuthKeyTip": "Esto sustituye la clave: se borra y el dispositivo inicia sesión con el navegador.",
   "tailscaleLoginDone": "Sesión iniciada con el navegador",

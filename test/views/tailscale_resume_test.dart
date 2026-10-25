@@ -149,4 +149,22 @@ void main() {
 
     await tester.pumpWidget(const SizedBox());
   });
+
+  // With no core there is nothing that would answer for the node, and a page
+  // that said "Starting" would keep saying it for as long as the user waited.
+  testWidgets('a node with no core behind it has not started', (tester) async {
+    when(
+      () => core.tailscaleStatus(kTailscaleProxyName),
+    ).thenAnswer((_) async => null);
+
+    await pumpView(tester);
+
+    expect(find.text('Not started'), findsOneWidget);
+    expect(find.text('Starting'), findsNothing);
+
+    // The page polls while the node is unsettled and riverpod schedules its
+    // own disposal, so both have to be given the frame that ends them.
+    await tester.pumpWidget(const SizedBox());
+    await tester.pump(Duration.zero);
+  });
 }

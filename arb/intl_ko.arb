@@ -991,6 +991,7 @@
   "tailscaleOffTip": "켜면 모든 프로필에 Tailscale 노드가 유지됩니다",
   "tailscaleLoginUnavailable": "이 기기는 이미 로그인되어 있어 완료할 인증이 없습니다",
   "tailscaleLoginPending": "노드가 아직 로그인 페이지를 제공하지 않았습니다. 잠시 후 다시 시도하세요",
+  "tailscaleLoginUnfinished": "이 기기의 로그인이 완료되기 전에 로그인 페이지가 닫혔습니다",
   "tailscaleReplaceBrowserLoginTip": "브라우저 로그인을 대체합니다. 이 기기는 Tailscale에서 로그아웃되고 키로 다시 로그인합니다.",
   "tailscaleReplaceAuthKeyTip": "키 인증을 대체합니다. 키가 삭제되고 이 기기는 브라우저로 로그인합니다.",
   "tailscaleLoginDone": "브라우저로 로그인됨",

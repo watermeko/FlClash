@@ -1426,6 +1426,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
       "本设备已登录，无需再次认证",
     ),
+    "tailscaleLoginUnfinished": MessageLookupByLibrary.simpleMessage(
+      "登录页在本设备登录完成前被关闭了",
+    ),
     "tailscaleLogout": MessageLookupByLibrary.simpleMessage("登出"),
     "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
       "清除本设备保存的密钥，以便其他账号接管",

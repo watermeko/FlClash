@@ -1550,6 +1550,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginUnavailable": MessageLookupByLibrary.simpleMessage(
       "이 기기는 이미 로그인되어 있어 완료할 인증이 없습니다",
     ),
+    "tailscaleLoginUnfinished": MessageLookupByLibrary.simpleMessage(
+      "이 기기의 로그인이 완료되기 전에 로그인 페이지가 닫혔습니다",
+    ),
     "tailscaleLogout": MessageLookupByLibrary.simpleMessage("로그아웃"),
     "tailscaleLogoutTip": MessageLookupByLibrary.simpleMessage(
       "이 기기의 키를 삭제하여 다른 계정에서 사용할 수 있게 합니다",
