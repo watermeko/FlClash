@@ -1974,6 +1974,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage(
       "Sesión iniciada con el navegador",
     ),
+    "tailscaleLoginPending": MessageLookupByLibrary.simpleMessage(
+      "El nodo aún no ha facilitado una página de inicio de sesión, inténtalo de nuevo en un momento",
+    ),
     "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
       "Abre la página de inicio de sesión de Tailscale en un navegador",
     ),

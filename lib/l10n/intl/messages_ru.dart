@@ -1913,6 +1913,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage(
       "Выполнен вход через браузер",
     ),
+    "tailscaleLoginPending": MessageLookupByLibrary.simpleMessage(
+      "Узел ещё не получил страницу входа, повторите попытку позже",
+    ),
     "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
       "Открывает страницу входа Tailscale в браузере",
     ),

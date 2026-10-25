@@ -1541,6 +1541,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleHealth": MessageLookupByLibrary.simpleMessage("문제"),
     "tailscaleLogin": MessageLookupByLibrary.simpleMessage("브라우저 로그인 인증"),
     "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage("브라우저로 로그인됨"),
+    "tailscaleLoginPending": MessageLookupByLibrary.simpleMessage(
+      "노드가 아직 로그인 페이지를 제공하지 않았습니다. 잠시 후 다시 시도하세요",
+    ),
     "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
       "브라우저에서 Tailscale 로그인 페이지를 엽니다",
     ),

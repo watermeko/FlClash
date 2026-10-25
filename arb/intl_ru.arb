@@ -990,6 +990,7 @@
   "tailscaleOff": "Выключено",
   "tailscaleOffTip": "Включите, чтобы держать узел Tailscale в каждом профиле",
   "tailscaleLoginUnavailable": "Это устройство уже авторизовано, завершать нечего",
+  "tailscaleLoginPending": "Узел ещё не получил страницу входа, повторите попытку позже",
   "tailscaleReplaceBrowserLoginTip": "Это заменит вход через браузер: устройство выйдет из Tailscale и войдёт снова по ключу.",
   "tailscaleReplaceAuthKeyTip": "Это заменит ключ: ключ будет удалён, а устройство войдёт через браузер.",
   "tailscaleLoginDone": "Выполнен вход через браузер",

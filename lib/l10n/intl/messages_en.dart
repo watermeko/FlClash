@@ -1825,6 +1825,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage(
       "Signed in with a browser",
     ),
+    "tailscaleLoginPending": MessageLookupByLibrary.simpleMessage(
+      "The node has not reported a sign-in page yet, so try again in a moment",
+    ),
     "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
       "Opens the Tailscale sign-in page in a browser",
     ),

@@ -331,11 +331,16 @@ class _TailscaleViewState extends ConsumerState<TailscaleView>
       return;
     }
     if (url.isEmpty) {
-      // A node that is signed in has nothing to finish, and one that never
-      // started has nothing to continue; both say so instead of opening a
-      // page that would not be about this device.
+      // An empty answer means the node is signed in, which is worth saying:
+      // the user pressed a button that promised a page. A node still coming up
+      // reads as signed in too, so the advice differs when it has not said so.
+      final signedIn = ref.read(tailscaleStatusProvider)?.isRunning ?? false;
       await dialogs.showAlert(
-        message: TextSpan(text: appLocalizations.tailscaleLoginUnavailable),
+        message: TextSpan(
+          text: signedIn
+              ? appLocalizations.tailscaleLoginUnavailable
+              : appLocalizations.tailscaleLoginPending,
+        ),
       );
       return;
     }

@@ -990,6 +990,7 @@
   "tailscaleOff": "Désactivé",
   "tailscaleOffTip": "Activez ceci pour conserver un nœud Tailscale dans chaque profil",
   "tailscaleLoginUnavailable": "Cet appareil est déjà connecté, il n'y a rien à terminer",
+  "tailscaleLoginPending": "Le nœud n’a pas encore fourni de page de connexion, réessayez dans un instant",
   "tailscaleReplaceBrowserLoginTip": "Cela remplace la connexion par navigateur : l'appareil se déconnecte de Tailscale et se reconnecte avec la clé.",
   "tailscaleReplaceAuthKeyTip": "Cela remplace la clé : elle est effacée et l'appareil se connecte avec un navigateur.",
   "tailscaleLoginDone": "Connecté via un navigateur",

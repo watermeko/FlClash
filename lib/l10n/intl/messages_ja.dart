@@ -1568,6 +1568,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleHealth": MessageLookupByLibrary.simpleMessage("問題"),
     "tailscaleLogin": MessageLookupByLibrary.simpleMessage("ブラウザでサインイン"),
     "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage("ブラウザでサインイン済み"),
+    "tailscaleLoginPending": MessageLookupByLibrary.simpleMessage(
+      "ノードはまだサインインページを取得していません。しばらくしてからお試しください",
+    ),
     "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
       "ブラウザで Tailscale のサインインページを開きます",
     ),

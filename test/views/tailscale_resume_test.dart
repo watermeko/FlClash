@@ -113,4 +113,40 @@ void main() {
 
     await tester.pumpWidget(const SizedBox());
   });
+
+  // A button that promises a page has to say what happened when control hands
+  // out none. Saying "already signed in" about a node that never got that far
+  // is a lie the fresh install showed, so the two answers stay apart.
+  testWidgets('an empty login URL on a node that is not running is not a '
+      'sign-in', (tester) async {
+    when(() => core.tailscaleStatus(kTailscaleProxyName)).thenAnswer(
+      (_) async => TailscaleStatus.fromJson({
+        'name': kTailscaleProxyName,
+        'backend-state': 'NeedsLogin',
+      }),
+    );
+    when(
+      () => core.tailscaleLoginUrl(kTailscaleProxyName),
+    ).thenAnswer((_) async => '');
+
+    await pumpView(tester);
+
+    await tester.tap(find.text('Browser sign-in'));
+    await tester.pumpAndSettle();
+
+    expect(
+      find.text(
+        'The node has not reported a sign-in page yet, so try again in a moment',
+      ),
+      findsOneWidget,
+    );
+    expect(
+      find.text(
+        'This device is already signed in, so there is nothing to finish',
+      ),
+      findsNothing,
+    );
+
+    await tester.pumpWidget(const SizedBox());
+  });
 }

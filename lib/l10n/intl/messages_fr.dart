@@ -1973,6 +1973,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage(
       "Connecté via un navigateur",
     ),
+    "tailscaleLoginPending": MessageLookupByLibrary.simpleMessage(
+      "Le nœud n’a pas encore fourni de page de connexion, réessayez dans un instant",
+    ),
     "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
       "Ouvre la page de connexion Tailscale dans un navigateur",
     ),

@@ -8293,6 +8293,16 @@ class AppLocalizations {
     );
   }
 
+  /// `The node has not reported a sign-in page yet, so try again in a moment`
+  String get tailscaleLoginPending {
+    return Intl.message(
+      'The node has not reported a sign-in page yet, so try again in a moment',
+      name: 'tailscaleLoginPending',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.`
   String get tailscaleReplaceBrowserLoginTip {
     return Intl.message(

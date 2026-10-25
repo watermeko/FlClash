@@ -1417,6 +1417,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleHealth": MessageLookupByLibrary.simpleMessage("问题"),
     "tailscaleLogin": MessageLookupByLibrary.simpleMessage("浏览器登录认证"),
     "tailscaleLoginDone": MessageLookupByLibrary.simpleMessage("已通过浏览器登录"),
+    "tailscaleLoginPending": MessageLookupByLibrary.simpleMessage(
+      "节点还没有拿到登录页，请稍候再试",
+    ),
     "tailscaleLoginTip": MessageLookupByLibrary.simpleMessage(
       "在浏览器中打开 Tailscale 登录页",
     ),
