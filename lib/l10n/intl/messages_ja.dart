@@ -198,17 +198,19 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m80(count) =>
       "${Intl.plural(count, one: '1 台のデバイス', other: '${count} 台のデバイス')}";
 
-  static String m81(value) => "ピーク ${value}";
+  static String m81(hostname) => "コントロールパネルではこのノードを ${hostname} として認識しています";
 
-  static String m82(value) => "累計 ${value}";
+  static String m82(value) => "ピーク ${value}";
 
-  static String m83(transport) => "${transport} リクエストヘッダー";
+  static String m83(value) => "累計 ${value}";
 
-  static String m84(label) => "${label}はURLである必要があります";
+  static String m84(transport) => "${transport} リクエストヘッダー";
 
-  static String m85(count) => "${count} 年前";
+  static String m85(label) => "${label}はURLである必要があります";
 
   static String m86(count) => "${count} 年前";
+
+  static String m87(count) => "${count} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -1592,6 +1594,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
       "このデバイスがサインインすると表示されます",
     ),
+    "tailscaleNodeName": m81,
     "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("未起動"),
     "tailscaleOff": MessageLookupByLibrary.simpleMessage("オフ"),
     "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
@@ -1636,11 +1639,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("アップロード量"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxyポート"),
     "traffic": MessageLookupByLibrary.simpleMessage("通信量"),
-    "trafficPeak": m81,
-    "trafficTotal": m82,
+    "trafficPeak": m82,
+    "trafficTotal": m83,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("トラフィック統計"),
     "transport": MessageLookupByLibrary.simpleMessage("トランスポート"),
-    "transportHeaders": m83,
+    "transportHeaders": m84,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN の権限を取得できなかったため、オフにしました。",
@@ -1668,7 +1671,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("アップロード"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("アップロード帯域幅"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m84,
+    "urlTip": m85,
     "useHosts": MessageLookupByLibrary.simpleMessage("Hostsを使用"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("システムのHostsを使用"),
     "usedShort": MessageLookupByLibrary.simpleMessage("使用済み"),
@@ -1691,8 +1694,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "システムに書き込むを有効にするとシステムクロックも設定します。Android では無視されます。",
     ),
-    "yearsAgo": m85,
-    "yearsAgoShort": m86,
+    "yearsAgo": m86,
+    "yearsAgoShort": m87,
     "yes": MessageLookupByLibrary.simpleMessage("はい"),
     "zhCN": MessageLookupByLibrary.simpleMessage("簡体字中国語"),
   };

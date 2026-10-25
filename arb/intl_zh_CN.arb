@@ -992,6 +992,15 @@
   "tailscaleLoginUnavailable": "本设备已登录，无需再次认证",
   "tailscaleLoginPending": "节点还没有拿到登录页，请稍候再试",
   "tailscaleLoginUnfinished": "登录页在本设备登录完成前被关闭了",
+  "tailscaleNodeName": "控制台记录的节点名是 {hostname}",
+  "@tailscaleNodeName": {
+    "description": "The name control has for the node, which is the one it registered under and not one set afterwards.",
+    "placeholders": {
+      "hostname": {
+        "type": "String"
+      }
+    }
+  },
   "tailscaleReplaceBrowserLoginTip": "这会替代浏览器登录：本设备将从 Tailscale 登出，改用密钥重新登录。",
   "tailscaleReplaceAuthKeyTip": "这会替代密钥认证：密钥会被清除，本设备改用浏览器登录。",
   "tailscaleLoginDone": "已通过浏览器登录",

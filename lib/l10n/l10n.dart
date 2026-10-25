@@ -8313,6 +8313,17 @@ class AppLocalizations {
     );
   }
 
+  /// `Control knows this node as {hostname}`
+  String tailscaleNodeName(String hostname) {
+    return Intl.message(
+      'Control knows this node as $hostname',
+      name: 'tailscaleNodeName',
+      desc:
+          'The name control has for the node, which is the one it registered under and not one set afterwards.',
+      args: [hostname],
+    );
+  }
+
   /// `This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.`
   String get tailscaleReplaceBrowserLoginTip {
     return Intl.message(

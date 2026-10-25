@@ -199,17 +199,19 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m80(count) =>
       "${Intl.plural(count, one: '기기 1대', other: '기기 ${count}대')}";
 
-  static String m81(value) => "최고 ${value}";
+  static String m81(hostname) => "제어판은 이 노드를 ${hostname} 으로 알고 있습니다";
 
-  static String m82(value) => "합계 ${value}";
+  static String m82(value) => "최고 ${value}";
 
-  static String m83(transport) => "${transport} 요청 헤더";
+  static String m83(value) => "합계 ${value}";
 
-  static String m84(label) => "${label}은(는) URL이어야 합니다";
+  static String m84(transport) => "${transport} 요청 헤더";
 
-  static String m85(count) => "${Intl.plural(count, other: '${count}년 전')}";
+  static String m85(label) => "${label}은(는) URL이어야 합니다";
 
   static String m86(count) => "${Intl.plural(count, other: '${count}년 전')}";
+
+  static String m87(count) => "${Intl.plural(count, other: '${count}년 전')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -1565,6 +1567,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
       "이 기기가 로그인하면 표시됩니다",
     ),
+    "tailscaleNodeName": m81,
     "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("시작되지 않음"),
     "tailscaleOff": MessageLookupByLibrary.simpleMessage("꺼짐"),
     "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
@@ -1609,11 +1612,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("업로드량"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxy 포트"),
     "traffic": MessageLookupByLibrary.simpleMessage("트래픽"),
-    "trafficPeak": m81,
-    "trafficTotal": m82,
+    "trafficPeak": m82,
+    "trafficTotal": m83,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("트래픽 사용량"),
     "transport": MessageLookupByLibrary.simpleMessage("전송"),
-    "transportHeaders": m83,
+    "transportHeaders": m84,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN 권한을 얻지 못해 끄기로 되돌렸습니다.",
@@ -1643,7 +1646,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("업로드"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("업로드 대역폭"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m84,
+    "urlTip": m85,
     "useHosts": MessageLookupByLibrary.simpleMessage("hosts 사용"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("시스템 hosts 사용"),
     "usedShort": MessageLookupByLibrary.simpleMessage("사용"),
@@ -1666,8 +1669,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "시스템에 기록하면 시스템 시계도 설정합니다. Android에서는 무시됩니다.",
     ),
-    "yearsAgo": m85,
-    "yearsAgoShort": m86,
+    "yearsAgo": m86,
+    "yearsAgoShort": m87,
     "yes": MessageLookupByLibrary.simpleMessage("예"),
     "zhCN": MessageLookupByLibrary.simpleMessage("중국어 간체"),
   };

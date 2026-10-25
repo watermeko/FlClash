@@ -220,18 +220,21 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m80(count) =>
       "${Intl.plural(count, one: '1 устройство', other: '${count} устройств')}";
 
-  static String m81(value) => "Пик ${value}";
+  static String m81(hostname) =>
+      "Панель управления знает этот узел как ${hostname}";
 
-  static String m82(value) => "Всего ${value}";
+  static String m82(value) => "Пик ${value}";
 
-  static String m83(transport) => "Заголовки ${transport}";
+  static String m83(value) => "Всего ${value}";
 
-  static String m84(label) => "Значение «${label}» должно быть URL";
+  static String m84(transport) => "Заголовки ${transport}";
 
-  static String m85(count) =>
-      "${Intl.plural(count, one: '${count} год назад', few: '${count} года назад', many: '${count} лет назад', other: '${count} года назад')}";
+  static String m85(label) => "Значение «${label}» должно быть URL";
 
   static String m86(count) =>
+      "${Intl.plural(count, one: '${count} год назад', few: '${count} года назад', many: '${count} лет назад', other: '${count} года назад')}";
+
+  static String m87(count) =>
       "${Intl.plural(count, one: '${count} г. назад', few: '${count} г. назад', many: '${count} л. назад', other: '${count} г. назад')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -1941,6 +1944,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
       "Они появятся после входа на этом устройстве",
     ),
+    "tailscaleNodeName": m81,
     "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("Не запущено"),
     "tailscaleOff": MessageLookupByLibrary.simpleMessage("Выключено"),
     "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
@@ -1995,11 +1999,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("Отдано"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("Порт TProxy"),
     "traffic": MessageLookupByLibrary.simpleMessage("Трафик"),
-    "trafficPeak": m81,
-    "trafficTotal": m82,
+    "trafficPeak": m82,
+    "trafficTotal": m83,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("Статистика трафика"),
     "transport": MessageLookupByLibrary.simpleMessage("Транспорт"),
-    "transportHeaders": m83,
+    "transportHeaders": m84,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "Не удалось получить права для TUN, поэтому он выключен.",
@@ -2033,7 +2037,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("Отдача"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("Скорость отдачи"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m84,
+    "urlTip": m85,
     "useHosts": MessageLookupByLibrary.simpleMessage("Использовать hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage(
       "Использовать системный hosts",
@@ -2066,8 +2070,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "«Записывать в систему» также устанавливает системные часы; Android это игнорирует.",
     ),
-    "yearsAgo": m85,
-    "yearsAgoShort": m86,
+    "yearsAgo": m86,
+    "yearsAgoShort": m87,
     "yes": MessageLookupByLibrary.simpleMessage("Да"),
     "zhCN": MessageLookupByLibrary.simpleMessage("Упрощённый китайский"),
   };

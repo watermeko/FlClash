@@ -992,6 +992,15 @@
   "tailscaleLoginUnavailable": "This device is already signed in, so there is nothing to finish",
   "tailscaleLoginPending": "The node has not reported a sign-in page yet, so try again in a moment",
   "tailscaleLoginUnfinished": "The sign-in page closed before this device was signed in",
+  "tailscaleNodeName": "Control knows this node as {hostname}",
+  "@tailscaleNodeName": {
+    "description": "The name control has for the node, which is the one it registered under and not one set afterwards.",
+    "placeholders": {
+      "hostname": {
+        "type": "String"
+      }
+    }
+  },
   "tailscaleReplaceBrowserLoginTip": "This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.",
   "tailscaleReplaceAuthKeyTip": "This replaces the key: the key is cleared and this device signs in through a browser instead.",
   "tailscaleLoginDone": "Signed in with a browser",

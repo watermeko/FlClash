@@ -228,18 +228,20 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m80(count) =>
       "${Intl.plural(count, one: '1 máquina', other: '${count} máquinas')}";
 
-  static String m81(value) => "Pico: ${value}";
+  static String m81(hostname) => "El panel conoce este nodo como ${hostname}";
 
-  static String m82(value) => "Total: ${value}";
+  static String m82(value) => "Pico: ${value}";
 
-  static String m83(transport) => "Encabezados ${transport}";
+  static String m83(value) => "Total: ${value}";
 
-  static String m84(label) => "${label} debe ser una URL";
+  static String m84(transport) => "Encabezados ${transport}";
 
-  static String m85(count) =>
+  static String m85(label) => "${label} debe ser una URL";
+
+  static String m86(count) =>
       "${Intl.plural(count, one: 'hace 1 año', other: 'hace ${count} años')}";
 
-  static String m86(count) => "${Intl.plural(count, other: 'hace ${count} a')}";
+  static String m87(count) => "${Intl.plural(count, other: 'hace ${count} a')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -2004,6 +2006,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
       "Aparecen cuando este dispositivo inicia sesión",
     ),
+    "tailscaleNodeName": m81,
     "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("Sin iniciar"),
     "tailscaleOff": MessageLookupByLibrary.simpleMessage("Desactivado"),
     "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
@@ -2054,11 +2057,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("Subido"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("Puerto TProxy"),
     "traffic": MessageLookupByLibrary.simpleMessage("Tráfico"),
-    "trafficPeak": m81,
-    "trafficTotal": m82,
+    "trafficPeak": m82,
+    "trafficTotal": m83,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("Uso de tráfico"),
     "transport": MessageLookupByLibrary.simpleMessage("Transporte"),
-    "transportHeaders": m83,
+    "transportHeaders": m84,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "No se pudo autorizar TUN, por lo que se desactivó.",
@@ -2094,7 +2097,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Ancho de banda de subida",
     ),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m84,
+    "urlTip": m85,
     "useHosts": MessageLookupByLibrary.simpleMessage("Usar hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage(
       "Usar hosts del sistema",
@@ -2123,8 +2126,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "Escribir en el sistema también ajusta el reloj del sistema; Android lo ignora.",
     ),
-    "yearsAgo": m85,
-    "yearsAgoShort": m86,
+    "yearsAgo": m86,
+    "yearsAgoShort": m87,
     "yes": MessageLookupByLibrary.simpleMessage("Sí"),
     "zhCN": MessageLookupByLibrary.simpleMessage("Chino simplificado"),
   };

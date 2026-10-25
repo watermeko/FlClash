@@ -195,17 +195,19 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m80(count) =>
       "${Intl.plural(count, one: '1 台设备', other: '${count} 台设备')}";
 
-  static String m81(value) => "峰值 ${value}";
+  static String m81(hostname) => "控制台记录的节点名是 ${hostname}";
 
-  static String m82(value) => "累计 ${value}";
+  static String m82(value) => "峰值 ${value}";
 
-  static String m83(transport) => "${transport} 请求头";
+  static String m83(value) => "累计 ${value}";
 
-  static String m84(label) => "${label}必须为URL";
+  static String m84(transport) => "${transport} 请求头";
 
-  static String m85(count) => "${count} 年前";
+  static String m85(label) => "${label}必须为URL";
 
   static String m86(count) => "${count} 年前";
+
+  static String m87(count) => "${count} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -1439,6 +1441,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage("需要登录"),
     "tailscaleNoMachines": MessageLookupByLibrary.simpleMessage("暂无设备"),
     "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage("本机登录后会出现"),
+    "tailscaleNodeName": m81,
     "tailscaleNotStarted": MessageLookupByLibrary.simpleMessage("未启动"),
     "tailscaleOff": MessageLookupByLibrary.simpleMessage("已关闭"),
     "tailscaleOffTip": MessageLookupByLibrary.simpleMessage(
@@ -1481,11 +1484,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("上传总量"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("Tproxy端口"),
     "traffic": MessageLookupByLibrary.simpleMessage("流量"),
-    "trafficPeak": m81,
-    "trafficTotal": m82,
+    "trafficPeak": m82,
+    "trafficTotal": m83,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("流量统计"),
     "transport": MessageLookupByLibrary.simpleMessage("传输协议"),
-    "transportHeaders": m83,
+    "transportHeaders": m84,
     "tun": MessageLookupByLibrary.simpleMessage("虚拟网卡"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "虚拟网卡授权失败，已关闭。",
@@ -1513,7 +1516,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("上传"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("上行带宽"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m84,
+    "urlTip": m85,
     "useHosts": MessageLookupByLibrary.simpleMessage("使用Hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("使用系统Hosts"),
     "usedShort": MessageLookupByLibrary.simpleMessage("已用"),
@@ -1536,8 +1539,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "写入系统会同时设置系统时钟，Android 上不生效。",
     ),
-    "yearsAgo": m85,
-    "yearsAgoShort": m86,
+    "yearsAgo": m86,
+    "yearsAgoShort": m87,
     "yes": MessageLookupByLibrary.simpleMessage("是"),
     "zhCN": MessageLookupByLibrary.simpleMessage("中文简体"),
   };

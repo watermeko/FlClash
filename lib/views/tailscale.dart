@@ -522,6 +522,20 @@ class _StatusCard extends ConsumerWidget {
                   ],
                 ),
               ],
+              // Control keeps the name the node registered under, so a hostname
+              // set afterwards leaves the node the name it already has. Showing
+              // that name is what lets the setting and the node disagree
+              // without the user having to guess which one they are reading.
+              if ((status?.hostname.isNotEmpty ?? false) &&
+                  status!.hostname != props.hostname) ...[
+                const SizedBox(height: 4),
+                Text(
+                  appLocalizations.tailscaleNodeName(status!.hostname),
+                  style: AppTextStyle.footnote
+                      .of(context)
+                      .copyWith(color: context.colorScheme.onSurfaceVariant),
+                ),
+              ],
               if (status?.ips.isNotEmpty ?? false) ...[
                 const SizedBox(height: 4),
                 SelectableText(

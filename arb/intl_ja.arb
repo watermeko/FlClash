@@ -992,6 +992,15 @@
   "tailscaleLoginUnavailable": "このデバイスはすでにサインインしているため、完了する手続きはありません",
   "tailscaleLoginPending": "ノードはまだサインインページを取得していません。しばらくしてからお試しください",
   "tailscaleLoginUnfinished": "このデバイスのサインインが完了する前にログインページが閉じられました",
+  "tailscaleNodeName": "コントロールパネルではこのノードを {hostname} として認識しています",
+  "@tailscaleNodeName": {
+    "description": "The name control has for the node, which is the one it registered under and not one set afterwards.",
+    "placeholders": {
+      "hostname": {
+        "type": "String"
+      }
+    }
+  },
   "tailscaleReplaceBrowserLoginTip": "ブラウザでのサインインを置き換えます。この端末は Tailscale からサインアウトし、キーでサインインし直します。",
   "tailscaleReplaceAuthKeyTip": "キーを置き換えます。キーは削除され、この端末はブラウザでサインインします。",
   "tailscaleLoginDone": "ブラウザでサインイン済み",
