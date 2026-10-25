@@ -2006,6 +2006,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage(
       "Actualizar estado",
     ),
+    "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "Esto sustituye la clave: se borra y el dispositivo inicia sesión con el navegador.",
+    ),
+    "tailscaleReplaceBrowserLoginTip": MessageLookupByLibrary.simpleMessage(
+      "Esto sustituye el inicio de sesión con el navegador: el dispositivo cierra la sesión de Tailscale y vuelve a entrar con la clave.",
+    ),
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("Conectado"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("Iniciando"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("Estado"),

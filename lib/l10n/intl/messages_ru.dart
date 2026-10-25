@@ -1943,6 +1943,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage(
       "Обновить состояние",
     ),
+    "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "Это заменит ключ: ключ будет удалён, а устройство войдёт через браузер.",
+    ),
+    "tailscaleReplaceBrowserLoginTip": MessageLookupByLibrary.simpleMessage(
+      "Это заменит вход через браузер: устройство выйдет из Tailscale и войдёт снова по ключу.",
+    ),
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("Подключено"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("Запуск"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("Состояние"),

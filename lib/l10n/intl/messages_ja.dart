@@ -1592,6 +1592,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "オンにするとすべてのプロファイルに Tailscale ノードを保持します",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("状態を更新"),
+    "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "キーを置き換えます。キーは削除され、この端末はブラウザでサインインします。",
+    ),
+    "tailscaleReplaceBrowserLoginTip": MessageLookupByLibrary.simpleMessage(
+      "ブラウザでのサインインを置き換えます。この端末は Tailscale からサインアウトし、キーでサインインし直します。",
+    ),
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("接続済み"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("起動中"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("状態"),

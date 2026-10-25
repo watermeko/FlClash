@@ -990,6 +990,8 @@
   "tailscaleOff": "オフ",
   "tailscaleOffTip": "オンにするとすべてのプロファイルに Tailscale ノードを保持します",
   "tailscaleLoginUnavailable": "このデバイスはすでにサインインしているため、完了する手続きはありません",
+  "tailscaleReplaceBrowserLoginTip": "ブラウザでのサインインを置き換えます。この端末は Tailscale からサインアウトし、キーでサインインし直します。",
+  "tailscaleReplaceAuthKeyTip": "キーを置き換えます。キーは削除され、この端末はブラウザでサインインします。",
   "tailscaleLoginDone": "ブラウザでサインイン済み",
   "tailscaleDesc": "Tailnet の状態・アドレス・サインイン方法",
   "tailscaleMachinesCount": "{count, plural, =1{1 台のデバイス} other{{count} 台のデバイス}}"

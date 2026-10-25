@@ -1565,6 +1565,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "켜면 모든 프로필에 Tailscale 노드가 유지됩니다",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("상태 새로 고침"),
+    "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "키 인증을 대체합니다. 키가 삭제되고 이 기기는 브라우저로 로그인합니다.",
+    ),
+    "tailscaleReplaceBrowserLoginTip": MessageLookupByLibrary.simpleMessage(
+      "브라우저 로그인을 대체합니다. 이 기기는 Tailscale에서 로그아웃되고 키로 다시 로그인합니다.",
+    ),
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("연결됨"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("시작 중"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("상태"),

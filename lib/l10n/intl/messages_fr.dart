@@ -2005,6 +2005,12 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage(
       "Actualiser l\'état",
     ),
+    "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "Cela remplace la clé : elle est effacée et l\'appareil se connecte avec un navigateur.",
+    ),
+    "tailscaleReplaceBrowserLoginTip": MessageLookupByLibrary.simpleMessage(
+      "Cela remplace la connexion par navigateur : l\'appareil se déconnecte de Tailscale et se reconnecte avec la clé.",
+    ),
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("Connecté"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("Démarrage"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("État"),

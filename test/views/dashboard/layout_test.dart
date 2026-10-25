@@ -130,8 +130,13 @@ void main() {
     expect(memory.top, service.top);
     expect(memory.left, closeTo(service.right + 16, 0.01));
     expect(table.top, intranet.bottom + 16);
-    expect(table.width / groups.width, closeTo(1.5, 0.01));
     expect(groups.top, table.top);
+    // The tailnet holds a column of the bottom row, beside the group tiles
+    // rather than above them, so the two no longer split it three to two.
+    final tailnet = tester.getRect(find.byType(TailscaleCard));
+    expect(tailnet.top, table.top);
+    expect(tailnet.left, greaterThan(groups.right));
+    expect(tailnet.right, closeTo(memory.right, 0.01));
     expect(table.bottom, 824 - 24);
     expect(scrollExtentOf(tester), 0);
     expect(find.byType(OutboundModeCard), findsNothing);
@@ -234,15 +239,19 @@ void main() {
     seedGroups(12);
     await pumpDashboard(tester, const Size(1000, 660));
 
-    final current = rectOf(tester, CurrentOutboundCard);
     final stats = rectOf(tester, ConnectionStatsCard);
     final groups = rectOf(tester, ProxyGroupsSummaryCard);
     expect(find.byType(ConnectionsTableCard), findsNothing);
     expect(find.byType(ProxyGroupsCard), findsNothing);
     expect(stats.height, greaterThan(112));
     expect(stats.bottom, 660 - 24);
-    expect(stats.width, closeTo(current.width, 0.01));
     expect(groups.top, stats.top);
+    expect(stats.width, greaterThan(112));
+    // The tailnet keeps the right edge of the row even with no tables to sit
+    // beside, so a short window still reports the node.
+    final tailnet = tester.getRect(find.byType(TailscaleCard));
+    expect(tailnet.top, stats.top);
+    expect(tailnet.left, greaterThan(groups.right));
     expect(find.text('12 groups', findRichText: true), findsOneWidget);
     expect(scrollExtentOf(tester), 0);
     expect(find.byType(Scrollable), findsOneWidget);
@@ -384,9 +393,11 @@ void main() {
     );
     final stats = rectOf(tester, ConnectionStatsCard);
     final groups = rectOf(tester, ProxyGroupsSummaryCard);
-    expect(stats.width, closeTo(upload.width, 0.01));
     expect(groups.top, stats.top);
     expect(groups.left, closeTo(stats.right + gap, 0.01));
+    final tailnet = tester.getRect(find.byType(TailscaleCard));
+    expect(tailnet.top, stats.top);
+    expect(tailnet.left, greaterThan(groups.right));
     expect(find.byType(ConnectionsTableCard), findsNothing);
     expect(find.byType(Scrollable), findsOneWidget);
     expect(tester.takeException(), isNull);

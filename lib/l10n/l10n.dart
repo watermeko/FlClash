@@ -8293,6 +8293,26 @@ class AppLocalizations {
     );
   }
 
+  /// `This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.`
+  String get tailscaleReplaceBrowserLoginTip {
+    return Intl.message(
+      'This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.',
+      name: 'tailscaleReplaceBrowserLoginTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This replaces the key: the key is cleared and this device signs in through a browser instead.`
+  String get tailscaleReplaceAuthKeyTip {
+    return Intl.message(
+      'This replaces the key: the key is cleared and this device signs in through a browser instead.',
+      name: 'tailscaleReplaceAuthKeyTip',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Signed in with a browser`
   String get tailscaleLoginDone {
     return Intl.message(

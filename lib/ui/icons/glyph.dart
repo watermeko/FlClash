@@ -6,22 +6,18 @@ import 'package:path_parsing/path_parsing.dart';
 enum GlyphRole { body, detail, line }
 
 class Glyph {
-  const Glyph(this.shapes, {this.matchTextDirection = false, this.asset})
-    : assert(
-        asset == null || shapes.length == 0,
-        'an asset glyph draws the asset, not the shapes',
-      );
+  const Glyph(this.shapes, {this.matchTextDirection = false, this.lattice});
 
-  /// A brand mark that is a picture rather than a stroke drawing, such as a
-  /// lattice of dots. It points into `assets/images/services`, where the other
-  /// brand marks live, and is drawn in the colour the caller asks for.
-  const Glyph.asset(String this.asset)
-    : shapes = const [],
-      matchTextDirection = false;
+  /// The Tailscale mark is a lattice of dots rather than strokes, so it is
+  /// drawn by its own painter instead of as a list of shapes. A glyph is one or
+  /// the other: what the dot lattice fills cannot come from the grid.
+  const Glyph.lattice({this.matchTextDirection = false})
+    : lattice = true,
+      shapes = const [];
 
   final List<GlyphShape> shapes;
   final bool matchTextDirection;
-  final String? asset;
+  final bool? lattice;
 
   static const size = 24.0;
   static const strokeWidth = 1.8;

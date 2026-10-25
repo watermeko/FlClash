@@ -1439,6 +1439,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "开启后会在每个配置中保留一个 Tailscale 节点",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("刷新状态"),
+    "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "这会替代密钥认证：密钥会被清除，本设备改用浏览器登录。",
+    ),
+    "tailscaleReplaceBrowserLoginTip": MessageLookupByLibrary.simpleMessage(
+      "这会替代浏览器登录：本设备将从 Tailscale 登出，改用密钥重新登录。",
+    ),
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("已连接"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("正在启动"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("状态"),

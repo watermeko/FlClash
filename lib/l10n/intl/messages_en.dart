@@ -1853,6 +1853,12 @@ class MessageLookup extends MessageLookupByLibrary {
       "Turn this on to keep a Tailscale node in every profile",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("Refresh status"),
+    "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
+      "This replaces the key: the key is cleared and this device signs in through a browser instead.",
+    ),
+    "tailscaleReplaceBrowserLoginTip": MessageLookupByLibrary.simpleMessage(
+      "This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.",
+    ),
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("Connected"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("Starting"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("Status"),

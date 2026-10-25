@@ -22,13 +22,15 @@ class TailscaleView extends ConsumerStatefulWidget {
   ConsumerState<TailscaleView> createState() => _TailscaleViewState();
 }
 
-class _TailscaleViewState extends ConsumerState<TailscaleView> {
+class _TailscaleViewState extends ConsumerState<TailscaleView>
+    with WidgetsBindingObserver {
   Timer? _poll;
   bool _reading = false;
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     // The core starts the node and pushes what changes, but a page that opens
     // during those first seconds would otherwise sit on a stale "starting"
     // until the next change. Poll while the node is not settled and stop as
@@ -39,8 +41,21 @@ class _TailscaleViewState extends ConsumerState<TailscaleView> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _poll?.cancel();
     super.dispose();
+  }
+
+  /// A login finishes in a browser, which takes this page off screen and stops
+  /// its timer. The node is signed in by the time it comes back, so the read
+  /// that reports it has to happen on return rather than on the next tick.
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state != AppLifecycleState.resumed) {
+      return;
+    }
+    _poll ??= Timer.periodic(const Duration(seconds: 3), (_) => _read());
+    _read();
   }
 
   Future<void> _read() async {
@@ -61,13 +76,14 @@ class _TailscaleViewState extends ConsumerState<TailscaleView> {
       _reading = false;
     }
     final status = ref.read(tailscaleStatusProvider);
-    if (status != null && (status.isRunning || status.needsLogin)) {
+    if (status != null && status.isRunning) {
       _settle();
     }
   }
 
-  /// A node that is running or waiting for a login reports its own changes, so
-  /// polling is what carries the first seconds only.
+  /// A node that is running reports its own changes from then on, so polling is
+  /// what carries the first seconds only. A node still waiting for a login is
+  /// not settled: the browser finishes it out of sight of this timer.
   void _settle() {
     _poll?.cancel();
     _poll = null;
@@ -111,19 +127,33 @@ class _TailscaleViewState extends ConsumerState<TailscaleView> {
   ) {
     final appLocalizations = context.appLocalizations;
     final signedInWithBrowser = status?.signedInWithBrowser ?? false;
+    final signedInWithKey = status?.signedInWithKey ?? false;
     return generateSection(
       title: appLocalizations.tailscaleAccount,
       items: [
+        // The two ways of signing in are alternatives, not switches: each one
+        // replaces whoever holds the node now, so a row that would drop that
+        // asks first.
         ConfigTextItem(
           leading: const GlyphIcon(AppGlyphs.key),
           selector: tailscaleSettingProvider.select((state) => state.authKey),
           title: (l) => l.tailscaleAuthKey,
           maxLength: TextInputLimits.password,
           allowEmpty: true,
+          obscureText: true,
+          valueText: maskSecret,
+          confirm: (value) =>
+              _confirmReplacement(context, ref, value, signedInWithBrowser),
           onChanged: (ref, value) {
             ref
                 .read(tailscaleSettingProvider.notifier)
                 .update((state) => state.copyWith(authKey: value));
+            // A key only signs a node in on the apply that installs it, and the
+            // page has already said what that costs, so the node is brought up
+            // rather than left waiting for the next unrelated change.
+            if (value.isNotEmpty) {
+              ref.read(coreHandlerProvider).startTailscale(kTailscaleProxyName);
+            }
           },
         ),
         ListItem(
@@ -140,10 +170,7 @@ class _TailscaleViewState extends ConsumerState<TailscaleView> {
           trailing: signedInWithBrowser
               ? GlyphIcon(AppGlyphs.check, color: context.colorScheme.primary)
               : null,
-          // The node is started and control asked for a URL on tap: the one in
-          // the status is only there while a login is already pending, so
-          // reading it first is what made this do nothing once signed in.
-          onTap: () => _handleLogin(context, ref),
+          onTap: () => _handleLogin(context, ref, signedInWithKey),
         ),
         ConfigTextItem(
           leading: const GlyphIcon(AppGlyphs.devices),
@@ -262,9 +289,34 @@ class _TailscaleViewState extends ConsumerState<TailscaleView> {
     );
   }
 
-  Future<void> _handleLogin(BuildContext context, WidgetRef ref) async {
+  Future<void> _handleLogin(
+    BuildContext context,
+    WidgetRef ref,
+    bool signedInWithKey,
+  ) async {
     final appLocalizations = context.appLocalizations;
+    // A browser login replaces whatever signed the node in, so the two stay
+    // alternatives rather than one quietly winning over the other. A node that
+    // is signed in will not ask control for a page at all, so replacing the key
+    // means signing out first.
+    if (signedInWithKey && !await _confirmSignInWithBrowser(context)) {
+      return;
+    }
     final notifier = ref.read(tailscalesProvider.notifier);
+    if (signedInWithKey) {
+      try {
+        await notifier.logout();
+      } catch (error) {
+        if (!context.mounted) {
+          return;
+        }
+        await dialogs.showAlert(message: TextSpan(text: compactError(error)));
+        return;
+      }
+      if (!context.mounted) {
+        return;
+      }
+    }
     String url;
     try {
       url = await notifier.loginUrl();
@@ -287,7 +339,56 @@ class _TailscaleViewState extends ConsumerState<TailscaleView> {
       );
       return;
     }
+    // The key signed the node in that the login just dropped, so it goes rather
+    // than staying in the config to claim the login afterwards.
+    if (signedInWithKey) {
+      ref
+          .read(tailscaleSettingProvider.notifier)
+          .update((state) => state.copyWith(authKey: ''));
+      await ref.read(coreHandlerProvider).startTailscale(kTailscaleProxyName);
+    }
     await dialogs.openUrl(url);
+  }
+
+  /// A key and a browser login both hold the node, so setting one drops the
+  /// other. This is what asks before that happens.
+  Future<bool> _confirmReplacement(
+    BuildContext context,
+    WidgetRef ref,
+    String value,
+    bool signedInWithBrowser,
+  ) async {
+    if (value.isEmpty || !signedInWithBrowser) {
+      return true;
+    }
+    final appLocalizations = context.appLocalizations;
+    final confirmed = await dialogs.showMessage(
+      title: appLocalizations.tailscaleAuthKey,
+      message: TextSpan(text: appLocalizations.tailscaleReplaceBrowserLoginTip),
+      confirmText: appLocalizations.confirm,
+    );
+    if (confirmed != true) {
+      return false;
+    }
+    // Signing out is what drops the key the browser login left behind, so the
+    // new key signs the node in on the apply that follows.
+    try {
+      await ref.read(tailscalesProvider.notifier).logout();
+    } catch (_) {
+      // A node that was not signed in has nothing to drop, which is not worth
+      // stopping the key from being saved.
+    }
+    return true;
+  }
+
+  Future<bool> _confirmSignInWithBrowser(BuildContext context) async {
+    final appLocalizations = context.appLocalizations;
+    final confirmed = await dialogs.showMessage(
+      title: appLocalizations.tailscaleLogin,
+      message: TextSpan(text: appLocalizations.tailscaleReplaceAuthKeyTip),
+      confirmText: appLocalizations.confirm,
+    );
+    return confirmed == true;
   }
 
   Future<void> _handleLogout(BuildContext context, WidgetRef ref) async {
@@ -310,6 +411,15 @@ class _TailscaleViewState extends ConsumerState<TailscaleView> {
       await dialogs.showAlert(message: TextSpan(text: compactError(error)));
     }
   }
+}
+
+/// A secret shown only by its last few characters, enough to tell two keys
+/// apart without putting either on screen.
+String maskSecret(String value) {
+  if (value.length <= 4) {
+    return '•' * value.length;
+  }
+  return '${'•' * 8}${value.substring(value.length - 4)}';
 }
 
 /// What the node is doing, in the one place a glance reads it.

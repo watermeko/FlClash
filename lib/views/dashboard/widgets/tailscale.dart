@@ -39,80 +39,106 @@ class TailscaleCard extends ConsumerWidget {
     ).copyWith(letterSpacing: 0);
     final state = _stateOf(appLocalizations, inject, status);
     final address = status?.primaryIp;
-    return DashboardCard(
-      semanticLabel: appLocalizations.tailscale,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        mainAxisSize: mobile ? MainAxisSize.min : MainAxisSize.max,
-        children: [
-          DashboardCardHeader(
-            glyph: AppGlyphs.tailscale,
-            title: appLocalizations.tailscale,
-          ),
-          SizedBox(height: figure.top),
-          SizedBox(
-            height: figure.style.leading * scale,
-            child: Align(
-              alignment: AlignmentDirectional.centerStart,
-              child: Text(
-                state.label,
+    // How many machines the tailnet holds, short enough to sit at the end of
+    // the state line.
+    final machines = status != null && (status.peers.isNotEmpty || !mobile)
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            spacing: 6,
+            children: [
+              GlyphIcon(
+                AppGlyphs.devices,
+                size: 14,
+                color: colorScheme.onSurfaceVariant,
+              ),
+              Text(
+                appLocalizations.tailscaleMachinesCount(status.peers.length),
                 maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: style.copyWith(
-                  color: state.running
-                      ? colorScheme.primary
-                      : colorScheme.onSurfaceVariant,
-                ),
+                style: AppTextStyle.footnote
+                    .of(context)
+                    .copyWith(color: colorScheme.onSurfaceVariant),
+              ),
+            ],
+          )
+        : null;
+    // Which of the two ways signed the node in. It takes a line of its own at
+    // the foot of the card: a narrow column cannot hold it beside anything.
+    final figures = SizedBox(
+      height: figure.style.leading * scale,
+      child: Row(
+        spacing: 8,
+        children: [
+          // The state keeps the room it needs; the count gives way, being the
+          // one of the two the page repeats elsewhere.
+          Expanded(
+            child: Text(
+              state.label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: style.copyWith(
+                color: state.running
+                    ? colorScheme.primary
+                    : colorScheme.onSurfaceVariant,
               ),
             ),
           ),
-          // An address is only worth the room once there is one to show; the
-          // state above already says why it is missing.
-          if (address != null) ...[
-            SizedBox(height: mobile ? 6 : 4),
-            Text(
-              address,
+          ?machines,
+        ],
+      ),
+    );
+    final auth = _authOf(appLocalizations, status);
+    final detail = AppTextStyle.footnote
+        .of(context)
+        .copyWith(color: colorScheme.onSurfaceVariant);
+    return DashboardCard(
+      semanticLabel: appLocalizations.tailscale,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          // On a desktop the card shares its row with the tables, so its height
+          // is whatever they need. The lines under the state then give way,
+          // least important first, instead of painting past the edge.
+          final leading = figure.style.leading * scale;
+          // Each detail line is pinned to its leading, so the count below
+          // matches what the text actually paints.
+          final footnote = AppTextStyle.footnote.leading * scale;
+          var used =
+              (mobile ? 26.0 : DashboardCardHeader.height) * scale +
+              figure.top +
+              leading;
+          final room = constraints.maxHeight;
+          Widget line(String text) => SizedBox(
+            height: footnote,
+            child: Text(
+              text,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: AppTextStyle.footnote
-                  .of(context)
-                  .copyWith(color: colorScheme.onSurfaceVariant),
+              style: detail,
             ),
-          ],
-          if (mobile) const SizedBox(height: 14) else const Spacer(),
-          if (status != null && (status.peers.isNotEmpty || !mobile))
-            Row(
-              children: [
-                GlyphIcon(
-                  AppGlyphs.devices,
-                  size: 14,
-                  color: colorScheme.onSurfaceVariant,
-                ),
-                const SizedBox(width: 6),
-                Expanded(
-                  child: Text(
-                    appLocalizations.tailscaleMachinesCount(
-                      status.peers.length,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyle.footnote
-                        .of(context)
-                        .copyWith(color: colorScheme.onSurfaceVariant),
-                  ),
-                ),
-                if (_authOf(appLocalizations, status) case final auth?)
-                  Text(
-                    auth,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: AppTextStyle.footnote
-                        .of(context)
-                        .copyWith(color: colorScheme.onSurfaceVariant),
-                  ),
-              ],
-            ),
-        ],
+          );
+          final details = <Widget>[];
+          for (final text in [?address, ?auth]) {
+            if (used + 4 + footnote > room) {
+              break;
+            }
+            details
+              ..add(const SizedBox(height: 4))
+              ..add(line(text));
+            used += 4 + footnote;
+          }
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: mobile ? MainAxisSize.min : MainAxisSize.max,
+            children: [
+              DashboardCardHeader(
+                glyph: AppGlyphs.tailscale,
+                title: appLocalizations.tailscale,
+              ),
+              SizedBox(height: figure.top),
+              figures,
+              ...details,
+            ],
+          );
+        },
       ),
     );
   }
