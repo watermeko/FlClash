@@ -555,6 +555,37 @@ class NetworkOptionsSection extends ConsumerWidget {
   }
 }
 
+/// Which overlay the mesh page drives. It lives here rather than on the page
+/// itself because it is a choice about the network, and because the page it
+/// decides is the one a user opens to see the result.
+class MeshSection extends ConsumerWidget {
+  const MeshSection({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final appLocalizations = context.appLocalizations;
+    final meshKind = ref.watch(meshKindSettingProvider);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        ListHeader(title: appLocalizations.mesh),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+          child: SegmentedControl<MeshKind>(
+            segments: [
+              (MeshKind.tailscale, appLocalizations.tailscale),
+              (MeshKind.easyTier, appLocalizations.easyTier),
+            ],
+            value: meshKind,
+            onChanged: (value) =>
+                ref.read(meshKindSettingProvider.notifier).update((_) => value),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
 class NetworkListView extends StatelessWidget {
   const NetworkListView({super.key});
 
@@ -567,6 +598,7 @@ class NetworkListView extends StatelessWidget {
       ),
       children: [
         if (system.isAndroid) const VpnSections(),
+        const MeshSection(),
         if (system.isDesktop) const SystemProxySection(),
         const NetworkOptionsSection(),
         TunSection(

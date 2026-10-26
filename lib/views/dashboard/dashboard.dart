@@ -137,6 +137,9 @@ class _DesktopDashboard extends StatelessWidget {
     final middleHeight = (compact ? 152 : 176) * scale;
     final tablesHeight = connectionsTableMinHeight(density, scale);
     final summaryHeight = (compact ? 112 : 120) * scale;
+    // The tailnet gets a column of its own beside the tables rather than a row
+    // of its own, so it costs width the tables can spare and no height at all.
+    final tailnetColumn = (compact ? 200.0 : 232.0) * scale;
     return LayoutBuilder(
       builder: (context, constraints) {
         final room =
@@ -168,11 +171,28 @@ class _DesktopDashboard extends StatelessWidget {
                 (1, NetworkTakeoverTile(TakeoverSwitch.tun)),
               ]
             : const [(2, VpnTile())];
-        final half = columns ~/ 2;
-        final summaries = row([
-          (half, const ConnectionStatsCard()),
-          (half, const ProxyGroupsSummaryCard()),
-        ]);
+        // The tailnet holds the right edge of the bottom row in every layout,
+        // beside whichever cards share it, and never more than one column of
+        // it: a window with no room for the tables keeps the node rather than
+        // dropping it for want of a row.
+        final tailnetWidth = math.min(tailnetColumn, column);
+        final tailnet = SizedBox(
+          width: tailnetWidth,
+          child: const RepaintBoundary(child: MeshCard()),
+        );
+        final summaries = Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          spacing: gap,
+          children: [
+            const Expanded(
+              child: RepaintBoundary(child: ConnectionStatsCard()),
+            ),
+            const Expanded(
+              child: RepaintBoundary(child: ProxyGroupsSummaryCard()),
+            ),
+            tailnet,
+          ],
+        );
         if (columns == 2) {
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
@@ -209,6 +229,13 @@ class _DesktopDashboard extends StatelessWidget {
             ),
           );
         }
+        final rowsHeight =
+            padding.vertical +
+            topHeight +
+            controlHeight +
+            middleHeight +
+            gap * 3;
+        final tablesFit = constraints.maxHeight >= rowsHeight + tablesHeight;
         final rows = [
           sized(
             topHeight,
@@ -237,13 +264,6 @@ class _DesktopDashboard extends StatelessWidget {
             ]),
           ),
         ];
-        final rowsHeight =
-            padding.vertical +
-            topHeight +
-            controlHeight +
-            middleHeight +
-            gap * 3;
-        final tablesFit = constraints.maxHeight >= rowsHeight + tablesHeight;
         final fills = constraints.maxHeight >= rowsHeight + summaryHeight;
         return SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
@@ -260,16 +280,23 @@ class _DesktopDashboard extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         spacing: gap,
-                        children: const [
-                          Expanded(
-                            flex: 3,
+                        children: [
+                          const Expanded(
+                            flex: 6,
                             child: RepaintBoundary(
                               child: ConnectionsTableCard(),
                             ),
                           ),
-                          Expanded(
+                          const Expanded(
                             flex: 2,
                             child: RepaintBoundary(child: ProxyGroupsCard()),
+                          ),
+                          // The tailnet takes the far end of the row as a
+                          // column of its own. Sharing a column with the group
+                          // tiles squeezed their head until it clipped.
+                          const Expanded(
+                            flex: 2,
+                            child: RepaintBoundary(child: MeshCard()),
                           ),
                         ],
                       ),

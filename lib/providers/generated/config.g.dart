@@ -164,6 +164,176 @@ abstract class _$VpnSetting extends $Notifier<VpnProps> {
   }
 }
 
+@ProviderFor(TailscaleSetting)
+final tailscaleSettingProvider = TailscaleSettingProvider._();
+
+final class TailscaleSettingProvider
+    extends $NotifierProvider<TailscaleSetting, TailscaleProps> {
+  TailscaleSettingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'tailscaleSettingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$tailscaleSettingHash();
+
+  @$internal
+  @override
+  TailscaleSetting create() => TailscaleSetting();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(TailscaleProps value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<TailscaleProps>(value),
+    );
+  }
+}
+
+String _$tailscaleSettingHash() => r'1781b95e0c5bbf23f01075bfc22f160fd00e0dfb';
+
+abstract class _$TailscaleSetting extends $Notifier<TailscaleProps> {
+  TailscaleProps build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<TailscaleProps, TailscaleProps>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<TailscaleProps, TailscaleProps>,
+              TailscaleProps,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+@ProviderFor(EasyTierSetting)
+final easyTierSettingProvider = EasyTierSettingProvider._();
+
+final class EasyTierSettingProvider
+    extends $NotifierProvider<EasyTierSetting, EasyTierProps> {
+  EasyTierSettingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'easyTierSettingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$easyTierSettingHash();
+
+  @$internal
+  @override
+  EasyTierSetting create() => EasyTierSetting();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(EasyTierProps value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<EasyTierProps>(value),
+    );
+  }
+}
+
+String _$easyTierSettingHash() => r'db1ea2f7d12e5f4d38e98c0afa20f6f2eb919dd8';
+
+abstract class _$EasyTierSetting extends $Notifier<EasyTierProps> {
+  EasyTierProps build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<EasyTierProps, EasyTierProps>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<EasyTierProps, EasyTierProps>,
+              EasyTierProps,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
+/// Which overlay the mesh page and the injected node follow. Turning one off
+/// does not clear it, so the two keep their own settings while only one is
+/// written into a profile at a time.
+
+@ProviderFor(MeshKindSetting)
+final meshKindSettingProvider = MeshKindSettingProvider._();
+
+/// Which overlay the mesh page and the injected node follow. Turning one off
+/// does not clear it, so the two keep their own settings while only one is
+/// written into a profile at a time.
+final class MeshKindSettingProvider
+    extends $NotifierProvider<MeshKindSetting, MeshKind> {
+  /// Which overlay the mesh page and the injected node follow. Turning one off
+  /// does not clear it, so the two keep their own settings while only one is
+  /// written into a profile at a time.
+  MeshKindSettingProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'meshKindSettingProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$meshKindSettingHash();
+
+  @$internal
+  @override
+  MeshKindSetting create() => MeshKindSetting();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(MeshKind value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<MeshKind>(value),
+    );
+  }
+}
+
+String _$meshKindSettingHash() => r'9b9d4b90805f0aa39162d4f85cdae9981780d7e2';
+
+/// Which overlay the mesh page and the injected node follow. Turning one off
+/// does not clear it, so the two keep their own settings while only one is
+/// written into a profile at a time.
+
+abstract class _$MeshKindSetting extends $Notifier<MeshKind> {
+  MeshKind build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<MeshKind, MeshKind>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<MeshKind, MeshKind>,
+              MeshKind,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(NetworkSetting)
 final networkSettingProvider = NetworkSettingProvider._();
 
@@ -619,4 +789,4 @@ final class _ConfigProvider extends $FunctionalProvider<Config, Config, Config>
   }
 }
 
-String _$_configHash() => r'a9e717216fc1ca6b3526907bd578c4982bb6961a';
+String _$_configHash() => r'a09cee844db41468e74dbe9ed2f2500ce0592e77';

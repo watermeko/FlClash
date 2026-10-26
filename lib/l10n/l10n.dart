@@ -7333,6 +7333,149 @@ class AppLocalizations {
     return Intl.message('Hostname', name: 'hostname', desc: '', args: []);
   }
 
+  /// `EasyTier`
+  String get easyTier {
+    return Intl.message(
+      'EasyTier',
+      name: 'easyTier',
+      desc:
+          'The name of the EasyTier mesh product, which is a proper noun and stays the same in every language.',
+      args: [],
+    );
+  }
+
+  /// `Mesh`
+  String get mesh {
+    return Intl.message(
+      'Mesh',
+      name: 'mesh',
+      desc:
+          'The heading of the setting that chooses which overlay the mesh page drives.',
+      args: [],
+    );
+  }
+
+  /// `Network`
+  String get easyTierNetwork {
+    return Intl.message(
+      'Network',
+      name: 'easyTierNetwork',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Network name`
+  String get easyTierNetworkName {
+    return Intl.message(
+      'Network name',
+      name: 'easyTierNetworkName',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Network secret`
+  String get easyTierNetworkSecret {
+    return Intl.message(
+      'Network secret',
+      name: 'easyTierNetworkSecret',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Connection`
+  String get easyTierPeers {
+    return Intl.message(
+      'Connection',
+      name: 'easyTierPeers',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Peer addresses`
+  String get easyTierPeerList {
+    return Intl.message(
+      'Peer addresses',
+      name: 'easyTierPeerList',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Do not accept incoming connections`
+  String get easyTierNoListener {
+    return Intl.message(
+      'Do not accept incoming connections',
+      name: 'easyTierNoListener',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Needs a network name`
+  String get easyTierNeedsNetwork {
+    return Intl.message(
+      'Needs a network name',
+      name: 'easyTierNeedsNetwork',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Connected`
+  String get easyTierConnected {
+    return Intl.message(
+      'Connected',
+      name: 'easyTierConnected',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Looking for peers`
+  String get easyTierConnecting {
+    return Intl.message(
+      'Looking for peers',
+      name: 'easyTierConnecting',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `relayed {hops}`
+  String easyTierRelayed(int hops) {
+    return Intl.message(
+      'relayed $hops',
+      name: 'easyTierRelayed',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [hops],
+    );
+  }
+
+  /// `The mesh is off, so this device is not on any overlay`
+  String get easyTierOffTip {
+    return Intl.message(
+      'The mesh is off, so this device is not on any overlay',
+      name: 'easyTierOffTip',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `UDP`
+  String get easyTierUdp {
+    return Intl.message(
+      'UDP',
+      name: 'easyTierUdp',
+      desc:
+          'Whether the node carries UDP traffic, shown as a setting on the mesh page.',
+      args: [],
+    );
+  }
+
   /// `Exit nodes`
   String get exitNodes {
     return Intl.message('Exit nodes', name: 'exitNodes', desc: '', args: []);
@@ -8050,6 +8193,329 @@ class AppLocalizations {
       name: 'alreadyInLocalProxies',
       desc: '',
       args: [name],
+    );
+  }
+
+  /// `Tailscale`
+  String get tailscale {
+    return Intl.message('Tailscale', name: 'tailscale', desc: '', args: []);
+  }
+
+  /// `Accept routes`
+  String get acceptRoutes {
+    return Intl.message(
+      'Accept routes',
+      name: 'acceptRoutes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Allow LAN access`
+  String get exitNodeAllowLanAccess {
+    return Intl.message(
+      'Allow LAN access',
+      name: 'exitNodeAllowLanAccess',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Status`
+  String get tailscaleStatus {
+    return Intl.message('Status', name: 'tailscaleStatus', desc: '', args: []);
+  }
+
+  /// `Not started`
+  String get tailscaleNotStarted {
+    return Intl.message(
+      'Not started',
+      name: 'tailscaleNotStarted',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Starting`
+  String get tailscaleStarting {
+    return Intl.message(
+      'Starting',
+      name: 'tailscaleStarting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connected`
+  String get tailscaleRunning {
+    return Intl.message(
+      'Connected',
+      name: 'tailscaleRunning',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign-in required`
+  String get tailscaleNeedsLogin {
+    return Intl.message(
+      'Sign-in required',
+      name: 'tailscaleNeedsLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Addresses`
+  String get tailscaleAddresses {
+    return Intl.message(
+      'Addresses',
+      name: 'tailscaleAddresses',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Machine name`
+  String get tailscaleMachine {
+    return Intl.message(
+      'Machine name',
+      name: 'tailscaleMachine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Problem`
+  String get tailscaleHealth {
+    return Intl.message('Problem', name: 'tailscaleHealth', desc: '', args: []);
+  }
+
+  /// `Browser sign-in`
+  String get tailscaleLogin {
+    return Intl.message(
+      'Browser sign-in',
+      name: 'tailscaleLogin',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Refresh status`
+  String get tailscaleRefresh {
+    return Intl.message(
+      'Refresh status',
+      name: 'tailscaleRefresh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get tailscaleAccount {
+    return Intl.message(
+      'Account',
+      name: 'tailscaleAccount',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Key authentication`
+  String get tailscaleAuthKey {
+    return Intl.message(
+      'Key authentication',
+      name: 'tailscaleAuthKey',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Leave it empty to sign in from the page instead`
+  String get tailscaleAuthKeyTip {
+    return Intl.message(
+      'Leave it empty to sign in from the page instead',
+      name: 'tailscaleAuthKeyTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Opens the Tailscale sign-in page in a browser`
+  String get tailscaleLoginTip {
+    return Intl.message(
+      'Opens the Tailscale sign-in page in a browser',
+      name: 'tailscaleLoginTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign out`
+  String get tailscaleLogout {
+    return Intl.message(
+      'Sign out',
+      name: 'tailscaleLogout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Drops the key this device keeps, so another account can claim it`
+  String get tailscaleLogoutTip {
+    return Intl.message(
+      'Drops the key this device keeps, so another account can claim it',
+      name: 'tailscaleLogoutTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Machines`
+  String get tailscaleMachines {
+    return Intl.message(
+      'Machines',
+      name: 'tailscaleMachines',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No machines yet`
+  String get tailscaleNoMachines {
+    return Intl.message(
+      'No machines yet',
+      name: 'tailscaleNoMachines',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `They appear once this device is signed in`
+  String get tailscaleNoMachinesTip {
+    return Intl.message(
+      'They appear once this device is signed in',
+      name: 'tailscaleNoMachinesTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `exit node`
+  String get tailscaleExitNodeInUse {
+    return Intl.message(
+      'exit node',
+      name: 'tailscaleExitNodeInUse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Off`
+  String get tailscaleOff {
+    return Intl.message('Off', name: 'tailscaleOff', desc: '', args: []);
+  }
+
+  /// `Turn this on to keep a Tailscale node in every profile`
+  String get tailscaleOffTip {
+    return Intl.message(
+      'Turn this on to keep a Tailscale node in every profile',
+      name: 'tailscaleOffTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This device is already signed in, so there is nothing to finish`
+  String get tailscaleLoginUnavailable {
+    return Intl.message(
+      'This device is already signed in, so there is nothing to finish',
+      name: 'tailscaleLoginUnavailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The node has not reported a sign-in page yet, so try again in a moment`
+  String get tailscaleLoginPending {
+    return Intl.message(
+      'The node has not reported a sign-in page yet, so try again in a moment',
+      name: 'tailscaleLoginPending',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The sign-in page closed before this device was signed in`
+  String get tailscaleLoginUnfinished {
+    return Intl.message(
+      'The sign-in page closed before this device was signed in',
+      name: 'tailscaleLoginUnfinished',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Control knows this node as {hostname}`
+  String tailscaleNodeName(String hostname) {
+    return Intl.message(
+      'Control knows this node as $hostname',
+      name: 'tailscaleNodeName',
+      desc:
+          'The name control has for the node, which is the one it registered under and not one set afterwards.',
+      args: [hostname],
+    );
+  }
+
+  /// `This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.`
+  String get tailscaleReplaceBrowserLoginTip {
+    return Intl.message(
+      'This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.',
+      name: 'tailscaleReplaceBrowserLoginTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This replaces the key: the key is cleared and this device signs in through a browser instead.`
+  String get tailscaleReplaceAuthKeyTip {
+    return Intl.message(
+      'This replaces the key: the key is cleared and this device signs in through a browser instead.',
+      name: 'tailscaleReplaceAuthKeyTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Signed in with a browser`
+  String get tailscaleLoginDone {
+    return Intl.message(
+      'Signed in with a browser',
+      name: 'tailscaleLoginDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tailnet status, address and how the node signed in`
+  String get tailscaleDesc {
+    return Intl.message(
+      'Tailnet status, address and how the node signed in',
+      name: 'tailscaleDesc',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count, plural, =1{1 machine} other{{count} machines}}`
+  String tailscaleMachinesCount(num count) {
+    return Intl.plural(
+      count,
+      one: '1 machine',
+      other: '$count machines',
+      name: 'tailscaleMachinesCount',
+      desc: '',
+      args: [count],
     );
   }
 }

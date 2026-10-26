@@ -6,6 +6,24 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:material_ui/material_ui.dart';
 
 abstract final class AppGlyphs {
+  /// The Tailscale mark is a lattice of dots, so it is drawn by its own painter
+  /// from the published path instead of as a list of strokes.
+  static const tailscale = Glyph.lattice();
+
+  /// A mesh: four nodes joined through a fifth, which is what EasyTier forms
+  /// rather than a star around one server. Three dots and the links between
+  /// them read as a network at 20dp where a full graph turns to noise.
+  static const easytier = Glyph([
+    GlyphCircle(12, 4.2, 2.1, solid: true),
+    GlyphCircle(4.6, 17.2, 2.1, solid: true),
+    GlyphCircle(19.4, 17.2, 2.1, solid: true),
+    GlyphCircle(12, 12.4, 1.5, solid: true),
+    GlyphPath('M12 6.3 L12 10.9', role: GlyphRole.line),
+    GlyphPath('M10.2 13.6 L6.4 15.9', role: GlyphRole.line),
+    GlyphPath('M13.8 13.6 L17.6 15.9', role: GlyphRole.line),
+    GlyphPath('M6.7 17.2 L17.3 17.2', role: GlyphRole.line),
+  ]);
+
   static const dashboard = Glyph([
     GlyphBox(3.5, 3.5, 10.5, 11.5, 2),
     GlyphBox(13.5, 3.5, 20.5, 9.5, 2),

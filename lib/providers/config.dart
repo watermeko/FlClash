@@ -29,6 +29,34 @@ class VpnSetting extends _$VpnSetting with AutoDisposeNotifierMixin {
 }
 
 @riverpod
+class TailscaleSetting extends _$TailscaleSetting
+    with AutoDisposeNotifierMixin {
+  @override
+  TailscaleProps build() {
+    return defaultTailscaleProps;
+  }
+}
+
+@riverpod
+class EasyTierSetting extends _$EasyTierSetting with AutoDisposeNotifierMixin {
+  @override
+  EasyTierProps build() {
+    return defaultEasyTierProps;
+  }
+}
+
+/// Which overlay the mesh page and the injected node follow. Turning one off
+/// does not clear it, so the two keep their own settings while only one is
+/// written into a profile at a time.
+@riverpod
+class MeshKindSetting extends _$MeshKindSetting with AutoDisposeNotifierMixin {
+  @override
+  MeshKind build() {
+    return MeshKind.tailscale;
+  }
+}
+
+@riverpod
 class NetworkSetting extends _$NetworkSetting with AutoDisposeNotifierMixin {
   @override
   NetworkProps build() {
@@ -100,6 +128,9 @@ Config _config(Ref ref) {
   final appSettingProps = ref.watch(appSettingProvider);
   final windowProps = ref.watch(windowSettingProvider);
   final vpnProps = ref.watch(vpnSettingProvider);
+  final tailscaleProps = ref.watch(tailscaleSettingProvider);
+  final easyTierProps = ref.watch(easyTierSettingProvider);
+  final meshKind = ref.watch(meshKindSettingProvider);
   final networkProps = ref.watch(networkSettingProvider);
   final themeProps = ref.watch(themeSettingProvider);
   final currentProfileId = ref.watch(currentProfileIdProvider);
@@ -112,6 +143,9 @@ Config _config(Ref ref) {
     appSettingProps: appSettingProps,
     windowProps: windowProps,
     vpnProps: vpnProps,
+    tailscaleProps: tailscaleProps,
+    easyTierProps: easyTierProps,
+    meshKind: meshKind,
     networkProps: networkProps,
     themeProps: themeProps,
     currentProfileId: currentProfileId,
@@ -127,6 +161,9 @@ void writeConfig(Ref ref, Config config) {
   ref.read(appSettingProvider.notifier).value = config.appSettingProps;
   ref.read(windowSettingProvider.notifier).value = config.windowProps;
   ref.read(vpnSettingProvider.notifier).value = config.vpnProps;
+  ref.read(tailscaleSettingProvider.notifier).value = config.tailscaleProps;
+  ref.read(easyTierSettingProvider.notifier).value = config.easyTierProps;
+  ref.read(meshKindSettingProvider.notifier).value = config.meshKind;
   ref.read(networkSettingProvider.notifier).value = config.networkProps;
   ref.read(themeSettingProvider.notifier).value = config.themeProps;
   ref.read(currentProfileIdProvider.notifier).value = config.currentProfileId;
@@ -144,6 +181,9 @@ List<Override> buildConfigOverrides(Config config) {
     appSettingProvider.overrideWithBuild((_, _) => config.appSettingProps),
     windowSettingProvider.overrideWithBuild((_, _) => config.windowProps),
     vpnSettingProvider.overrideWithBuild((_, _) => config.vpnProps),
+    tailscaleSettingProvider.overrideWithBuild((_, _) => config.tailscaleProps),
+    easyTierSettingProvider.overrideWithBuild((_, _) => config.easyTierProps),
+    meshKindSettingProvider.overrideWithBuild((_, _) => config.meshKind),
     networkSettingProvider.overrideWithBuild((_, _) => config.networkProps),
     themeSettingProvider.overrideWithBuild((_, _) => config.themeProps),
     currentProfileIdProvider.overrideWithBuild(

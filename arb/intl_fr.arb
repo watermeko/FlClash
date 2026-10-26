@@ -878,6 +878,67 @@
   "peers": "Pairs",
   "virtualIpv4": "IPv4 virtuelle",
   "hostname": "Nom d’hôte",
+  "easyTier": "EasyTier",
+  "@easyTier": {
+    "description": "The name of the EasyTier mesh product, which is a proper noun and stays the same in every language."
+  },
+  "mesh": "Maillage",
+  "@mesh": {
+    "description": "The heading of the setting that chooses which overlay the mesh page drives."
+  },
+  "easyTierNetwork": "Réseau",
+  "@easyTierNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkName": "Nom du réseau",
+  "@easyTierNetworkName": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkSecret": "Secret du réseau",
+  "@easyTierNetworkSecret": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeers": "Connexion",
+  "@easyTierPeers": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeerList": "Adresses des pairs",
+  "@easyTierPeerList": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNoListener": "Ne pas accepter les connexions entrantes",
+  "@easyTierNoListener": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNeedsNetwork": "Nom du réseau requis",
+  "@easyTierNeedsNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnected": "Connecté",
+  "@easyTierConnected": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnecting": "Recherche de pairs",
+  "@easyTierConnecting": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierRelayed": "relayé sur {hops}",
+  "@easyTierRelayed": {
+    "description": "EasyTier mesh setting or state shown on the mesh page.",
+    "placeholders": {
+      "hops": {
+        "type": "int"
+      }
+    }
+  },
+  "easyTierOffTip": "Le maillage est désactivé, cet appareil n’est sur aucun réseau",
+  "@easyTierOffTip": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierUdp": "UDP",
+  "@easyTierUdp": {
+    "description": "Whether the node carries UDP traffic, shown as a setting on the mesh page."
+  },
   "exitNodes": "Nœuds de sortie",
   "cipher": "Chiffrement",
   "protocol": "Protocole",
@@ -963,5 +1024,47 @@
   "preferred": "Préféré",
   "addToLocalProxies": "Ajouter aux proxys locaux",
   "addedToLocalProxies": "{name} ajouté aux proxys locaux",
-  "alreadyInLocalProxies": "{name} est déjà dans les proxys locaux"
+  "alreadyInLocalProxies": "{name} est déjà dans les proxys locaux",
+  "tailscale": "Tailscale",
+  "acceptRoutes": "Accepter les routes",
+  "exitNodeAllowLanAccess": "Autoriser l'accès au LAN",
+  "tailscaleStatus": "État",
+  "tailscaleNotStarted": "Non démarré",
+  "tailscaleStarting": "Démarrage",
+  "tailscaleRunning": "Connecté",
+  "tailscaleNeedsLogin": "Connexion requise",
+  "tailscaleAddresses": "Adresses",
+  "tailscaleMachine": "Nom de la machine",
+  "tailscaleHealth": "Problème",
+  "tailscaleLogin": "Connexion dans le navigateur",
+  "tailscaleRefresh": "Actualiser l'état",
+  "tailscaleAccount": "Compte",
+  "tailscaleAuthKey": "Authentification par clé",
+  "tailscaleAuthKeyTip": "Laissez vide pour vous connecter depuis cette page",
+  "tailscaleLoginTip": "Ouvre la page de connexion Tailscale dans un navigateur",
+  "tailscaleLogout": "Se déconnecter",
+  "tailscaleLogoutTip": "Supprime la clé conservée sur cet appareil pour qu'un autre compte puisse le reprendre",
+  "tailscaleMachines": "Machines",
+  "tailscaleNoMachines": "Aucune machine pour le moment",
+  "tailscaleNoMachinesTip": "Elles apparaissent une fois cet appareil connecté",
+  "tailscaleExitNodeInUse": "nœud de sortie",
+  "tailscaleOff": "Désactivé",
+  "tailscaleOffTip": "Activez ceci pour conserver un nœud Tailscale dans chaque profil",
+  "tailscaleLoginUnavailable": "Cet appareil est déjà connecté, il n'y a rien à terminer",
+  "tailscaleLoginPending": "Le nœud n’a pas encore fourni de page de connexion, réessayez dans un instant",
+  "tailscaleLoginUnfinished": "La page de connexion a été fermée avant la fin de la connexion",
+  "tailscaleNodeName": "La console connaît ce nœud sous {hostname}",
+  "@tailscaleNodeName": {
+    "description": "The name control has for the node, which is the one it registered under and not one set afterwards.",
+    "placeholders": {
+      "hostname": {
+        "type": "String"
+      }
+    }
+  },
+  "tailscaleReplaceBrowserLoginTip": "Cela remplace la connexion par navigateur : l'appareil se déconnecte de Tailscale et se reconnecte avec la clé.",
+  "tailscaleReplaceAuthKeyTip": "Cela remplace la clé : elle est effacée et l'appareil se connecte avec un navigateur.",
+  "tailscaleLoginDone": "Connecté via un navigateur",
+  "tailscaleDesc": "État du tailnet, adresse et mode de connexion",
+  "tailscaleMachinesCount": "{count, plural, =1{1 machine} other{{count} machines}}"
 }

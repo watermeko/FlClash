@@ -878,6 +878,67 @@
   "peers": "Peers",
   "virtualIpv4": "Virtual IPv4",
   "hostname": "Hostname",
+  "easyTier": "EasyTier",
+  "@easyTier": {
+    "description": "The name of the EasyTier mesh product, which is a proper noun and stays the same in every language."
+  },
+  "mesh": "Mesh",
+  "@mesh": {
+    "description": "The heading of the setting that chooses which overlay the mesh page drives."
+  },
+  "easyTierNetwork": "Network",
+  "@easyTierNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkName": "Network name",
+  "@easyTierNetworkName": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkSecret": "Network secret",
+  "@easyTierNetworkSecret": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeers": "Connection",
+  "@easyTierPeers": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeerList": "Peer addresses",
+  "@easyTierPeerList": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNoListener": "Do not accept incoming connections",
+  "@easyTierNoListener": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNeedsNetwork": "Needs a network name",
+  "@easyTierNeedsNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnected": "Connected",
+  "@easyTierConnected": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnecting": "Looking for peers",
+  "@easyTierConnecting": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierRelayed": "relayed {hops}",
+  "@easyTierRelayed": {
+    "description": "EasyTier mesh setting or state shown on the mesh page.",
+    "placeholders": {
+      "hops": {
+        "type": "int"
+      }
+    }
+  },
+  "easyTierOffTip": "The mesh is off, so this device is not on any overlay",
+  "@easyTierOffTip": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierUdp": "UDP",
+  "@easyTierUdp": {
+    "description": "Whether the node carries UDP traffic, shown as a setting on the mesh page."
+  },
   "exitNodes": "Exit nodes",
   "cipher": "Cipher",
   "protocol": "Protocol",
@@ -963,5 +1024,47 @@
   "preferred": "Preferred",
   "addToLocalProxies": "Add to local proxies",
   "addedToLocalProxies": "Added {name} to local proxies",
-  "alreadyInLocalProxies": "{name} is already in local proxies"
+  "alreadyInLocalProxies": "{name} is already in local proxies",
+  "tailscale": "Tailscale",
+  "acceptRoutes": "Accept routes",
+  "exitNodeAllowLanAccess": "Allow LAN access",
+  "tailscaleStatus": "Status",
+  "tailscaleNotStarted": "Not started",
+  "tailscaleStarting": "Starting",
+  "tailscaleRunning": "Connected",
+  "tailscaleNeedsLogin": "Sign-in required",
+  "tailscaleAddresses": "Addresses",
+  "tailscaleMachine": "Machine name",
+  "tailscaleHealth": "Problem",
+  "tailscaleLogin": "Browser sign-in",
+  "tailscaleRefresh": "Refresh status",
+  "tailscaleAccount": "Account",
+  "tailscaleAuthKey": "Key authentication",
+  "tailscaleAuthKeyTip": "Leave it empty to sign in from the page instead",
+  "tailscaleLoginTip": "Opens the Tailscale sign-in page in a browser",
+  "tailscaleLogout": "Sign out",
+  "tailscaleLogoutTip": "Drops the key this device keeps, so another account can claim it",
+  "tailscaleMachines": "Machines",
+  "tailscaleNoMachines": "No machines yet",
+  "tailscaleNoMachinesTip": "They appear once this device is signed in",
+  "tailscaleExitNodeInUse": "exit node",
+  "tailscaleOff": "Off",
+  "tailscaleOffTip": "Turn this on to keep a Tailscale node in every profile",
+  "tailscaleLoginUnavailable": "This device is already signed in, so there is nothing to finish",
+  "tailscaleLoginPending": "The node has not reported a sign-in page yet, so try again in a moment",
+  "tailscaleLoginUnfinished": "The sign-in page closed before this device was signed in",
+  "tailscaleNodeName": "Control knows this node as {hostname}",
+  "@tailscaleNodeName": {
+    "description": "The name control has for the node, which is the one it registered under and not one set afterwards.",
+    "placeholders": {
+      "hostname": {
+        "type": "String"
+      }
+    }
+  },
+  "tailscaleReplaceBrowserLoginTip": "This replaces the browser sign-in: this device is signed out of Tailscale and signed in again with the key.",
+  "tailscaleReplaceAuthKeyTip": "This replaces the key: the key is cleared and this device signs in through a browser instead.",
+  "tailscaleLoginDone": "Signed in with a browser",
+  "tailscaleDesc": "Tailnet status, address and how the node signed in",
+  "tailscaleMachinesCount": "{count, plural, =1{1 machine} other{{count} machines}}"
 }

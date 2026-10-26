@@ -231,6 +231,7 @@ enum CoreEventType {
   geoUpdate,
   routeChanged,
   dialerLoop,
+  tailscale,
 }
 
 enum FindProcessMode { always, off }
@@ -491,6 +492,7 @@ enum DashboardWidget {
   proxyGroups,
   connectionStats,
   intranetIp,
+  tailscale,
   memoryInfo;
 
   final List<SupportPlatform> platforms;
@@ -558,6 +560,7 @@ extension GeoResourceExt on GeoResource {
 enum PageLabel {
   dashboard,
   proxies,
+  tailscale,
   profiles,
   tools,
   logs,

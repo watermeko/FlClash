@@ -878,6 +878,67 @@
   "peers": "ピア",
   "virtualIpv4": "仮想 IPv4",
   "hostname": "ホスト名",
+  "easyTier": "EasyTier",
+  "@easyTier": {
+    "description": "The name of the EasyTier mesh product, which is a proper noun and stays the same in every language."
+  },
+  "mesh": "メッシュ",
+  "@mesh": {
+    "description": "The heading of the setting that chooses which overlay the mesh page drives."
+  },
+  "easyTierNetwork": "ネットワーク",
+  "@easyTierNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkName": "ネットワーク名",
+  "@easyTierNetworkName": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkSecret": "ネットワークシークレット",
+  "@easyTierNetworkSecret": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeers": "接続",
+  "@easyTierPeers": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeerList": "ピアアドレス",
+  "@easyTierPeerList": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNoListener": "着信接続を受け付けない",
+  "@easyTierNoListener": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNeedsNetwork": "ネットワーク名が必要です",
+  "@easyTierNeedsNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnected": "接続済み",
+  "@easyTierConnected": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnecting": "ピアを探しています",
+  "@easyTierConnecting": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierRelayed": "{hops} ホップ中継",
+  "@easyTierRelayed": {
+    "description": "EasyTier mesh setting or state shown on the mesh page.",
+    "placeholders": {
+      "hops": {
+        "type": "int"
+      }
+    }
+  },
+  "easyTierOffTip": "メッシュはオフのため、この端末はどのネットワークにも参加していません",
+  "@easyTierOffTip": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierUdp": "UDP",
+  "@easyTierUdp": {
+    "description": "Whether the node carries UDP traffic, shown as a setting on the mesh page."
+  },
   "exitNodes": "出口ノード",
   "cipher": "暗号方式",
   "protocol": "プロトコル",
@@ -963,5 +1024,47 @@
   "preferred": "優先",
   "addToLocalProxies": "ローカルプロキシに追加",
   "addedToLocalProxies": "{name} をローカルプロキシに追加しました",
-  "alreadyInLocalProxies": "{name} はすでにローカルプロキシにあります"
+  "alreadyInLocalProxies": "{name} はすでにローカルプロキシにあります",
+  "tailscale": "Tailscale",
+  "acceptRoutes": "ルートを受け入れる",
+  "exitNodeAllowLanAccess": "LAN アクセスを許可",
+  "tailscaleStatus": "状態",
+  "tailscaleNotStarted": "未起動",
+  "tailscaleStarting": "起動中",
+  "tailscaleRunning": "接続済み",
+  "tailscaleNeedsLogin": "サインインが必要",
+  "tailscaleAddresses": "アドレス",
+  "tailscaleMachine": "マシン名",
+  "tailscaleHealth": "問題",
+  "tailscaleLogin": "ブラウザでサインイン",
+  "tailscaleRefresh": "状態を更新",
+  "tailscaleAccount": "アカウント",
+  "tailscaleAuthKey": "キー認証",
+  "tailscaleAuthKeyTip": "空欄の場合はこのページからサインインします",
+  "tailscaleLoginTip": "ブラウザで Tailscale のサインインページを開きます",
+  "tailscaleLogout": "サインアウト",
+  "tailscaleLogoutTip": "このデバイスのキーを削除し、別のアカウントで引き継げるようにします",
+  "tailscaleMachines": "マシン",
+  "tailscaleNoMachines": "マシンはまだありません",
+  "tailscaleNoMachinesTip": "このデバイスがサインインすると表示されます",
+  "tailscaleExitNodeInUse": "出口ノード",
+  "tailscaleOff": "オフ",
+  "tailscaleOffTip": "オンにするとすべてのプロファイルに Tailscale ノードを保持します",
+  "tailscaleLoginUnavailable": "このデバイスはすでにサインインしているため、完了する手続きはありません",
+  "tailscaleLoginPending": "ノードはまだサインインページを取得していません。しばらくしてからお試しください",
+  "tailscaleLoginUnfinished": "このデバイスのサインインが完了する前にログインページが閉じられました",
+  "tailscaleNodeName": "コントロールパネルではこのノードを {hostname} として認識しています",
+  "@tailscaleNodeName": {
+    "description": "The name control has for the node, which is the one it registered under and not one set afterwards.",
+    "placeholders": {
+      "hostname": {
+        "type": "String"
+      }
+    }
+  },
+  "tailscaleReplaceBrowserLoginTip": "ブラウザでのサインインを置き換えます。この端末は Tailscale からサインアウトし、キーでサインインし直します。",
+  "tailscaleReplaceAuthKeyTip": "キーを置き換えます。キーは削除され、この端末はブラウザでサインインします。",
+  "tailscaleLoginDone": "ブラウザでサインイン済み",
+  "tailscaleDesc": "Tailnet の状態・アドレス・サインイン方法",
+  "tailscaleMachinesCount": "{count, plural, =1{1 台のデバイス} other{{count} 台のデバイス}}"
 }

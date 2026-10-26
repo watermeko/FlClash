@@ -56,11 +56,15 @@ class _CoreContainerState extends ConsumerState<CoreManager>
             .read(setupActionProvider.notifier)
             .applyProfileDebounce(
               silence: true,
-              // The test URL changes no YAML, so only a forced apply hands
-              // it over.
+              // Neither of these reaches the profile's own YAML: the test URL
+              // is a runtime setting, and the mesh node is injected after the
+              // base is merged. Without a forced apply both would be compared
+              // against the same md5 and skipped, which left a node switched on
+              // against a config that never mentions it.
               force:
                   prev != null &&
-                  prev.patchConfig.testUrl != next.patchConfig.testUrl,
+                  (prev.patchConfig.testUrl != next.patchConfig.testUrl ||
+                      prev.meshRevision != next.meshRevision),
             );
       }
     });
@@ -194,6 +198,12 @@ class _CoreContainerState extends ConsumerState<CoreManager>
         .read(geoResourceActionProvider.notifier)
         .handleCoreUpdate(geoType, updating, skipped, error);
     super.onGeoUpdate(geoType, updating, skipped, error);
+  }
+
+  @override
+  void onTailscale(TailscaleStatus status) {
+    ref.read(tailscalesProvider.notifier).setStatus(status);
+    super.onTailscale(status);
   }
 
   @override

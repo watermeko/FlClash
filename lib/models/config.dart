@@ -79,7 +79,78 @@ const defaultFilters = [
   ),
 ];
 
+/// Which of the two overlays the app keeps in every profile. They are two ways
+/// into one mesh rather than two meshes: at most one is written, because each
+/// claims the addresses it routes.
+enum MeshKind {
+  tailscale,
+  easyTier;
+
+  static MeshKind fromJson(Object? value) => MeshKind.values.firstWhere(
+    (kind) => kind.name == value,
+    orElse: () => MeshKind.tailscale,
+  );
+
+  String toJson() => name;
+}
+
+/// Written through a named function because a JsonKey cannot take a tear-off of
+/// the enum's own method.
+String _meshKindToJson(MeshKind kind) => kind.toJson();
+
+/// The Tailscale node the app keeps in every profile's running config, so the
+/// mesh is a page of its own rather than something written into a profile.
+///
+/// [inject] is what a user turns on; without it nothing is written and the core
+/// never sees a Tailscale outbound. An empty [authKey] leaves the node to the
+/// interactive login the page shows, and [exitNode] stays empty until a node is
+/// picked from the tailnet's own list.
+@freezed
+abstract class TailscaleProps with _$TailscaleProps {
+  const factory TailscaleProps({
+    @Default(false) bool inject,
+    @Default('') String authKey,
+    @Default('') String hostname,
+    @Default('') String exitNode,
+    @Default(false) bool exitNodeAllowLanAccess,
+    @Default(false) bool acceptRoutes,
+    @Default(false) bool ephemeral,
+    @Default('') String controlUrl,
+    @Default(true) bool udp,
+  }) = _TailscaleProps;
+
+  factory TailscaleProps.fromJson(Map<String, Object?>? json) =>
+      json == null ? defaultTailscaleProps : _$TailscalePropsFromJson(json);
+}
+
+/// The EasyTier node the app keeps in every profile's running config.
+///
+/// EasyTier has no control plane and no login: a node joins a network by
+/// holding the same name and secret as its peers, so what a user fills in here
+/// is the network itself rather than an account. [peers] is how a node behind
+/// NAT finds one that is not, and an empty [ipv4] with [dhcp] asks the network
+/// for an address instead of holding a fixed one.
+@freezed
+abstract class EasyTierProps with _$EasyTierProps {
+  const factory EasyTierProps({
+    @Default(false) bool inject,
+    @Default('') String networkName,
+    @Default('') String networkSecret,
+    @Default('') String hostname,
+    @Default('') String ipv4,
+    @Default(true) bool dhcp,
+    @Default([]) List<String> peers,
+    @Default(true) bool udp,
+    @Default(false) bool noListener,
+  }) = _EasyTierProps;
+
+  factory EasyTierProps.fromJson(Map<String, Object?>? json) =>
+      json == null ? defaultEasyTierProps : _$EasyTierPropsFromJson(json);
+}
+
 const defaultAppSettingProps = AppSettingProps();
+const defaultTailscaleProps = TailscaleProps();
+const defaultEasyTierProps = EasyTierProps();
 const defaultVpnProps = VpnProps();
 const defaultAuthenticationProps = AuthenticationProps();
 const defaultNetworkProps = NetworkProps();
@@ -131,6 +202,7 @@ final List<DashboardWidget> platformDefaultDashboardWidgets = system.isAndroid
         DashboardWidget.outboundMode,
         DashboardWidget.profiles,
         DashboardWidget.proxyGroups,
+        DashboardWidget.tailscale,
       ]
     : defaultDashboardWidgets;
 
@@ -157,6 +229,15 @@ const _legacyDashboardWidgets = {
   'trafficUsage': DashboardWidget.networkSpeed,
 };
 
+/// What a phone that never rearranged its dashboard shows by default.
+const _shippedDashboardWidgets = [
+  DashboardWidget.currentOutbound,
+  DashboardWidget.networkSpeed,
+  DashboardWidget.outboundMode,
+  DashboardWidget.profiles,
+  DashboardWidget.proxyGroups,
+];
+
 const _retiredDashboardWidgets = {
   'runTime',
   'overrideDnsButton',
@@ -171,20 +252,26 @@ List<DashboardWidget> dashboardWidgetsFromJson(
     return platformDefaultDashboardWidgets;
   }
   final byName = DashboardWidget.values.asNameMap();
+  final names = {
+    for (final name in dashboardWidgets)
+      name == 'outboundModeV2' ? DashboardWidget.outboundMode.name : name,
+  };
+  // A phone that never touched its dashboard still has the list it shipped
+  // with, so it gains the cards added since without losing an arrangement it
+  // never made. Both shipped lists are checked: the current one, and the one
+  // that came before this card existed.
+  final shipped = {for (final widget in _shippedDashboardWidgets) widget.name};
+  if ((names.length == shipped.length && names.containsAll(shipped)) ||
+      (names.length == _legacyDefaultDashboardWidgets.length &&
+          names.containsAll(_legacyDefaultDashboardWidgets))) {
+    return platformDefaultDashboardWidgets;
+  }
   if (dashboardWidgets.contains(DashboardWidget.currentOutbound.name)) {
     return dashboardWidgets
         .map((e) => _legacyDashboardWidgets[e] ?? byName[e])
         .nonNulls
         .toSet()
         .toList();
-  }
-  final names = {
-    for (final name in dashboardWidgets)
-      name == 'outboundModeV2' ? DashboardWidget.outboundMode.name : name,
-  };
-  if (names.length == _legacyDefaultDashboardWidgets.length &&
-      names.containsAll(_legacyDefaultDashboardWidgets)) {
-    return platformDefaultDashboardWidgets;
   }
   final kept = dashboardWidgets
       .map((e) => _legacyDashboardWidgets[e] ?? byName[e])
@@ -509,6 +596,13 @@ abstract class Config with _$Config {
     DAVProps? davProps,
     @Default(defaultNetworkProps) NetworkProps networkProps,
     @Default(defaultVpnProps) VpnProps vpnProps,
+    @Default(defaultTailscaleProps) TailscaleProps tailscaleProps,
+    @Default(defaultEasyTierProps) EasyTierProps easyTierProps,
+    // Which overlay the pages and the injected node follow. Kept apart from
+    // the two props so turning one off does not forget how it was set up.
+    @JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson)
+    @Default(MeshKind.tailscale)
+    MeshKind meshKind,
     @JsonKey(fromJson: ThemeProps.safeFromJson) required ThemeProps themeProps,
     @Default(defaultProxiesStyleProps) ProxiesStyleProps proxiesStyleProps,
     // A new key opens every window once at defaultWindowSize.

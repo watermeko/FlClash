@@ -95,6 +95,8 @@ final class _InputAction extends _ListItemAction {
   final int? maxLength;
   final TextInputType? keyboardType;
   final String? resetValue;
+  final bool obscureText;
+  final Future<bool> Function(String? value)? confirm;
 
   const _InputAction({
     required this.title,
@@ -105,6 +107,8 @@ final class _InputAction extends _ListItemAction {
     this.validator,
     this.maxLength,
     this.keyboardType,
+    this.obscureText = false,
+    this.confirm,
   });
 }
 
@@ -214,6 +218,8 @@ class ListItem<T> extends StatelessWidget {
     int? maxLength,
     TextInputType? keyboardType,
     String? resetValue,
+    bool obscureText = false,
+    Future<bool> Function(String? value)? confirm,
     this.horizontalTitleGap,
     this.color,
     this.minTileHeight,
@@ -228,6 +234,8 @@ class ListItem<T> extends StatelessWidget {
          maxLength: maxLength,
          keyboardType: keyboardType,
          resetValue: resetValue,
+         obscureText: obscureText,
+         confirm: confirm,
        ),
        onTap = null;
 
@@ -406,9 +414,18 @@ class ListItem<T> extends StatelessWidget {
                     ? null
                     : TextInputLimits.limit(inputDelegate.maxLength!),
                 keyboardType: inputDelegate.keyboardType,
+                obscureText: inputDelegate.obscureText,
                 validator: inputDelegate.validator,
               ),
             );
+            // A value that replaces something else asks before it lands, and a
+            // refusal leaves the old one in place.
+            final confirm = inputDelegate.confirm;
+            if (value != null && confirm != null) {
+              if (!await confirm(value)) {
+                return;
+              }
+            }
             inputDelegate.onChanged(value);
           },
         );

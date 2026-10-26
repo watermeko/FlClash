@@ -878,6 +878,67 @@
   "peers": "初始节点",
   "virtualIpv4": "虚拟 IPv4",
   "hostname": "主机名",
+  "easyTier": "EasyTier",
+  "@easyTier": {
+    "description": "The name of the EasyTier mesh product, which is a proper noun and stays the same in every language."
+  },
+  "mesh": "组网",
+  "@mesh": {
+    "description": "The heading of the setting that chooses which overlay the mesh page drives."
+  },
+  "easyTierNetwork": "网络",
+  "@easyTierNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkName": "网络名称",
+  "@easyTierNetworkName": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkSecret": "网络密钥",
+  "@easyTierNetworkSecret": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeers": "连接",
+  "@easyTierPeers": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeerList": "对等节点地址",
+  "@easyTierPeerList": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNoListener": "不接受入站连接",
+  "@easyTierNoListener": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNeedsNetwork": "需要填写网络名称",
+  "@easyTierNeedsNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnected": "已连接",
+  "@easyTierConnected": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnecting": "正在寻找节点",
+  "@easyTierConnecting": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierRelayed": "中继 {hops} 跳",
+  "@easyTierRelayed": {
+    "description": "EasyTier mesh setting or state shown on the mesh page.",
+    "placeholders": {
+      "hops": {
+        "type": "int"
+      }
+    }
+  },
+  "easyTierOffTip": "组网已关闭，本机不在任何虚拟网络中",
+  "@easyTierOffTip": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierUdp": "UDP",
+  "@easyTierUdp": {
+    "description": "Whether the node carries UDP traffic, shown as a setting on the mesh page."
+  },
   "exitNodes": "出口节点",
   "cipher": "加密方式",
   "protocol": "协议",
@@ -963,5 +1024,47 @@
   "preferred": "首选",
   "addToLocalProxies": "添加到本地代理",
   "addedToLocalProxies": "已将 {name} 添加到本地代理",
-  "alreadyInLocalProxies": "本地代理中已有 {name}"
+  "alreadyInLocalProxies": "本地代理中已有 {name}",
+  "tailscale": "Tailscale",
+  "acceptRoutes": "接受子网路由",
+  "exitNodeAllowLanAccess": "允许访问局域网",
+  "tailscaleStatus": "状态",
+  "tailscaleNotStarted": "未启动",
+  "tailscaleStarting": "正在启动",
+  "tailscaleRunning": "已连接",
+  "tailscaleNeedsLogin": "需要登录",
+  "tailscaleAddresses": "地址",
+  "tailscaleMachine": "设备名",
+  "tailscaleHealth": "问题",
+  "tailscaleLogin": "浏览器登录认证",
+  "tailscaleRefresh": "刷新状态",
+  "tailscaleAccount": "账号",
+  "tailscaleAuthKey": "密钥认证",
+  "tailscaleAuthKeyTip": "留空则在本页交互式登录",
+  "tailscaleLoginTip": "在浏览器中打开 Tailscale 登录页",
+  "tailscaleLogout": "登出",
+  "tailscaleLogoutTip": "清除本设备保存的密钥，以便其他账号接管",
+  "tailscaleMachines": "设备",
+  "tailscaleNoMachines": "暂无设备",
+  "tailscaleNoMachinesTip": "本机登录后会出现",
+  "tailscaleExitNodeInUse": "出口节点",
+  "tailscaleOff": "已关闭",
+  "tailscaleOffTip": "开启后会在每个配置中保留一个 Tailscale 节点",
+  "tailscaleLoginUnavailable": "本设备已登录，无需再次认证",
+  "tailscaleLoginPending": "节点还没有拿到登录页，请稍候再试",
+  "tailscaleLoginUnfinished": "登录页在本设备登录完成前被关闭了",
+  "tailscaleNodeName": "控制台记录的节点名是 {hostname}",
+  "@tailscaleNodeName": {
+    "description": "The name control has for the node, which is the one it registered under and not one set afterwards.",
+    "placeholders": {
+      "hostname": {
+        "type": "String"
+      }
+    }
+  },
+  "tailscaleReplaceBrowserLoginTip": "这会替代浏览器登录：本设备将从 Tailscale 登出，改用密钥重新登录。",
+  "tailscaleReplaceAuthKeyTip": "这会替代密钥认证：密钥会被清除，本设备改用浏览器登录。",
+  "tailscaleLoginDone": "已通过浏览器登录",
+  "tailscaleDesc": "Tailnet 状态、地址与登录方式",
+  "tailscaleMachinesCount": "{count, plural, =1{1 台设备} other{{count} 台设备}}"
 }

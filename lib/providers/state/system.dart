@@ -19,12 +19,31 @@ UpdateParams updateParams(Ref ref) {
 }
 
 @riverpod
-({PatchClashConfig patchConfig, bool appendSystemDns, bool bypassPrivateRoute})
+({
+  PatchClashConfig patchConfig,
+  bool appendSystemDns,
+  bool bypassPrivateRoute,
+  int meshRevision,
+})
 setupPatch(Ref ref) {
+  final meshKind = ref.watch(meshKindSettingProvider);
+  // Whichever overlay the app is set to use: the one not chosen writes nothing,
+  // so editing it is not a change to the profile and must not restart it.
+  final meshRevision = switch (meshKind) {
+    MeshKind.tailscale => ref.watch(
+      tailscaleSettingProvider.select((state) => state.hashCode),
+    ),
+    MeshKind.easyTier => ref.watch(
+      easyTierSettingProvider.select((state) => state.hashCode),
+    ),
+  };
   return (
     patchConfig: ref.watch(
       patchClashConfigProvider.select((state) => state.setupOnly),
     ),
+    // The node is written into the profile at apply time, so a change to it is
+    // an apply of its own: nothing patches a running config into one.
+    meshRevision: meshKind.hashCode ^ meshRevision,
     appendSystemDns: ref.watch(
       networkSettingProvider.select((state) => state.appendSystemDns),
     ),

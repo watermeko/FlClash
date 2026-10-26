@@ -241,6 +241,26 @@ class CoreController {
     return _interface.clearDnsCache();
   }
 
+  Future<TailscaleStatus?> tailscaleStatus(String name) async {
+    return _interface.tailscaleStatus(name);
+  }
+
+  Future<bool> startTailscale(String name) async {
+    return _interface.startTailscale(name);
+  }
+
+  Future<bool> logoutTailscale(String name) async {
+    return _interface.logoutTailscale(name);
+  }
+
+  Future<String> tailscaleLoginUrl(String name) async {
+    return _interface.tailscaleLoginUrl(name);
+  }
+
+  Future<EasyTierStatus?> easyTierStatus(String name) async {
+    return _interface.easyTierStatus(name);
+  }
+
   Future<List<ExternalProvider>> getExternalProviders() async {
     return _interface.getExternalProviders();
   }

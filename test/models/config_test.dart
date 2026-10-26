@@ -245,6 +245,38 @@ void main() {
       expect(restored.acceptedDisclaimerVersion, lessThan(disclaimerVersion));
     });
 
+    test('a phone that never rearranged its dashboard gains the new card', () {
+      // What the previous release stored on a phone left at its defaults.
+      final restored = AppSettingProps.fromJson({
+        'dashboardWidgets': [
+          'currentOutbound',
+          'networkSpeed',
+          'outboundMode',
+          'profiles',
+          'proxyGroups',
+        ],
+      });
+
+      // The list is recognised as untouched, so it becomes this platform's
+      // defaults rather than the stored copy: that is what lets a card added
+      // since the release reach a phone that never opened the editor.
+      expect(restored.dashboardWidgets, platformDefaultDashboardWidgets);
+      if (system.isAndroid) {
+        expect(restored.dashboardWidgets, contains(DashboardWidget.tailscale));
+      }
+    });
+
+    test('an arranged dashboard keeps the cards it was given', () {
+      final restored = AppSettingProps.fromJson({
+        'dashboardWidgets': ['currentOutbound', 'memoryInfo'],
+      });
+
+      expect(restored.dashboardWidgets, [
+        DashboardWidget.currentOutbound,
+        DashboardWidget.memoryInfo,
+      ]);
+    });
+
     test('every dashboard widget survives round-trip', () {
       const props = AppSettingProps(dashboardWidgets: DashboardWidget.values);
       final restored = roundTrip(props.toJson, AppSettingProps.fromJson);

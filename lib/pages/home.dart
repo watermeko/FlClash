@@ -96,7 +96,7 @@ class _HomeShell extends ConsumerWidget {
                           for (final item in navigationItems)
                             NavigationDockDestination(
                               glyph: item.glyph,
-                              label: item.label.label,
+                              label: item.shownTitle,
                             ),
                         ],
                         selectedIndex: state.currentIndex,
@@ -121,7 +121,7 @@ class _HomeShell extends ConsumerWidget {
                         glyph: item.glyph,
                         filled: index == state.currentIndex,
                       ),
-                      label: item.label.label,
+                      label: item.shownTitle,
                     ),
                 ],
                 selectedIndex: state.currentIndex,

@@ -75,6 +75,20 @@ void main() {
     });
   });
 
+  test('fixed widths scale to fit a table narrower than them', () {
+    const columns = [
+      TableColumn('source', 'Source', width: 140),
+      TableColumn('target', 'Target', flex: 1),
+      TableColumn('exit', 'Exit', width: 100),
+      TableColumn('time', 'Time', width: 76),
+    ];
+
+    final widths = tableColumnWidths(columns, 200);
+
+    expect(_sum(widths), closeTo(200, 0.01));
+    expect(widths[0], lessThan(140));
+  });
+
   test('a column that cannot be resized is never squeezed', () {
     const columns = [
       TableColumn('target', 'Target', flex: 1),

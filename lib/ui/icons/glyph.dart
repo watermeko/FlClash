@@ -6,10 +6,18 @@ import 'package:path_parsing/path_parsing.dart';
 enum GlyphRole { body, detail, line }
 
 class Glyph {
-  const Glyph(this.shapes, {this.matchTextDirection = false});
+  const Glyph(this.shapes, {this.matchTextDirection = false, this.lattice});
+
+  /// The Tailscale mark is a lattice of dots rather than strokes, so it is
+  /// drawn by its own painter instead of as a list of shapes. A glyph is one or
+  /// the other: what the dot lattice fills cannot come from the grid.
+  const Glyph.lattice({this.matchTextDirection = false})
+    : lattice = true,
+      shapes = const [];
 
   final List<GlyphShape> shapes;
   final bool matchTextDirection;
+  final bool? lattice;
 
   static const size = 24.0;
   static const strokeWidth = 1.8;

@@ -11,4 +11,7 @@ export 'logs.dart';
 export 'profiles/profiles.dart';
 export 'proxies/proxies.dart';
 export 'resources.dart';
+export 'tailscale.dart';
+export 'easytier.dart';
+export 'mesh.dart';
 export 'tools.dart';

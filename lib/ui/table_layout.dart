@@ -43,8 +43,12 @@ List<double> tableColumnWidths(
     }
   }
   final free = width - fixed;
-  if (overrides.isEmpty ||
-      (flexCount > 0 && free >= flexCount * tableColumnMinWidth)) {
+  // A column narrow enough for the bottom row of the dashboard can be thinner
+  // than the widths the columns ask for, dragging or not: scaling them all is
+  // the only way the head fits rather than clipping its last cell.
+  if (fixed <= width &&
+      (overrides.isEmpty ||
+          (flexCount > 0 && free >= flexCount * tableColumnMinWidth))) {
     final share = free.clamp(0.0, double.infinity);
     return [
       for (final (index, column) in columns.indexed)

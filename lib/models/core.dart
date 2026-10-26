@@ -12,6 +12,8 @@ abstract class SetupParams with _$SetupParams {
     @JsonKey(name: 'test-url') required String testUrl,
     @Default(false) @JsonKey(name: 'skip-cert-verify') bool skipCertVerify,
     @JsonKey(includeIfNull: false) SetupBase? base,
+    @JsonKey(includeIfNull: false) TailscaleInject? tailscale,
+    @JsonKey(includeIfNull: false) EasyTierInject? easyTier,
   }) = _SetupParams;
 
   factory SetupParams.fromJson(Map<String, dynamic> json) =>
@@ -203,6 +205,95 @@ abstract class RouteCheck with _$RouteCheck {
       _$RouteCheckFromJson(json);
 }
 
+/// The Tailscale node the app keeps in every profile. Absent from a setup
+/// means the user turned the mesh off, and the core writes nothing.
+@freezed
+abstract class TailscaleInject with _$TailscaleInject {
+  const factory TailscaleInject({
+    required String name,
+    @JsonKey(name: 'auth-key') @Default('') String authKey,
+    @Default('') String hostname,
+    @JsonKey(name: 'control-url') @Default('') String controlUrl,
+    @JsonKey(name: 'state-dir') @Default('') String stateDir,
+    @Default(false) bool ephemeral,
+    @Default(true) bool udp,
+    @JsonKey(name: 'accept-routes') @Default(false) bool acceptRoutes,
+    @JsonKey(name: 'exit-node') @Default('') String exitNode,
+    @JsonKey(name: 'exit-node-allow-lan-access')
+    @Default(false)
+    bool exitNodeAllowLanAccess,
+    @JsonKey(name: 'magic-dns-suffix') @Default('') String magicDnsSuffix,
+  }) = _TailscaleInject;
+
+  factory TailscaleInject.fromJson(Map<String, Object?> json) =>
+      _$TailscaleInjectFromJson(json);
+}
+
+/// The EasyTier node the app keeps in every profile. Absent from a setup means
+/// the user turned this overlay off, or chose the other one.
+///
+/// EasyTier has no control plane: the network name and secret are the whole of
+/// what identifies a network, and [peers] is where a node goes to find it.
+@freezed
+abstract class EasyTierInject with _$EasyTierInject {
+  const factory EasyTierInject({
+    required String name,
+    @JsonKey(name: 'network-name') required String networkName,
+    @JsonKey(name: 'network-secret') required String networkSecret,
+    @Default('') String hostname,
+    @Default('') String ipv4,
+    @Default(false) bool dhcp,
+    @Default([]) List<String> peers,
+    @Default([]) List<String> listeners,
+    @JsonKey(name: 'no-listener') @Default(false) bool noListener,
+    @JsonKey(name: 'state-dir') @Default('') String stateDir,
+    @Default(true) bool udp,
+
+    /// The range the overlay hands out, so its addresses route through it.
+    @JsonKey(name: 'ipv4-range') @Default('10.126.126.0/24') String ipv4Range,
+    @JsonKey(name: 'dns-zone') @Default('') String dnsZone,
+  }) = _EasyTierInject;
+
+  factory EasyTierInject.fromJson(Map<String, Object?> json) =>
+      _$EasyTierInjectFromJson(json);
+}
+
+/// What an EasyTier outbound reports about the overlay it reached.
+@freezed
+abstract class EasyTierStatus with _$EasyTierStatus {
+  const factory EasyTierStatus({
+    required String name,
+    @Default('') String state,
+    @JsonKey(name: 'instance-id') @Default('') String instanceId,
+    @Default('') String hostname,
+    @JsonKey(name: 'network-name') @Default('') String networkName,
+    @Default('') String ipv4,
+    @Default(false) bool connected,
+    @Default([]) List<EasyTierPeer> peers,
+    @Default('') String error,
+  }) = _EasyTierStatus;
+
+  factory EasyTierStatus.fromJson(Map<String, Object?> json) =>
+      _$EasyTierStatusFromJson(json);
+}
+
+/// One machine the overlay reached.
+@freezed
+abstract class EasyTierPeer with _$EasyTierPeer {
+  const factory EasyTierPeer({
+    @Default('') String hostname,
+    @Default('') String ipv4,
+
+    /// 1 for a direct peer, more when relayed through another.
+    @JsonKey(name: 'path-len') @Default(0) int pathLen,
+    @JsonKey(name: 'latency-ms') @Default(0) int latencyMs,
+    @Default('') String tunnel,
+  }) = _EasyTierPeer;
+
+  factory EasyTierPeer.fromJson(Map<String, Object?> json) =>
+      _$EasyTierPeerFromJson(json);
+}
+
 @freezed
 abstract class CoreEvent with _$CoreEvent {
   const factory CoreEvent({required CoreEventType type, dynamic data}) =
@@ -370,4 +461,68 @@ abstract class ProxiesData with _$ProxiesData {
 
   factory ProxiesData.fromJson(Map<String, Object?> json) =>
       _$ProxiesDataFromJson(json);
+}
+
+/// What the core's Tailscale backend knows about one outbound, read without
+/// dialing through it. [backendState] is Tailscale's own: `NoState`,
+/// `NeedsLogin`, `NeedsMachineAuth`, `Stopped`, `Starting` or `Running`.
+@freezed
+abstract class TailscaleStatus with _$TailscaleStatus {
+  const factory TailscaleStatus({
+    required String name,
+    @JsonKey(name: 'backend-state') required String backendState,
+    @JsonKey(name: 'auth-url') @Default('') String authUrl,
+    @Default('') String hostname,
+    @JsonKey(name: 'dns-name') @Default('') String dnsName,
+    @JsonKey(name: 'magic-dns') @Default('') String magicDns,
+    @Default(false) bool online,
+    @JsonKey(name: 'have-node-key') @Default(false) bool haveNodeKey,
+    @JsonKey(name: 'auth-method') @Default('') String authMethod,
+    @Default([]) List<String> ips,
+    @Default([]) List<String> health,
+    @JsonKey(name: 'exit-node') TailscalePeer? exitNode,
+    @Default([]) List<TailscalePeer> peers,
+  }) = _TailscaleStatus;
+
+  factory TailscaleStatus.fromJson(Map<String, Object?> json) =>
+      _$TailscaleStatusFromJson(json);
+}
+
+@freezed
+abstract class TailscalePeer with _$TailscalePeer {
+  const factory TailscalePeer({
+    @Default('') String hostname,
+    @JsonKey(name: 'dns-name') @Default('') String dnsName,
+    @Default('') String os,
+    @Default([]) List<String> ips,
+    @Default(false) bool online,
+    @JsonKey(name: 'exit-node-option') @Default(false) bool exitNodeOption,
+    @JsonKey(name: 'exit-node') @Default(false) bool exitNode,
+    @Default('') String relay,
+    @JsonKey(name: 'cur-addr') @Default('') String curAddr,
+    @JsonKey(name: 'rx-bytes') @Default(0) int rxBytes,
+    @JsonKey(name: 'tx-bytes') @Default(0) int txBytes,
+  }) = _TailscalePeer;
+
+  factory TailscalePeer.fromJson(Map<String, Object?> json) =>
+      _$TailscalePeerFromJson(json);
+}
+
+extension TailscaleStatusExt on TailscaleStatus {
+  /// Whether the node is signed in and reachable, as opposed to a backend that
+  /// is still starting or one that needs a login.
+  bool get isRunning => backendState == 'Running';
+
+  bool get needsLogin =>
+      backendState == 'NeedsLogin' || backendState == 'NeedsMachineAuth';
+
+  /// The address a peer is reached at, preferring the tailnet address.
+  String? get primaryIp => ips.firstOrNull;
+
+  /// Whether a pre-auth key signed this node in, as opposed to a browser
+  /// login. Control cannot tell the two apart once the node is up, so the
+  /// outbound reports which one was used instead.
+  bool get signedInWithKey => authMethod == 'auth-key';
+
+  bool get signedInWithBrowser => authMethod == 'browser';
 }

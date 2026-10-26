@@ -22,9 +22,19 @@ abstract class NavigationItem with _$NavigationItem {
     required PageLabel label,
     required WidgetBuilder builder,
     String? path,
+
+    /// What the item calls itself when [label] is not the name to show. One
+    /// page holds more than one thing, and the label is a routing key that
+    /// cannot change while the name on screen has to.
+    String? title,
     @Default([NavigationItemMode.mobile, NavigationItemMode.desktop])
     List<NavigationItemMode> modes,
   }) = _NavigationItem;
+}
+
+extension NavigationItemTitle on NavigationItem {
+  /// The name to show, which is [title] when the item sets one.
+  String get shownTitle => title ?? label.label;
 }
 
 @freezed

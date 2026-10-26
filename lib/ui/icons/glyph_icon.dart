@@ -1,4 +1,5 @@
 import 'package:fl_clash/ui/icons/glyph.dart';
+import 'package:fl_clash/ui/icons/glyph_lattice.dart';
 import 'package:fl_clash/ui/icons/glyph_painter.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -16,6 +17,17 @@ class GlyphIcon extends StatelessWidget {
     final color = this.color ?? iconTheme.color!;
     final opacity = iconTheme.opacity ?? 1;
     final side = size ?? iconTheme.size ?? Glyph.size;
+    if (glyph.lattice ?? false) {
+      // A dot lattice fills by closing its rings, so it takes the same fill
+      // the stroke glyphs do and draws it its own way.
+      return GlyphLattice(
+        fill: fill ?? iconTheme.fill ?? 0,
+        size: side,
+        color: color,
+        opacity: opacity,
+        matchTextDirection: glyph.matchTextDirection,
+      );
+    }
     final icon = SizedBox.square(
       dimension: side,
       child: Center(

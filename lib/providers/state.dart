@@ -26,3 +26,5 @@ part 'state/theme.dart';
 part 'state/profile.dart';
 part 'state/custom.dart';
 part 'state/custom_import.dart';
+part 'state/tailscale.dart';
+part 'state/easytier.dart';

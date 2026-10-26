@@ -114,6 +114,24 @@ mixin CoreInterface {
   FutureOr<bool> resetConnections();
 
   FutureOr<bool> clearDnsCache();
+
+  /// What the core's Tailscale backend knows about [name], or null when no
+  /// Tailscale outbound carries that name.
+  FutureOr<TailscaleStatus?> tailscaleStatus(String name);
+
+  FutureOr<bool> startTailscale(String name);
+
+  /// Signs the node out, dropping the key its state directory holds so another
+  /// account can claim it.
+  FutureOr<bool> logoutTailscale(String name);
+
+  /// The URL a browser has to open to finish a login, empty when the node is
+  /// already signed in.
+  Future<String> tailscaleLoginUrl(String name);
+
+  /// What the core's EasyTier node has reached, or null when no EasyTier
+  /// outbound carries that name.
+  FutureOr<EasyTierStatus?> easyTierStatus(String name);
 }
 
 abstract class CoreHandlerInterface with CoreInterface {
@@ -518,6 +536,49 @@ abstract class CoreHandlerInterface with CoreInterface {
   @override
   Future<bool> clearDnsCache() async {
     return await _invokeMethod<bool>(method: CoreMethod.clearDnsCache) ?? false;
+  }
+
+  @override
+  Future<TailscaleStatus?> tailscaleStatus(String name) async {
+    final data = await _invokeMethod<Map<String, dynamic>>(
+      method: CoreMethod.tailscaleStatus,
+      arguments: {'name': name},
+    );
+    return data == null ? null : TailscaleStatus.fromJson(data);
+  }
+
+  @override
+  Future<bool> startTailscale(String name) async {
+    return _invokeMessage(
+      method: CoreMethod.startTailscale,
+      arguments: {'name': name},
+    ).then((message) => message.isEmpty);
+  }
+
+  @override
+  Future<String> tailscaleLoginUrl(String name) async {
+    return await _invokeMethod<String>(
+          method: CoreMethod.loginTailscale,
+          arguments: {'name': name},
+        ) ??
+        '';
+  }
+
+  @override
+  Future<EasyTierStatus?> easyTierStatus(String name) async {
+    final data = await _invokeMethod<Map<String, dynamic>>(
+      method: CoreMethod.easyTierStatus,
+      arguments: {'name': name},
+    );
+    return data == null ? null : EasyTierStatus.fromJson(data);
+  }
+
+  @override
+  Future<bool> logoutTailscale(String name) async {
+    return _invokeMessage(
+      method: CoreMethod.logoutTailscale,
+      arguments: {'name': name},
+    ).then((message) => message.isEmpty);
   }
 
   @override

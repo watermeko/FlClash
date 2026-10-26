@@ -187,6 +187,9 @@ class ConfigTextItem extends _ConfigItem<String> {
     this.validator,
     this.normalize,
     this.allowEmpty = false,
+    this.obscureText = false,
+    this.confirm,
+    this.valueText,
     super.leading,
   });
 
@@ -195,6 +198,17 @@ class ConfigTextItem extends _ConfigItem<String> {
   final ConfigValidator? validator;
   final String Function(String value)? normalize;
   final bool allowEmpty;
+
+  /// Hides the value behind dots, for a secret the row also has to show.
+  final bool obscureText;
+
+  /// Asked before a new value is kept, so a row whose value replaces another
+  /// can explain what it costs first.
+  final Future<bool> Function(String value)? confirm;
+
+  /// What the row shows for its value, for one that is a secret rather than
+  /// something to read at a glance.
+  final String Function(String value)? valueText;
 
   String? _normalize(String? value) {
     if (value == null) {
@@ -215,11 +229,13 @@ class ConfigTextItem extends _ConfigItem<String> {
     return ListItem.input(
       leading: leading,
       title: Text(label),
-      subtitle: value.isEmpty ? null : Text(value),
+      subtitle: value.isEmpty ? null : Text(valueText?.call(value) ?? value),
       dialogTitle: label,
       value: value,
       maxLength: maxLength,
       keyboardType: keyboardType,
+      obscureText: obscureText,
+      confirm: confirm == null ? null : (text) => confirm!(text ?? ''),
       validator: (text) {
         final normalized = _normalize(text);
         if (normalized == null || normalized.isEmpty) {
