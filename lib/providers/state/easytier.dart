@@ -82,6 +82,16 @@ class EasyTiers extends _$EasyTiers {
     state = {...state, status.name: status};
   }
 
+  /// Drops what the core no longer knows about: an overlay that went away has
+  /// no peers left to list, and keeping the last answer would show machines
+  /// that are not there.
+  void clearStatus(String name) {
+    if (!state.containsKey(name)) {
+      return;
+    }
+    state = {...state}..remove(name);
+  }
+
   /// Reads the node the app injects. The first read can land while the node is
   /// still starting, so a page that wants a live state polls what it cannot
   /// wait for.
@@ -95,6 +105,8 @@ class EasyTiers extends _$EasyTiers {
         }
         if (status != null) {
           setStatus(status);
+        } else {
+          clearStatus(name);
         }
       } catch (error) {
         commonPrint.log('Unable to read the EasyTier status of $name: $error');

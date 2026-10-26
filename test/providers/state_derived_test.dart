@@ -988,6 +988,28 @@ void main() {
     );
   });
 
+  test('a mesh change is a re-apply, whichever mesh is chosen', () {
+    container.listen(setupPatchProvider, (_, _) {});
+    final initial = container.read(setupPatchProvider);
+
+    // Editing the mesh that is not chosen writes nothing to the profile, so it
+    // is not a reason to restart the core.
+    container
+        .read(easyTierSettingProvider.notifier)
+        .update((state) => state.copyWith(hostname: 'marble'));
+    expect(container.read(setupPatchProvider), initial);
+
+    container.read(meshKindSettingProvider.notifier).value = MeshKind.easyTier;
+    final chosen = container.read(setupPatchProvider);
+    expect(chosen, isNot(initial));
+
+    // The chosen one is: its settings reach the profile the app builds.
+    container
+        .read(easyTierSettingProvider.notifier)
+        .update((state) => state.copyWith(hostname: 'marble-2'));
+    expect(container.read(setupPatchProvider), isNot(chosen));
+  });
+
   test('shared state carries the notification stop action switch', () async {
     await AppLocalizations.load(const Locale('en'));
     container.listen(sharedStateProvider, (_, _) {});

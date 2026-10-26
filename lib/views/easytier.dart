@@ -34,8 +34,9 @@ class _EasyTierViewState extends ConsumerState<EasyTierView> {
     super.initState();
     // The core starts the node on the first dial and pushes nothing about it,
     // so a page that opens early would otherwise sit on a stale view until the
-    // next apply. Poll while the node is not settled and stop when it is.
-    _poll = Timer.periodic(const Duration(seconds: 3), (_) => _read());
+    // next apply. A mesh is also membership that changes on its own, so the
+    // page keeps asking rather than stopping once it has an answer.
+    _schedule();
     WidgetsBinding.instance.addPostFrameCallback((_) => _read());
   }
 
@@ -45,9 +46,22 @@ class _EasyTierViewState extends ConsumerState<EasyTierView> {
     super.dispose();
   }
 
+  /// Quickly while a node is still coming up, and slowly once it is there:
+  /// a settled node still gains and loses peers, which the page has to show.
+  void _schedule() {
+    _poll?.cancel();
+    _poll = null;
+    if (!mounted) {
+      return;
+    }
+    final connected = ref.read(easyTierStatusProvider)?.connected ?? false;
+    _poll = Timer(Duration(seconds: connected ? 10 : 3), () {
+      unawaited(_read().whenComplete(_schedule));
+    });
+  }
+
   Future<void> _read() async {
     if (!ref.read(easyTierSettingProvider).inject) {
-      _settle();
       return;
     }
     if (_reading) {
@@ -62,17 +76,6 @@ class _EasyTierViewState extends ConsumerState<EasyTierView> {
     } finally {
       _reading = false;
     }
-    final status = ref.read(easyTierStatusProvider);
-    if (status != null && status.connected) {
-      _settle();
-    }
-  }
-
-  /// A node that has reached its peers reports nothing further on its own, so
-  /// polling is what carries the first seconds only.
-  void _settle() {
-    _poll?.cancel();
-    _poll = null;
   }
 
   @override

@@ -59,20 +59,20 @@ final class SetupPatchProvider
           ({
             bool appendSystemDns,
             bool bypassPrivateRoute,
+            int meshRevision,
             PatchClashConfig patchConfig,
-            int tailscaleRevision,
           }),
           ({
             bool appendSystemDns,
             bool bypassPrivateRoute,
+            int meshRevision,
             PatchClashConfig patchConfig,
-            int tailscaleRevision,
           }),
           ({
             bool appendSystemDns,
             bool bypassPrivateRoute,
+            int meshRevision,
             PatchClashConfig patchConfig,
-            int tailscaleRevision,
           })
         >
     with
@@ -80,8 +80,8 @@ final class SetupPatchProvider
           ({
             bool appendSystemDns,
             bool bypassPrivateRoute,
+            int meshRevision,
             PatchClashConfig patchConfig,
-            int tailscaleRevision,
           })
         > {
   SetupPatchProvider._()
@@ -104,8 +104,8 @@ final class SetupPatchProvider
     ({
       bool appendSystemDns,
       bool bypassPrivateRoute,
+      int meshRevision,
       PatchClashConfig patchConfig,
-      int tailscaleRevision,
     })
   >
   $createElement($ProviderPointer pointer) => $ProviderElement(pointer);
@@ -114,8 +114,8 @@ final class SetupPatchProvider
   ({
     bool appendSystemDns,
     bool bypassPrivateRoute,
+    int meshRevision,
     PatchClashConfig patchConfig,
-    int tailscaleRevision,
   })
   create(Ref ref) {
     return setupPatch(ref);
@@ -126,8 +126,8 @@ final class SetupPatchProvider
     ({
       bool appendSystemDns,
       bool bypassPrivateRoute,
+      int meshRevision,
       PatchClashConfig patchConfig,
-      int tailscaleRevision,
     })
     value,
   ) {
@@ -138,15 +138,15 @@ final class SetupPatchProvider
             ({
               bool appendSystemDns,
               bool bypassPrivateRoute,
+              int meshRevision,
               PatchClashConfig patchConfig,
-              int tailscaleRevision,
             })
           >(value),
     );
   }
 }
 
-String _$setupPatchHash() => r'4afd66aaeb7e33097613012159baa037b66a3948';
+String _$setupPatchHash() => r'64543d4b1bbade69af6545b76fcc7313e44ed23e';
 
 @ProviderFor(trayState)
 final trayStateProvider = TrayStateProvider._();
@@ -3231,7 +3231,7 @@ final class NavigationItemsStateProvider
 }
 
 String _$navigationItemsStateHash() =>
-    r'3c633d4f3e5f2e80b7cfd166a46397f9a207bb1e';
+    r'63b1eae429640008c7fa6670b9c7f950d58e437c';
 
 @ProviderFor(currentNavigationItemsState)
 final currentNavigationItemsStateProvider =

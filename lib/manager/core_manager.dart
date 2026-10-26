@@ -57,14 +57,14 @@ class _CoreContainerState extends ConsumerState<CoreManager>
             .applyProfileDebounce(
               silence: true,
               // Neither of these reaches the profile's own YAML: the test URL
-              // is a runtime setting, and the Tailscale node is injected after
-              // the base is merged. Without a forced apply both would be
-              // compared against the same md5 and skipped, which left a node
-              // switched on against a config that never mentions it.
+              // is a runtime setting, and the mesh node is injected after the
+              // base is merged. Without a forced apply both would be compared
+              // against the same md5 and skipped, which left a node switched on
+              // against a config that never mentions it.
               force:
                   prev != null &&
                   (prev.patchConfig.testUrl != next.patchConfig.testUrl ||
-                      prev.tailscaleRevision != next.tailscaleRevision),
+                      prev.meshRevision != next.meshRevision),
             );
       }
     });
