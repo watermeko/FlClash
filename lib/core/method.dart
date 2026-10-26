@@ -58,6 +58,7 @@ enum CoreMethod {
   startTailscale,
   logoutTailscale,
   loginTailscale,
+  easyTierStatus,
 }
 
 class CoreMethodCall {

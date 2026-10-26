@@ -41,12 +41,13 @@ func loadWithNode(t *testing.T, path string, node *TailscaleInject) string {
 		&SetupBase{Path: path, Overlay: overlay},
 		configPath,
 		node,
+		nil,
 	); err != nil {
 		t.Fatalf("loadConfigWithBase: %v", err)
 	}
 	// A profile carries its proxies, so the node reaches the tunnel through
 	// the same apply the app uses.
-	applied, err := loadConfig(configPath, nil)
+	applied, err := loadConfig(configPath, nil, nil)
 	if err != nil {
 		t.Fatalf("loadConfig: %v", err)
 	}
@@ -168,14 +169,14 @@ rules:
   - MATCH,DIRECT
 `)
 
-	written, err := withTailscale(custom, &TailscaleInject{
+	written, err := withOverlay(custom, &TailscaleInject{
 		Name:           "Tailscale",
 		AuthKey:        "tskey-auth-custom",
 		MagicDNSSuffix: "tail72614b.ts.net",
-	})
+	}, nil)
 
 	if err != nil {
-		t.Fatalf("withTailscale = %v", err)
+		t.Fatalf("withOverlay = %v", err)
 	}
 	for _, want := range []string{
 		"type: tailscale",

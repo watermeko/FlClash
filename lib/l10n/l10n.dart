@@ -7333,6 +7333,149 @@ class AppLocalizations {
     return Intl.message('Hostname', name: 'hostname', desc: '', args: []);
   }
 
+  /// `EasyTier`
+  String get easyTier {
+    return Intl.message(
+      'EasyTier',
+      name: 'easyTier',
+      desc:
+          'The name of the EasyTier mesh product, which is a proper noun and stays the same in every language.',
+      args: [],
+    );
+  }
+
+  /// `Mesh`
+  String get mesh {
+    return Intl.message(
+      'Mesh',
+      name: 'mesh',
+      desc:
+          'The heading of the setting that chooses which overlay the mesh page drives.',
+      args: [],
+    );
+  }
+
+  /// `Network`
+  String get easyTierNetwork {
+    return Intl.message(
+      'Network',
+      name: 'easyTierNetwork',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Network name`
+  String get easyTierNetworkName {
+    return Intl.message(
+      'Network name',
+      name: 'easyTierNetworkName',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Network secret`
+  String get easyTierNetworkSecret {
+    return Intl.message(
+      'Network secret',
+      name: 'easyTierNetworkSecret',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Connection`
+  String get easyTierPeers {
+    return Intl.message(
+      'Connection',
+      name: 'easyTierPeers',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Peer addresses`
+  String get easyTierPeerList {
+    return Intl.message(
+      'Peer addresses',
+      name: 'easyTierPeerList',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Do not accept incoming connections`
+  String get easyTierNoListener {
+    return Intl.message(
+      'Do not accept incoming connections',
+      name: 'easyTierNoListener',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Needs a network name`
+  String get easyTierNeedsNetwork {
+    return Intl.message(
+      'Needs a network name',
+      name: 'easyTierNeedsNetwork',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Connected`
+  String get easyTierConnected {
+    return Intl.message(
+      'Connected',
+      name: 'easyTierConnected',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `Looking for peers`
+  String get easyTierConnecting {
+    return Intl.message(
+      'Looking for peers',
+      name: 'easyTierConnecting',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `relayed {hops}`
+  String easyTierRelayed(int hops) {
+    return Intl.message(
+      'relayed $hops',
+      name: 'easyTierRelayed',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [hops],
+    );
+  }
+
+  /// `The mesh is off, so this device is not on any overlay`
+  String get easyTierOffTip {
+    return Intl.message(
+      'The mesh is off, so this device is not on any overlay',
+      name: 'easyTierOffTip',
+      desc: 'EasyTier mesh setting or state shown on the mesh page.',
+      args: [],
+    );
+  }
+
+  /// `UDP`
+  String get easyTierUdp {
+    return Intl.message(
+      'UDP',
+      name: 'easyTierUdp',
+      desc:
+          'Whether the node carries UDP traffic, shown as a setting on the mesh page.',
+      args: [],
+    );
+  }
+
   /// `Exit nodes`
   String get exitNodes {
     return Intl.message('Exit nodes', name: 'exitNodes', desc: '', args: []);

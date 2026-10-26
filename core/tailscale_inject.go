@@ -275,10 +275,10 @@ func hasProxyNamed(section *yaml.Node, name string) bool {
 	return false
 }
 
-// withTailscale applies the node to a config that arrives as bytes, which is
-// the path a custom profile takes: it has no base to merge, so its own yaml is
-// the whole document the tunnel is built from.
-func withTailscale(buf []byte, node *TailscaleInject) ([]byte, error) {
+// withOverlay applies whichever node the user chose to a config that arrives
+// as bytes, which is the path a custom profile takes: it has no base to merge,
+// so its own yaml is the whole document the tunnel is built from.
+func withOverlay(buf []byte, tailscale *TailscaleInject, easyTier *EasyTierInject) ([]byte, error) {
 	var document yaml.Node
 	if err := yaml.Unmarshal(buf, &document); err != nil {
 		return nil, err
@@ -287,7 +287,7 @@ func withTailscale(buf []byte, node *TailscaleInject) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	if err := injectTailscale(root, node); err != nil {
+	if err := injectOverlay(root, tailscale, easyTier); err != nil {
 		return nil, err
 	}
 	return yaml.Marshal(&yaml.Node{Kind: yaml.DocumentNode, Content: []*yaml.Node{root}})

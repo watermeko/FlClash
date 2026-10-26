@@ -128,6 +128,10 @@ mixin CoreInterface {
   /// The URL a browser has to open to finish a login, empty when the node is
   /// already signed in.
   Future<String> tailscaleLoginUrl(String name);
+
+  /// What the core's EasyTier node has reached, or null when no EasyTier
+  /// outbound carries that name.
+  FutureOr<EasyTierStatus?> easyTierStatus(String name);
 }
 
 abstract class CoreHandlerInterface with CoreInterface {
@@ -558,6 +562,15 @@ abstract class CoreHandlerInterface with CoreInterface {
           arguments: {'name': name},
         ) ??
         '';
+  }
+
+  @override
+  Future<EasyTierStatus?> easyTierStatus(String name) async {
+    final data = await _invokeMethod<Map<String, dynamic>>(
+      method: CoreMethod.easyTierStatus,
+      arguments: {'name': name},
+    );
+    return data == null ? null : EasyTierStatus.fromJson(data);
   }
 
   @override

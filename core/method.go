@@ -230,6 +230,7 @@ var methodHandlers = map[CoreMethod]methodHandler{
 	startTailscaleMethod:           withMessage(handleStartTailscale),
 	logoutTailscaleMethod:          withMessage(handleLogoutTailscale),
 	loginTailscaleMethod:           withFallible(handleLoginTailscale),
+	easyTierStatusMethod:           withFallible(handleEasyTierStatus),
 }
 
 func watchRouteHandler(call *MethodCall) (any, error) {

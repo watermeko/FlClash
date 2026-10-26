@@ -16,7 +16,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SetupParams {
 
-@JsonKey(name: 'selected-map') Map<String, String> get selectedMap;@JsonKey(name: 'test-url') String get testUrl;@JsonKey(name: 'skip-cert-verify') bool get skipCertVerify;@JsonKey(includeIfNull: false) SetupBase? get base;@JsonKey(includeIfNull: false) TailscaleInject? get tailscale;
+@JsonKey(name: 'selected-map') Map<String, String> get selectedMap;@JsonKey(name: 'test-url') String get testUrl;@JsonKey(name: 'skip-cert-verify') bool get skipCertVerify;@JsonKey(includeIfNull: false) SetupBase? get base;@JsonKey(includeIfNull: false) TailscaleInject? get tailscale;@JsonKey(includeIfNull: false) EasyTierInject? get easyTier;
 /// Create a copy of SetupParams
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -30,20 +30,20 @@ $SetupParamsCopyWith<SetupParams> get copyWith => _$SetupParamsCopyWithImpl<Setu
 @override
 bool operator ==(Object other) {
   final _this = this as SetupParams;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupParams&&const DeepCollectionEquality().equals(other.selectedMap, _this.selectedMap)&&(identical(other.testUrl, _this.testUrl) || other.testUrl == _this.testUrl)&&(identical(other.skipCertVerify, _this.skipCertVerify) || other.skipCertVerify == _this.skipCertVerify)&&(identical(other.base, _this.base) || other.base == _this.base)&&(identical(other.tailscale, _this.tailscale) || other.tailscale == _this.tailscale));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetupParams&&const DeepCollectionEquality().equals(other.selectedMap, _this.selectedMap)&&(identical(other.testUrl, _this.testUrl) || other.testUrl == _this.testUrl)&&(identical(other.skipCertVerify, _this.skipCertVerify) || other.skipCertVerify == _this.skipCertVerify)&&(identical(other.base, _this.base) || other.base == _this.base)&&(identical(other.tailscale, _this.tailscale) || other.tailscale == _this.tailscale)&&(identical(other.easyTier, _this.easyTier) || other.easyTier == _this.easyTier));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as SetupParams;
-  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.selectedMap),_this.testUrl,_this.skipCertVerify,_this.base,_this.tailscale);
+  return Object.hash(runtimeType,const DeepCollectionEquality().hash(_this.selectedMap),_this.testUrl,_this.skipCertVerify,_this.base,_this.tailscale,_this.easyTier);
 }
 
 @override
 String toString() {
   final _this = this as SetupParams;
-  return 'SetupParams(selectedMap: ${_this.selectedMap}, testUrl: ${_this.testUrl}, skipCertVerify: ${_this.skipCertVerify}, base: ${_this.base}, tailscale: ${_this.tailscale})';
+  return 'SetupParams(selectedMap: ${_this.selectedMap}, testUrl: ${_this.testUrl}, skipCertVerify: ${_this.skipCertVerify}, base: ${_this.base}, tailscale: ${_this.tailscale}, easyTier: ${_this.easyTier})';
 }
 
 
@@ -54,11 +54,11 @@ abstract mixin class $SetupParamsCopyWith<$Res>  {
   factory $SetupParamsCopyWith(SetupParams value, $Res Function(SetupParams) _then) = _$SetupParamsCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'selected-map') Map<String, String> selectedMap,@JsonKey(name: 'test-url') String testUrl,@JsonKey(name: 'skip-cert-verify') bool skipCertVerify,@JsonKey(includeIfNull: false) SetupBase? base,@JsonKey(includeIfNull: false) TailscaleInject? tailscale
+@JsonKey(name: 'selected-map') Map<String, String> selectedMap,@JsonKey(name: 'test-url') String testUrl,@JsonKey(name: 'skip-cert-verify') bool skipCertVerify,@JsonKey(includeIfNull: false) SetupBase? base,@JsonKey(includeIfNull: false) TailscaleInject? tailscale,@JsonKey(includeIfNull: false) EasyTierInject? easyTier
 });
 
 
-$SetupBaseCopyWith<$Res>? get base;$TailscaleInjectCopyWith<$Res>? get tailscale;
+$SetupBaseCopyWith<$Res>? get base;$TailscaleInjectCopyWith<$Res>? get tailscale;$EasyTierInjectCopyWith<$Res>? get easyTier;
 
 }
 /// @nodoc
@@ -71,14 +71,15 @@ class _$SetupParamsCopyWithImpl<$Res>
 
 /// Create a copy of SetupParams
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? selectedMap = null,Object? testUrl = null,Object? skipCertVerify = null,Object? base = freezed,Object? tailscale = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? selectedMap = null,Object? testUrl = null,Object? skipCertVerify = null,Object? base = freezed,Object? tailscale = freezed,Object? easyTier = freezed,}) {
   return _then(SetupParams(
 selectedMap: null == selectedMap ? _self.selectedMap : selectedMap // ignore: cast_nullable_to_non_nullable
 as Map<String, String>,testUrl: null == testUrl ? _self.testUrl : testUrl // ignore: cast_nullable_to_non_nullable
 as String,skipCertVerify: null == skipCertVerify ? _self.skipCertVerify : skipCertVerify // ignore: cast_nullable_to_non_nullable
 as bool,base: freezed == base ? _self.base : base // ignore: cast_nullable_to_non_nullable
 as SetupBase?,tailscale: freezed == tailscale ? _self.tailscale : tailscale // ignore: cast_nullable_to_non_nullable
-as TailscaleInject?,
+as TailscaleInject?,easyTier: freezed == easyTier ? _self.easyTier : easyTier // ignore: cast_nullable_to_non_nullable
+as EasyTierInject?,
   ));
 }
 /// Create a copy of SetupParams
@@ -104,6 +105,18 @@ $TailscaleInjectCopyWith<$Res>? get tailscale {
 
   return $TailscaleInjectCopyWith<$Res>(_self.tailscale!, (value) {
     return _then(_self.copyWith(tailscale: value));
+  });
+}/// Create a copy of SetupParams
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$EasyTierInjectCopyWith<$Res>? get easyTier {
+    if (_self.easyTier == null) {
+    return null;
+  }
+
+  return $EasyTierInjectCopyWith<$Res>(_self.easyTier!, (value) {
+    return _then(_self.copyWith(easyTier: value));
   });
 }
 }
@@ -187,10 +200,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'selected-map')  Map<String, String> selectedMap, @JsonKey(name: 'test-url')  String testUrl, @JsonKey(name: 'skip-cert-verify')  bool skipCertVerify, @JsonKey(includeIfNull: false)  SetupBase? base, @JsonKey(includeIfNull: false)  TailscaleInject? tailscale)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'selected-map')  Map<String, String> selectedMap, @JsonKey(name: 'test-url')  String testUrl, @JsonKey(name: 'skip-cert-verify')  bool skipCertVerify, @JsonKey(includeIfNull: false)  SetupBase? base, @JsonKey(includeIfNull: false)  TailscaleInject? tailscale, @JsonKey(includeIfNull: false)  EasyTierInject? easyTier)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetupParams() when $default != null:
-return $default(_that.selectedMap,_that.testUrl,_that.skipCertVerify,_that.base,_that.tailscale);case _:
+return $default(_that.selectedMap,_that.testUrl,_that.skipCertVerify,_that.base,_that.tailscale,_that.easyTier);case _:
   return orElse();
 
 }
@@ -208,10 +221,10 @@ return $default(_that.selectedMap,_that.testUrl,_that.skipCertVerify,_that.base,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'selected-map')  Map<String, String> selectedMap, @JsonKey(name: 'test-url')  String testUrl, @JsonKey(name: 'skip-cert-verify')  bool skipCertVerify, @JsonKey(includeIfNull: false)  SetupBase? base, @JsonKey(includeIfNull: false)  TailscaleInject? tailscale)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'selected-map')  Map<String, String> selectedMap, @JsonKey(name: 'test-url')  String testUrl, @JsonKey(name: 'skip-cert-verify')  bool skipCertVerify, @JsonKey(includeIfNull: false)  SetupBase? base, @JsonKey(includeIfNull: false)  TailscaleInject? tailscale, @JsonKey(includeIfNull: false)  EasyTierInject? easyTier)  $default,) {final _that = this;
 switch (_that) {
 case _SetupParams():
-return $default(_that.selectedMap,_that.testUrl,_that.skipCertVerify,_that.base,_that.tailscale);case _:
+return $default(_that.selectedMap,_that.testUrl,_that.skipCertVerify,_that.base,_that.tailscale,_that.easyTier);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -228,10 +241,10 @@ return $default(_that.selectedMap,_that.testUrl,_that.skipCertVerify,_that.base,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'selected-map')  Map<String, String> selectedMap, @JsonKey(name: 'test-url')  String testUrl, @JsonKey(name: 'skip-cert-verify')  bool skipCertVerify, @JsonKey(includeIfNull: false)  SetupBase? base, @JsonKey(includeIfNull: false)  TailscaleInject? tailscale)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'selected-map')  Map<String, String> selectedMap, @JsonKey(name: 'test-url')  String testUrl, @JsonKey(name: 'skip-cert-verify')  bool skipCertVerify, @JsonKey(includeIfNull: false)  SetupBase? base, @JsonKey(includeIfNull: false)  TailscaleInject? tailscale, @JsonKey(includeIfNull: false)  EasyTierInject? easyTier)?  $default,) {final _that = this;
 switch (_that) {
 case _SetupParams() when $default != null:
-return $default(_that.selectedMap,_that.testUrl,_that.skipCertVerify,_that.base,_that.tailscale);case _:
+return $default(_that.selectedMap,_that.testUrl,_that.skipCertVerify,_that.base,_that.tailscale,_that.easyTier);case _:
   return null;
 
 }
@@ -243,7 +256,7 @@ return $default(_that.selectedMap,_that.testUrl,_that.skipCertVerify,_that.base,
 @JsonSerializable()
 
 class _SetupParams implements SetupParams {
-  const _SetupParams({@JsonKey(name: 'selected-map') required  Map<String, String> selectedMap, @JsonKey(name: 'test-url') required this.testUrl, @JsonKey(name: 'skip-cert-verify') this.skipCertVerify = false, @JsonKey(includeIfNull: false) this.base, @JsonKey(includeIfNull: false) this.tailscale}): _selectedMap = selectedMap;
+  const _SetupParams({@JsonKey(name: 'selected-map') required  Map<String, String> selectedMap, @JsonKey(name: 'test-url') required this.testUrl, @JsonKey(name: 'skip-cert-verify') this.skipCertVerify = false, @JsonKey(includeIfNull: false) this.base, @JsonKey(includeIfNull: false) this.tailscale, @JsonKey(includeIfNull: false) this.easyTier}): _selectedMap = selectedMap;
   factory _SetupParams.fromJson(Map<String, dynamic> json) => _$SetupParamsFromJson(json);
 
  final  Map<String, String> _selectedMap;
@@ -257,6 +270,7 @@ class _SetupParams implements SetupParams {
 @override@JsonKey(name: 'skip-cert-verify') final  bool skipCertVerify;
 @override@JsonKey(includeIfNull: false) final  SetupBase? base;
 @override@JsonKey(includeIfNull: false) final  TailscaleInject? tailscale;
+@override@JsonKey(includeIfNull: false) final  EasyTierInject? easyTier;
 
 /// Create a copy of SetupParams
 /// with the given fields replaced by the non-null parameter values.
@@ -271,18 +285,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupParams&&const DeepCollectionEquality().equals(other.selectedMap, _selectedMap)&&(identical(other.testUrl, testUrl) || other.testUrl == testUrl)&&(identical(other.skipCertVerify, skipCertVerify) || other.skipCertVerify == skipCertVerify)&&(identical(other.base, base) || other.base == base)&&(identical(other.tailscale, tailscale) || other.tailscale == tailscale));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetupParams&&const DeepCollectionEquality().equals(other.selectedMap, _selectedMap)&&(identical(other.testUrl, testUrl) || other.testUrl == testUrl)&&(identical(other.skipCertVerify, skipCertVerify) || other.skipCertVerify == skipCertVerify)&&(identical(other.base, base) || other.base == base)&&(identical(other.tailscale, tailscale) || other.tailscale == tailscale)&&(identical(other.easyTier, easyTier) || other.easyTier == easyTier));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedMap),testUrl,skipCertVerify,base,tailscale);
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(_selectedMap),testUrl,skipCertVerify,base,tailscale,easyTier);
 }
 
 @override
 String toString() {
-    return 'SetupParams(selectedMap: $selectedMap, testUrl: $testUrl, skipCertVerify: $skipCertVerify, base: $base, tailscale: $tailscale)';
+    return 'SetupParams(selectedMap: $selectedMap, testUrl: $testUrl, skipCertVerify: $skipCertVerify, base: $base, tailscale: $tailscale, easyTier: $easyTier)';
 }
 
 
@@ -293,11 +307,11 @@ abstract mixin class _$SetupParamsCopyWith<$Res> implements $SetupParamsCopyWith
   factory _$SetupParamsCopyWith(_SetupParams value, $Res Function(_SetupParams) _then) = __$SetupParamsCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'selected-map') Map<String, String> selectedMap,@JsonKey(name: 'test-url') String testUrl,@JsonKey(name: 'skip-cert-verify') bool skipCertVerify,@JsonKey(includeIfNull: false) SetupBase? base,@JsonKey(includeIfNull: false) TailscaleInject? tailscale
+@JsonKey(name: 'selected-map') Map<String, String> selectedMap,@JsonKey(name: 'test-url') String testUrl,@JsonKey(name: 'skip-cert-verify') bool skipCertVerify,@JsonKey(includeIfNull: false) SetupBase? base,@JsonKey(includeIfNull: false) TailscaleInject? tailscale,@JsonKey(includeIfNull: false) EasyTierInject? easyTier
 });
 
 
-@override $SetupBaseCopyWith<$Res>? get base;@override $TailscaleInjectCopyWith<$Res>? get tailscale;
+@override $SetupBaseCopyWith<$Res>? get base;@override $TailscaleInjectCopyWith<$Res>? get tailscale;@override $EasyTierInjectCopyWith<$Res>? get easyTier;
 
 }
 /// @nodoc
@@ -310,14 +324,15 @@ class __$SetupParamsCopyWithImpl<$Res>
 
 /// Create a copy of SetupParams
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? selectedMap = null,Object? testUrl = null,Object? skipCertVerify = null,Object? base = freezed,Object? tailscale = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? selectedMap = null,Object? testUrl = null,Object? skipCertVerify = null,Object? base = freezed,Object? tailscale = freezed,Object? easyTier = freezed,}) {
   return _then(_SetupParams(
 selectedMap: null == selectedMap ? _self._selectedMap : selectedMap // ignore: cast_nullable_to_non_nullable
 as Map<String, String>,testUrl: null == testUrl ? _self.testUrl : testUrl // ignore: cast_nullable_to_non_nullable
 as String,skipCertVerify: null == skipCertVerify ? _self.skipCertVerify : skipCertVerify // ignore: cast_nullable_to_non_nullable
 as bool,base: freezed == base ? _self.base : base // ignore: cast_nullable_to_non_nullable
 as SetupBase?,tailscale: freezed == tailscale ? _self.tailscale : tailscale // ignore: cast_nullable_to_non_nullable
-as TailscaleInject?,
+as TailscaleInject?,easyTier: freezed == easyTier ? _self.easyTier : easyTier // ignore: cast_nullable_to_non_nullable
+as EasyTierInject?,
   ));
 }
 
@@ -344,6 +359,18 @@ $TailscaleInjectCopyWith<$Res>? get tailscale {
 
   return $TailscaleInjectCopyWith<$Res>(_self.tailscale!, (value) {
     return _then(_self.copyWith(tailscale: value));
+  });
+}/// Create a copy of SetupParams
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$EasyTierInjectCopyWith<$Res>? get easyTier {
+    if (_self.easyTier == null) {
+    return null;
+  }
+
+  return $EasyTierInjectCopyWith<$Res>(_self.easyTier!, (value) {
+    return _then(_self.copyWith(easyTier: value));
   });
 }
 }
@@ -3815,6 +3842,910 @@ as bool,acceptRoutes: null == acceptRoutes ? _self.acceptRoutes : acceptRoutes /
 as bool,exitNode: null == exitNode ? _self.exitNode : exitNode // ignore: cast_nullable_to_non_nullable
 as String,exitNodeAllowLanAccess: null == exitNodeAllowLanAccess ? _self.exitNodeAllowLanAccess : exitNodeAllowLanAccess // ignore: cast_nullable_to_non_nullable
 as bool,magicDnsSuffix: null == magicDnsSuffix ? _self.magicDnsSuffix : magicDnsSuffix // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$EasyTierInject {
+
+ String get name;@JsonKey(name: 'network-name') String get networkName;@JsonKey(name: 'network-secret') String get networkSecret; String get hostname; String get ipv4; bool get dhcp; List<String> get peers; List<String> get listeners;@JsonKey(name: 'no-listener') bool get noListener;@JsonKey(name: 'state-dir') String get stateDir; bool get udp;/// The range the overlay hands out, so its addresses route through it.
+@JsonKey(name: 'ipv4-range') String get ipv4Range;@JsonKey(name: 'dns-zone') String get dnsZone;
+/// Create a copy of EasyTierInject
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$EasyTierInjectCopyWith<EasyTierInject> get copyWith => _$EasyTierInjectCopyWithImpl<EasyTierInject>(this as EasyTierInject, _$identity);
+
+  /// Serializes this EasyTierInject to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as EasyTierInject;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EasyTierInject&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.networkName, _this.networkName) || other.networkName == _this.networkName)&&(identical(other.networkSecret, _this.networkSecret) || other.networkSecret == _this.networkSecret)&&(identical(other.hostname, _this.hostname) || other.hostname == _this.hostname)&&(identical(other.ipv4, _this.ipv4) || other.ipv4 == _this.ipv4)&&(identical(other.dhcp, _this.dhcp) || other.dhcp == _this.dhcp)&&const DeepCollectionEquality().equals(other.peers, _this.peers)&&const DeepCollectionEquality().equals(other.listeners, _this.listeners)&&(identical(other.noListener, _this.noListener) || other.noListener == _this.noListener)&&(identical(other.stateDir, _this.stateDir) || other.stateDir == _this.stateDir)&&(identical(other.udp, _this.udp) || other.udp == _this.udp)&&(identical(other.ipv4Range, _this.ipv4Range) || other.ipv4Range == _this.ipv4Range)&&(identical(other.dnsZone, _this.dnsZone) || other.dnsZone == _this.dnsZone));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as EasyTierInject;
+  return Object.hash(runtimeType,_this.name,_this.networkName,_this.networkSecret,_this.hostname,_this.ipv4,_this.dhcp,const DeepCollectionEquality().hash(_this.peers),const DeepCollectionEquality().hash(_this.listeners),_this.noListener,_this.stateDir,_this.udp,_this.ipv4Range,_this.dnsZone);
+}
+
+@override
+String toString() {
+  final _this = this as EasyTierInject;
+  return 'EasyTierInject(name: ${_this.name}, networkName: ${_this.networkName}, networkSecret: ${_this.networkSecret}, hostname: ${_this.hostname}, ipv4: ${_this.ipv4}, dhcp: ${_this.dhcp}, peers: ${_this.peers}, listeners: ${_this.listeners}, noListener: ${_this.noListener}, stateDir: ${_this.stateDir}, udp: ${_this.udp}, ipv4Range: ${_this.ipv4Range}, dnsZone: ${_this.dnsZone})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $EasyTierInjectCopyWith<$Res>  {
+  factory $EasyTierInjectCopyWith(EasyTierInject value, $Res Function(EasyTierInject) _then) = _$EasyTierInjectCopyWithImpl;
+@useResult
+$Res call({
+ String name,@JsonKey(name: 'network-name') String networkName,@JsonKey(name: 'network-secret') String networkSecret, String hostname, String ipv4, bool dhcp, List<String> peers, List<String> listeners,@JsonKey(name: 'no-listener') bool noListener,@JsonKey(name: 'state-dir') String stateDir, bool udp,@JsonKey(name: 'ipv4-range') String ipv4Range,@JsonKey(name: 'dns-zone') String dnsZone
+});
+
+
+
+
+}
+/// @nodoc
+class _$EasyTierInjectCopyWithImpl<$Res>
+    implements $EasyTierInjectCopyWith<$Res> {
+  _$EasyTierInjectCopyWithImpl(this._self, this._then);
+
+  final EasyTierInject _self;
+  final $Res Function(EasyTierInject) _then;
+
+/// Create a copy of EasyTierInject
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? networkName = null,Object? networkSecret = null,Object? hostname = null,Object? ipv4 = null,Object? dhcp = null,Object? peers = null,Object? listeners = null,Object? noListener = null,Object? stateDir = null,Object? udp = null,Object? ipv4Range = null,Object? dnsZone = null,}) {
+  return _then(EasyTierInject(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,networkName: null == networkName ? _self.networkName : networkName // ignore: cast_nullable_to_non_nullable
+as String,networkSecret: null == networkSecret ? _self.networkSecret : networkSecret // ignore: cast_nullable_to_non_nullable
+as String,hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
+as String,ipv4: null == ipv4 ? _self.ipv4 : ipv4 // ignore: cast_nullable_to_non_nullable
+as String,dhcp: null == dhcp ? _self.dhcp : dhcp // ignore: cast_nullable_to_non_nullable
+as bool,peers: null == peers ? _self.peers : peers // ignore: cast_nullable_to_non_nullable
+as List<String>,listeners: null == listeners ? _self.listeners : listeners // ignore: cast_nullable_to_non_nullable
+as List<String>,noListener: null == noListener ? _self.noListener : noListener // ignore: cast_nullable_to_non_nullable
+as bool,stateDir: null == stateDir ? _self.stateDir : stateDir // ignore: cast_nullable_to_non_nullable
+as String,udp: null == udp ? _self.udp : udp // ignore: cast_nullable_to_non_nullable
+as bool,ipv4Range: null == ipv4Range ? _self.ipv4Range : ipv4Range // ignore: cast_nullable_to_non_nullable
+as String,dnsZone: null == dnsZone ? _self.dnsZone : dnsZone // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [EasyTierInject].
+extension EasyTierInjectPatterns on EasyTierInject {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _EasyTierInject value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _EasyTierInject() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _EasyTierInject value)  $default,){
+final _that = this;
+switch (_that) {
+case _EasyTierInject():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _EasyTierInject value)?  $default,){
+final _that = this;
+switch (_that) {
+case _EasyTierInject() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name, @JsonKey(name: 'network-name')  String networkName, @JsonKey(name: 'network-secret')  String networkSecret,  String hostname,  String ipv4,  bool dhcp,  List<String> peers,  List<String> listeners, @JsonKey(name: 'no-listener')  bool noListener, @JsonKey(name: 'state-dir')  String stateDir,  bool udp, @JsonKey(name: 'ipv4-range')  String ipv4Range, @JsonKey(name: 'dns-zone')  String dnsZone)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _EasyTierInject() when $default != null:
+return $default(_that.name,_that.networkName,_that.networkSecret,_that.hostname,_that.ipv4,_that.dhcp,_that.peers,_that.listeners,_that.noListener,_that.stateDir,_that.udp,_that.ipv4Range,_that.dnsZone);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name, @JsonKey(name: 'network-name')  String networkName, @JsonKey(name: 'network-secret')  String networkSecret,  String hostname,  String ipv4,  bool dhcp,  List<String> peers,  List<String> listeners, @JsonKey(name: 'no-listener')  bool noListener, @JsonKey(name: 'state-dir')  String stateDir,  bool udp, @JsonKey(name: 'ipv4-range')  String ipv4Range, @JsonKey(name: 'dns-zone')  String dnsZone)  $default,) {final _that = this;
+switch (_that) {
+case _EasyTierInject():
+return $default(_that.name,_that.networkName,_that.networkSecret,_that.hostname,_that.ipv4,_that.dhcp,_that.peers,_that.listeners,_that.noListener,_that.stateDir,_that.udp,_that.ipv4Range,_that.dnsZone);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name, @JsonKey(name: 'network-name')  String networkName, @JsonKey(name: 'network-secret')  String networkSecret,  String hostname,  String ipv4,  bool dhcp,  List<String> peers,  List<String> listeners, @JsonKey(name: 'no-listener')  bool noListener, @JsonKey(name: 'state-dir')  String stateDir,  bool udp, @JsonKey(name: 'ipv4-range')  String ipv4Range, @JsonKey(name: 'dns-zone')  String dnsZone)?  $default,) {final _that = this;
+switch (_that) {
+case _EasyTierInject() when $default != null:
+return $default(_that.name,_that.networkName,_that.networkSecret,_that.hostname,_that.ipv4,_that.dhcp,_that.peers,_that.listeners,_that.noListener,_that.stateDir,_that.udp,_that.ipv4Range,_that.dnsZone);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _EasyTierInject implements EasyTierInject {
+  const _EasyTierInject({required this.name, @JsonKey(name: 'network-name') required this.networkName, @JsonKey(name: 'network-secret') required this.networkSecret, this.hostname = '', this.ipv4 = '', this.dhcp = false,  List<String> peers = const [],  List<String> listeners = const [], @JsonKey(name: 'no-listener') this.noListener = false, @JsonKey(name: 'state-dir') this.stateDir = '', this.udp = true, @JsonKey(name: 'ipv4-range') this.ipv4Range = '10.126.126.0/24', @JsonKey(name: 'dns-zone') this.dnsZone = ''}): _peers = peers,_listeners = listeners;
+  factory _EasyTierInject.fromJson(Map<String, dynamic> json) => _$EasyTierInjectFromJson(json);
+
+@override final  String name;
+@override@JsonKey(name: 'network-name') final  String networkName;
+@override@JsonKey(name: 'network-secret') final  String networkSecret;
+@override@JsonKey() final  String hostname;
+@override@JsonKey() final  String ipv4;
+@override@JsonKey() final  bool dhcp;
+ final  List<String> _peers;
+@override@JsonKey() List<String> get peers {
+  if (_peers is EqualUnmodifiableListView) return _peers;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_peers);
+}
+
+ final  List<String> _listeners;
+@override@JsonKey() List<String> get listeners {
+  if (_listeners is EqualUnmodifiableListView) return _listeners;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_listeners);
+}
+
+@override@JsonKey(name: 'no-listener') final  bool noListener;
+@override@JsonKey(name: 'state-dir') final  String stateDir;
+@override@JsonKey() final  bool udp;
+/// The range the overlay hands out, so its addresses route through it.
+@override@JsonKey(name: 'ipv4-range') final  String ipv4Range;
+@override@JsonKey(name: 'dns-zone') final  String dnsZone;
+
+/// Create a copy of EasyTierInject
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$EasyTierInjectCopyWith<_EasyTierInject> get copyWith => __$EasyTierInjectCopyWithImpl<_EasyTierInject>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$EasyTierInjectToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _EasyTierInject&&(identical(other.name, name) || other.name == name)&&(identical(other.networkName, networkName) || other.networkName == networkName)&&(identical(other.networkSecret, networkSecret) || other.networkSecret == networkSecret)&&(identical(other.hostname, hostname) || other.hostname == hostname)&&(identical(other.ipv4, ipv4) || other.ipv4 == ipv4)&&(identical(other.dhcp, dhcp) || other.dhcp == dhcp)&&const DeepCollectionEquality().equals(other.peers, _peers)&&const DeepCollectionEquality().equals(other.listeners, _listeners)&&(identical(other.noListener, noListener) || other.noListener == noListener)&&(identical(other.stateDir, stateDir) || other.stateDir == stateDir)&&(identical(other.udp, udp) || other.udp == udp)&&(identical(other.ipv4Range, ipv4Range) || other.ipv4Range == ipv4Range)&&(identical(other.dnsZone, dnsZone) || other.dnsZone == dnsZone));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,name,networkName,networkSecret,hostname,ipv4,dhcp,const DeepCollectionEquality().hash(_peers),const DeepCollectionEquality().hash(_listeners),noListener,stateDir,udp,ipv4Range,dnsZone);
+}
+
+@override
+String toString() {
+    return 'EasyTierInject(name: $name, networkName: $networkName, networkSecret: $networkSecret, hostname: $hostname, ipv4: $ipv4, dhcp: $dhcp, peers: $peers, listeners: $listeners, noListener: $noListener, stateDir: $stateDir, udp: $udp, ipv4Range: $ipv4Range, dnsZone: $dnsZone)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$EasyTierInjectCopyWith<$Res> implements $EasyTierInjectCopyWith<$Res> {
+  factory _$EasyTierInjectCopyWith(_EasyTierInject value, $Res Function(_EasyTierInject) _then) = __$EasyTierInjectCopyWithImpl;
+@override @useResult
+$Res call({
+ String name,@JsonKey(name: 'network-name') String networkName,@JsonKey(name: 'network-secret') String networkSecret, String hostname, String ipv4, bool dhcp, List<String> peers, List<String> listeners,@JsonKey(name: 'no-listener') bool noListener,@JsonKey(name: 'state-dir') String stateDir, bool udp,@JsonKey(name: 'ipv4-range') String ipv4Range,@JsonKey(name: 'dns-zone') String dnsZone
+});
+
+
+
+
+}
+/// @nodoc
+class __$EasyTierInjectCopyWithImpl<$Res>
+    implements _$EasyTierInjectCopyWith<$Res> {
+  __$EasyTierInjectCopyWithImpl(this._self, this._then);
+
+  final _EasyTierInject _self;
+  final $Res Function(_EasyTierInject) _then;
+
+/// Create a copy of EasyTierInject
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? networkName = null,Object? networkSecret = null,Object? hostname = null,Object? ipv4 = null,Object? dhcp = null,Object? peers = null,Object? listeners = null,Object? noListener = null,Object? stateDir = null,Object? udp = null,Object? ipv4Range = null,Object? dnsZone = null,}) {
+  return _then(_EasyTierInject(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,networkName: null == networkName ? _self.networkName : networkName // ignore: cast_nullable_to_non_nullable
+as String,networkSecret: null == networkSecret ? _self.networkSecret : networkSecret // ignore: cast_nullable_to_non_nullable
+as String,hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
+as String,ipv4: null == ipv4 ? _self.ipv4 : ipv4 // ignore: cast_nullable_to_non_nullable
+as String,dhcp: null == dhcp ? _self.dhcp : dhcp // ignore: cast_nullable_to_non_nullable
+as bool,peers: null == peers ? _self._peers : peers // ignore: cast_nullable_to_non_nullable
+as List<String>,listeners: null == listeners ? _self._listeners : listeners // ignore: cast_nullable_to_non_nullable
+as List<String>,noListener: null == noListener ? _self.noListener : noListener // ignore: cast_nullable_to_non_nullable
+as bool,stateDir: null == stateDir ? _self.stateDir : stateDir // ignore: cast_nullable_to_non_nullable
+as String,udp: null == udp ? _self.udp : udp // ignore: cast_nullable_to_non_nullable
+as bool,ipv4Range: null == ipv4Range ? _self.ipv4Range : ipv4Range // ignore: cast_nullable_to_non_nullable
+as String,dnsZone: null == dnsZone ? _self.dnsZone : dnsZone // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$EasyTierStatus {
+
+ String get name; String get state;@JsonKey(name: 'instance-id') String get instanceId; String get hostname;@JsonKey(name: 'network-name') String get networkName; String get ipv4; bool get connected; List<EasyTierPeer> get peers; String get error;
+/// Create a copy of EasyTierStatus
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$EasyTierStatusCopyWith<EasyTierStatus> get copyWith => _$EasyTierStatusCopyWithImpl<EasyTierStatus>(this as EasyTierStatus, _$identity);
+
+  /// Serializes this EasyTierStatus to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as EasyTierStatus;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EasyTierStatus&&(identical(other.name, _this.name) || other.name == _this.name)&&(identical(other.state, _this.state) || other.state == _this.state)&&(identical(other.instanceId, _this.instanceId) || other.instanceId == _this.instanceId)&&(identical(other.hostname, _this.hostname) || other.hostname == _this.hostname)&&(identical(other.networkName, _this.networkName) || other.networkName == _this.networkName)&&(identical(other.ipv4, _this.ipv4) || other.ipv4 == _this.ipv4)&&(identical(other.connected, _this.connected) || other.connected == _this.connected)&&const DeepCollectionEquality().equals(other.peers, _this.peers)&&(identical(other.error, _this.error) || other.error == _this.error));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as EasyTierStatus;
+  return Object.hash(runtimeType,_this.name,_this.state,_this.instanceId,_this.hostname,_this.networkName,_this.ipv4,_this.connected,const DeepCollectionEquality().hash(_this.peers),_this.error);
+}
+
+@override
+String toString() {
+  final _this = this as EasyTierStatus;
+  return 'EasyTierStatus(name: ${_this.name}, state: ${_this.state}, instanceId: ${_this.instanceId}, hostname: ${_this.hostname}, networkName: ${_this.networkName}, ipv4: ${_this.ipv4}, connected: ${_this.connected}, peers: ${_this.peers}, error: ${_this.error})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $EasyTierStatusCopyWith<$Res>  {
+  factory $EasyTierStatusCopyWith(EasyTierStatus value, $Res Function(EasyTierStatus) _then) = _$EasyTierStatusCopyWithImpl;
+@useResult
+$Res call({
+ String name, String state,@JsonKey(name: 'instance-id') String instanceId, String hostname,@JsonKey(name: 'network-name') String networkName, String ipv4, bool connected, List<EasyTierPeer> peers, String error
+});
+
+
+
+
+}
+/// @nodoc
+class _$EasyTierStatusCopyWithImpl<$Res>
+    implements $EasyTierStatusCopyWith<$Res> {
+  _$EasyTierStatusCopyWithImpl(this._self, this._then);
+
+  final EasyTierStatus _self;
+  final $Res Function(EasyTierStatus) _then;
+
+/// Create a copy of EasyTierStatus
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? state = null,Object? instanceId = null,Object? hostname = null,Object? networkName = null,Object? ipv4 = null,Object? connected = null,Object? peers = null,Object? error = null,}) {
+  return _then(EasyTierStatus(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,state: null == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
+as String,instanceId: null == instanceId ? _self.instanceId : instanceId // ignore: cast_nullable_to_non_nullable
+as String,hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
+as String,networkName: null == networkName ? _self.networkName : networkName // ignore: cast_nullable_to_non_nullable
+as String,ipv4: null == ipv4 ? _self.ipv4 : ipv4 // ignore: cast_nullable_to_non_nullable
+as String,connected: null == connected ? _self.connected : connected // ignore: cast_nullable_to_non_nullable
+as bool,peers: null == peers ? _self.peers : peers // ignore: cast_nullable_to_non_nullable
+as List<EasyTierPeer>,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [EasyTierStatus].
+extension EasyTierStatusPatterns on EasyTierStatus {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _EasyTierStatus value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _EasyTierStatus() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _EasyTierStatus value)  $default,){
+final _that = this;
+switch (_that) {
+case _EasyTierStatus():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _EasyTierStatus value)?  $default,){
+final _that = this;
+switch (_that) {
+case _EasyTierStatus() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String name,  String state, @JsonKey(name: 'instance-id')  String instanceId,  String hostname, @JsonKey(name: 'network-name')  String networkName,  String ipv4,  bool connected,  List<EasyTierPeer> peers,  String error)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _EasyTierStatus() when $default != null:
+return $default(_that.name,_that.state,_that.instanceId,_that.hostname,_that.networkName,_that.ipv4,_that.connected,_that.peers,_that.error);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String name,  String state, @JsonKey(name: 'instance-id')  String instanceId,  String hostname, @JsonKey(name: 'network-name')  String networkName,  String ipv4,  bool connected,  List<EasyTierPeer> peers,  String error)  $default,) {final _that = this;
+switch (_that) {
+case _EasyTierStatus():
+return $default(_that.name,_that.state,_that.instanceId,_that.hostname,_that.networkName,_that.ipv4,_that.connected,_that.peers,_that.error);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String name,  String state, @JsonKey(name: 'instance-id')  String instanceId,  String hostname, @JsonKey(name: 'network-name')  String networkName,  String ipv4,  bool connected,  List<EasyTierPeer> peers,  String error)?  $default,) {final _that = this;
+switch (_that) {
+case _EasyTierStatus() when $default != null:
+return $default(_that.name,_that.state,_that.instanceId,_that.hostname,_that.networkName,_that.ipv4,_that.connected,_that.peers,_that.error);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _EasyTierStatus implements EasyTierStatus {
+  const _EasyTierStatus({required this.name, this.state = '', @JsonKey(name: 'instance-id') this.instanceId = '', this.hostname = '', @JsonKey(name: 'network-name') this.networkName = '', this.ipv4 = '', this.connected = false,  List<EasyTierPeer> peers = const [], this.error = ''}): _peers = peers;
+  factory _EasyTierStatus.fromJson(Map<String, dynamic> json) => _$EasyTierStatusFromJson(json);
+
+@override final  String name;
+@override@JsonKey() final  String state;
+@override@JsonKey(name: 'instance-id') final  String instanceId;
+@override@JsonKey() final  String hostname;
+@override@JsonKey(name: 'network-name') final  String networkName;
+@override@JsonKey() final  String ipv4;
+@override@JsonKey() final  bool connected;
+ final  List<EasyTierPeer> _peers;
+@override@JsonKey() List<EasyTierPeer> get peers {
+  if (_peers is EqualUnmodifiableListView) return _peers;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_peers);
+}
+
+@override@JsonKey() final  String error;
+
+/// Create a copy of EasyTierStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$EasyTierStatusCopyWith<_EasyTierStatus> get copyWith => __$EasyTierStatusCopyWithImpl<_EasyTierStatus>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$EasyTierStatusToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _EasyTierStatus&&(identical(other.name, name) || other.name == name)&&(identical(other.state, state) || other.state == state)&&(identical(other.instanceId, instanceId) || other.instanceId == instanceId)&&(identical(other.hostname, hostname) || other.hostname == hostname)&&(identical(other.networkName, networkName) || other.networkName == networkName)&&(identical(other.ipv4, ipv4) || other.ipv4 == ipv4)&&(identical(other.connected, connected) || other.connected == connected)&&const DeepCollectionEquality().equals(other.peers, _peers)&&(identical(other.error, error) || other.error == error));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,name,state,instanceId,hostname,networkName,ipv4,connected,const DeepCollectionEquality().hash(_peers),error);
+}
+
+@override
+String toString() {
+    return 'EasyTierStatus(name: $name, state: $state, instanceId: $instanceId, hostname: $hostname, networkName: $networkName, ipv4: $ipv4, connected: $connected, peers: $peers, error: $error)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$EasyTierStatusCopyWith<$Res> implements $EasyTierStatusCopyWith<$Res> {
+  factory _$EasyTierStatusCopyWith(_EasyTierStatus value, $Res Function(_EasyTierStatus) _then) = __$EasyTierStatusCopyWithImpl;
+@override @useResult
+$Res call({
+ String name, String state,@JsonKey(name: 'instance-id') String instanceId, String hostname,@JsonKey(name: 'network-name') String networkName, String ipv4, bool connected, List<EasyTierPeer> peers, String error
+});
+
+
+
+
+}
+/// @nodoc
+class __$EasyTierStatusCopyWithImpl<$Res>
+    implements _$EasyTierStatusCopyWith<$Res> {
+  __$EasyTierStatusCopyWithImpl(this._self, this._then);
+
+  final _EasyTierStatus _self;
+  final $Res Function(_EasyTierStatus) _then;
+
+/// Create a copy of EasyTierStatus
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? state = null,Object? instanceId = null,Object? hostname = null,Object? networkName = null,Object? ipv4 = null,Object? connected = null,Object? peers = null,Object? error = null,}) {
+  return _then(_EasyTierStatus(
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,state: null == state ? _self.state : state // ignore: cast_nullable_to_non_nullable
+as String,instanceId: null == instanceId ? _self.instanceId : instanceId // ignore: cast_nullable_to_non_nullable
+as String,hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
+as String,networkName: null == networkName ? _self.networkName : networkName // ignore: cast_nullable_to_non_nullable
+as String,ipv4: null == ipv4 ? _self.ipv4 : ipv4 // ignore: cast_nullable_to_non_nullable
+as String,connected: null == connected ? _self.connected : connected // ignore: cast_nullable_to_non_nullable
+as bool,peers: null == peers ? _self._peers : peers // ignore: cast_nullable_to_non_nullable
+as List<EasyTierPeer>,error: null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
+mixin _$EasyTierPeer {
+
+ String get hostname; String get ipv4;/// 1 for a direct peer, more when relayed through another.
+@JsonKey(name: 'path-len') int get pathLen;@JsonKey(name: 'latency-ms') int get latencyMs; String get tunnel;
+/// Create a copy of EasyTierPeer
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$EasyTierPeerCopyWith<EasyTierPeer> get copyWith => _$EasyTierPeerCopyWithImpl<EasyTierPeer>(this as EasyTierPeer, _$identity);
+
+  /// Serializes this EasyTierPeer to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as EasyTierPeer;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EasyTierPeer&&(identical(other.hostname, _this.hostname) || other.hostname == _this.hostname)&&(identical(other.ipv4, _this.ipv4) || other.ipv4 == _this.ipv4)&&(identical(other.pathLen, _this.pathLen) || other.pathLen == _this.pathLen)&&(identical(other.latencyMs, _this.latencyMs) || other.latencyMs == _this.latencyMs)&&(identical(other.tunnel, _this.tunnel) || other.tunnel == _this.tunnel));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as EasyTierPeer;
+  return Object.hash(runtimeType,_this.hostname,_this.ipv4,_this.pathLen,_this.latencyMs,_this.tunnel);
+}
+
+@override
+String toString() {
+  final _this = this as EasyTierPeer;
+  return 'EasyTierPeer(hostname: ${_this.hostname}, ipv4: ${_this.ipv4}, pathLen: ${_this.pathLen}, latencyMs: ${_this.latencyMs}, tunnel: ${_this.tunnel})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $EasyTierPeerCopyWith<$Res>  {
+  factory $EasyTierPeerCopyWith(EasyTierPeer value, $Res Function(EasyTierPeer) _then) = _$EasyTierPeerCopyWithImpl;
+@useResult
+$Res call({
+ String hostname, String ipv4,@JsonKey(name: 'path-len') int pathLen,@JsonKey(name: 'latency-ms') int latencyMs, String tunnel
+});
+
+
+
+
+}
+/// @nodoc
+class _$EasyTierPeerCopyWithImpl<$Res>
+    implements $EasyTierPeerCopyWith<$Res> {
+  _$EasyTierPeerCopyWithImpl(this._self, this._then);
+
+  final EasyTierPeer _self;
+  final $Res Function(EasyTierPeer) _then;
+
+/// Create a copy of EasyTierPeer
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? hostname = null,Object? ipv4 = null,Object? pathLen = null,Object? latencyMs = null,Object? tunnel = null,}) {
+  return _then(EasyTierPeer(
+hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
+as String,ipv4: null == ipv4 ? _self.ipv4 : ipv4 // ignore: cast_nullable_to_non_nullable
+as String,pathLen: null == pathLen ? _self.pathLen : pathLen // ignore: cast_nullable_to_non_nullable
+as int,latencyMs: null == latencyMs ? _self.latencyMs : latencyMs // ignore: cast_nullable_to_non_nullable
+as int,tunnel: null == tunnel ? _self.tunnel : tunnel // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [EasyTierPeer].
+extension EasyTierPeerPatterns on EasyTierPeer {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _EasyTierPeer value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _EasyTierPeer() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _EasyTierPeer value)  $default,){
+final _that = this;
+switch (_that) {
+case _EasyTierPeer():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _EasyTierPeer value)?  $default,){
+final _that = this;
+switch (_that) {
+case _EasyTierPeer() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String hostname,  String ipv4, @JsonKey(name: 'path-len')  int pathLen, @JsonKey(name: 'latency-ms')  int latencyMs,  String tunnel)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _EasyTierPeer() when $default != null:
+return $default(_that.hostname,_that.ipv4,_that.pathLen,_that.latencyMs,_that.tunnel);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String hostname,  String ipv4, @JsonKey(name: 'path-len')  int pathLen, @JsonKey(name: 'latency-ms')  int latencyMs,  String tunnel)  $default,) {final _that = this;
+switch (_that) {
+case _EasyTierPeer():
+return $default(_that.hostname,_that.ipv4,_that.pathLen,_that.latencyMs,_that.tunnel);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String hostname,  String ipv4, @JsonKey(name: 'path-len')  int pathLen, @JsonKey(name: 'latency-ms')  int latencyMs,  String tunnel)?  $default,) {final _that = this;
+switch (_that) {
+case _EasyTierPeer() when $default != null:
+return $default(_that.hostname,_that.ipv4,_that.pathLen,_that.latencyMs,_that.tunnel);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _EasyTierPeer implements EasyTierPeer {
+  const _EasyTierPeer({this.hostname = '', this.ipv4 = '', @JsonKey(name: 'path-len') this.pathLen = 0, @JsonKey(name: 'latency-ms') this.latencyMs = 0, this.tunnel = ''});
+  factory _EasyTierPeer.fromJson(Map<String, dynamic> json) => _$EasyTierPeerFromJson(json);
+
+@override@JsonKey() final  String hostname;
+@override@JsonKey() final  String ipv4;
+/// 1 for a direct peer, more when relayed through another.
+@override@JsonKey(name: 'path-len') final  int pathLen;
+@override@JsonKey(name: 'latency-ms') final  int latencyMs;
+@override@JsonKey() final  String tunnel;
+
+/// Create a copy of EasyTierPeer
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$EasyTierPeerCopyWith<_EasyTierPeer> get copyWith => __$EasyTierPeerCopyWithImpl<_EasyTierPeer>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$EasyTierPeerToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _EasyTierPeer&&(identical(other.hostname, hostname) || other.hostname == hostname)&&(identical(other.ipv4, ipv4) || other.ipv4 == ipv4)&&(identical(other.pathLen, pathLen) || other.pathLen == pathLen)&&(identical(other.latencyMs, latencyMs) || other.latencyMs == latencyMs)&&(identical(other.tunnel, tunnel) || other.tunnel == tunnel));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,hostname,ipv4,pathLen,latencyMs,tunnel);
+}
+
+@override
+String toString() {
+    return 'EasyTierPeer(hostname: $hostname, ipv4: $ipv4, pathLen: $pathLen, latencyMs: $latencyMs, tunnel: $tunnel)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$EasyTierPeerCopyWith<$Res> implements $EasyTierPeerCopyWith<$Res> {
+  factory _$EasyTierPeerCopyWith(_EasyTierPeer value, $Res Function(_EasyTierPeer) _then) = __$EasyTierPeerCopyWithImpl;
+@override @useResult
+$Res call({
+ String hostname, String ipv4,@JsonKey(name: 'path-len') int pathLen,@JsonKey(name: 'latency-ms') int latencyMs, String tunnel
+});
+
+
+
+
+}
+/// @nodoc
+class __$EasyTierPeerCopyWithImpl<$Res>
+    implements _$EasyTierPeerCopyWith<$Res> {
+  __$EasyTierPeerCopyWithImpl(this._self, this._then);
+
+  final _EasyTierPeer _self;
+  final $Res Function(_EasyTierPeer) _then;
+
+/// Create a copy of EasyTierPeer
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? hostname = null,Object? ipv4 = null,Object? pathLen = null,Object? latencyMs = null,Object? tunnel = null,}) {
+  return _then(_EasyTierPeer(
+hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
+as String,ipv4: null == ipv4 ? _self.ipv4 : ipv4 // ignore: cast_nullable_to_non_nullable
+as String,pathLen: null == pathLen ? _self.pathLen : pathLen // ignore: cast_nullable_to_non_nullable
+as int,latencyMs: null == latencyMs ? _self.latencyMs : latencyMs // ignore: cast_nullable_to_non_nullable
+as int,tunnel: null == tunnel ? _self.tunnel : tunnel // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }

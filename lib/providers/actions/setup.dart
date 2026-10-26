@@ -66,17 +66,26 @@ class SetupAction extends _$SetupAction {
   SetupParams get _setupParams {
     final selectedMap = ref.read(selectedMapProvider);
     final appSetting = ref.read(appSettingProvider);
-    final tailscale = ref.read(tailscaleSettingProvider);
+    // One overlay at a time: the two are ways into one mesh, and a node of
+    // each would claim the ranges the other routes.
+    final meshKind = ref.read(meshKindSettingProvider);
     return SetupParams(
       selectedMap: selectedMap,
       testUrl: ref.read(patchClashConfigProvider).testUrl,
       skipCertVerify: !appSetting.checkCertificate,
-      tailscale: tailscaleInjectOf(
-        tailscale,
-        status: ref.read(
-          tailscalesProvider.select((state) => state[kTailscaleProxyName]),
-        ),
-      ),
+      tailscale: meshKind == MeshKind.tailscale
+          ? tailscaleInjectOf(
+              ref.read(tailscaleSettingProvider),
+              status: ref.read(
+                tailscalesProvider.select(
+                  (state) => state[kTailscaleProxyName],
+                ),
+              ),
+            )
+          : null,
+      easyTier: meshKind == MeshKind.easyTier
+          ? easyTierInjectOf(ref.read(easyTierSettingProvider))
+          : null,
     );
   }
 

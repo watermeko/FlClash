@@ -16,6 +16,9 @@ _SetupParams _$SetupParamsFromJson(Map<String, dynamic> json) => _SetupParams(
   tailscale: json['tailscale'] == null
       ? null
       : TailscaleInject.fromJson(json['tailscale'] as Map<String, dynamic>),
+  easyTier: json['easyTier'] == null
+      ? null
+      : EasyTierInject.fromJson(json['easyTier'] as Map<String, dynamic>),
 );
 
 Map<String, dynamic> _$SetupParamsToJson(_SetupParams instance) =>
@@ -25,6 +28,7 @@ Map<String, dynamic> _$SetupParamsToJson(_SetupParams instance) =>
       'skip-cert-verify': instance.skipCertVerify,
       'base': ?instance.base,
       'tailscale': ?instance.tailscale,
+      'easyTier': ?instance.easyTier,
     };
 
 _SetupBase _$SetupBaseFromJson(Map<String, dynamic> json) => _SetupBase(
@@ -292,6 +296,94 @@ Map<String, dynamic> _$TailscaleInjectToJson(_TailscaleInject instance) =>
       'exit-node': instance.exitNode,
       'exit-node-allow-lan-access': instance.exitNodeAllowLanAccess,
       'magic-dns-suffix': instance.magicDnsSuffix,
+    };
+
+_EasyTierInject _$EasyTierInjectFromJson(Map<String, dynamic> json) =>
+    _EasyTierInject(
+      name: json['name'] as String,
+      networkName: json['network-name'] as String,
+      networkSecret: json['network-secret'] as String,
+      hostname: json['hostname'] as String? ?? '',
+      ipv4: json['ipv4'] as String? ?? '',
+      dhcp: json['dhcp'] as bool? ?? false,
+      peers:
+          (json['peers'] as List<dynamic>?)?.map((e) => e as String).toList() ??
+          const [],
+      listeners:
+          (json['listeners'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          const [],
+      noListener: json['no-listener'] as bool? ?? false,
+      stateDir: json['state-dir'] as String? ?? '',
+      udp: json['udp'] as bool? ?? true,
+      ipv4Range: json['ipv4-range'] as String? ?? '10.126.126.0/24',
+      dnsZone: json['dns-zone'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$EasyTierInjectToJson(_EasyTierInject instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'network-name': instance.networkName,
+      'network-secret': instance.networkSecret,
+      'hostname': instance.hostname,
+      'ipv4': instance.ipv4,
+      'dhcp': instance.dhcp,
+      'peers': instance.peers,
+      'listeners': instance.listeners,
+      'no-listener': instance.noListener,
+      'state-dir': instance.stateDir,
+      'udp': instance.udp,
+      'ipv4-range': instance.ipv4Range,
+      'dns-zone': instance.dnsZone,
+    };
+
+_EasyTierStatus _$EasyTierStatusFromJson(Map<String, dynamic> json) =>
+    _EasyTierStatus(
+      name: json['name'] as String,
+      state: json['state'] as String? ?? '',
+      instanceId: json['instance-id'] as String? ?? '',
+      hostname: json['hostname'] as String? ?? '',
+      networkName: json['network-name'] as String? ?? '',
+      ipv4: json['ipv4'] as String? ?? '',
+      connected: json['connected'] as bool? ?? false,
+      peers:
+          (json['peers'] as List<dynamic>?)
+              ?.map((e) => EasyTierPeer.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+      error: json['error'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$EasyTierStatusToJson(_EasyTierStatus instance) =>
+    <String, dynamic>{
+      'name': instance.name,
+      'state': instance.state,
+      'instance-id': instance.instanceId,
+      'hostname': instance.hostname,
+      'network-name': instance.networkName,
+      'ipv4': instance.ipv4,
+      'connected': instance.connected,
+      'peers': instance.peers,
+      'error': instance.error,
+    };
+
+_EasyTierPeer _$EasyTierPeerFromJson(Map<String, dynamic> json) =>
+    _EasyTierPeer(
+      hostname: json['hostname'] as String? ?? '',
+      ipv4: json['ipv4'] as String? ?? '',
+      pathLen: (json['path-len'] as num?)?.toInt() ?? 0,
+      latencyMs: (json['latency-ms'] as num?)?.toInt() ?? 0,
+      tunnel: json['tunnel'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$EasyTierPeerToJson(_EasyTierPeer instance) =>
+    <String, dynamic>{
+      'hostname': instance.hostname,
+      'ipv4': instance.ipv4,
+      'path-len': instance.pathLen,
+      'latency-ms': instance.latencyMs,
+      'tunnel': instance.tunnel,
     };
 
 _CoreEvent _$CoreEventFromJson(Map<String, dynamic> json) => _CoreEvent(

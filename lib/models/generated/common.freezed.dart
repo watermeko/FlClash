@@ -15,7 +15,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NavigationItem {
 
- Glyph get glyph; PageLabel get label; WidgetBuilder get builder; String? get path; List<NavigationItemMode> get modes;
+ Glyph get glyph; PageLabel get label; WidgetBuilder get builder; String? get path;/// What the item calls itself when [label] is not the name to show. One
+/// page holds more than one thing, and the label is a routing key that
+/// cannot change while the name on screen has to.
+ String? get title; List<NavigationItemMode> get modes;
 /// Create a copy of NavigationItem
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,20 +30,20 @@ $NavigationItemCopyWith<NavigationItem> get copyWith => _$NavigationItemCopyWith
 @override
 bool operator ==(Object other) {
   final _this = this as NavigationItem;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is NavigationItem&&(identical(other.glyph, _this.glyph) || other.glyph == _this.glyph)&&(identical(other.label, _this.label) || other.label == _this.label)&&(identical(other.builder, _this.builder) || other.builder == _this.builder)&&(identical(other.path, _this.path) || other.path == _this.path)&&const DeepCollectionEquality().equals(other.modes, _this.modes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is NavigationItem&&(identical(other.glyph, _this.glyph) || other.glyph == _this.glyph)&&(identical(other.label, _this.label) || other.label == _this.label)&&(identical(other.builder, _this.builder) || other.builder == _this.builder)&&(identical(other.path, _this.path) || other.path == _this.path)&&(identical(other.title, _this.title) || other.title == _this.title)&&const DeepCollectionEquality().equals(other.modes, _this.modes));
 }
 
 
 @override
 int get hashCode {
   final _this = this as NavigationItem;
-  return Object.hash(runtimeType,_this.glyph,_this.label,_this.builder,_this.path,const DeepCollectionEquality().hash(_this.modes));
+  return Object.hash(runtimeType,_this.glyph,_this.label,_this.builder,_this.path,_this.title,const DeepCollectionEquality().hash(_this.modes));
 }
 
 @override
 String toString() {
   final _this = this as NavigationItem;
-  return 'NavigationItem(glyph: ${_this.glyph}, label: ${_this.label}, builder: ${_this.builder}, path: ${_this.path}, modes: ${_this.modes})';
+  return 'NavigationItem(glyph: ${_this.glyph}, label: ${_this.label}, builder: ${_this.builder}, path: ${_this.path}, title: ${_this.title}, modes: ${_this.modes})';
 }
 
 
@@ -51,7 +54,7 @@ abstract mixin class $NavigationItemCopyWith<$Res>  {
   factory $NavigationItemCopyWith(NavigationItem value, $Res Function(NavigationItem) _then) = _$NavigationItemCopyWithImpl;
 @useResult
 $Res call({
- Glyph glyph, PageLabel label, WidgetBuilder builder, String? path, List<NavigationItemMode> modes
+ Glyph glyph, PageLabel label, WidgetBuilder builder, String? path, String? title, List<NavigationItemMode> modes
 });
 
 
@@ -68,12 +71,13 @@ class _$NavigationItemCopyWithImpl<$Res>
 
 /// Create a copy of NavigationItem
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? glyph = null,Object? label = null,Object? builder = null,Object? path = freezed,Object? modes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? glyph = null,Object? label = null,Object? builder = null,Object? path = freezed,Object? title = freezed,Object? modes = null,}) {
   return _then(NavigationItem(
 glyph: null == glyph ? _self.glyph : glyph // ignore: cast_nullable_to_non_nullable
 as Glyph,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
 as PageLabel,builder: null == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
 as WidgetBuilder,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
+as String?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,modes: null == modes ? _self.modes : modes // ignore: cast_nullable_to_non_nullable
 as List<NavigationItemMode>,
   ));
@@ -160,10 +164,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Glyph glyph,  PageLabel label,  WidgetBuilder builder,  String? path,  List<NavigationItemMode> modes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Glyph glyph,  PageLabel label,  WidgetBuilder builder,  String? path,  String? title,  List<NavigationItemMode> modes)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NavigationItem() when $default != null:
-return $default(_that.glyph,_that.label,_that.builder,_that.path,_that.modes);case _:
+return $default(_that.glyph,_that.label,_that.builder,_that.path,_that.title,_that.modes);case _:
   return orElse();
 
 }
@@ -181,10 +185,10 @@ return $default(_that.glyph,_that.label,_that.builder,_that.path,_that.modes);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Glyph glyph,  PageLabel label,  WidgetBuilder builder,  String? path,  List<NavigationItemMode> modes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Glyph glyph,  PageLabel label,  WidgetBuilder builder,  String? path,  String? title,  List<NavigationItemMode> modes)  $default,) {final _that = this;
 switch (_that) {
 case _NavigationItem():
-return $default(_that.glyph,_that.label,_that.builder,_that.path,_that.modes);case _:
+return $default(_that.glyph,_that.label,_that.builder,_that.path,_that.title,_that.modes);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -201,10 +205,10 @@ return $default(_that.glyph,_that.label,_that.builder,_that.path,_that.modes);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Glyph glyph,  PageLabel label,  WidgetBuilder builder,  String? path,  List<NavigationItemMode> modes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Glyph glyph,  PageLabel label,  WidgetBuilder builder,  String? path,  String? title,  List<NavigationItemMode> modes)?  $default,) {final _that = this;
 switch (_that) {
 case _NavigationItem() when $default != null:
-return $default(_that.glyph,_that.label,_that.builder,_that.path,_that.modes);case _:
+return $default(_that.glyph,_that.label,_that.builder,_that.path,_that.title,_that.modes);case _:
   return null;
 
 }
@@ -216,13 +220,17 @@ return $default(_that.glyph,_that.label,_that.builder,_that.path,_that.modes);ca
 
 
 class _NavigationItem implements NavigationItem {
-  const _NavigationItem({required this.glyph, required this.label, required this.builder, this.path,  List<NavigationItemMode> modes = const [NavigationItemMode.mobile, NavigationItemMode.desktop]}): _modes = modes;
+  const _NavigationItem({required this.glyph, required this.label, required this.builder, this.path, this.title,  List<NavigationItemMode> modes = const [NavigationItemMode.mobile, NavigationItemMode.desktop]}): _modes = modes;
   
 
 @override final  Glyph glyph;
 @override final  PageLabel label;
 @override final  WidgetBuilder builder;
 @override final  String? path;
+/// What the item calls itself when [label] is not the name to show. One
+/// page holds more than one thing, and the label is a routing key that
+/// cannot change while the name on screen has to.
+@override final  String? title;
  final  List<NavigationItemMode> _modes;
 @override@JsonKey() List<NavigationItemMode> get modes {
   if (_modes is EqualUnmodifiableListView) return _modes;
@@ -241,18 +249,18 @@ _$NavigationItemCopyWith<_NavigationItem> get copyWith => __$NavigationItemCopyW
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _NavigationItem&&(identical(other.glyph, glyph) || other.glyph == glyph)&&(identical(other.label, label) || other.label == label)&&(identical(other.builder, builder) || other.builder == builder)&&(identical(other.path, path) || other.path == path)&&const DeepCollectionEquality().equals(other.modes, _modes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _NavigationItem&&(identical(other.glyph, glyph) || other.glyph == glyph)&&(identical(other.label, label) || other.label == label)&&(identical(other.builder, builder) || other.builder == builder)&&(identical(other.path, path) || other.path == path)&&(identical(other.title, title) || other.title == title)&&const DeepCollectionEquality().equals(other.modes, _modes));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,glyph,label,builder,path,const DeepCollectionEquality().hash(_modes));
+    return Object.hash(runtimeType,glyph,label,builder,path,title,const DeepCollectionEquality().hash(_modes));
 }
 
 @override
 String toString() {
-    return 'NavigationItem(glyph: $glyph, label: $label, builder: $builder, path: $path, modes: $modes)';
+    return 'NavigationItem(glyph: $glyph, label: $label, builder: $builder, path: $path, title: $title, modes: $modes)';
 }
 
 
@@ -263,7 +271,7 @@ abstract mixin class _$NavigationItemCopyWith<$Res> implements $NavigationItemCo
   factory _$NavigationItemCopyWith(_NavigationItem value, $Res Function(_NavigationItem) _then) = __$NavigationItemCopyWithImpl;
 @override @useResult
 $Res call({
- Glyph glyph, PageLabel label, WidgetBuilder builder, String? path, List<NavigationItemMode> modes
+ Glyph glyph, PageLabel label, WidgetBuilder builder, String? path, String? title, List<NavigationItemMode> modes
 });
 
 
@@ -280,12 +288,13 @@ class __$NavigationItemCopyWithImpl<$Res>
 
 /// Create a copy of NavigationItem
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? glyph = null,Object? label = null,Object? builder = null,Object? path = freezed,Object? modes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? glyph = null,Object? label = null,Object? builder = null,Object? path = freezed,Object? title = freezed,Object? modes = null,}) {
   return _then(_NavigationItem(
 glyph: null == glyph ? _self.glyph : glyph // ignore: cast_nullable_to_non_nullable
 as Glyph,label: null == label ? _self.label : label // ignore: cast_nullable_to_non_nullable
 as PageLabel,builder: null == builder ? _self.builder : builder // ignore: cast_nullable_to_non_nullable
 as WidgetBuilder,path: freezed == path ? _self.path : path // ignore: cast_nullable_to_non_nullable
+as String?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,modes: null == modes ? _self._modes : modes // ignore: cast_nullable_to_non_nullable
 as List<NavigationItemMode>,
   ));

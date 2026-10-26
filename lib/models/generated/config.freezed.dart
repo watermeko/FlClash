@@ -308,6 +308,306 @@ as bool,
 
 
 /// @nodoc
+mixin _$EasyTierProps {
+
+ bool get inject; String get networkName; String get networkSecret; String get hostname; String get ipv4; bool get dhcp; List<String> get peers; bool get udp; bool get noListener;
+/// Create a copy of EasyTierProps
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$EasyTierPropsCopyWith<EasyTierProps> get copyWith => _$EasyTierPropsCopyWithImpl<EasyTierProps>(this as EasyTierProps, _$identity);
+
+  /// Serializes this EasyTierProps to a JSON map.
+  Map<String, dynamic> toJson();
+
+
+@override
+bool operator ==(Object other) {
+  final _this = this as EasyTierProps;
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EasyTierProps&&(identical(other.inject, _this.inject) || other.inject == _this.inject)&&(identical(other.networkName, _this.networkName) || other.networkName == _this.networkName)&&(identical(other.networkSecret, _this.networkSecret) || other.networkSecret == _this.networkSecret)&&(identical(other.hostname, _this.hostname) || other.hostname == _this.hostname)&&(identical(other.ipv4, _this.ipv4) || other.ipv4 == _this.ipv4)&&(identical(other.dhcp, _this.dhcp) || other.dhcp == _this.dhcp)&&const DeepCollectionEquality().equals(other.peers, _this.peers)&&(identical(other.udp, _this.udp) || other.udp == _this.udp)&&(identical(other.noListener, _this.noListener) || other.noListener == _this.noListener));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+  final _this = this as EasyTierProps;
+  return Object.hash(runtimeType,_this.inject,_this.networkName,_this.networkSecret,_this.hostname,_this.ipv4,_this.dhcp,const DeepCollectionEquality().hash(_this.peers),_this.udp,_this.noListener);
+}
+
+@override
+String toString() {
+  final _this = this as EasyTierProps;
+  return 'EasyTierProps(inject: ${_this.inject}, networkName: ${_this.networkName}, networkSecret: ${_this.networkSecret}, hostname: ${_this.hostname}, ipv4: ${_this.ipv4}, dhcp: ${_this.dhcp}, peers: ${_this.peers}, udp: ${_this.udp}, noListener: ${_this.noListener})';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $EasyTierPropsCopyWith<$Res>  {
+  factory $EasyTierPropsCopyWith(EasyTierProps value, $Res Function(EasyTierProps) _then) = _$EasyTierPropsCopyWithImpl;
+@useResult
+$Res call({
+ bool inject, String networkName, String networkSecret, String hostname, String ipv4, bool dhcp, List<String> peers, bool udp, bool noListener
+});
+
+
+
+
+}
+/// @nodoc
+class _$EasyTierPropsCopyWithImpl<$Res>
+    implements $EasyTierPropsCopyWith<$Res> {
+  _$EasyTierPropsCopyWithImpl(this._self, this._then);
+
+  final EasyTierProps _self;
+  final $Res Function(EasyTierProps) _then;
+
+/// Create a copy of EasyTierProps
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? inject = null,Object? networkName = null,Object? networkSecret = null,Object? hostname = null,Object? ipv4 = null,Object? dhcp = null,Object? peers = null,Object? udp = null,Object? noListener = null,}) {
+  return _then(EasyTierProps(
+inject: null == inject ? _self.inject : inject // ignore: cast_nullable_to_non_nullable
+as bool,networkName: null == networkName ? _self.networkName : networkName // ignore: cast_nullable_to_non_nullable
+as String,networkSecret: null == networkSecret ? _self.networkSecret : networkSecret // ignore: cast_nullable_to_non_nullable
+as String,hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
+as String,ipv4: null == ipv4 ? _self.ipv4 : ipv4 // ignore: cast_nullable_to_non_nullable
+as String,dhcp: null == dhcp ? _self.dhcp : dhcp // ignore: cast_nullable_to_non_nullable
+as bool,peers: null == peers ? _self.peers : peers // ignore: cast_nullable_to_non_nullable
+as List<String>,udp: null == udp ? _self.udp : udp // ignore: cast_nullable_to_non_nullable
+as bool,noListener: null == noListener ? _self.noListener : noListener // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [EasyTierProps].
+extension EasyTierPropsPatterns on EasyTierProps {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _EasyTierProps value)?  $default,{required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case _EasyTierProps() when $default != null:
+return $default(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _EasyTierProps value)  $default,){
+final _that = this;
+switch (_that) {
+case _EasyTierProps():
+return $default(_that);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _EasyTierProps value)?  $default,){
+final _that = this;
+switch (_that) {
+case _EasyTierProps() when $default != null:
+return $default(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool inject,  String networkName,  String networkSecret,  String hostname,  String ipv4,  bool dhcp,  List<String> peers,  bool udp,  bool noListener)?  $default,{required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case _EasyTierProps() when $default != null:
+return $default(_that.inject,_that.networkName,_that.networkSecret,_that.hostname,_that.ipv4,_that.dhcp,_that.peers,_that.udp,_that.noListener);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool inject,  String networkName,  String networkSecret,  String hostname,  String ipv4,  bool dhcp,  List<String> peers,  bool udp,  bool noListener)  $default,) {final _that = this;
+switch (_that) {
+case _EasyTierProps():
+return $default(_that.inject,_that.networkName,_that.networkSecret,_that.hostname,_that.ipv4,_that.dhcp,_that.peers,_that.udp,_that.noListener);case _:
+  throw StateError('Unexpected subclass');
+
+}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool inject,  String networkName,  String networkSecret,  String hostname,  String ipv4,  bool dhcp,  List<String> peers,  bool udp,  bool noListener)?  $default,) {final _that = this;
+switch (_that) {
+case _EasyTierProps() when $default != null:
+return $default(_that.inject,_that.networkName,_that.networkSecret,_that.hostname,_that.ipv4,_that.dhcp,_that.peers,_that.udp,_that.noListener);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+@JsonSerializable()
+
+class _EasyTierProps implements EasyTierProps {
+  const _EasyTierProps({this.inject = false, this.networkName = '', this.networkSecret = '', this.hostname = '', this.ipv4 = '', this.dhcp = true,  List<String> peers = const [], this.udp = true, this.noListener = false}): _peers = peers;
+  factory _EasyTierProps.fromJson(Map<String, dynamic> json) => _$EasyTierPropsFromJson(json);
+
+@override@JsonKey() final  bool inject;
+@override@JsonKey() final  String networkName;
+@override@JsonKey() final  String networkSecret;
+@override@JsonKey() final  String hostname;
+@override@JsonKey() final  String ipv4;
+@override@JsonKey() final  bool dhcp;
+ final  List<String> _peers;
+@override@JsonKey() List<String> get peers {
+  if (_peers is EqualUnmodifiableListView) return _peers;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_peers);
+}
+
+@override@JsonKey() final  bool udp;
+@override@JsonKey() final  bool noListener;
+
+/// Create a copy of EasyTierProps
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$EasyTierPropsCopyWith<_EasyTierProps> get copyWith => __$EasyTierPropsCopyWithImpl<_EasyTierProps>(this, _$identity);
+
+@override
+Map<String, dynamic> toJson() {
+  return _$EasyTierPropsToJson(this, );
+}
+
+@override
+bool operator ==(Object other) {
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _EasyTierProps&&(identical(other.inject, inject) || other.inject == inject)&&(identical(other.networkName, networkName) || other.networkName == networkName)&&(identical(other.networkSecret, networkSecret) || other.networkSecret == networkSecret)&&(identical(other.hostname, hostname) || other.hostname == hostname)&&(identical(other.ipv4, ipv4) || other.ipv4 == ipv4)&&(identical(other.dhcp, dhcp) || other.dhcp == dhcp)&&const DeepCollectionEquality().equals(other.peers, _peers)&&(identical(other.udp, udp) || other.udp == udp)&&(identical(other.noListener, noListener) || other.noListener == noListener));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode {
+    return Object.hash(runtimeType,inject,networkName,networkSecret,hostname,ipv4,dhcp,const DeepCollectionEquality().hash(_peers),udp,noListener);
+}
+
+@override
+String toString() {
+    return 'EasyTierProps(inject: $inject, networkName: $networkName, networkSecret: $networkSecret, hostname: $hostname, ipv4: $ipv4, dhcp: $dhcp, peers: $peers, udp: $udp, noListener: $noListener)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$EasyTierPropsCopyWith<$Res> implements $EasyTierPropsCopyWith<$Res> {
+  factory _$EasyTierPropsCopyWith(_EasyTierProps value, $Res Function(_EasyTierProps) _then) = __$EasyTierPropsCopyWithImpl;
+@override @useResult
+$Res call({
+ bool inject, String networkName, String networkSecret, String hostname, String ipv4, bool dhcp, List<String> peers, bool udp, bool noListener
+});
+
+
+
+
+}
+/// @nodoc
+class __$EasyTierPropsCopyWithImpl<$Res>
+    implements _$EasyTierPropsCopyWith<$Res> {
+  __$EasyTierPropsCopyWithImpl(this._self, this._then);
+
+  final _EasyTierProps _self;
+  final $Res Function(_EasyTierProps) _then;
+
+/// Create a copy of EasyTierProps
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? inject = null,Object? networkName = null,Object? networkSecret = null,Object? hostname = null,Object? ipv4 = null,Object? dhcp = null,Object? peers = null,Object? udp = null,Object? noListener = null,}) {
+  return _then(_EasyTierProps(
+inject: null == inject ? _self.inject : inject // ignore: cast_nullable_to_non_nullable
+as bool,networkName: null == networkName ? _self.networkName : networkName // ignore: cast_nullable_to_non_nullable
+as String,networkSecret: null == networkSecret ? _self.networkSecret : networkSecret // ignore: cast_nullable_to_non_nullable
+as String,hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
+as String,ipv4: null == ipv4 ? _self.ipv4 : ipv4 // ignore: cast_nullable_to_non_nullable
+as String,dhcp: null == dhcp ? _self.dhcp : dhcp // ignore: cast_nullable_to_non_nullable
+as bool,peers: null == peers ? _self._peers : peers // ignore: cast_nullable_to_non_nullable
+as List<String>,udp: null == udp ? _self.udp : udp // ignore: cast_nullable_to_non_nullable
+as bool,noListener: null == noListener ? _self.noListener : noListener // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+
+/// @nodoc
 mixin _$Filter {
 
  String get label; String get regex;
@@ -3322,7 +3622,7 @@ $TextScaleCopyWith<$Res> get textScale {
 /// @nodoc
 mixin _$Config {
 
- int? get currentProfileId; List<HotKeyAction> get hotKeyActions;@JsonKey(fromJson: AppSettingProps.safeFromJson) AppSettingProps get appSettingProps; DAVProps? get davProps; NetworkProps get networkProps; VpnProps get vpnProps; TailscaleProps get tailscaleProps;@JsonKey(fromJson: ThemeProps.safeFromJson) ThemeProps get themeProps; ProxiesStyleProps get proxiesStyleProps;@JsonKey(name: 'windowGeometry') WindowProps get windowProps; PatchClashConfig get patchClashConfig; List<String> get excludeSSIDs;
+ int? get currentProfileId; List<HotKeyAction> get hotKeyActions;@JsonKey(fromJson: AppSettingProps.safeFromJson) AppSettingProps get appSettingProps; DAVProps? get davProps; NetworkProps get networkProps; VpnProps get vpnProps; TailscaleProps get tailscaleProps; EasyTierProps get easyTierProps;@JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson) MeshKind get meshKind;@JsonKey(fromJson: ThemeProps.safeFromJson) ThemeProps get themeProps; ProxiesStyleProps get proxiesStyleProps;@JsonKey(name: 'windowGeometry') WindowProps get windowProps; PatchClashConfig get patchClashConfig; List<String> get excludeSSIDs;
 /// Create a copy of Config
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -3336,20 +3636,20 @@ $ConfigCopyWith<Config> get copyWith => _$ConfigCopyWithImpl<Config>(this as Con
 @override
 bool operator ==(Object other) {
   final _this = this as Config;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Config&&(identical(other.currentProfileId, _this.currentProfileId) || other.currentProfileId == _this.currentProfileId)&&const DeepCollectionEquality().equals(other.hotKeyActions, _this.hotKeyActions)&&(identical(other.appSettingProps, _this.appSettingProps) || other.appSettingProps == _this.appSettingProps)&&(identical(other.davProps, _this.davProps) || other.davProps == _this.davProps)&&(identical(other.networkProps, _this.networkProps) || other.networkProps == _this.networkProps)&&(identical(other.vpnProps, _this.vpnProps) || other.vpnProps == _this.vpnProps)&&(identical(other.tailscaleProps, _this.tailscaleProps) || other.tailscaleProps == _this.tailscaleProps)&&(identical(other.themeProps, _this.themeProps) || other.themeProps == _this.themeProps)&&(identical(other.proxiesStyleProps, _this.proxiesStyleProps) || other.proxiesStyleProps == _this.proxiesStyleProps)&&(identical(other.windowProps, _this.windowProps) || other.windowProps == _this.windowProps)&&(identical(other.patchClashConfig, _this.patchClashConfig) || other.patchClashConfig == _this.patchClashConfig)&&const DeepCollectionEquality().equals(other.excludeSSIDs, _this.excludeSSIDs));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Config&&(identical(other.currentProfileId, _this.currentProfileId) || other.currentProfileId == _this.currentProfileId)&&const DeepCollectionEquality().equals(other.hotKeyActions, _this.hotKeyActions)&&(identical(other.appSettingProps, _this.appSettingProps) || other.appSettingProps == _this.appSettingProps)&&(identical(other.davProps, _this.davProps) || other.davProps == _this.davProps)&&(identical(other.networkProps, _this.networkProps) || other.networkProps == _this.networkProps)&&(identical(other.vpnProps, _this.vpnProps) || other.vpnProps == _this.vpnProps)&&(identical(other.tailscaleProps, _this.tailscaleProps) || other.tailscaleProps == _this.tailscaleProps)&&(identical(other.easyTierProps, _this.easyTierProps) || other.easyTierProps == _this.easyTierProps)&&(identical(other.meshKind, _this.meshKind) || other.meshKind == _this.meshKind)&&(identical(other.themeProps, _this.themeProps) || other.themeProps == _this.themeProps)&&(identical(other.proxiesStyleProps, _this.proxiesStyleProps) || other.proxiesStyleProps == _this.proxiesStyleProps)&&(identical(other.windowProps, _this.windowProps) || other.windowProps == _this.windowProps)&&(identical(other.patchClashConfig, _this.patchClashConfig) || other.patchClashConfig == _this.patchClashConfig)&&const DeepCollectionEquality().equals(other.excludeSSIDs, _this.excludeSSIDs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as Config;
-  return Object.hash(runtimeType,_this.currentProfileId,const DeepCollectionEquality().hash(_this.hotKeyActions),_this.appSettingProps,_this.davProps,_this.networkProps,_this.vpnProps,_this.tailscaleProps,_this.themeProps,_this.proxiesStyleProps,_this.windowProps,_this.patchClashConfig,const DeepCollectionEquality().hash(_this.excludeSSIDs));
+  return Object.hash(runtimeType,_this.currentProfileId,const DeepCollectionEquality().hash(_this.hotKeyActions),_this.appSettingProps,_this.davProps,_this.networkProps,_this.vpnProps,_this.tailscaleProps,_this.easyTierProps,_this.meshKind,_this.themeProps,_this.proxiesStyleProps,_this.windowProps,_this.patchClashConfig,const DeepCollectionEquality().hash(_this.excludeSSIDs));
 }
 
 @override
 String toString() {
   final _this = this as Config;
-  return 'Config(currentProfileId: ${_this.currentProfileId}, hotKeyActions: ${_this.hotKeyActions}, appSettingProps: ${_this.appSettingProps}, davProps: ${_this.davProps}, networkProps: ${_this.networkProps}, vpnProps: ${_this.vpnProps}, tailscaleProps: ${_this.tailscaleProps}, themeProps: ${_this.themeProps}, proxiesStyleProps: ${_this.proxiesStyleProps}, windowProps: ${_this.windowProps}, patchClashConfig: ${_this.patchClashConfig}, excludeSSIDs: ${_this.excludeSSIDs})';
+  return 'Config(currentProfileId: ${_this.currentProfileId}, hotKeyActions: ${_this.hotKeyActions}, appSettingProps: ${_this.appSettingProps}, davProps: ${_this.davProps}, networkProps: ${_this.networkProps}, vpnProps: ${_this.vpnProps}, tailscaleProps: ${_this.tailscaleProps}, easyTierProps: ${_this.easyTierProps}, meshKind: ${_this.meshKind}, themeProps: ${_this.themeProps}, proxiesStyleProps: ${_this.proxiesStyleProps}, windowProps: ${_this.windowProps}, patchClashConfig: ${_this.patchClashConfig}, excludeSSIDs: ${_this.excludeSSIDs})';
 }
 
 
@@ -3360,11 +3660,11 @@ abstract mixin class $ConfigCopyWith<$Res>  {
   factory $ConfigCopyWith(Config value, $Res Function(Config) _then) = _$ConfigCopyWithImpl;
 @useResult
 $Res call({
- int? currentProfileId, List<HotKeyAction> hotKeyActions,@JsonKey(fromJson: AppSettingProps.safeFromJson) AppSettingProps appSettingProps, DAVProps? davProps, NetworkProps networkProps, VpnProps vpnProps, TailscaleProps tailscaleProps,@JsonKey(fromJson: ThemeProps.safeFromJson) ThemeProps themeProps, ProxiesStyleProps proxiesStyleProps,@JsonKey(name: 'windowGeometry') WindowProps windowProps, PatchClashConfig patchClashConfig, List<String> excludeSSIDs
+ int? currentProfileId, List<HotKeyAction> hotKeyActions,@JsonKey(fromJson: AppSettingProps.safeFromJson) AppSettingProps appSettingProps, DAVProps? davProps, NetworkProps networkProps, VpnProps vpnProps, TailscaleProps tailscaleProps, EasyTierProps easyTierProps,@JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson) MeshKind meshKind,@JsonKey(fromJson: ThemeProps.safeFromJson) ThemeProps themeProps, ProxiesStyleProps proxiesStyleProps,@JsonKey(name: 'windowGeometry') WindowProps windowProps, PatchClashConfig patchClashConfig, List<String> excludeSSIDs
 });
 
 
-$AppSettingPropsCopyWith<$Res> get appSettingProps;$DAVPropsCopyWith<$Res>? get davProps;$NetworkPropsCopyWith<$Res> get networkProps;$VpnPropsCopyWith<$Res> get vpnProps;$TailscalePropsCopyWith<$Res> get tailscaleProps;$ThemePropsCopyWith<$Res> get themeProps;$ProxiesStylePropsCopyWith<$Res> get proxiesStyleProps;$WindowPropsCopyWith<$Res> get windowProps;$PatchClashConfigCopyWith<$Res> get patchClashConfig;
+$AppSettingPropsCopyWith<$Res> get appSettingProps;$DAVPropsCopyWith<$Res>? get davProps;$NetworkPropsCopyWith<$Res> get networkProps;$VpnPropsCopyWith<$Res> get vpnProps;$TailscalePropsCopyWith<$Res> get tailscaleProps;$EasyTierPropsCopyWith<$Res> get easyTierProps;$ThemePropsCopyWith<$Res> get themeProps;$ProxiesStylePropsCopyWith<$Res> get proxiesStyleProps;$WindowPropsCopyWith<$Res> get windowProps;$PatchClashConfigCopyWith<$Res> get patchClashConfig;
 
 }
 /// @nodoc
@@ -3377,7 +3677,7 @@ class _$ConfigCopyWithImpl<$Res>
 
 /// Create a copy of Config
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? currentProfileId = freezed,Object? hotKeyActions = null,Object? appSettingProps = null,Object? davProps = freezed,Object? networkProps = null,Object? vpnProps = null,Object? tailscaleProps = null,Object? themeProps = null,Object? proxiesStyleProps = null,Object? windowProps = null,Object? patchClashConfig = null,Object? excludeSSIDs = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? currentProfileId = freezed,Object? hotKeyActions = null,Object? appSettingProps = null,Object? davProps = freezed,Object? networkProps = null,Object? vpnProps = null,Object? tailscaleProps = null,Object? easyTierProps = null,Object? meshKind = null,Object? themeProps = null,Object? proxiesStyleProps = null,Object? windowProps = null,Object? patchClashConfig = null,Object? excludeSSIDs = null,}) {
   return _then(Config(
 currentProfileId: freezed == currentProfileId ? _self.currentProfileId : currentProfileId // ignore: cast_nullable_to_non_nullable
 as int?,hotKeyActions: null == hotKeyActions ? _self.hotKeyActions : hotKeyActions // ignore: cast_nullable_to_non_nullable
@@ -3386,7 +3686,9 @@ as AppSettingProps,davProps: freezed == davProps ? _self.davProps : davProps // 
 as DAVProps?,networkProps: null == networkProps ? _self.networkProps : networkProps // ignore: cast_nullable_to_non_nullable
 as NetworkProps,vpnProps: null == vpnProps ? _self.vpnProps : vpnProps // ignore: cast_nullable_to_non_nullable
 as VpnProps,tailscaleProps: null == tailscaleProps ? _self.tailscaleProps : tailscaleProps // ignore: cast_nullable_to_non_nullable
-as TailscaleProps,themeProps: null == themeProps ? _self.themeProps : themeProps // ignore: cast_nullable_to_non_nullable
+as TailscaleProps,easyTierProps: null == easyTierProps ? _self.easyTierProps : easyTierProps // ignore: cast_nullable_to_non_nullable
+as EasyTierProps,meshKind: null == meshKind ? _self.meshKind : meshKind // ignore: cast_nullable_to_non_nullable
+as MeshKind,themeProps: null == themeProps ? _self.themeProps : themeProps // ignore: cast_nullable_to_non_nullable
 as ThemeProps,proxiesStyleProps: null == proxiesStyleProps ? _self.proxiesStyleProps : proxiesStyleProps // ignore: cast_nullable_to_non_nullable
 as ProxiesStyleProps,windowProps: null == windowProps ? _self.windowProps : windowProps // ignore: cast_nullable_to_non_nullable
 as WindowProps,patchClashConfig: null == patchClashConfig ? _self.patchClashConfig : patchClashConfig // ignore: cast_nullable_to_non_nullable
@@ -3441,6 +3743,15 @@ $TailscalePropsCopyWith<$Res> get tailscaleProps {
   
   return $TailscalePropsCopyWith<$Res>(_self.tailscaleProps, (value) {
     return _then(_self.copyWith(tailscaleProps: value));
+  });
+}/// Create a copy of Config
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$EasyTierPropsCopyWith<$Res> get easyTierProps {
+  
+  return $EasyTierPropsCopyWith<$Res>(_self.easyTierProps, (value) {
+    return _then(_self.copyWith(easyTierProps: value));
   });
 }/// Create a copy of Config
 /// with the given fields replaced by the non-null parameter values.
@@ -3560,10 +3871,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? currentProfileId,  List<HotKeyAction> hotKeyActions, @JsonKey(fromJson: AppSettingProps.safeFromJson)  AppSettingProps appSettingProps,  DAVProps? davProps,  NetworkProps networkProps,  VpnProps vpnProps,  TailscaleProps tailscaleProps, @JsonKey(fromJson: ThemeProps.safeFromJson)  ThemeProps themeProps,  ProxiesStyleProps proxiesStyleProps, @JsonKey(name: 'windowGeometry')  WindowProps windowProps,  PatchClashConfig patchClashConfig,  List<String> excludeSSIDs)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? currentProfileId,  List<HotKeyAction> hotKeyActions, @JsonKey(fromJson: AppSettingProps.safeFromJson)  AppSettingProps appSettingProps,  DAVProps? davProps,  NetworkProps networkProps,  VpnProps vpnProps,  TailscaleProps tailscaleProps,  EasyTierProps easyTierProps, @JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson)  MeshKind meshKind, @JsonKey(fromJson: ThemeProps.safeFromJson)  ThemeProps themeProps,  ProxiesStyleProps proxiesStyleProps, @JsonKey(name: 'windowGeometry')  WindowProps windowProps,  PatchClashConfig patchClashConfig,  List<String> excludeSSIDs)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Config() when $default != null:
-return $default(_that.currentProfileId,_that.hotKeyActions,_that.appSettingProps,_that.davProps,_that.networkProps,_that.vpnProps,_that.tailscaleProps,_that.themeProps,_that.proxiesStyleProps,_that.windowProps,_that.patchClashConfig,_that.excludeSSIDs);case _:
+return $default(_that.currentProfileId,_that.hotKeyActions,_that.appSettingProps,_that.davProps,_that.networkProps,_that.vpnProps,_that.tailscaleProps,_that.easyTierProps,_that.meshKind,_that.themeProps,_that.proxiesStyleProps,_that.windowProps,_that.patchClashConfig,_that.excludeSSIDs);case _:
   return orElse();
 
 }
@@ -3581,10 +3892,10 @@ return $default(_that.currentProfileId,_that.hotKeyActions,_that.appSettingProps
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? currentProfileId,  List<HotKeyAction> hotKeyActions, @JsonKey(fromJson: AppSettingProps.safeFromJson)  AppSettingProps appSettingProps,  DAVProps? davProps,  NetworkProps networkProps,  VpnProps vpnProps,  TailscaleProps tailscaleProps, @JsonKey(fromJson: ThemeProps.safeFromJson)  ThemeProps themeProps,  ProxiesStyleProps proxiesStyleProps, @JsonKey(name: 'windowGeometry')  WindowProps windowProps,  PatchClashConfig patchClashConfig,  List<String> excludeSSIDs)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? currentProfileId,  List<HotKeyAction> hotKeyActions, @JsonKey(fromJson: AppSettingProps.safeFromJson)  AppSettingProps appSettingProps,  DAVProps? davProps,  NetworkProps networkProps,  VpnProps vpnProps,  TailscaleProps tailscaleProps,  EasyTierProps easyTierProps, @JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson)  MeshKind meshKind, @JsonKey(fromJson: ThemeProps.safeFromJson)  ThemeProps themeProps,  ProxiesStyleProps proxiesStyleProps, @JsonKey(name: 'windowGeometry')  WindowProps windowProps,  PatchClashConfig patchClashConfig,  List<String> excludeSSIDs)  $default,) {final _that = this;
 switch (_that) {
 case _Config():
-return $default(_that.currentProfileId,_that.hotKeyActions,_that.appSettingProps,_that.davProps,_that.networkProps,_that.vpnProps,_that.tailscaleProps,_that.themeProps,_that.proxiesStyleProps,_that.windowProps,_that.patchClashConfig,_that.excludeSSIDs);case _:
+return $default(_that.currentProfileId,_that.hotKeyActions,_that.appSettingProps,_that.davProps,_that.networkProps,_that.vpnProps,_that.tailscaleProps,_that.easyTierProps,_that.meshKind,_that.themeProps,_that.proxiesStyleProps,_that.windowProps,_that.patchClashConfig,_that.excludeSSIDs);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -3601,10 +3912,10 @@ return $default(_that.currentProfileId,_that.hotKeyActions,_that.appSettingProps
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? currentProfileId,  List<HotKeyAction> hotKeyActions, @JsonKey(fromJson: AppSettingProps.safeFromJson)  AppSettingProps appSettingProps,  DAVProps? davProps,  NetworkProps networkProps,  VpnProps vpnProps,  TailscaleProps tailscaleProps, @JsonKey(fromJson: ThemeProps.safeFromJson)  ThemeProps themeProps,  ProxiesStyleProps proxiesStyleProps, @JsonKey(name: 'windowGeometry')  WindowProps windowProps,  PatchClashConfig patchClashConfig,  List<String> excludeSSIDs)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? currentProfileId,  List<HotKeyAction> hotKeyActions, @JsonKey(fromJson: AppSettingProps.safeFromJson)  AppSettingProps appSettingProps,  DAVProps? davProps,  NetworkProps networkProps,  VpnProps vpnProps,  TailscaleProps tailscaleProps,  EasyTierProps easyTierProps, @JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson)  MeshKind meshKind, @JsonKey(fromJson: ThemeProps.safeFromJson)  ThemeProps themeProps,  ProxiesStyleProps proxiesStyleProps, @JsonKey(name: 'windowGeometry')  WindowProps windowProps,  PatchClashConfig patchClashConfig,  List<String> excludeSSIDs)?  $default,) {final _that = this;
 switch (_that) {
 case _Config() when $default != null:
-return $default(_that.currentProfileId,_that.hotKeyActions,_that.appSettingProps,_that.davProps,_that.networkProps,_that.vpnProps,_that.tailscaleProps,_that.themeProps,_that.proxiesStyleProps,_that.windowProps,_that.patchClashConfig,_that.excludeSSIDs);case _:
+return $default(_that.currentProfileId,_that.hotKeyActions,_that.appSettingProps,_that.davProps,_that.networkProps,_that.vpnProps,_that.tailscaleProps,_that.easyTierProps,_that.meshKind,_that.themeProps,_that.proxiesStyleProps,_that.windowProps,_that.patchClashConfig,_that.excludeSSIDs);case _:
   return null;
 
 }
@@ -3616,7 +3927,7 @@ return $default(_that.currentProfileId,_that.hotKeyActions,_that.appSettingProps
 @JsonSerializable()
 
 class _Config implements Config {
-  const _Config({this.currentProfileId,  List<HotKeyAction> hotKeyActions = const [], @JsonKey(fromJson: AppSettingProps.safeFromJson) this.appSettingProps = defaultAppSettingProps, this.davProps, this.networkProps = defaultNetworkProps, this.vpnProps = defaultVpnProps, this.tailscaleProps = defaultTailscaleProps, @JsonKey(fromJson: ThemeProps.safeFromJson) required this.themeProps, this.proxiesStyleProps = defaultProxiesStyleProps, @JsonKey(name: 'windowGeometry') this.windowProps = defaultWindowProps, this.patchClashConfig = defaultClashConfig,  List<String> excludeSSIDs = const []}): _hotKeyActions = hotKeyActions,_excludeSSIDs = excludeSSIDs;
+  const _Config({this.currentProfileId,  List<HotKeyAction> hotKeyActions = const [], @JsonKey(fromJson: AppSettingProps.safeFromJson) this.appSettingProps = defaultAppSettingProps, this.davProps, this.networkProps = defaultNetworkProps, this.vpnProps = defaultVpnProps, this.tailscaleProps = defaultTailscaleProps, this.easyTierProps = defaultEasyTierProps, @JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson) this.meshKind = MeshKind.tailscale, @JsonKey(fromJson: ThemeProps.safeFromJson) required this.themeProps, this.proxiesStyleProps = defaultProxiesStyleProps, @JsonKey(name: 'windowGeometry') this.windowProps = defaultWindowProps, this.patchClashConfig = defaultClashConfig,  List<String> excludeSSIDs = const []}): _hotKeyActions = hotKeyActions,_excludeSSIDs = excludeSSIDs;
   factory _Config.fromJson(Map<String, dynamic> json) => _$ConfigFromJson(json);
 
 @override final  int? currentProfileId;
@@ -3632,6 +3943,8 @@ class _Config implements Config {
 @override@JsonKey() final  NetworkProps networkProps;
 @override@JsonKey() final  VpnProps vpnProps;
 @override@JsonKey() final  TailscaleProps tailscaleProps;
+@override@JsonKey() final  EasyTierProps easyTierProps;
+@override@JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson) final  MeshKind meshKind;
 @override@JsonKey(fromJson: ThemeProps.safeFromJson) final  ThemeProps themeProps;
 @override@JsonKey() final  ProxiesStyleProps proxiesStyleProps;
 @override@JsonKey(name: 'windowGeometry') final  WindowProps windowProps;
@@ -3657,18 +3970,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Config&&(identical(other.currentProfileId, currentProfileId) || other.currentProfileId == currentProfileId)&&const DeepCollectionEquality().equals(other.hotKeyActions, _hotKeyActions)&&(identical(other.appSettingProps, appSettingProps) || other.appSettingProps == appSettingProps)&&(identical(other.davProps, davProps) || other.davProps == davProps)&&(identical(other.networkProps, networkProps) || other.networkProps == networkProps)&&(identical(other.vpnProps, vpnProps) || other.vpnProps == vpnProps)&&(identical(other.tailscaleProps, tailscaleProps) || other.tailscaleProps == tailscaleProps)&&(identical(other.themeProps, themeProps) || other.themeProps == themeProps)&&(identical(other.proxiesStyleProps, proxiesStyleProps) || other.proxiesStyleProps == proxiesStyleProps)&&(identical(other.windowProps, windowProps) || other.windowProps == windowProps)&&(identical(other.patchClashConfig, patchClashConfig) || other.patchClashConfig == patchClashConfig)&&const DeepCollectionEquality().equals(other.excludeSSIDs, _excludeSSIDs));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Config&&(identical(other.currentProfileId, currentProfileId) || other.currentProfileId == currentProfileId)&&const DeepCollectionEquality().equals(other.hotKeyActions, _hotKeyActions)&&(identical(other.appSettingProps, appSettingProps) || other.appSettingProps == appSettingProps)&&(identical(other.davProps, davProps) || other.davProps == davProps)&&(identical(other.networkProps, networkProps) || other.networkProps == networkProps)&&(identical(other.vpnProps, vpnProps) || other.vpnProps == vpnProps)&&(identical(other.tailscaleProps, tailscaleProps) || other.tailscaleProps == tailscaleProps)&&(identical(other.easyTierProps, easyTierProps) || other.easyTierProps == easyTierProps)&&(identical(other.meshKind, meshKind) || other.meshKind == meshKind)&&(identical(other.themeProps, themeProps) || other.themeProps == themeProps)&&(identical(other.proxiesStyleProps, proxiesStyleProps) || other.proxiesStyleProps == proxiesStyleProps)&&(identical(other.windowProps, windowProps) || other.windowProps == windowProps)&&(identical(other.patchClashConfig, patchClashConfig) || other.patchClashConfig == patchClashConfig)&&const DeepCollectionEquality().equals(other.excludeSSIDs, _excludeSSIDs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,currentProfileId,const DeepCollectionEquality().hash(_hotKeyActions),appSettingProps,davProps,networkProps,vpnProps,tailscaleProps,themeProps,proxiesStyleProps,windowProps,patchClashConfig,const DeepCollectionEquality().hash(_excludeSSIDs));
+    return Object.hash(runtimeType,currentProfileId,const DeepCollectionEquality().hash(_hotKeyActions),appSettingProps,davProps,networkProps,vpnProps,tailscaleProps,easyTierProps,meshKind,themeProps,proxiesStyleProps,windowProps,patchClashConfig,const DeepCollectionEquality().hash(_excludeSSIDs));
 }
 
 @override
 String toString() {
-    return 'Config(currentProfileId: $currentProfileId, hotKeyActions: $hotKeyActions, appSettingProps: $appSettingProps, davProps: $davProps, networkProps: $networkProps, vpnProps: $vpnProps, tailscaleProps: $tailscaleProps, themeProps: $themeProps, proxiesStyleProps: $proxiesStyleProps, windowProps: $windowProps, patchClashConfig: $patchClashConfig, excludeSSIDs: $excludeSSIDs)';
+    return 'Config(currentProfileId: $currentProfileId, hotKeyActions: $hotKeyActions, appSettingProps: $appSettingProps, davProps: $davProps, networkProps: $networkProps, vpnProps: $vpnProps, tailscaleProps: $tailscaleProps, easyTierProps: $easyTierProps, meshKind: $meshKind, themeProps: $themeProps, proxiesStyleProps: $proxiesStyleProps, windowProps: $windowProps, patchClashConfig: $patchClashConfig, excludeSSIDs: $excludeSSIDs)';
 }
 
 
@@ -3679,11 +3992,11 @@ abstract mixin class _$ConfigCopyWith<$Res> implements $ConfigCopyWith<$Res> {
   factory _$ConfigCopyWith(_Config value, $Res Function(_Config) _then) = __$ConfigCopyWithImpl;
 @override @useResult
 $Res call({
- int? currentProfileId, List<HotKeyAction> hotKeyActions,@JsonKey(fromJson: AppSettingProps.safeFromJson) AppSettingProps appSettingProps, DAVProps? davProps, NetworkProps networkProps, VpnProps vpnProps, TailscaleProps tailscaleProps,@JsonKey(fromJson: ThemeProps.safeFromJson) ThemeProps themeProps, ProxiesStyleProps proxiesStyleProps,@JsonKey(name: 'windowGeometry') WindowProps windowProps, PatchClashConfig patchClashConfig, List<String> excludeSSIDs
+ int? currentProfileId, List<HotKeyAction> hotKeyActions,@JsonKey(fromJson: AppSettingProps.safeFromJson) AppSettingProps appSettingProps, DAVProps? davProps, NetworkProps networkProps, VpnProps vpnProps, TailscaleProps tailscaleProps, EasyTierProps easyTierProps,@JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson) MeshKind meshKind,@JsonKey(fromJson: ThemeProps.safeFromJson) ThemeProps themeProps, ProxiesStyleProps proxiesStyleProps,@JsonKey(name: 'windowGeometry') WindowProps windowProps, PatchClashConfig patchClashConfig, List<String> excludeSSIDs
 });
 
 
-@override $AppSettingPropsCopyWith<$Res> get appSettingProps;@override $DAVPropsCopyWith<$Res>? get davProps;@override $NetworkPropsCopyWith<$Res> get networkProps;@override $VpnPropsCopyWith<$Res> get vpnProps;@override $TailscalePropsCopyWith<$Res> get tailscaleProps;@override $ThemePropsCopyWith<$Res> get themeProps;@override $ProxiesStylePropsCopyWith<$Res> get proxiesStyleProps;@override $WindowPropsCopyWith<$Res> get windowProps;@override $PatchClashConfigCopyWith<$Res> get patchClashConfig;
+@override $AppSettingPropsCopyWith<$Res> get appSettingProps;@override $DAVPropsCopyWith<$Res>? get davProps;@override $NetworkPropsCopyWith<$Res> get networkProps;@override $VpnPropsCopyWith<$Res> get vpnProps;@override $TailscalePropsCopyWith<$Res> get tailscaleProps;@override $EasyTierPropsCopyWith<$Res> get easyTierProps;@override $ThemePropsCopyWith<$Res> get themeProps;@override $ProxiesStylePropsCopyWith<$Res> get proxiesStyleProps;@override $WindowPropsCopyWith<$Res> get windowProps;@override $PatchClashConfigCopyWith<$Res> get patchClashConfig;
 
 }
 /// @nodoc
@@ -3696,7 +4009,7 @@ class __$ConfigCopyWithImpl<$Res>
 
 /// Create a copy of Config
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? currentProfileId = freezed,Object? hotKeyActions = null,Object? appSettingProps = null,Object? davProps = freezed,Object? networkProps = null,Object? vpnProps = null,Object? tailscaleProps = null,Object? themeProps = null,Object? proxiesStyleProps = null,Object? windowProps = null,Object? patchClashConfig = null,Object? excludeSSIDs = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? currentProfileId = freezed,Object? hotKeyActions = null,Object? appSettingProps = null,Object? davProps = freezed,Object? networkProps = null,Object? vpnProps = null,Object? tailscaleProps = null,Object? easyTierProps = null,Object? meshKind = null,Object? themeProps = null,Object? proxiesStyleProps = null,Object? windowProps = null,Object? patchClashConfig = null,Object? excludeSSIDs = null,}) {
   return _then(_Config(
 currentProfileId: freezed == currentProfileId ? _self.currentProfileId : currentProfileId // ignore: cast_nullable_to_non_nullable
 as int?,hotKeyActions: null == hotKeyActions ? _self._hotKeyActions : hotKeyActions // ignore: cast_nullable_to_non_nullable
@@ -3705,7 +4018,9 @@ as AppSettingProps,davProps: freezed == davProps ? _self.davProps : davProps // 
 as DAVProps?,networkProps: null == networkProps ? _self.networkProps : networkProps // ignore: cast_nullable_to_non_nullable
 as NetworkProps,vpnProps: null == vpnProps ? _self.vpnProps : vpnProps // ignore: cast_nullable_to_non_nullable
 as VpnProps,tailscaleProps: null == tailscaleProps ? _self.tailscaleProps : tailscaleProps // ignore: cast_nullable_to_non_nullable
-as TailscaleProps,themeProps: null == themeProps ? _self.themeProps : themeProps // ignore: cast_nullable_to_non_nullable
+as TailscaleProps,easyTierProps: null == easyTierProps ? _self.easyTierProps : easyTierProps // ignore: cast_nullable_to_non_nullable
+as EasyTierProps,meshKind: null == meshKind ? _self.meshKind : meshKind // ignore: cast_nullable_to_non_nullable
+as MeshKind,themeProps: null == themeProps ? _self.themeProps : themeProps // ignore: cast_nullable_to_non_nullable
 as ThemeProps,proxiesStyleProps: null == proxiesStyleProps ? _self.proxiesStyleProps : proxiesStyleProps // ignore: cast_nullable_to_non_nullable
 as ProxiesStyleProps,windowProps: null == windowProps ? _self.windowProps : windowProps // ignore: cast_nullable_to_non_nullable
 as WindowProps,patchClashConfig: null == patchClashConfig ? _self.patchClashConfig : patchClashConfig // ignore: cast_nullable_to_non_nullable
@@ -3761,6 +4076,15 @@ $TailscalePropsCopyWith<$Res> get tailscaleProps {
   
   return $TailscalePropsCopyWith<$Res>(_self.tailscaleProps, (value) {
     return _then(_self.copyWith(tailscaleProps: value));
+  });
+}/// Create a copy of Config
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$EasyTierPropsCopyWith<$Res> get easyTierProps {
+  
+  return $EasyTierPropsCopyWith<$Res>(_self.easyTierProps, (value) {
+    return _then(_self.copyWith(easyTierProps: value));
   });
 }/// Create a copy of Config
 /// with the given fields replaced by the non-null parameter values.

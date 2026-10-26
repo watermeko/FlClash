@@ -9,4 +9,6 @@ export 'profiles.dart';
 export 'proxy_groups.dart';
 export 'service_status.dart';
 export 'tailscale.dart';
+export 'easytier.dart';
+export 'mesh.dart';
 export 'traffic.dart';

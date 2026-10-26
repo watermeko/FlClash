@@ -878,6 +878,67 @@
   "peers": "피어",
   "virtualIpv4": "가상 IPv4",
   "hostname": "호스트 이름",
+  "easyTier": "EasyTier",
+  "@easyTier": {
+    "description": "The name of the EasyTier mesh product, which is a proper noun and stays the same in every language."
+  },
+  "mesh": "메시",
+  "@mesh": {
+    "description": "The heading of the setting that chooses which overlay the mesh page drives."
+  },
+  "easyTierNetwork": "네트워크",
+  "@easyTierNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkName": "네트워크 이름",
+  "@easyTierNetworkName": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNetworkSecret": "네트워크 시크릿",
+  "@easyTierNetworkSecret": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeers": "연결",
+  "@easyTierPeers": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierPeerList": "피어 주소",
+  "@easyTierPeerList": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNoListener": "수신 연결을 받지 않음",
+  "@easyTierNoListener": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierNeedsNetwork": "네트워크 이름이 필요합니다",
+  "@easyTierNeedsNetwork": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnected": "연결됨",
+  "@easyTierConnected": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierConnecting": "피어를 찾는 중",
+  "@easyTierConnecting": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierRelayed": "{hops}홉 중계",
+  "@easyTierRelayed": {
+    "description": "EasyTier mesh setting or state shown on the mesh page.",
+    "placeholders": {
+      "hops": {
+        "type": "int"
+      }
+    }
+  },
+  "easyTierOffTip": "메시가 꺼져 있어 이 기기는 어떤 네트워크에도 없습니다",
+  "@easyTierOffTip": {
+    "description": "EasyTier mesh setting or state shown on the mesh page."
+  },
+  "easyTierUdp": "UDP",
+  "@easyTierUdp": {
+    "description": "Whether the node carries UDP traffic, shown as a setting on the mesh page."
+  },
   "exitNodes": "출구 노드",
   "cipher": "암호화 방식",
   "protocol": "프로토콜",

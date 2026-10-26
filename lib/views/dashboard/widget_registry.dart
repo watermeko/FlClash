@@ -16,7 +16,7 @@ extension DashboardWidgetView on DashboardWidget {
     DashboardWidget.proxyGroups => const ProxyGroupsCard(),
     DashboardWidget.connectionStats => const ConnectionStatsCard(),
     DashboardWidget.intranetIp => const IntranetIpCard(),
-    DashboardWidget.tailscale => const TailscaleCard(),
+    DashboardWidget.tailscale => const MeshCard(),
     DashboardWidget.memoryInfo => const MemoryInfo(),
   };
 

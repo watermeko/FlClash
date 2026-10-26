@@ -70,6 +70,7 @@ const (
 	startTailscaleMethod           CoreMethod = "startTailscale"
 	logoutTailscaleMethod          CoreMethod = "logoutTailscale"
 	loginTailscaleMethod           CoreMethod = "loginTailscale"
+	easyTierStatusMethod           CoreMethod = "easyTierStatus"
 )
 
 type MessageType string
@@ -86,6 +87,7 @@ const (
 	DialerLoopMessage     MessageType = "dialerLoop"
 	RequestTrafficMessage MessageType = "requestTraffic"
 	TailscaleMessage      MessageType = "tailscale"
+	EasyTierMessage       MessageType = "easytier"
 )
 
 type Message struct {
@@ -109,10 +111,13 @@ type SetupParams struct {
 	SkipCertVerify bool              `json:"skip-cert-verify"`
 	Base           *SetupBase        `json:"base,omitempty"`
 
-	// The Tailscale node the app keeps in every profile. It reaches the yaml
-	// after the base is merged, because an overlay's own proxies replace that
-	// section rather than extend it. Absent means the user left the mesh off.
+	// The overlay the app keeps in every profile. It reaches the yaml after the
+	// base is merged, because an overlay's own proxies replace that section
+	// rather than extend it. Absent means the user left the mesh off, and at
+	// most one of the two is ever set: they are two ways into one mesh, and the
+	// app writes whichever the user chose.
 	Tailscale *TailscaleInject `json:"tailscale,omitempty"`
+	EasyTier  *EasyTierInject  `json:"easytier,omitempty"`
 }
 
 type SetupBase struct {
@@ -123,8 +128,9 @@ type SetupBase struct {
 // What buildProfile merges: the same base a setup applies, with the node the
 // app keeps in it, so the preview shows what the tunnel will run.
 type BuildProfileParams struct {
-	Base      *SetupBase      `json:"base"`
+	Base      *SetupBase       `json:"base"`
 	Tailscale *TailscaleInject `json:"tailscale,omitempty"`
+	EasyTier  *EasyTierInject  `json:"easytier,omitempty"`
 }
 
 // A Tailscale node as the app's settings describe it. Empty AuthKey leaves the
@@ -142,6 +148,32 @@ type TailscaleInject struct {
 	ExitNodeAllowLANAccess bool   `json:"exit-node-allow-lan-access"`
 	// The tailnet's DNS suffix, so its names resolve through the node.
 	MagicDNSSuffix string `json:"magic-dns-suffix"`
+}
+
+// An EasyTier node as the app's settings describe it. EasyTier has no control
+// plane and no login: a node joins a network by holding the same name and
+// secret as its peers, and reaches them through the peers it is given.
+type EasyTierInject struct {
+	Name          string `json:"name"`
+	NetworkName   string `json:"network-name"`
+	NetworkSecret string `json:"network-secret"`
+	Hostname      string `json:"hostname"`
+	// The overlay address to hold. Empty with DHCP set asks the network for one.
+	IPv4 string `json:"ipv4,omitempty"`
+	DHCP bool   `json:"dhcp,omitempty"`
+	// The nodes to reach first, which is how a node that is behind NAT joins.
+	Peers     []string `json:"peers,omitempty"`
+	Listeners []string `json:"listeners,omitempty"`
+	// Whether the node listens at all. A phone that only reaches out does not
+	// need to, and a listener on a device that moves between networks is what
+	// makes it reachable from outside.
+	NoListener bool   `json:"no-listener,omitempty"`
+	StateDir   string `json:"state-dir"`
+	UDP        bool   `json:"udp"`
+	// The subnet the overlay hands out, so its addresses route through the node.
+	IPv4Range string `json:"ipv4-range"`
+	// The DNS zone the overlay resolves names under, when it reports one.
+	DNSZone string `json:"dns-zone,omitempty"`
 }
 
 type ProfileBase struct {
@@ -297,6 +329,11 @@ type nodeView struct {
 // The query names an outbound by its proxy name; a status of nil in the answer
 // means no Tailscale outbound carries it.
 type TailscaleParams struct {
+	Name string `json:"name"`
+}
+
+// The overlay state of one EasyTier outbound, asked about by proxy name.
+type EasyTierParams struct {
 	Name string `json:"name"`
 }
 

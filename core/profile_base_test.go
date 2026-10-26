@@ -145,7 +145,7 @@ func TestHandleBuildProfileWritesTheMergedConfigWhereTheHostReadsSpills(t *testi
 	if filepath.Dir(built) != spilledResponseDir() {
 		t.Errorf("built %s, want it in %s", built, spilledResponseDir())
 	}
-	cfg, err := loadConfig(built, nil)
+	cfg, err := loadConfig(built, nil, nil)
 	if err != nil {
 		t.Fatalf("loadConfig(built) = %v", err)
 	}
@@ -166,7 +166,7 @@ func TestLoadConfigWithBasePutsTheAddedRulesFirstAndTheOverlayOverTheRest(t *tes
 	})
 	configPath := filepath.Join(t.TempDir(), "config.yaml")
 
-	cfg, err := loadConfigWithBase(&SetupBase{Path: path, Overlay: overlay}, configPath, nil)
+	cfg, err := loadConfigWithBase(&SetupBase{Path: path, Overlay: overlay}, configPath, nil, nil)
 
 	if err != nil {
 		t.Fatalf("loadConfigWithBase = %v", err)
@@ -209,12 +209,13 @@ func TestLoadConfigWithBaseWritesAConfigThatLoadsAlone(t *testing.T) {
 		&SetupBase{Path: path, Overlay: overlayOf(t, base, []string{"DOMAIN,added.test,DIRECT"}, nil)},
 		configPath,
 		nil,
+		nil,
 	)
 	if err != nil {
 		t.Fatalf("loadConfigWithBase = %v", err)
 	}
 
-	reloaded, err := loadConfig(configPath, nil)
+	reloaded, err := loadConfig(configPath, nil, nil)
 
 	if err != nil {
 		t.Fatalf("loadConfig(config.yaml) = %v", err)
@@ -246,6 +247,7 @@ func TestLoadConfigWithBaseKeepsAnEmptyProfileOnTheDefaults(t *testing.T) {
 		&SetupBase{Path: path, Overlay: `{"rules": ["MATCH,DIRECT"]}`},
 		filepath.Join(t.TempDir(), "config.yaml"),
 		nil,
+		nil,
 	)
 
 	if err != nil {
@@ -260,7 +262,7 @@ func TestLoadConfigWithBaseRejectsAProfileThatIsNotAMapping(t *testing.T) {
 	path := writeBaseProfile(t, "- a\n- b\n")
 	configPath := filepath.Join(t.TempDir(), "config.yaml")
 
-	if _, err := loadConfigWithBase(&SetupBase{Path: path, Overlay: "{}"}, configPath, nil); err == nil {
+	if _, err := loadConfigWithBase(&SetupBase{Path: path, Overlay: "{}"}, configPath, nil, nil); err == nil {
 		t.Fatal("loadConfigWithBase accepted a list as a config")
 	}
 	if _, err := os.Stat(configPath); !os.IsNotExist(err) {

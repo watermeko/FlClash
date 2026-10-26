@@ -178,7 +178,7 @@ class _DesktopDashboard extends StatelessWidget {
         final tailnetWidth = math.min(tailnetColumn, column);
         final tailnet = SizedBox(
           width: tailnetWidth,
-          child: const RepaintBoundary(child: TailscaleCard()),
+          child: const RepaintBoundary(child: MeshCard()),
         );
         final summaries = Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -296,7 +296,7 @@ class _DesktopDashboard extends StatelessWidget {
                           // tiles squeezed their head until it clipped.
                           const Expanded(
                             flex: 2,
-                            child: RepaintBoundary(child: TailscaleCard()),
+                            child: RepaintBoundary(child: MeshCard()),
                           ),
                         ],
                       ),

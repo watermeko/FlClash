@@ -13,6 +13,7 @@ abstract class SetupParams with _$SetupParams {
     @Default(false) @JsonKey(name: 'skip-cert-verify') bool skipCertVerify,
     @JsonKey(includeIfNull: false) SetupBase? base,
     @JsonKey(includeIfNull: false) TailscaleInject? tailscale,
+    @JsonKey(includeIfNull: false) EasyTierInject? easyTier,
   }) = _SetupParams;
 
   factory SetupParams.fromJson(Map<String, dynamic> json) =>
@@ -226,6 +227,71 @@ abstract class TailscaleInject with _$TailscaleInject {
 
   factory TailscaleInject.fromJson(Map<String, Object?> json) =>
       _$TailscaleInjectFromJson(json);
+}
+
+/// The EasyTier node the app keeps in every profile. Absent from a setup means
+/// the user turned this overlay off, or chose the other one.
+///
+/// EasyTier has no control plane: the network name and secret are the whole of
+/// what identifies a network, and [peers] is where a node goes to find it.
+@freezed
+abstract class EasyTierInject with _$EasyTierInject {
+  const factory EasyTierInject({
+    required String name,
+    @JsonKey(name: 'network-name') required String networkName,
+    @JsonKey(name: 'network-secret') required String networkSecret,
+    @Default('') String hostname,
+    @Default('') String ipv4,
+    @Default(false) bool dhcp,
+    @Default([]) List<String> peers,
+    @Default([]) List<String> listeners,
+    @JsonKey(name: 'no-listener') @Default(false) bool noListener,
+    @JsonKey(name: 'state-dir') @Default('') String stateDir,
+    @Default(true) bool udp,
+
+    /// The range the overlay hands out, so its addresses route through it.
+    @JsonKey(name: 'ipv4-range') @Default('10.126.126.0/24') String ipv4Range,
+    @JsonKey(name: 'dns-zone') @Default('') String dnsZone,
+  }) = _EasyTierInject;
+
+  factory EasyTierInject.fromJson(Map<String, Object?> json) =>
+      _$EasyTierInjectFromJson(json);
+}
+
+/// What an EasyTier outbound reports about the overlay it reached.
+@freezed
+abstract class EasyTierStatus with _$EasyTierStatus {
+  const factory EasyTierStatus({
+    required String name,
+    @Default('') String state,
+    @JsonKey(name: 'instance-id') @Default('') String instanceId,
+    @Default('') String hostname,
+    @JsonKey(name: 'network-name') @Default('') String networkName,
+    @Default('') String ipv4,
+    @Default(false) bool connected,
+    @Default([]) List<EasyTierPeer> peers,
+    @Default('') String error,
+  }) = _EasyTierStatus;
+
+  factory EasyTierStatus.fromJson(Map<String, Object?> json) =>
+      _$EasyTierStatusFromJson(json);
+}
+
+/// One machine the overlay reached.
+@freezed
+abstract class EasyTierPeer with _$EasyTierPeer {
+  const factory EasyTierPeer({
+    @Default('') String hostname,
+    @Default('') String ipv4,
+
+    /// 1 for a direct peer, more when relayed through another.
+    @JsonKey(name: 'path-len') @Default(0) int pathLen,
+    @JsonKey(name: 'latency-ms') @Default(0) int latencyMs,
+    @Default('') String tunnel,
+  }) = _EasyTierPeer;
+
+  factory EasyTierPeer.fromJson(Map<String, Object?> json) =>
+      _$EasyTierPeerFromJson(json);
 }
 
 @freezed

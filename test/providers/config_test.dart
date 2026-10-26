@@ -234,7 +234,7 @@ void main() {
     test('produces correct overrides', () {
       const config = Config(themeProps: ThemeProps(), currentProfileId: 7);
       final overrides = buildConfigOverrides(config);
-      expect(overrides.length, 12);
+      expect(overrides.length, 14);
 
       final overrideContainer = ProviderContainer(overrides: overrides);
       addTearDown(overrideContainer.dispose);
@@ -244,6 +244,13 @@ void main() {
         overrideContainer.read(tailscaleSettingProvider),
         config.tailscaleProps,
       );
+      // The mesh keeps two overlays and one choice, so all three come back
+      // from a config rather than resetting to their defaults.
+      expect(
+        overrideContainer.read(easyTierSettingProvider),
+        config.easyTierProps,
+      );
+      expect(overrideContainer.read(meshKindSettingProvider), config.meshKind);
       expect(
         overrideContainer.read(patchClashConfigProvider),
         config.patchClashConfig,

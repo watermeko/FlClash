@@ -1899,6 +1899,181 @@ abstract class _$Tailscales extends $Notifier<Map<String, TailscaleStatus>> {
   }
 }
 
+/// The overlay state of the injected node, if the core has reported one.
+
+@ProviderFor(easyTierStatus)
+final easyTierStatusProvider = EasyTierStatusProvider._();
+
+/// The overlay state of the injected node, if the core has reported one.
+
+final class EasyTierStatusProvider
+    extends
+        $FunctionalProvider<EasyTierStatus?, EasyTierStatus?, EasyTierStatus?>
+    with $Provider<EasyTierStatus?> {
+  /// The overlay state of the injected node, if the core has reported one.
+  EasyTierStatusProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: _noRetry,
+        name: r'easyTierStatusProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$easyTierStatusHash();
+
+  @$internal
+  @override
+  $ProviderElement<EasyTierStatus?> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  EasyTierStatus? create(Ref ref) {
+    return easyTierStatus(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(EasyTierStatus? value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<EasyTierStatus?>(value),
+    );
+  }
+}
+
+String _$easyTierStatusHash() => r'd4d7764c45f8d33bc7b1f2704551fc248ff41ece';
+
+/// Whether an EasyTier outbound exists in the running config at all, which is
+/// what a page has to know before it can say anything about the node.
+
+@ProviderFor(easyTierPresent)
+final easyTierPresentProvider = EasyTierPresentProvider._();
+
+/// Whether an EasyTier outbound exists in the running config at all, which is
+/// what a page has to know before it can say anything about the node.
+
+final class EasyTierPresentProvider
+    extends $FunctionalProvider<bool, bool, bool>
+    with $Provider<bool> {
+  /// Whether an EasyTier outbound exists in the running config at all, which is
+  /// what a page has to know before it can say anything about the node.
+  EasyTierPresentProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: _noRetry,
+        name: r'easyTierPresentProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$easyTierPresentHash();
+
+  @$internal
+  @override
+  $ProviderElement<bool> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  bool create(Ref ref) {
+    return easyTierPresent(ref);
+  }
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(bool value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<bool>(value),
+    );
+  }
+}
+
+String _$easyTierPresentHash() => r'364d4e15a68cbe953c95de61d1515935ef3b99dd';
+
+/// Every EasyTier state the core has reported, by proxy name.
+///
+/// Unlike Tailscale there is nothing pushed: EasyTier reports no events of its
+/// own to the host, so a page reads what it wants rather than waiting for a
+/// change to arrive.
+
+@ProviderFor(EasyTiers)
+final easyTiersProvider = EasyTiersProvider._();
+
+/// Every EasyTier state the core has reported, by proxy name.
+///
+/// Unlike Tailscale there is nothing pushed: EasyTier reports no events of its
+/// own to the host, so a page reads what it wants rather than waiting for a
+/// change to arrive.
+final class EasyTiersProvider
+    extends $NotifierProvider<EasyTiers, Map<String, EasyTierStatus>> {
+  /// Every EasyTier state the core has reported, by proxy name.
+  ///
+  /// Unlike Tailscale there is nothing pushed: EasyTier reports no events of its
+  /// own to the host, so a page reads what it wants rather than waiting for a
+  /// change to arrive.
+  EasyTiersProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: _noRetry,
+        name: r'easyTiersProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$easyTiersHash();
+
+  @$internal
+  @override
+  EasyTiers create() => EasyTiers();
+
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(Map<String, EasyTierStatus> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<Map<String, EasyTierStatus>>(value),
+    );
+  }
+}
+
+String _$easyTiersHash() => r'e858a32c59db571d3c4ef9b9dd22ef5b2d9b9d6b';
+
+/// Every EasyTier state the core has reported, by proxy name.
+///
+/// Unlike Tailscale there is nothing pushed: EasyTier reports no events of its
+/// own to the host, so a page reads what it wants rather than waiting for a
+/// change to arrive.
+
+abstract class _$EasyTiers extends $Notifier<Map<String, EasyTierStatus>> {
+  Map<String, EasyTierStatus> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref =
+        this.ref
+            as $Ref<Map<String, EasyTierStatus>, Map<String, EasyTierStatus>>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<
+                Map<String, EasyTierStatus>,
+                Map<String, EasyTierStatus>
+              >,
+              Map<String, EasyTierStatus>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
+
 @ProviderFor(currentGroupsState)
 final currentGroupsStateProvider = CurrentGroupsStateProvider._();
 

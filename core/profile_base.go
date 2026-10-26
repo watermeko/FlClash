@@ -76,7 +76,7 @@ func outboundsOf(mappings []map[string]any) []ProfileOutbound {
 // and never decodes it.
 func handleBuildProfile(params BuildProfileParams) (string, error) {
 	defer scheduleLoadMemoryRelease()
-	document, err := mergeProfileBase(params.Base, params.Tailscale)
+	document, err := mergeProfileBase(params.Base, params.Tailscale, params.EasyTier)
 	if err != nil {
 		return "", err
 	}
@@ -98,8 +98,8 @@ func isMatchRule(rule string) bool {
 	return strings.EqualFold(strings.TrimSpace(kind), "MATCH")
 }
 
-func loadConfigWithBase(base *SetupBase, configPath string, tailscale *TailscaleInject) (*config.Config, error) {
-	document, err := mergeProfileBase(base, tailscale)
+func loadConfigWithBase(base *SetupBase, configPath string, tailscale *TailscaleInject, easyTier *EasyTierInject) (*config.Config, error) {
+	document, err := mergeProfileBase(base, tailscale, easyTier)
 	if err != nil {
 		return nil, err
 	}
@@ -117,7 +117,7 @@ func loadConfigWithBase(base *SetupBase, configPath string, tailscale *Tailscale
 	return withPlatformLimits(cfg), nil
 }
 
-func mergeProfileBase(base *SetupBase, tailscale *TailscaleInject) (*yaml.Node, error) {
+func mergeProfileBase(base *SetupBase, tailscale *TailscaleInject, easyTier *EasyTierInject) (*yaml.Node, error) {
 	buf, err := os.ReadFile(base.Path)
 	if err != nil {
 		return nil, err
@@ -153,7 +153,7 @@ func mergeProfileBase(base *SetupBase, tailscale *TailscaleInject) (*yaml.Node, 
 	if rules != nil {
 		setMappingValue(root, "rules", rules)
 	}
-	if err := injectTailscale(root, tailscale); err != nil {
+	if err := injectOverlay(root, tailscale, easyTier); err != nil {
 		return nil, err
 	}
 	if retag {

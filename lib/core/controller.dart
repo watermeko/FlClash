@@ -257,6 +257,10 @@ class CoreController {
     return _interface.tailscaleLoginUrl(name);
   }
 
+  Future<EasyTierStatus?> easyTierStatus(String name) async {
+    return _interface.easyTierStatus(name);
+  }
+
   Future<List<ExternalProvider>> getExternalProviders() async {
     return _interface.getExternalProviders();
   }

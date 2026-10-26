@@ -1,3 +1,4 @@
+import 'package:fl_clash/common/app_localizations.dart';
 import 'package:fl_clash/common/app_ports.dart';
 import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/models/models.dart';
@@ -12,7 +13,11 @@ class Navigation implements NavigationPort {
   List<NavigationItem> getItems({
     bool openLogs = false,
     bool hasProxies = false,
+    MeshKind meshKind = MeshKind.tailscale,
   }) {
+    // One page holds whichever overlay the user chose, so the label stays the
+    // routing key it always was and only the name and icon follow the choice.
+    final meshIsEasyTier = meshKind == MeshKind.easyTier;
     return [
       NavigationItem(
         glyph: AppGlyphs.dashboard,
@@ -30,10 +35,11 @@ class Navigation implements NavigationPort {
             : [],
       ),
       NavigationItem(
-        glyph: AppGlyphs.tailscale,
+        glyph: meshIsEasyTier ? AppGlyphs.easytier : AppGlyphs.tailscale,
         label: PageLabel.tailscale,
+        title: meshIsEasyTier ? currentAppLocalizations.easyTier : null,
         builder: (_) =>
-            const TailscaleView(key: GlobalObjectKey(PageLabel.tailscale)),
+            const MeshView(key: GlobalObjectKey(PageLabel.tailscale)),
       ),
       NavigationItem(
         glyph: AppGlyphs.profiles,

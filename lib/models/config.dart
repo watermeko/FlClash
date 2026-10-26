@@ -79,6 +79,25 @@ const defaultFilters = [
   ),
 ];
 
+/// Which of the two overlays the app keeps in every profile. They are two ways
+/// into one mesh rather than two meshes: at most one is written, because each
+/// claims the addresses it routes.
+enum MeshKind {
+  tailscale,
+  easyTier;
+
+  static MeshKind fromJson(Object? value) => MeshKind.values.firstWhere(
+    (kind) => kind.name == value,
+    orElse: () => MeshKind.tailscale,
+  );
+
+  String toJson() => name;
+}
+
+/// Written through a named function because a JsonKey cannot take a tear-off of
+/// the enum's own method.
+String _meshKindToJson(MeshKind kind) => kind.toJson();
+
 /// The Tailscale node the app keeps in every profile's running config, so the
 /// mesh is a page of its own rather than something written into a profile.
 ///
@@ -104,8 +123,34 @@ abstract class TailscaleProps with _$TailscaleProps {
       json == null ? defaultTailscaleProps : _$TailscalePropsFromJson(json);
 }
 
+/// The EasyTier node the app keeps in every profile's running config.
+///
+/// EasyTier has no control plane and no login: a node joins a network by
+/// holding the same name and secret as its peers, so what a user fills in here
+/// is the network itself rather than an account. [peers] is how a node behind
+/// NAT finds one that is not, and an empty [ipv4] with [dhcp] asks the network
+/// for an address instead of holding a fixed one.
+@freezed
+abstract class EasyTierProps with _$EasyTierProps {
+  const factory EasyTierProps({
+    @Default(false) bool inject,
+    @Default('') String networkName,
+    @Default('') String networkSecret,
+    @Default('') String hostname,
+    @Default('') String ipv4,
+    @Default(true) bool dhcp,
+    @Default([]) List<String> peers,
+    @Default(true) bool udp,
+    @Default(false) bool noListener,
+  }) = _EasyTierProps;
+
+  factory EasyTierProps.fromJson(Map<String, Object?>? json) =>
+      json == null ? defaultEasyTierProps : _$EasyTierPropsFromJson(json);
+}
+
 const defaultAppSettingProps = AppSettingProps();
 const defaultTailscaleProps = TailscaleProps();
+const defaultEasyTierProps = EasyTierProps();
 const defaultVpnProps = VpnProps();
 const defaultAuthenticationProps = AuthenticationProps();
 const defaultNetworkProps = NetworkProps();
@@ -552,6 +597,12 @@ abstract class Config with _$Config {
     @Default(defaultNetworkProps) NetworkProps networkProps,
     @Default(defaultVpnProps) VpnProps vpnProps,
     @Default(defaultTailscaleProps) TailscaleProps tailscaleProps,
+    @Default(defaultEasyTierProps) EasyTierProps easyTierProps,
+    // Which overlay the pages and the injected node follow. Kept apart from
+    // the two props so turning one off does not forget how it was set up.
+    @JsonKey(fromJson: MeshKind.fromJson, toJson: _meshKindToJson)
+    @Default(MeshKind.tailscale)
+    MeshKind meshKind,
     @JsonKey(fromJson: ThemeProps.safeFromJson) required ThemeProps themeProps,
     @Default(defaultProxiesStyleProps) ProxiesStyleProps proxiesStyleProps,
     // A new key opens every window once at defaultWindowSize.
