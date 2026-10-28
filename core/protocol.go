@@ -123,7 +123,7 @@ type SetupBase struct {
 // What buildProfile merges: the same base a setup applies, with the node the
 // app keeps in it, so the preview shows what the tunnel will run.
 type BuildProfileParams struct {
-	Base      *SetupBase      `json:"base"`
+	Base      *SetupBase       `json:"base"`
 	Tailscale *TailscaleInject `json:"tailscale,omitempty"`
 }
 

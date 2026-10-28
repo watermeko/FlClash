@@ -199,7 +199,11 @@ jobs:
             gofmt -l ./*.go ./cmd ./mobile ./platform ./tun >&2
             exit 1
           }
-          go test -count=1 .
+          tags="$(sed -n 's/^tags: *//p' ../build_config.yaml)"
+          test -n "$tags" || { echo 'Could not read tags from build_config.yaml' >&2; exit 1; }
+          # The tag the core is built with decides which files exist: without
+          # it the Tailscale tests see a stub and fail on the missing node.
+          go test -tags "$tags" -count=1 .
           go vet . ./cmd/...
           GOOS=linux go vet ./platform
 

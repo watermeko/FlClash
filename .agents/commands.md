@@ -212,7 +212,7 @@ The CI Go-wrapper checks can be reproduced without CGO, the Android files includ
 
 ```bash
 cd core
-CGO_ENABLED=0 go test .
+CGO_ENABLED=0 go test -tags "$(sed -n 's/^tags: *//p' ../build_config.yaml)" .
 CGO_ENABLED=0 go vet . ./cmd/...
 GOOS=android GOARCH=arm64 CGO_ENABLED=0 go vet -tags=with_gvisor . ./mobile ./tun ./platform
 ```
