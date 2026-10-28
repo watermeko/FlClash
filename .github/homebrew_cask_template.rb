@@ -30,12 +30,12 @@ cask "flclash" do
         writable_base:  :appdir
   end
 
-  uninstall quit: "com.follow.clash"
+  uninstall quit: "icu.watermeko.clash"
 
   zap trash: [
-    "~/Library/Application Support/com.follow.clash",
-    "~/Library/Caches/com.follow.clash",
-    "~/Library/Preferences/com.follow.clash.plist",
-    "~/Library/Saved Application State/com.follow.clash.savedState",
+    "~/Library/Application Support/icu.watermeko.clash",
+    "~/Library/Caches/icu.watermeko.clash",
+    "~/Library/Preferences/icu.watermeko.clash.plist",
+    "~/Library/Saved Application State/icu.watermeko.clash.savedState",
   ]
 end

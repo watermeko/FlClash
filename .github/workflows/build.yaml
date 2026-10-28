@@ -14,9 +14,8 @@ concurrency:
 
 env:
   IS_STABLE: ${{ !contains(github.ref, '-') }}
-  # A fork carries no signing secrets, so its Android builds fall back to the
-  # debug key under the .dev id the way a local debug build does.
-  HAS_ANDROID_KEYSTORE: ${{ secrets.KEYSTORE != '' }}
+  # A fork may carry no signing secrets; the Android step then leaves the debug
+  # key and the .dev id in place, the way a local debug build does.
   # See CI Caches in .agents/commands.md.
   BRANCH_CACHE: ${{ !startsWith(github.ref, 'refs/tags/') }}
   FLUTTER_VERSION: '3.47.6'
@@ -377,13 +376,26 @@ jobs:
           submodules: recursive
 
       - name: Setup Android Signing
-        if: startsWith(matrix.platform,'android') && env.HAS_ANDROID_KEYSTORE == 'true'
+        if: startsWith(matrix.platform,'android')
+        env:
+          ANDROID_KEYSTORE: ${{ secrets.KEYSTORE }}
+          ANDROID_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          ANDROID_STORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         run: |
-          echo "${{ secrets.KEYSTORE }}" | base64 --decode > android/app/keystore.jks
+          # A repository without the secrets has no storePassword either, and
+          # android/app/build.gradle.kts then falls back to the debug key.
+          if [[ -z "$ANDROID_KEYSTORE" ]]; then
+            echo 'No keystore secrets; the APKs keep the debug key and the .dev id.'
+            exit 0
+          fi
+          # The keystore and its passwords are the only parts of this file that
+          # are secret; a checkout has no local.properties of its own.
+          base64 --decode <<<"$ANDROID_KEYSTORE" > android/app/keystore.jks
           {
-            echo "keyAlias=${{ secrets.KEY_ALIAS }}"
-            echo "storePassword=${{ secrets.STORE_PASSWORD }}"
-            echo "keyPassword=${{ secrets.KEY_PASSWORD }}"
+            echo "keyAlias=$ANDROID_KEY_ALIAS"
+            echo "storePassword=$ANDROID_STORE_PASSWORD"
+            echo "keyPassword=$ANDROID_KEY_PASSWORD"
           } >> android/local.properties
 
       - name: Setup Go
@@ -597,10 +609,11 @@ jobs:
           target-directory: /tmp/
 
   fork-release:
-    # The matrix's dist becomes one rolling pre-release, so a phone can download
-    # a build without the Actions login an artifact needs. A leg that failed only
-    # drops its own files, which is why this waits on !cancelled() rather than a
-    # green build.
+    # Every build gets its own tag, so a phone can download without the Actions
+    # login an artifact needs and yesterday's build stays reachable. The newest
+    # one is also the latest release, which is what a /releases/latest/download
+    # link resolves to. A leg that failed only drops its own files, which is why
+    # this waits on !cancelled() rather than a green build.
     if: |
       !cancelled() &&
       github.repository != 'chen08209/FlClash' &&
@@ -611,6 +624,27 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
+      - name: Name the build
+        id: build-tag
+        env:
+          BRANCH: ${{ github.ref_name }}
+          SHA: ${{ github.sha }}
+          RUN_NUMBER: ${{ github.run_number }}
+        run: |
+          short=${SHA:0:7}
+          if [[ "$BRANCH" == 'main' ]]; then
+            tag="ci-$short-$RUN_NUMBER"
+            name="CI $short build $RUN_NUMBER"
+          else
+            tag="ci-${BRANCH//\//-}-$short-$RUN_NUMBER"
+            name="CI $BRANCH $short build $RUN_NUMBER"
+          fi
+          {
+            echo "tag=$tag"
+            echo "name=$name"
+            echo "short=$short"
+          } >> "$GITHUB_OUTPUT"
+
       - name: Download
         uses: actions/download-artifact@v4
         with:
@@ -624,17 +658,19 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ci-latest
+          tag_name: ${{ steps.build-tag.outputs.tag }}
           target_commitish: ${{ github.sha }}
-          name: CI ${{ github.sha }}
-          prerelease: true
-          make_latest: false
-          overwrite_files: true
+          name: ${{ steps.build-tag.outputs.name }}
+          # A fork build is not an upstream release, but it is the newest thing
+          # this repository has, so it is what a download link should reach.
+          prerelease: false
+          make_latest: true
           body: |
-            Rolling build of `${{ github.ref_name }}` at ${{ github.sha }}.
+            Build of `${{ github.ref_name }}` at ${{ github.sha }}, from
+            [run ${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
 
-            A fork build, not an upstream release: the Android APKs are signed
-            with the debug key under the `com.follow.clash.dev` app id unless the
-            repository carries the keystore secrets, and the desktop packages are
-            unsigned. A matrix leg that failed contributed no files here.
+            A fork build, not an upstream release. Unless the repository carries
+            no keystore secrets, the Android APKs are signed with the debug key
+            under the `icu.watermeko.clash.dev` app id and the desktop packages
+            are unsigned. A matrix leg that failed contributed no files here.
           files: ./dist/*

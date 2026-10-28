@@ -1,4 +1,4 @@
-package com.follow.clash.packages
+package icu.watermeko.clash.packages
 
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertEquals

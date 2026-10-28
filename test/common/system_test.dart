@@ -185,7 +185,7 @@ void main() {
     });
 
     test('passes a path containing spaces through untouched', () {
-      const path = '/Users/a b/Library/Application Support/com.follow.clash';
+      const path = '/Users/a b/Library/Application Support/icu.watermeko.clash';
 
       final arguments = System.aclArguments(path, 'alice');
 

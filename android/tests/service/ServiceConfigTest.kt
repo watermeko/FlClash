@@ -1,9 +1,9 @@
-package com.follow.clash.service
+package icu.watermeko.clash.service
 
-import com.follow.clash.common.AccessControlMode
-import com.follow.clash.service.models.AccessControlProps
-import com.follow.clash.service.models.NotificationParams
-import com.follow.clash.service.models.VpnOptions
+import icu.watermeko.clash.common.AccessControlMode
+import icu.watermeko.clash.service.models.AccessControlProps
+import icu.watermeko.clash.service.models.NotificationParams
+import icu.watermeko.clash.service.models.VpnOptions
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotSame

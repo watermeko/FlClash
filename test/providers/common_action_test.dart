@@ -27,7 +27,7 @@ void main() {
     core = MockCoreHandlerInterface();
     globalState.packageInfo = PackageInfo(
       appName: 'FlClash',
-      packageName: 'com.follow.clash',
+      packageName: 'icu.watermeko.clash',
       version: runningVersion,
       buildNumber: '1',
     );

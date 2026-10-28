@@ -427,7 +427,7 @@
             'tipIntentTitle',
             'tipIntent',
             commandBlock(
-              ['com.follow.clash.action.START', 'com.follow.clash.action.STOP', 'com.follow.clash.action.TOGGLE'].join(
+              ['icu.watermeko.clash.action.START', 'icu.watermeko.clash.action.STOP', 'icu.watermeko.clash.action.TOGGLE'].join(
                 '\n',
               ),
             ),

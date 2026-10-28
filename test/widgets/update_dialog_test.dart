@@ -67,7 +67,7 @@ void main() {
   setUpAll(() {
     globalState.packageInfo = PackageInfo(
       appName: 'FlClash',
-      packageName: 'com.follow.clash',
+      packageName: 'icu.watermeko.clash',
       version: _runningVersion,
       buildNumber: '1',
     );

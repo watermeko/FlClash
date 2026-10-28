@@ -1,11 +1,11 @@
-package com.follow.clash
+package icu.watermeko.clash
 
-import com.follow.clash.common.AccessControlMode
-import com.follow.clash.models.SetupParams
-import com.follow.clash.models.SharedState
-import com.follow.clash.service.models.AccessControlProps
-import com.follow.clash.service.models.NotificationParams
-import com.follow.clash.service.models.VpnOptions
+import icu.watermeko.clash.common.AccessControlMode
+import icu.watermeko.clash.models.SetupParams
+import icu.watermeko.clash.models.SharedState
+import icu.watermeko.clash.service.models.AccessControlProps
+import icu.watermeko.clash.service.models.NotificationParams
+import icu.watermeko.clash.service.models.VpnOptions
 import com.google.gson.Gson
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -102,7 +102,7 @@ private class FakeHost(override val scope: CoroutineScope) : ServiceStateHost {
     var lastStartOptions: VpnOptions? = null
 
     override var runtime: ServiceRuntime? = null
-    override val homeDirPath = "/data/user/0/com.follow.clash/files"
+    override val homeDirPath = "/data/user/0/icu.watermeko.clash/files"
     override val sdkInt = 34
 
     val toasts = mutableListOf<String>()

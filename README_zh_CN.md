@@ -84,15 +84,15 @@ clash://install-config?url=<经过 URL 编码的订阅链接>
 **Android 自动化。** Tasker、MacroDroid 等应用可以用下面的 Action 启动 Activity，从而启动、停止或切换代理：
 
 ```text
-com.follow.clash.action.START
-com.follow.clash.action.STOP
-com.follow.clash.action.TOGGLE
+icu.watermeko.clash.action.START
+icu.watermeko.clash.action.STOP
+icu.watermeko.clash.action.TOGGLE
 ```
 
 在电脑上也可以通过 adb 触发：
 
 ```bash
-adb shell am start -a com.follow.clash.action.TOGGLE
+adb shell am start -a icu.watermeko.clash.action.TOGGLE
 ```
 
 ## 从源码构建
