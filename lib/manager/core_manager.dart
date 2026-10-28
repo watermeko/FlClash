@@ -46,8 +46,11 @@ class _CoreContainerState extends ConsumerState<CoreManager>
         // The proxies page is usually already built when the profile changes,
         // and an apply that finds nothing to change reports no update at all, so
         // the switch refreshes what that page reads instead of leaving the
-        // previous profile's nodes on screen.
+        // previous profile's nodes on screen. A switch that already went away
+        // while the setup ran has no page left to refresh.
+        if (!mounted) return;
         await ref.read(proxiesActionProvider.notifier).updateGroups();
+        if (!mounted) return;
         await ref.read(providersProvider.notifier).syncProviders();
       });
     });
