@@ -198,17 +198,19 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m80(count) =>
       "${Intl.plural(count, one: '1 台のデバイス', other: '${count} 台のデバイス')}";
 
-  static String m81(value) => "ピーク ${value}";
+  static String m81(relay) => "リレー ${relay}";
 
-  static String m82(value) => "累計 ${value}";
+  static String m82(value) => "ピーク ${value}";
 
-  static String m83(transport) => "${transport} リクエストヘッダー";
+  static String m83(value) => "累計 ${value}";
 
-  static String m84(label) => "${label}はURLである必要があります";
+  static String m84(transport) => "${transport} リクエストヘッダー";
 
-  static String m85(count) => "${count} 年前";
+  static String m85(label) => "${label}はURLである必要があります";
 
   static String m86(count) => "${count} 年前";
+
+  static String m87(count) => "${count} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -1564,6 +1566,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleDesc": MessageLookupByLibrary.simpleMessage(
       "Tailnet の状態・アドレス・サインイン方法",
     ),
+    "tailscaleDirect": MessageLookupByLibrary.simpleMessage("直接"),
     "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage("出口ノード"),
     "tailscaleHealth": MessageLookupByLibrary.simpleMessage("問題"),
     "tailscaleLogin": MessageLookupByLibrary.simpleMessage("ブラウザでサインイン"),
@@ -1592,6 +1595,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "オンにするとすべてのプロファイルに Tailscale ノードを保持します",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("状態を更新"),
+    "tailscaleRelayPath": m81,
     "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
       "キーを置き換えます。キーは削除され、この端末はブラウザでサインインします。",
     ),
@@ -1601,6 +1605,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("接続済み"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("起動中"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("状態"),
+    "tailscaleUnknown": MessageLookupByLibrary.simpleMessage("不明"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage("アイコンをタップして再試行"),
     "tapToAuthorize": MessageLookupByLibrary.simpleMessage("タップして許可"),
     "target": MessageLookupByLibrary.simpleMessage("宛先"),
@@ -1630,11 +1635,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("アップロード量"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxyポート"),
     "traffic": MessageLookupByLibrary.simpleMessage("通信量"),
-    "trafficPeak": m81,
-    "trafficTotal": m82,
+    "trafficPeak": m82,
+    "trafficTotal": m83,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("トラフィック統計"),
     "transport": MessageLookupByLibrary.simpleMessage("トランスポート"),
-    "transportHeaders": m83,
+    "transportHeaders": m84,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN の権限を取得できなかったため、オフにしました。",
@@ -1662,7 +1667,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("アップロード"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("アップロード帯域幅"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m84,
+    "urlTip": m85,
     "useHosts": MessageLookupByLibrary.simpleMessage("Hostsを使用"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("システムのHostsを使用"),
     "usedShort": MessageLookupByLibrary.simpleMessage("使用済み"),
@@ -1685,8 +1690,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "システムに書き込むを有効にするとシステムクロックも設定します。Android では無視されます。",
     ),
-    "yearsAgo": m85,
-    "yearsAgoShort": m86,
+    "yearsAgo": m86,
+    "yearsAgoShort": m87,
     "yes": MessageLookupByLibrary.simpleMessage("はい"),
     "zhCN": MessageLookupByLibrary.simpleMessage("簡体字中国語"),
   };

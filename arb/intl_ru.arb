@@ -986,6 +986,10 @@
   "tailscaleMachines": "Машины",
   "tailscaleNoMachines": "Машин пока нет",
   "tailscaleNoMachinesTip": "Они появятся после входа на этом устройстве",
+
+  "tailscaleDirect": "Напрямую",
+  "tailscaleRelayPath": "Через ретранслятор {relay}",
+  "tailscaleUnknown": "Неизвестно",
   "tailscaleExitNodeInUse": "выходной узел",
   "tailscaleOff": "Выключено",
   "tailscaleOffTip": "Включите, чтобы держать узел Tailscale в каждом профиле",

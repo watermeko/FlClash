@@ -986,6 +986,10 @@
   "tailscaleMachines": "장치",
   "tailscaleNoMachines": "아직 장치가 없습니다",
   "tailscaleNoMachinesTip": "이 기기가 로그인하면 표시됩니다",
+
+  "tailscaleDirect": "직접",
+  "tailscaleRelayPath": "릴레이 {relay}",
+  "tailscaleUnknown": "알 수 없음",
   "tailscaleExitNodeInUse": "출구 노드",
   "tailscaleOff": "꺼짐",
   "tailscaleOffTip": "켜면 모든 프로필에 Tailscale 노드가 유지됩니다",

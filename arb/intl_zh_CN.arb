@@ -986,6 +986,10 @@
   "tailscaleMachines": "设备",
   "tailscaleNoMachines": "暂无设备",
   "tailscaleNoMachinesTip": "本机登录后会出现",
+
+  "tailscaleDirect": "直连",
+  "tailscaleRelayPath": "中继 {relay}",
+  "tailscaleUnknown": "未知",
   "tailscaleExitNodeInUse": "出口节点",
   "tailscaleOff": "已关闭",
   "tailscaleOffTip": "开启后会在每个配置中保留一个 Tailscale 节点",

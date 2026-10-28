@@ -986,6 +986,10 @@
   "tailscaleMachines": "マシン",
   "tailscaleNoMachines": "マシンはまだありません",
   "tailscaleNoMachinesTip": "このデバイスがサインインすると表示されます",
+
+  "tailscaleDirect": "直接",
+  "tailscaleRelayPath": "リレー {relay}",
+  "tailscaleUnknown": "不明",
   "tailscaleExitNodeInUse": "出口ノード",
   "tailscaleOff": "オフ",
   "tailscaleOffTip": "オンにするとすべてのプロファイルに Tailscale ノードを保持します",

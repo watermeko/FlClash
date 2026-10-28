@@ -223,18 +223,20 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m80(count) =>
       "${Intl.plural(count, one: '1 machine', other: '${count} machines')}";
 
-  static String m81(value) => "Peak ${value}";
+  static String m81(relay) => "Relay ${relay}";
 
-  static String m82(value) => "Total ${value}";
+  static String m82(value) => "Peak ${value}";
 
-  static String m83(transport) => "${transport} Headers";
+  static String m83(value) => "Total ${value}";
 
-  static String m84(label) => "${label} must be a URL";
+  static String m84(transport) => "${transport} Headers";
 
-  static String m85(count) =>
+  static String m85(label) => "${label} must be a URL";
+
+  static String m86(count) =>
       "${Intl.plural(count, one: '1 year ago', other: '${count} years ago')}";
 
-  static String m86(count) => "${Intl.plural(count, other: '${count}y ago')}";
+  static String m87(count) => "${Intl.plural(count, other: '${count}y ago')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -968,9 +970,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "inputRuleContent": MessageLookupByLibrary.simpleMessage(
       "Enter the rule content",
     ),
-    "installedAppsPermissionDeniedMessage": MessageLookupByLibrary.simpleMessage(
-      "The app list permission was denied, so installed apps cannot be listed. Please grant it manually in system settings.",
-    ),
+    "installedAppsPermissionDeniedMessage":
+        MessageLookupByLibrary.simpleMessage(
+          "The app list permission was denied, so installed apps cannot be listed. Please grant it manually in system settings.",
+        ),
     "installedAppsPermissionDesc": MessageLookupByLibrary.simpleMessage(
       "This system hides the installed app list until the permission is granted. Authorize it to configure the per-app proxy.",
     ),
@@ -1819,6 +1822,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleDesc": MessageLookupByLibrary.simpleMessage(
       "Tailnet status, address and how the node signed in",
     ),
+    "tailscaleDirect": MessageLookupByLibrary.simpleMessage("Direct"),
     "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage("exit node"),
     "tailscaleHealth": MessageLookupByLibrary.simpleMessage("Problem"),
     "tailscaleLogin": MessageLookupByLibrary.simpleMessage("Browser sign-in"),
@@ -1853,6 +1857,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Turn this on to keep a Tailscale node in every profile",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("Refresh status"),
+    "tailscaleRelayPath": m81,
     "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
       "This replaces the key: the key is cleared and this device signs in through a browser instead.",
     ),
@@ -1862,6 +1867,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("Connected"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("Starting"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("Status"),
+    "tailscaleUnknown": MessageLookupByLibrary.simpleMessage("Unknown"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage(
       "Tap the icon to retry",
     ),
@@ -1893,11 +1899,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("Uploaded"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxy port"),
     "traffic": MessageLookupByLibrary.simpleMessage("Traffic"),
-    "trafficPeak": m81,
-    "trafficTotal": m82,
+    "trafficPeak": m82,
+    "trafficTotal": m83,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("Traffic usage"),
     "transport": MessageLookupByLibrary.simpleMessage("Transport"),
-    "transportHeaders": m83,
+    "transportHeaders": m84,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN could not be authorized, so it was turned off.",
@@ -1929,7 +1935,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("Upload"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("Upload bandwidth"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m84,
+    "urlTip": m85,
     "useHosts": MessageLookupByLibrary.simpleMessage("Use hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("Use system hosts"),
     "usedShort": MessageLookupByLibrary.simpleMessage("used"),
@@ -1954,8 +1960,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "Write to system also sets the system clock; Android ignores it.",
     ),
-    "yearsAgo": m85,
-    "yearsAgoShort": m86,
+    "yearsAgo": m86,
+    "yearsAgoShort": m87,
     "yes": MessageLookupByLibrary.simpleMessage("Yes"),
     "zhCN": MessageLookupByLibrary.simpleMessage("Simplified Chinese"),
   };

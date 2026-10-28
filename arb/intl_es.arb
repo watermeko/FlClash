@@ -986,6 +986,10 @@
   "tailscaleMachines": "Máquinas",
   "tailscaleNoMachines": "Aún no hay máquinas",
   "tailscaleNoMachinesTip": "Aparecen cuando este dispositivo inicia sesión",
+
+  "tailscaleDirect": "Directo",
+  "tailscaleRelayPath": "Retransmisión {relay}",
+  "tailscaleUnknown": "Desconocido",
   "tailscaleExitNodeInUse": "nodo de salida",
   "tailscaleOff": "Desactivado",
   "tailscaleOffTip": "Actívalo para mantener un nodo Tailscale en cada perfil",

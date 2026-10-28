@@ -199,17 +199,19 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m80(count) =>
       "${Intl.plural(count, one: '기기 1대', other: '기기 ${count}대')}";
 
-  static String m81(value) => "최고 ${value}";
+  static String m81(relay) => "릴레이 ${relay}";
 
-  static String m82(value) => "합계 ${value}";
+  static String m82(value) => "최고 ${value}";
 
-  static String m83(transport) => "${transport} 요청 헤더";
+  static String m83(value) => "합계 ${value}";
 
-  static String m84(label) => "${label}은(는) URL이어야 합니다";
+  static String m84(transport) => "${transport} 요청 헤더";
 
-  static String m85(count) => "${Intl.plural(count, other: '${count}년 전')}";
+  static String m85(label) => "${label}은(는) URL이어야 합니다";
 
   static String m86(count) => "${Intl.plural(count, other: '${count}년 전')}";
+
+  static String m87(count) => "${Intl.plural(count, other: '${count}년 전')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -1537,6 +1539,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleDesc": MessageLookupByLibrary.simpleMessage(
       "Tailnet 상태, 주소 및 로그인 방식",
     ),
+    "tailscaleDirect": MessageLookupByLibrary.simpleMessage("직접"),
     "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage("출구 노드"),
     "tailscaleHealth": MessageLookupByLibrary.simpleMessage("문제"),
     "tailscaleLogin": MessageLookupByLibrary.simpleMessage("브라우저 로그인 인증"),
@@ -1565,6 +1568,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "켜면 모든 프로필에 Tailscale 노드가 유지됩니다",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("상태 새로 고침"),
+    "tailscaleRelayPath": m81,
     "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
       "키 인증을 대체합니다. 키가 삭제되고 이 기기는 브라우저로 로그인합니다.",
     ),
@@ -1574,6 +1578,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("연결됨"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("시작 중"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("상태"),
+    "tailscaleUnknown": MessageLookupByLibrary.simpleMessage("알 수 없음"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage("아이콘을 눌러 다시 시도"),
     "tapToAuthorize": MessageLookupByLibrary.simpleMessage("눌러서 허용"),
     "target": MessageLookupByLibrary.simpleMessage("대상"),
@@ -1603,11 +1608,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("업로드량"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxy 포트"),
     "traffic": MessageLookupByLibrary.simpleMessage("트래픽"),
-    "trafficPeak": m81,
-    "trafficTotal": m82,
+    "trafficPeak": m82,
+    "trafficTotal": m83,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("트래픽 사용량"),
     "transport": MessageLookupByLibrary.simpleMessage("전송"),
-    "transportHeaders": m83,
+    "transportHeaders": m84,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN 권한을 얻지 못해 끄기로 되돌렸습니다.",
@@ -1637,7 +1642,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("업로드"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("업로드 대역폭"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m84,
+    "urlTip": m85,
     "useHosts": MessageLookupByLibrary.simpleMessage("hosts 사용"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("시스템 hosts 사용"),
     "usedShort": MessageLookupByLibrary.simpleMessage("사용"),
@@ -1660,8 +1665,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "시스템에 기록하면 시스템 시계도 설정합니다. Android에서는 무시됩니다.",
     ),
-    "yearsAgo": m85,
-    "yearsAgoShort": m86,
+    "yearsAgo": m86,
+    "yearsAgoShort": m87,
     "yes": MessageLookupByLibrary.simpleMessage("예"),
     "zhCN": MessageLookupByLibrary.simpleMessage("중국어 간체"),
   };

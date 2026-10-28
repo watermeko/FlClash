@@ -986,6 +986,10 @@
   "tailscaleMachines": "Machines",
   "tailscaleNoMachines": "No machines yet",
   "tailscaleNoMachinesTip": "They appear once this device is signed in",
+
+  "tailscaleDirect": "Direct",
+  "tailscaleRelayPath": "Relay {relay}",
+  "tailscaleUnknown": "Unknown",
   "tailscaleExitNodeInUse": "exit node",
   "tailscaleOff": "Off",
   "tailscaleOffTip": "Turn this on to keep a Tailscale node in every profile",

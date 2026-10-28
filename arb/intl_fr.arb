@@ -986,6 +986,10 @@
   "tailscaleMachines": "Machines",
   "tailscaleNoMachines": "Aucune machine pour le moment",
   "tailscaleNoMachinesTip": "Elles apparaissent une fois cet appareil connecté",
+
+  "tailscaleDirect": "Direct",
+  "tailscaleRelayPath": "Relais {relay}",
+  "tailscaleUnknown": "Inconnu",
   "tailscaleExitNodeInUse": "nœud de sortie",
   "tailscaleOff": "Désactivé",
   "tailscaleOffTip": "Activez ceci pour conserver un nœud Tailscale dans chaque profil",

@@ -1868,7 +1868,7 @@ final class TailscalesProvider
   }
 }
 
-String _$tailscalesHash() => r'acb60519df2744684a15180ea64207fefc4d94ba';
+String _$tailscalesHash() => r'fbef047f19625f64a9b5cc492242aa5280c72778';
 
 /// Every Tailscale status the core has pushed, by proxy name.
 ///

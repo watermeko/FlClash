@@ -594,6 +594,7 @@ _TailscalePeer _$TailscalePeerFromJson(Map<String, dynamic> json) =>
       curAddr: json['cur-addr'] as String? ?? '',
       rxBytes: (json['rx-bytes'] as num?)?.toInt() ?? 0,
       txBytes: (json['tx-bytes'] as num?)?.toInt() ?? 0,
+      latencyMs: (json['latency-ms'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$TailscalePeerToJson(_TailscalePeer instance) =>
@@ -609,4 +610,5 @@ Map<String, dynamic> _$TailscalePeerToJson(_TailscalePeer instance) =>
       'cur-addr': instance.curAddr,
       'rx-bytes': instance.rxBytes,
       'tx-bytes': instance.txBytes,
+      'latency-ms': instance.latencyMs,
     };

@@ -119,6 +119,19 @@ class _TailscaleViewState extends ConsumerState<TailscaleView>
     );
   }
 
+  var _refreshing = false;
+
+  Future<void> _refresh(WidgetRef ref) async {
+    setState(() => _refreshing = true);
+    try {
+      await ref.read(tailscalesProvider.notifier).readAll();
+    } finally {
+      if (mounted) {
+        setState(() => _refreshing = false);
+      }
+    }
+  }
+
   Widget _buildNodeSection(
     BuildContext context,
     WidgetRef ref,
@@ -214,6 +227,17 @@ class _TailscaleViewState extends ConsumerState<TailscaleView>
     }
     return generateSection(
       title: appLocalizations.tailscaleMachines,
+      // The list is what a user opens the page to read, and the numbers in it
+      // only move when somebody asks: the refresh reads the node's own view of
+      // its peers rather than waiting for the next push.
+      actions: [
+        IconButtonData(
+          glyph: AppGlyphs.sync,
+          onPressed: _refreshing ? null : () => _refresh(ref),
+          tooltip: appLocalizations.tailscaleRefresh,
+          isLoading: _refreshing,
+        ),
+      ],
       items: [for (final peer in peers) _MachineItem(peer: peer)],
     );
   }
@@ -566,9 +590,19 @@ class _MachineItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final appLocalizations = context.appLocalizations;
+    // The path is what the list is for: a peer reached through a relay is slow
+    // for a reason a direct one is not, so the relay's region and the round trip
+    // are what say which this is.
+    final path = peer.curAddr.isNotEmpty
+        ? appLocalizations.tailscaleDirect
+        : peer.relay.isEmpty
+        ? appLocalizations.tailscaleUnknown
+        : appLocalizations.tailscaleRelayPath(peer.relay);
     final details = [
-      if (peer.os.isNotEmpty) peer.os,
       if (peer.ips.isNotEmpty) peer.ips.first,
+      if (peer.os.isNotEmpty) peer.os,
+      path,
+      if (peer.latencyMs > 0) '${peer.latencyMs} ms',
       if (peer.exitNode) appLocalizations.tailscaleExitNodeInUse,
     ].join(' · ');
     return ListItem(

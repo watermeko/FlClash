@@ -7372,7 +7372,9 @@ $TailscalePeerCopyWith<$Res>? get exitNode {
 /// @nodoc
 mixin _$TailscalePeer {
 
- String get hostname;@JsonKey(name: 'dns-name') String get dnsName; String get os; List<String> get ips; bool get online;@JsonKey(name: 'exit-node-option') bool get exitNodeOption;@JsonKey(name: 'exit-node') bool get exitNode; String get relay;@JsonKey(name: 'cur-addr') String get curAddr;@JsonKey(name: 'rx-bytes') int get rxBytes;@JsonKey(name: 'tx-bytes') int get txBytes;
+ String get hostname;@JsonKey(name: 'dns-name') String get dnsName; String get os; List<String> get ips; bool get online;@JsonKey(name: 'exit-node-option') bool get exitNodeOption;@JsonKey(name: 'exit-node') bool get exitNode; String get relay;@JsonKey(name: 'cur-addr') String get curAddr;@JsonKey(name: 'rx-bytes') int get rxBytes;@JsonKey(name: 'tx-bytes') int get txBytes;/// Round trip the tailnet measured to this machine, 0 when it could not be
+/// measured.
+@JsonKey(name: 'latency-ms') int get latencyMs;
 /// Create a copy of TailscalePeer
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -7386,20 +7388,20 @@ $TailscalePeerCopyWith<TailscalePeer> get copyWith => _$TailscalePeerCopyWithImp
 @override
 bool operator ==(Object other) {
   final _this = this as TailscalePeer;
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TailscalePeer&&(identical(other.hostname, _this.hostname) || other.hostname == _this.hostname)&&(identical(other.dnsName, _this.dnsName) || other.dnsName == _this.dnsName)&&(identical(other.os, _this.os) || other.os == _this.os)&&const DeepCollectionEquality().equals(other.ips, _this.ips)&&(identical(other.online, _this.online) || other.online == _this.online)&&(identical(other.exitNodeOption, _this.exitNodeOption) || other.exitNodeOption == _this.exitNodeOption)&&(identical(other.exitNode, _this.exitNode) || other.exitNode == _this.exitNode)&&(identical(other.relay, _this.relay) || other.relay == _this.relay)&&(identical(other.curAddr, _this.curAddr) || other.curAddr == _this.curAddr)&&(identical(other.rxBytes, _this.rxBytes) || other.rxBytes == _this.rxBytes)&&(identical(other.txBytes, _this.txBytes) || other.txBytes == _this.txBytes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TailscalePeer&&(identical(other.hostname, _this.hostname) || other.hostname == _this.hostname)&&(identical(other.dnsName, _this.dnsName) || other.dnsName == _this.dnsName)&&(identical(other.os, _this.os) || other.os == _this.os)&&const DeepCollectionEquality().equals(other.ips, _this.ips)&&(identical(other.online, _this.online) || other.online == _this.online)&&(identical(other.exitNodeOption, _this.exitNodeOption) || other.exitNodeOption == _this.exitNodeOption)&&(identical(other.exitNode, _this.exitNode) || other.exitNode == _this.exitNode)&&(identical(other.relay, _this.relay) || other.relay == _this.relay)&&(identical(other.curAddr, _this.curAddr) || other.curAddr == _this.curAddr)&&(identical(other.rxBytes, _this.rxBytes) || other.rxBytes == _this.rxBytes)&&(identical(other.txBytes, _this.txBytes) || other.txBytes == _this.txBytes)&&(identical(other.latencyMs, _this.latencyMs) || other.latencyMs == _this.latencyMs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
   final _this = this as TailscalePeer;
-  return Object.hash(runtimeType,_this.hostname,_this.dnsName,_this.os,const DeepCollectionEquality().hash(_this.ips),_this.online,_this.exitNodeOption,_this.exitNode,_this.relay,_this.curAddr,_this.rxBytes,_this.txBytes);
+  return Object.hash(runtimeType,_this.hostname,_this.dnsName,_this.os,const DeepCollectionEquality().hash(_this.ips),_this.online,_this.exitNodeOption,_this.exitNode,_this.relay,_this.curAddr,_this.rxBytes,_this.txBytes,_this.latencyMs);
 }
 
 @override
 String toString() {
   final _this = this as TailscalePeer;
-  return 'TailscalePeer(hostname: ${_this.hostname}, dnsName: ${_this.dnsName}, os: ${_this.os}, ips: ${_this.ips}, online: ${_this.online}, exitNodeOption: ${_this.exitNodeOption}, exitNode: ${_this.exitNode}, relay: ${_this.relay}, curAddr: ${_this.curAddr}, rxBytes: ${_this.rxBytes}, txBytes: ${_this.txBytes})';
+  return 'TailscalePeer(hostname: ${_this.hostname}, dnsName: ${_this.dnsName}, os: ${_this.os}, ips: ${_this.ips}, online: ${_this.online}, exitNodeOption: ${_this.exitNodeOption}, exitNode: ${_this.exitNode}, relay: ${_this.relay}, curAddr: ${_this.curAddr}, rxBytes: ${_this.rxBytes}, txBytes: ${_this.txBytes}, latencyMs: ${_this.latencyMs})';
 }
 
 
@@ -7410,7 +7412,7 @@ abstract mixin class $TailscalePeerCopyWith<$Res>  {
   factory $TailscalePeerCopyWith(TailscalePeer value, $Res Function(TailscalePeer) _then) = _$TailscalePeerCopyWithImpl;
 @useResult
 $Res call({
- String hostname,@JsonKey(name: 'dns-name') String dnsName, String os, List<String> ips, bool online,@JsonKey(name: 'exit-node-option') bool exitNodeOption,@JsonKey(name: 'exit-node') bool exitNode, String relay,@JsonKey(name: 'cur-addr') String curAddr,@JsonKey(name: 'rx-bytes') int rxBytes,@JsonKey(name: 'tx-bytes') int txBytes
+ String hostname,@JsonKey(name: 'dns-name') String dnsName, String os, List<String> ips, bool online,@JsonKey(name: 'exit-node-option') bool exitNodeOption,@JsonKey(name: 'exit-node') bool exitNode, String relay,@JsonKey(name: 'cur-addr') String curAddr,@JsonKey(name: 'rx-bytes') int rxBytes,@JsonKey(name: 'tx-bytes') int txBytes,@JsonKey(name: 'latency-ms') int latencyMs
 });
 
 
@@ -7427,7 +7429,7 @@ class _$TailscalePeerCopyWithImpl<$Res>
 
 /// Create a copy of TailscalePeer
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? hostname = null,Object? dnsName = null,Object? os = null,Object? ips = null,Object? online = null,Object? exitNodeOption = null,Object? exitNode = null,Object? relay = null,Object? curAddr = null,Object? rxBytes = null,Object? txBytes = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? hostname = null,Object? dnsName = null,Object? os = null,Object? ips = null,Object? online = null,Object? exitNodeOption = null,Object? exitNode = null,Object? relay = null,Object? curAddr = null,Object? rxBytes = null,Object? txBytes = null,Object? latencyMs = null,}) {
   return _then(TailscalePeer(
 hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
 as String,dnsName: null == dnsName ? _self.dnsName : dnsName // ignore: cast_nullable_to_non_nullable
@@ -7440,6 +7442,7 @@ as bool,relay: null == relay ? _self.relay : relay // ignore: cast_nullable_to_n
 as String,curAddr: null == curAddr ? _self.curAddr : curAddr // ignore: cast_nullable_to_non_nullable
 as String,rxBytes: null == rxBytes ? _self.rxBytes : rxBytes // ignore: cast_nullable_to_non_nullable
 as int,txBytes: null == txBytes ? _self.txBytes : txBytes // ignore: cast_nullable_to_non_nullable
+as int,latencyMs: null == latencyMs ? _self.latencyMs : latencyMs // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }
@@ -7525,10 +7528,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String hostname, @JsonKey(name: 'dns-name')  String dnsName,  String os,  List<String> ips,  bool online, @JsonKey(name: 'exit-node-option')  bool exitNodeOption, @JsonKey(name: 'exit-node')  bool exitNode,  String relay, @JsonKey(name: 'cur-addr')  String curAddr, @JsonKey(name: 'rx-bytes')  int rxBytes, @JsonKey(name: 'tx-bytes')  int txBytes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String hostname, @JsonKey(name: 'dns-name')  String dnsName,  String os,  List<String> ips,  bool online, @JsonKey(name: 'exit-node-option')  bool exitNodeOption, @JsonKey(name: 'exit-node')  bool exitNode,  String relay, @JsonKey(name: 'cur-addr')  String curAddr, @JsonKey(name: 'rx-bytes')  int rxBytes, @JsonKey(name: 'tx-bytes')  int txBytes, @JsonKey(name: 'latency-ms')  int latencyMs)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TailscalePeer() when $default != null:
-return $default(_that.hostname,_that.dnsName,_that.os,_that.ips,_that.online,_that.exitNodeOption,_that.exitNode,_that.relay,_that.curAddr,_that.rxBytes,_that.txBytes);case _:
+return $default(_that.hostname,_that.dnsName,_that.os,_that.ips,_that.online,_that.exitNodeOption,_that.exitNode,_that.relay,_that.curAddr,_that.rxBytes,_that.txBytes,_that.latencyMs);case _:
   return orElse();
 
 }
@@ -7546,10 +7549,10 @@ return $default(_that.hostname,_that.dnsName,_that.os,_that.ips,_that.online,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String hostname, @JsonKey(name: 'dns-name')  String dnsName,  String os,  List<String> ips,  bool online, @JsonKey(name: 'exit-node-option')  bool exitNodeOption, @JsonKey(name: 'exit-node')  bool exitNode,  String relay, @JsonKey(name: 'cur-addr')  String curAddr, @JsonKey(name: 'rx-bytes')  int rxBytes, @JsonKey(name: 'tx-bytes')  int txBytes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String hostname, @JsonKey(name: 'dns-name')  String dnsName,  String os,  List<String> ips,  bool online, @JsonKey(name: 'exit-node-option')  bool exitNodeOption, @JsonKey(name: 'exit-node')  bool exitNode,  String relay, @JsonKey(name: 'cur-addr')  String curAddr, @JsonKey(name: 'rx-bytes')  int rxBytes, @JsonKey(name: 'tx-bytes')  int txBytes, @JsonKey(name: 'latency-ms')  int latencyMs)  $default,) {final _that = this;
 switch (_that) {
 case _TailscalePeer():
-return $default(_that.hostname,_that.dnsName,_that.os,_that.ips,_that.online,_that.exitNodeOption,_that.exitNode,_that.relay,_that.curAddr,_that.rxBytes,_that.txBytes);case _:
+return $default(_that.hostname,_that.dnsName,_that.os,_that.ips,_that.online,_that.exitNodeOption,_that.exitNode,_that.relay,_that.curAddr,_that.rxBytes,_that.txBytes,_that.latencyMs);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -7566,10 +7569,10 @@ return $default(_that.hostname,_that.dnsName,_that.os,_that.ips,_that.online,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String hostname, @JsonKey(name: 'dns-name')  String dnsName,  String os,  List<String> ips,  bool online, @JsonKey(name: 'exit-node-option')  bool exitNodeOption, @JsonKey(name: 'exit-node')  bool exitNode,  String relay, @JsonKey(name: 'cur-addr')  String curAddr, @JsonKey(name: 'rx-bytes')  int rxBytes, @JsonKey(name: 'tx-bytes')  int txBytes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String hostname, @JsonKey(name: 'dns-name')  String dnsName,  String os,  List<String> ips,  bool online, @JsonKey(name: 'exit-node-option')  bool exitNodeOption, @JsonKey(name: 'exit-node')  bool exitNode,  String relay, @JsonKey(name: 'cur-addr')  String curAddr, @JsonKey(name: 'rx-bytes')  int rxBytes, @JsonKey(name: 'tx-bytes')  int txBytes, @JsonKey(name: 'latency-ms')  int latencyMs)?  $default,) {final _that = this;
 switch (_that) {
 case _TailscalePeer() when $default != null:
-return $default(_that.hostname,_that.dnsName,_that.os,_that.ips,_that.online,_that.exitNodeOption,_that.exitNode,_that.relay,_that.curAddr,_that.rxBytes,_that.txBytes);case _:
+return $default(_that.hostname,_that.dnsName,_that.os,_that.ips,_that.online,_that.exitNodeOption,_that.exitNode,_that.relay,_that.curAddr,_that.rxBytes,_that.txBytes,_that.latencyMs);case _:
   return null;
 
 }
@@ -7581,7 +7584,7 @@ return $default(_that.hostname,_that.dnsName,_that.os,_that.ips,_that.online,_th
 @JsonSerializable()
 
 class _TailscalePeer implements TailscalePeer {
-  const _TailscalePeer({this.hostname = '', @JsonKey(name: 'dns-name') this.dnsName = '', this.os = '',  List<String> ips = const [], this.online = false, @JsonKey(name: 'exit-node-option') this.exitNodeOption = false, @JsonKey(name: 'exit-node') this.exitNode = false, this.relay = '', @JsonKey(name: 'cur-addr') this.curAddr = '', @JsonKey(name: 'rx-bytes') this.rxBytes = 0, @JsonKey(name: 'tx-bytes') this.txBytes = 0}): _ips = ips;
+  const _TailscalePeer({this.hostname = '', @JsonKey(name: 'dns-name') this.dnsName = '', this.os = '',  List<String> ips = const [], this.online = false, @JsonKey(name: 'exit-node-option') this.exitNodeOption = false, @JsonKey(name: 'exit-node') this.exitNode = false, this.relay = '', @JsonKey(name: 'cur-addr') this.curAddr = '', @JsonKey(name: 'rx-bytes') this.rxBytes = 0, @JsonKey(name: 'tx-bytes') this.txBytes = 0, @JsonKey(name: 'latency-ms') this.latencyMs = 0}): _ips = ips;
   factory _TailscalePeer.fromJson(Map<String, dynamic> json) => _$TailscalePeerFromJson(json);
 
 @override@JsonKey() final  String hostname;
@@ -7601,6 +7604,9 @@ class _TailscalePeer implements TailscalePeer {
 @override@JsonKey(name: 'cur-addr') final  String curAddr;
 @override@JsonKey(name: 'rx-bytes') final  int rxBytes;
 @override@JsonKey(name: 'tx-bytes') final  int txBytes;
+/// Round trip the tailnet measured to this machine, 0 when it could not be
+/// measured.
+@override@JsonKey(name: 'latency-ms') final  int latencyMs;
 
 /// Create a copy of TailscalePeer
 /// with the given fields replaced by the non-null parameter values.
@@ -7615,18 +7621,18 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TailscalePeer&&(identical(other.hostname, hostname) || other.hostname == hostname)&&(identical(other.dnsName, dnsName) || other.dnsName == dnsName)&&(identical(other.os, os) || other.os == os)&&const DeepCollectionEquality().equals(other.ips, _ips)&&(identical(other.online, online) || other.online == online)&&(identical(other.exitNodeOption, exitNodeOption) || other.exitNodeOption == exitNodeOption)&&(identical(other.exitNode, exitNode) || other.exitNode == exitNode)&&(identical(other.relay, relay) || other.relay == relay)&&(identical(other.curAddr, curAddr) || other.curAddr == curAddr)&&(identical(other.rxBytes, rxBytes) || other.rxBytes == rxBytes)&&(identical(other.txBytes, txBytes) || other.txBytes == txBytes));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _TailscalePeer&&(identical(other.hostname, hostname) || other.hostname == hostname)&&(identical(other.dnsName, dnsName) || other.dnsName == dnsName)&&(identical(other.os, os) || other.os == os)&&const DeepCollectionEquality().equals(other.ips, _ips)&&(identical(other.online, online) || other.online == online)&&(identical(other.exitNodeOption, exitNodeOption) || other.exitNodeOption == exitNodeOption)&&(identical(other.exitNode, exitNode) || other.exitNode == exitNode)&&(identical(other.relay, relay) || other.relay == relay)&&(identical(other.curAddr, curAddr) || other.curAddr == curAddr)&&(identical(other.rxBytes, rxBytes) || other.rxBytes == rxBytes)&&(identical(other.txBytes, txBytes) || other.txBytes == txBytes)&&(identical(other.latencyMs, latencyMs) || other.latencyMs == latencyMs));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
 int get hashCode {
-    return Object.hash(runtimeType,hostname,dnsName,os,const DeepCollectionEquality().hash(_ips),online,exitNodeOption,exitNode,relay,curAddr,rxBytes,txBytes);
+    return Object.hash(runtimeType,hostname,dnsName,os,const DeepCollectionEquality().hash(_ips),online,exitNodeOption,exitNode,relay,curAddr,rxBytes,txBytes,latencyMs);
 }
 
 @override
 String toString() {
-    return 'TailscalePeer(hostname: $hostname, dnsName: $dnsName, os: $os, ips: $ips, online: $online, exitNodeOption: $exitNodeOption, exitNode: $exitNode, relay: $relay, curAddr: $curAddr, rxBytes: $rxBytes, txBytes: $txBytes)';
+    return 'TailscalePeer(hostname: $hostname, dnsName: $dnsName, os: $os, ips: $ips, online: $online, exitNodeOption: $exitNodeOption, exitNode: $exitNode, relay: $relay, curAddr: $curAddr, rxBytes: $rxBytes, txBytes: $txBytes, latencyMs: $latencyMs)';
 }
 
 
@@ -7637,7 +7643,7 @@ abstract mixin class _$TailscalePeerCopyWith<$Res> implements $TailscalePeerCopy
   factory _$TailscalePeerCopyWith(_TailscalePeer value, $Res Function(_TailscalePeer) _then) = __$TailscalePeerCopyWithImpl;
 @override @useResult
 $Res call({
- String hostname,@JsonKey(name: 'dns-name') String dnsName, String os, List<String> ips, bool online,@JsonKey(name: 'exit-node-option') bool exitNodeOption,@JsonKey(name: 'exit-node') bool exitNode, String relay,@JsonKey(name: 'cur-addr') String curAddr,@JsonKey(name: 'rx-bytes') int rxBytes,@JsonKey(name: 'tx-bytes') int txBytes
+ String hostname,@JsonKey(name: 'dns-name') String dnsName, String os, List<String> ips, bool online,@JsonKey(name: 'exit-node-option') bool exitNodeOption,@JsonKey(name: 'exit-node') bool exitNode, String relay,@JsonKey(name: 'cur-addr') String curAddr,@JsonKey(name: 'rx-bytes') int rxBytes,@JsonKey(name: 'tx-bytes') int txBytes,@JsonKey(name: 'latency-ms') int latencyMs
 });
 
 
@@ -7654,7 +7660,7 @@ class __$TailscalePeerCopyWithImpl<$Res>
 
 /// Create a copy of TailscalePeer
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? hostname = null,Object? dnsName = null,Object? os = null,Object? ips = null,Object? online = null,Object? exitNodeOption = null,Object? exitNode = null,Object? relay = null,Object? curAddr = null,Object? rxBytes = null,Object? txBytes = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? hostname = null,Object? dnsName = null,Object? os = null,Object? ips = null,Object? online = null,Object? exitNodeOption = null,Object? exitNode = null,Object? relay = null,Object? curAddr = null,Object? rxBytes = null,Object? txBytes = null,Object? latencyMs = null,}) {
   return _then(_TailscalePeer(
 hostname: null == hostname ? _self.hostname : hostname // ignore: cast_nullable_to_non_nullable
 as String,dnsName: null == dnsName ? _self.dnsName : dnsName // ignore: cast_nullable_to_non_nullable
@@ -7667,6 +7673,7 @@ as bool,relay: null == relay ? _self.relay : relay // ignore: cast_nullable_to_n
 as String,curAddr: null == curAddr ? _self.curAddr : curAddr // ignore: cast_nullable_to_non_nullable
 as String,rxBytes: null == rxBytes ? _self.rxBytes : rxBytes // ignore: cast_nullable_to_non_nullable
 as int,txBytes: null == txBytes ? _self.txBytes : txBytes // ignore: cast_nullable_to_non_nullable
+as int,latencyMs: null == latencyMs ? _self.latencyMs : latencyMs // ignore: cast_nullable_to_non_nullable
 as int,
   ));
 }

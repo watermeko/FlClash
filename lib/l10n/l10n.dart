@@ -7943,8 +7943,7 @@ class AppLocalizations {
   String customImportDroppedSubRules(num count, Object label) {
     return Intl.plural(
       count,
-      one:
-          '1 SUB-RULE rule was dropped, since custom profiles do not support sub-rules',
+      one: '1 SUB-RULE rule was dropped, since custom profiles do not support sub-rules',
       other:
           '$label SUB-RULE rules were dropped, since custom profiles do not support sub-rules',
       name: 'customImportDroppedSubRules',
@@ -8253,6 +8252,31 @@ class AppLocalizations {
     return Intl.message(
       'They appear once this device is signed in',
       name: 'tailscaleNoMachinesTip',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Direct`
+  String get tailscaleDirect {
+    return Intl.message('Direct', name: 'tailscaleDirect', desc: '', args: []);
+  }
+
+  /// `Relay {relay}`
+  String tailscaleRelayPath(Object relay) {
+    return Intl.message(
+      'Relay $relay',
+      name: 'tailscaleRelayPath',
+      desc: '',
+      args: [relay],
+    );
+  }
+
+  /// `Unknown`
+  String get tailscaleUnknown {
+    return Intl.message(
+      'Unknown',
+      name: 'tailscaleUnknown',
       desc: '',
       args: [],
     );

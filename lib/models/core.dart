@@ -436,6 +436,10 @@ abstract class TailscalePeer with _$TailscalePeer {
     @JsonKey(name: 'cur-addr') @Default('') String curAddr,
     @JsonKey(name: 'rx-bytes') @Default(0) int rxBytes,
     @JsonKey(name: 'tx-bytes') @Default(0) int txBytes,
+
+    /// Round trip the tailnet measured to this machine, 0 when it could not be
+    /// measured.
+    @JsonKey(name: 'latency-ms') @Default(0) int latencyMs,
   }) = _TailscalePeer;
 
   factory TailscalePeer.fromJson(Map<String, Object?> json) =>

@@ -232,18 +232,20 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m80(count) =>
       "${Intl.plural(count, one: '1 machine', other: '${count} machines')}";
 
-  static String m81(value) => "Pic ${value}";
+  static String m81(relay) => "Relais ${relay}";
 
-  static String m82(value) => "Total ${value}";
+  static String m82(value) => "Pic ${value}";
 
-  static String m83(transport) => "En-têtes ${transport}";
+  static String m83(value) => "Total ${value}";
 
-  static String m84(label) => "${label} doit être une URL";
+  static String m84(transport) => "En-têtes ${transport}";
 
-  static String m85(count) =>
-      "${Intl.plural(count, one: 'il y a 1 an', other: 'il y a ${count} ans')}";
+  static String m85(label) => "${label} doit être une URL";
 
   static String m86(count) =>
+      "${Intl.plural(count, one: 'il y a 1 an', other: 'il y a ${count} ans')}";
+
+  static String m87(count) =>
       "${Intl.plural(count, other: 'il y a ${count} a')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
@@ -1034,9 +1036,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "inputRuleContent": MessageLookupByLibrary.simpleMessage(
       "Saisissez le contenu de la règle",
     ),
-    "installedAppsPermissionDeniedMessage": MessageLookupByLibrary.simpleMessage(
-      "L’autorisation de la liste des apps a été refusée ; les apps installées ne peuvent donc pas être listées. Veuillez l’accorder manuellement dans les réglages du système.",
-    ),
+    "installedAppsPermissionDeniedMessage":
+        MessageLookupByLibrary.simpleMessage(
+          "L’autorisation de la liste des apps a été refusée ; les apps installées ne peuvent donc pas être listées. Veuillez l’accorder manuellement dans les réglages du système.",
+        ),
     "installedAppsPermissionDesc": MessageLookupByLibrary.simpleMessage(
       "Ce système masque la liste des apps installées tant que l’autorisation n’est pas accordée. Accordez-la pour configurer le proxy par app.",
     ),
@@ -1963,6 +1966,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleDesc": MessageLookupByLibrary.simpleMessage(
       "État du tailnet, adresse et mode de connexion",
     ),
+    "tailscaleDirect": MessageLookupByLibrary.simpleMessage("Direct"),
     "tailscaleExitNodeInUse": MessageLookupByLibrary.simpleMessage(
       "nœud de sortie",
     ),
@@ -2005,6 +2009,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage(
       "Actualiser l\'état",
     ),
+    "tailscaleRelayPath": m81,
     "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
       "Cela remplace la clé : elle est effacée et l\'appareil se connecte avec un navigateur.",
     ),
@@ -2014,6 +2019,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "tailscaleRunning": MessageLookupByLibrary.simpleMessage("Connecté"),
     "tailscaleStarting": MessageLookupByLibrary.simpleMessage("Démarrage"),
     "tailscaleStatus": MessageLookupByLibrary.simpleMessage("État"),
+    "tailscaleUnknown": MessageLookupByLibrary.simpleMessage("Inconnu"),
     "tapIconToRetry": MessageLookupByLibrary.simpleMessage(
       "Appuyez sur l’icône pour réessayer",
     ),
@@ -2049,11 +2055,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("Envoyé"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("Port TProxy"),
     "traffic": MessageLookupByLibrary.simpleMessage("Trafic"),
-    "trafficPeak": m81,
-    "trafficTotal": m82,
+    "trafficPeak": m82,
+    "trafficTotal": m83,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("Trafic utilisé"),
     "transport": MessageLookupByLibrary.simpleMessage("Transport"),
-    "transportHeaders": m83,
+    "transportHeaders": m84,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN n’a pas pu être autorisé et a donc été désactivé.",
@@ -2089,7 +2095,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Bande passante d’envoi",
     ),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m84,
+    "urlTip": m85,
     "useHosts": MessageLookupByLibrary.simpleMessage("Utiliser hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage(
       "Utiliser les hosts du système",
@@ -2118,8 +2124,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "Écrire dans le système règle aussi l’horloge système ; Android l’ignore.",
     ),
-    "yearsAgo": m85,
-    "yearsAgoShort": m86,
+    "yearsAgo": m86,
+    "yearsAgoShort": m87,
     "yes": MessageLookupByLibrary.simpleMessage("Oui"),
     "zhCN": MessageLookupByLibrary.simpleMessage("Chinois simplifié"),
   };
