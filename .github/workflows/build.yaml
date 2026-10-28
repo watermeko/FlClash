@@ -331,7 +331,7 @@ jobs:
   build:
     # Releases publish where the release links point: the public repository. A
     # fork owns no such release, so it builds the same matrix from main and by
-    # hand and publishes the rolling ci-latest pre-release instead.
+    # hand and publishes its own tagged release instead.
     if: |
       (github.repository == 'chen08209/FlClash' && github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')) ||
       (github.repository != 'chen08209/FlClash' &&
