@@ -75,6 +75,20 @@ class Tailscales extends _$Tailscales {
         state = const {};
       }
     });
+    // A status describes a node that exists. When an apply installs a config
+    // without one — the switch was turned off, or the profile no longer carries
+    // it — what the last node said is no longer an answer about anything, and a
+    // page reading it would claim a login that is gone.
+    ref.listen(groupsProvider, (_, next) {
+      final present = next.any(
+        (group) => group.all.any(
+          (proxy) => proxy.type.toLowerCase() == _tailscaleType,
+        ),
+      );
+      if (!present && state.isNotEmpty) {
+        state = const {};
+      }
+    });
     return const {};
   }
 
