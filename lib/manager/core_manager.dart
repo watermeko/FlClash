@@ -41,8 +41,14 @@ class _CoreContainerState extends ConsumerState<CoreManager>
     // the previous one hides the error and looks like the switch was lost.
     ref.listenManual(currentProfileIdProvider, (prev, next) {
       if (prev == next) return;
-      runAfterFrame(() {
-        unawaited(ref.read(setupActionProvider.notifier).fullSetup());
+      runAfterFrame(() async {
+        await ref.read(setupActionProvider.notifier).fullSetup();
+        // The proxies page is usually already built when the profile changes,
+        // and an apply that finds nothing to change reports no update at all, so
+        // the switch refreshes what that page reads instead of leaving the
+        // previous profile's nodes on screen.
+        await ref.read(proxiesActionProvider.notifier).updateGroups();
+        await ref.read(providersProvider.notifier).syncProviders();
       });
     });
     ref.listenManual(updateParamsProvider, (prev, next) {
