@@ -83,6 +83,12 @@ _MockCoreHandlerInterface _coreInterface() {
   final coreInterface = _MockCoreHandlerInterface();
   when(() => coreInterface.startLog()).thenAnswer((_) {});
   when(() => coreInterface.stopLog()).thenAnswer((_) {});
+  // A profile switch refreshes the proxies page and the providers list after
+  // the setup, so both answers have to exist even when a test never reads them.
+  when(
+    () => coreInterface.getProxies(),
+  ).thenAnswer((_) async => const ProxiesData(proxies: {}, all: []));
+  when(() => coreInterface.getExternalProviders()).thenAnswer((_) async => []);
   return coreInterface;
 }
 
