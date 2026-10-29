@@ -1,5 +1,22 @@
 # Changelog
 
+## v0.9.3 (2026-10-29)
+
+**Features**
+
+- **tailscale** A Tailscale page beside the dashboard, with its own group, rules and DNS; sign in with a key or in the browser (69a7a7f)
+- **tailscale** The node says which way it signed in, and the dashboard card keeps to the bottom row (4793653)
+- **tailscale** The tailnet as a network interface, and each machine's path and latency in the device list (795d6d8)
+- **android** Install as icu.watermeko.clash, signed with a release key (998e1e9)
+- **profiles** vless and other share-link subscriptions import with a proxy group and a routing rule (2fc640c)
+- **ci** Release notes are written from the commits behind each build (d0d7789)
+
+**Bug Fixes**
+
+- **tailscale** Forget a status once the config drops the node (6b69128)
+- **proxies** A profile switch refreshes the proxies page instead of leaving the previous profile's nodes (45ac879)
+- **proxies** The refresh after a switch stops when the page is already gone (132f5ef)
+
 ## v0.9.2 (2026-10-24)
 
 **Features**

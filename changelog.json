@@ -2,6 +2,69 @@
   "schemaVersion": 2,
   "versions": [
     {
+      "version": "0.9.3",
+      "tag": "v0.9.3",
+      "date": "2026-10-29",
+      "prerelease": false,
+      "groups": [
+        {
+          "type": "feat",
+          "entries": [
+            {
+              "id": "69a7a7f",
+              "scope": "tailscale",
+              "text": "A Tailscale page beside the dashboard, with its own group, rules and DNS; sign in with a key or in the browser"
+            },
+            {
+              "id": "4793653",
+              "scope": "tailscale",
+              "text": "The node says which way it signed in, and the dashboard card keeps to the bottom row"
+            },
+            {
+              "id": "795d6d8",
+              "scope": "tailscale",
+              "text": "The tailnet as a network interface, and each machine's path and latency in the device list"
+            },
+            {
+              "id": "998e1e9",
+              "scope": "android",
+              "text": "Install as icu.watermeko.clash, signed with a release key"
+            },
+            {
+              "id": "2fc640c",
+              "scope": "profiles",
+              "text": "vless and other share-link subscriptions import with a proxy group and a routing rule"
+            },
+            {
+              "id": "d0d7789",
+              "scope": "ci",
+              "text": "Release notes are written from the commits behind each build"
+            }
+          ]
+        },
+        {
+          "type": "fix",
+          "entries": [
+            {
+              "id": "6b69128",
+              "scope": "tailscale",
+              "text": "Forget a status once the config drops the node"
+            },
+            {
+              "id": "45ac879",
+              "scope": "proxies",
+              "text": "A profile switch refreshes the proxies page instead of leaving the previous profile's nodes"
+            },
+            {
+              "id": "132f5ef",
+              "scope": "proxies",
+              "text": "The refresh after a switch stops when the page is already gone"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "version": "0.9.2",
       "tag": "v0.9.2",
       "date": "2026-10-24",
