@@ -46,6 +46,11 @@
           "type": "fix",
           "entries": [
             {
+              "id": "21ca31b",
+              "scope": "tailscale",
+              "text": "The switch hands the node to the Core, and the login finishes in the app so the node is signed in when it returns"
+            },
+            {
               "id": "bb41ef8",
               "scope": "android",
               "text": "Release builds keep the names the service models cross the channel as JSON with, so the Core answers again"

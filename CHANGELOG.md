@@ -13,6 +13,7 @@
 
 **Bug Fixes**
 
+- **tailscale** The switch hands the node to the Core, and the login finishes in the app so the node is signed in when it returns (21ca31b)
 - **android** Release builds keep the names the service models cross the channel as JSON with, so the Core answers again (bb41ef8)
 - **tailscale** Forget a status once the config drops the node (6b69128)
 - **proxies** A profile switch refreshes the proxies page instead of leaving the previous profile's nodes (45ac879)
