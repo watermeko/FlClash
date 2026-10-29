@@ -5,6 +5,7 @@ import 'package:args/args.dart';
 import 'src/changelog/builder.dart';
 import 'src/changelog/git.dart';
 import 'src/changelog/models.dart';
+import 'src/changelog/parser.dart';
 import 'src/changelog/render.dart';
 
 const _repository = 'chen08209/FlClash';
@@ -27,6 +28,12 @@ Future<void> main(List<String> arguments) async {
 
   parser.addCommand('render')
     ..addOption('tag', help: 'Version tag to render, defaults to the newest.')
+    ..addOption(
+      'since',
+      help:
+          'For "unreleased": the tag to start from, defaults to the newest '
+          'stable one.',
+    )
     ..addOption('out', help: 'Output file, defaults to stdout.');
 
   parser.addCommand('verify');
@@ -105,7 +112,10 @@ int _build(String root, ArgResults command) {
 int _render(String root, ArgResults command) {
   final rest = command.rest;
   if (rest.isEmpty) {
-    _fail('render needs a target: release or telegram');
+    _fail('render needs a target: release, telegram, markdown or unreleased');
+  }
+  if (rest.first == 'unreleased') {
+    return _renderUnreleased(root, command);
   }
   final changelog = decodeChangelog(
     resolve(root, changelogDataPath).readAsStringSync(),
@@ -123,6 +133,15 @@ int _render(String root, ArgResults command) {
 
   final output = switch (rest.first) {
     'release' => renderRelease(version),
+    // Rewrites CHANGELOG.md from the data file alone, so an entry added by hand
+    // to changelog.json can reach the rendered page without regenerating from
+    // git, which would drop it again.
+    'markdown' => mergeMarkdown(
+      renderMarkdown(changelog),
+      resolve(root, changelogMarkdownPath).existsSync()
+          ? resolve(root, changelogMarkdownPath).readAsStringSync()
+          : '',
+    ),
     // Only stable builds pass --tag, and only they get a release page; a
     // prerelease caption already links its workflow run.
     'telegram' => renderTelegram(
@@ -141,6 +160,42 @@ int _render(String root, ArgResults command) {
     resolve(root, out).writeAsStringSync(output);
   }
   return 0;
+}
+
+/// The notes for a build that is not a version: everything a branch carries
+/// since the last stable tag. A fork publishes one of these per push, so the
+/// entries it lists must be the commits since the previous build rather than
+/// the whole history under a new name.
+int _renderUnreleased(String root, ArgResults command) {
+  final git = Git(workingDirectory: root);
+  final since = command.option('since');
+  if (since != null && !git.tagExists(since)) {
+    _fail('--since $since is not a tag in this repository');
+  }
+  final from = since ?? _newestStableTag(git);
+  final label = command.option('tag') ?? 'unreleased';
+  final parser = ChangelogParser();
+  final version = ChangelogVersion(
+    version: label.startsWith('v') ? label.substring(1) : label,
+    tag: label,
+    date: today(),
+    prerelease: true,
+    groups: groupItems(parser.parseAll(git.commits(from: from, to: 'HEAD'))),
+  );
+  _printWarnings(parser.warnings);
+  final output = renderRelease(version);
+  final out = command.option('out');
+  if (out == null) {
+    stdout.write(output);
+  } else {
+    resolve(root, out).writeAsStringSync(output);
+  }
+  return 0;
+}
+
+String? _newestStableTag(Git git) {
+  final stable = git.stableTags();
+  return stable.isEmpty ? null : stable.first.name;
 }
 
 int _verify(String root) {
@@ -273,6 +328,8 @@ Commands:
   release --version X   Rewrite CHANGELOG.md and changelog.json.
   build [--unreleased]  Rewrite changelog.json only.
   render <release|telegram> [--tag vX] [--out file]
+  render unreleased [--since vX] [--tag label] [--out file]
+  render markdown [--out CHANGELOG.md]
   verify                Check the committed changelog against git.
 
 ${parser.usage}''';

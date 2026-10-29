@@ -336,7 +336,8 @@ jobs:
       (github.repository == 'chen08209/FlClash' && github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')) ||
       (github.repository != 'chen08209/FlClash' &&
        (github.event_name == 'workflow_dispatch' ||
-        (github.event_name == 'push' && github.ref == 'refs/heads/main')))
+        (github.event_name == 'push' &&
+         (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')))))
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -613,41 +614,99 @@ jobs:
           target-directory: /tmp/
 
   fork-release:
-    # Every build gets its own tag, so a phone can download without the Actions
-    # login an artifact needs and yesterday's build stays reachable. The newest
-    # one is also the latest release, which is what a /releases/latest/download
+    # A version tag publishes the release the changelog was written for; every
+    # other build gets its own tag, so a phone can download without the Actions
+    # login an artifact needs and yesterday's build stays reachable. Whichever
+    # ran last is the latest release, which is what a /releases/latest/download
     # link resolves to. A leg that failed only drops its own files, which is why
     # this waits on !cancelled() rather than a green build.
     if: |
       !cancelled() &&
       github.repository != 'chen08209/FlClash' &&
       (github.event_name == 'workflow_dispatch' ||
-       (github.event_name == 'push' && github.ref == 'refs/heads/main'))
+       (github.event_name == 'push' &&
+        (github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v'))))
     needs: [ build ]
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # The changelog is derived from the commits between two tags, so the
+          # job needs the history and the tags a shallow clone leaves behind.
+          fetch-depth: 0
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: ${{ env.BRANCH_CACHE }}
+
+      - name: Install dependencies
+        run: flutter pub get
+
       - name: Name the build
         id: build-tag
         env:
-          BRANCH: ${{ github.ref_name }}
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
           SHA: ${{ github.sha }}
           RUN_NUMBER: ${{ github.run_number }}
         run: |
           short=${SHA:0:7}
-          if [[ "$BRANCH" == 'main' ]]; then
+          if [[ "$REF_TYPE" == 'tag' ]]; then
+            # A version tag is the release the changelog was written for.
+            tag="$REF_NAME"
+            name="$REF_NAME"
+            versioned=true
+          elif [[ "$REF_NAME" == 'main' ]]; then
             tag="ci-$short-$RUN_NUMBER"
             name="CI $short build $RUN_NUMBER"
+            versioned=false
           else
-            tag="ci-${BRANCH//\//-}-$short-$RUN_NUMBER"
-            name="CI $BRANCH $short build $RUN_NUMBER"
+            tag="ci-${REF_NAME//\//-}-$short-$RUN_NUMBER"
+            name="CI $REF_NAME $short build $RUN_NUMBER"
+            versioned=false
           fi
           {
             echo "tag=$tag"
             echo "name=$name"
+            echo "versioned=$versioned"
             echo "short=$short"
           } >> "$GITHUB_OUTPUT"
+
+      - name: Generate release notes
+        env:
+          VERSIONED: ${{ steps.build-tag.outputs.versioned }}
+          TAG: ${{ steps.build-tag.outputs.tag }}
+          RUN_NUMBER: ${{ github.run_number }}
+          REF_NAME: ${{ github.ref_name }}
+          SHA: ${{ github.sha }}
+        run: |
+          {
+            if [[ "$VERSIONED" == 'true' ]]; then
+              # The notes `tool/changelog.dart release` wrote for this version.
+              dart run tool/changelog.dart render release --tag "$TAG"
+            else
+              # A build between two versions: only what landed since the last
+              # one, so a download of today's build does not repeat the history
+              # the versioned release already lists.
+              dart run tool/changelog.dart render unreleased --tag "$TAG"
+            fi
+            echo
+            echo "---"
+            echo
+            echo "Built from \`$REF_NAME\` at $SHA, from [run $RUN_NUMBER](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})."
+            echo
+            echo "A fork build, not an upstream release. Unless the repository carries"
+            echo "no keystore secrets, the Android APKs are signed with the debug key"
+            echo "under the \`icu.watermeko.clash.dev\` app id and the desktop packages"
+            echo "are unsigned. A matrix leg that failed contributed no files here."
+          } > notes.md
+          cat notes.md
 
       - name: Download
         uses: actions/download-artifact@v4
@@ -669,12 +728,5 @@ jobs:
           # this repository has, so it is what a download link should reach.
           prerelease: false
           make_latest: true
-          body: |
-            Build of `${{ github.ref_name }}` at ${{ github.sha }}, from
-            [run ${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}).
-
-            A fork build, not an upstream release. Unless the repository carries
-            no keystore secrets, the Android APKs are signed with the debug key
-            under the `icu.watermeko.clash.dev` app id and the desktop packages
-            are unsigned. A matrix leg that failed contributed no files here.
+          body_path: ./notes.md
           files: ./dist/*
