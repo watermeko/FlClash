@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:fl_clash/common/common.dart';
 import 'package:fl_clash/models/models.dart';
@@ -6,6 +7,7 @@ import 'package:fl_clash/providers/providers.dart';
 import 'package:fl_clash/ui/icons/icons.dart';
 import 'package:fl_clash/l10n/l10n.dart';
 import 'package:fl_clash/widgets/widgets.dart';
+import 'tailscale_login.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -355,11 +357,18 @@ class _TailscaleViewState extends ConsumerState<TailscaleView>
       return;
     }
     if (url.isEmpty) {
-      // A node that is signed in has nothing to finish, and one that never
-      // started has nothing to continue; both say so instead of opening a
-      // page that would not be about this device.
+      // A node that is signed in has nothing to finish, and one the Core has not
+      // reported yet has not started; only the first of those may claim the
+      // node is already signed in.
+      final known = ref.read(
+        tailscalesProvider.select((state) => state[kTailscaleProxyName]),
+      );
       await dialogs.showAlert(
-        message: TextSpan(text: appLocalizations.tailscaleLoginUnavailable),
+        message: TextSpan(
+          text: known == null
+              ? appLocalizations.tailscaleStarting
+              : appLocalizations.tailscaleLoginUnavailable,
+        ),
       );
       return;
     }
@@ -370,6 +379,22 @@ class _TailscaleViewState extends ConsumerState<TailscaleView>
           .read(tailscaleSettingProvider.notifier)
           .update((state) => state.copyWith(authKey: ''));
       await ref.read(coreHandlerProvider).startTailscale(kTailscaleProxyName);
+    }
+    // A phone keeps the page in the app: an external browser leaves the app,
+    // and the node's waiting registration is only answered while the app runs.
+    if (system.isAndroid || Platform.isIOS) {
+      if (!context.mounted) {
+        return;
+      }
+      final navigatorContext = context;
+      final signedIn = await BaseNavigator.push<bool>(
+        navigatorContext,
+        TailscaleLoginView(url: url),
+      );
+      if (signedIn == true) {
+        await notifier.readAll();
+      }
+      return;
     }
     await dialogs.openUrl(url);
   }

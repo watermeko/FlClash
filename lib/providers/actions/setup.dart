@@ -42,6 +42,10 @@ class SetupAction extends _$SetupAction {
   _RunRequest? _latestRunRequest;
   DateTime? _startTime;
   _SetupInputs? _appliedInputs;
+
+  /// The parameters the Core was last handed, which the YAML alone cannot
+  /// describe: the tailnet node is written in by the Core, not by this side.
+  SetupParams? _appliedPushParams;
   var _lastPushDuration = Duration.zero;
   var _pendingForceApply = false;
 
@@ -759,8 +763,17 @@ class SetupAction extends _$SetupAction {
     };
     final yamlString = realProfile?.yaml ?? '';
     final yamlMd5 = realProfile?.md5 ?? '';
-    if (!profileFailed && yamlMd5 == globalState.lastConfigMd5 && !force) {
+    // A config the Core already runs needs no second push, but the parameters
+    // decide what that push would say, and the tailnet is one of them: the Core
+    // writes the node into the profile, so switching it on changes no YAML here
+    // and a comparison of the YAML alone would never hand it over.
+    final pushParams = setupParams.copyWith(selectedMap: const {});
+    if (!profileFailed &&
+        yamlMd5 == globalState.lastConfigMd5 &&
+        _appliedPushParams == pushParams &&
+        !force) {
       _appliedInputs = inputs;
+      _appliedPushParams = pushParams;
       globalState.lastConfigCounts = realProfile.counts;
       await preloadInvoke?.call();
       return _SetupTaskResult.completed;
@@ -768,6 +781,7 @@ class SetupAction extends _$SetupAction {
     // Go answers a config it rejects by running its built-in default, which
     // has no proxies, so until this push succeeds no applied config is known.
     _appliedInputs = null;
+    _appliedPushParams = null;
     globalState.lastConfigMd5 = null;
     globalState.lastConfigCounts = null;
     if (system.isAndroid) {
@@ -809,6 +823,7 @@ class SetupAction extends _$SetupAction {
         globalState.lastConfigCounts =
             realProfile?.counts ?? configCountsOf(const {});
         _appliedInputs = inputs;
+        _appliedPushParams = pushParams;
         if (system.isAndroid) {
           await preferences.saveAppliedConfigMd5(yamlMd5);
         }

@@ -354,6 +354,27 @@ void main() {
     await tester.pumpWidget(const SizedBox.shrink());
   });
 
+  testWidgets('turning the tailnet on re-applies the profile', (tester) async {
+    final setupAction = _ApplyRecordingSetupAction();
+    final container = await _pumpCoreManager(
+      tester,
+      _coreInterface(),
+      overrides: [setupActionProvider.overrideWith(() => setupAction)],
+    );
+
+    // The node is written into the profile by the Core at apply time, so a
+    // change here that only updates the patch never reaches the Core.
+    container
+        .read(tailscaleSettingProvider.notifier)
+        .update((state) => state.copyWith(inject: true));
+    await tester.pump();
+
+    expect(setupAction.applies, 1);
+    expect(setupAction.updates, 0);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
+
   testWidgets('a test URL change forces the apply, which alone hands it '
       'over', (tester) async {
     final setupAction = _ApplyRecordingSetupAction();
