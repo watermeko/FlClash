@@ -370,6 +370,40 @@ release, which is what a `/releases/latest/download/<file>` link resolves to. Th
 `KEYSTORE`, `KEY_ALIAS`, `STORE_PASSWORD` and `KEY_PASSWORD` secrets; without them the Android build falls back to
 the debug key under the `.dev` id.
 
+### Android on an emulator
+
+Nothing else here runs a release build. `flutter test`, `flutter run` and the
+`desktop` job all ship unminified code, so a `-keep` rule that stops matching a
+renamed package only ever fails on a phone: `VpnOptions` reached users as `lk1`,
+Gson answered "Invalid shared state", and the Core looked unresponsive. Two
+checks cover that, and they catch different halves of it:
+
+```bash
+flutter test test/lint/proguard_keep_test.dart   # a rule for a package that moved
+python3 tool/android_smoke.py                    # a release APK that cannot reach its Core
+```
+
+The lint test is cheap and runs with the suite: every `-keep class x.y.**` has to
+name a package a source file still declares, with gomobile's `go` and `-javapkg`
+prefixes allowed since it generates them.
+
+`tool/android_smoke.py` boots an AVD (creating it from
+`system-images;android-34;default;x86_64` if needed), installs a release APK,
+accepts the disclaimer, and opens a custom profile. The editor only appears once
+the Core has compiled that profile, so a silent Core fails there; logcat is also
+swept for `Core did not answer` and `Invalid shared state`. It builds
+`--target-platform android-x64` first, because an emulator is x86_64:
+
+```bash
+python3 tool/android_smoke.py --apk /path/to/release.apk --skip-build   # an artefact
+python3 tool/android_smoke.py --keep-emulator                           # build and keep the AVD
+```
+
+The AVD lives at `~/.android/avd/flclash.avd` and needs `adb` plus the emulator
+package on `PATH`; the image is the plain AOSP one, since nothing here needs Play
+services. `adb root` works on it, which is how a probe under
+`/data/data/<id>/files/` is read when a release build fails.
+
 `bash tool/check_plugins.sh` is that plugin gate, and CI runs the same script.
 It discovers every `plugins/*/pubspec.yaml`, analyzes each package, and runs
 `flutter test` wherever `test/*_test.dart` exists. Adding a plugin package needs
