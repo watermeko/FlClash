@@ -181,36 +181,39 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m72(count, label) =>
       "${Intl.plural(count, other: 'ルール ${label} 件')}";
 
-  static String m73(appName) => "${appName}（セーフモード）";
+  static String m73(count, skipped) =>
+      "${count}件のルールをインポート、${skipped}件をスキップしました";
 
-  static String m74(count) => "${count} 秒";
+  static String m74(appName) => "${appName}（セーフモード）";
 
-  static String m75(count) => "${count} 件が有効";
+  static String m75(count) => "${count} 秒";
 
-  static String m76(count) => "${count} 件に問題";
+  static String m76(count) => "${count} 件が有効";
 
-  static String m77(count) => "設定 ${count} 件";
+  static String m77(count) => "${count} 件に問題";
 
-  static String m78(link) => "${link} からプロキシを読み取れませんでした";
+  static String m78(count) => "設定 ${count} 件";
 
-  static String m79(label) => "${label}は1項目のみ指定できます";
+  static String m79(link) => "${link} からプロキシを読み取れませんでした";
 
-  static String m80(count) =>
+  static String m80(label) => "${label}は1項目のみ指定できます";
+
+  static String m81(count) =>
       "${Intl.plural(count, one: '1 台のデバイス', other: '${count} 台のデバイス')}";
 
-  static String m81(relay) => "リレー ${relay}";
+  static String m82(relay) => "リレー ${relay}";
 
-  static String m82(value) => "ピーク ${value}";
+  static String m83(value) => "ピーク ${value}";
 
-  static String m83(value) => "累計 ${value}";
+  static String m84(value) => "累計 ${value}";
 
-  static String m84(transport) => "${transport} リクエストヘッダー";
+  static String m85(transport) => "${transport} リクエストヘッダー";
 
-  static String m85(label) => "${label}はURLである必要があります";
-
-  static String m86(count) => "${count} 年前";
+  static String m86(label) => "${label}はURLである必要があります";
 
   static String m87(count) => "${count} 年前";
+
+  static String m88(count) => "${count} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -1395,11 +1398,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "rules": MessageLookupByLibrary.simpleMessage("ルール"),
     "rulesCount": m72,
+    "rulesImportResult": m73,
     "runTime": MessageLookupByLibrary.simpleMessage("稼働時間"),
     "running": MessageLookupByLibrary.simpleMessage("実行中"),
     "runtimeConfig": MessageLookupByLibrary.simpleMessage("ランタイム設定"),
     "safeMode": MessageLookupByLibrary.simpleMessage("セーフモード"),
-    "safeModeAppTitle": m73,
+    "safeModeAppTitle": m74,
     "saturation": MessageLookupByLibrary.simpleMessage("彩度"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("変更を保存しますか？"),
@@ -1410,9 +1414,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "scrollToSelected": MessageLookupByLibrary.simpleMessage("選択項目へスクロール"),
     "search": MessageLookupByLibrary.simpleMessage("検索"),
     "seconds": MessageLookupByLibrary.simpleMessage("秒"),
-    "secondsCount": m74,
+    "secondsCount": m75,
     "secretKey": MessageLookupByLibrary.simpleMessage("キー"),
-    "sectionsInEffect": m75,
+    "sectionsInEffect": m76,
     "select": MessageLookupByLibrary.simpleMessage("選択"),
     "selectAll": MessageLookupByLibrary.simpleMessage("すべて選択"),
     "selectRuleSet": MessageLookupByLibrary.simpleMessage("ルールセットを選択してください"),
@@ -1443,7 +1447,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "スマートフォンのカメラでコードをスキャンし、開いたページにリンクを貼り付けてください。両方のデバイスを同じネットワークに接続する必要があります。",
     ),
     "server": MessageLookupByLibrary.simpleMessage("サーバー"),
-    "serviceAbnormalCount": m76,
+    "serviceAbnormalCount": m77,
     "serviceAllAvailable": MessageLookupByLibrary.simpleMessage("すべて利用可能"),
     "serviceAvailable": MessageLookupByLibrary.simpleMessage("利用可能"),
     "serviceBlocked": MessageLookupByLibrary.simpleMessage("ブロック済み"),
@@ -1465,8 +1469,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceUnsupportedRegion": MessageLookupByLibrary.simpleMessage("対象外の地域"),
     "settingEntries": MessageLookupByLibrary.simpleMessage("設定項目"),
     "settings": MessageLookupByLibrary.simpleMessage("設定"),
-    "settingsCount": m77,
-    "shareLinkUnreadable": m78,
+    "settingsCount": m78,
+    "shareLinkUnreadable": m79,
     "shareLinksInvalid": MessageLookupByLibrary.simpleMessage(
       "リンクからプロキシを読み取れませんでした",
     ),
@@ -1493,7 +1497,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "singleShareLinkOnly": MessageLookupByLibrary.simpleMessage(
       "ここにはリンクを 1 つだけ入力してください。複数の場合は一覧のクイック編集を使ってください",
     ),
-    "singleValueTip": m79,
+    "singleValueTip": m80,
     "size": MessageLookupByLibrary.simpleMessage("サイズ"),
     "skipCertVerify": MessageLookupByLibrary.simpleMessage("証明書の検証をスキップ"),
     "skipDomain": MessageLookupByLibrary.simpleMessage("スキップするドメイン"),
@@ -1583,7 +1587,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tailscaleMachine": MessageLookupByLibrary.simpleMessage("マシン名"),
     "tailscaleMachines": MessageLookupByLibrary.simpleMessage("マシン"),
-    "tailscaleMachinesCount": m80,
+    "tailscaleMachinesCount": m81,
     "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage("サインインが必要"),
     "tailscaleNoMachines": MessageLookupByLibrary.simpleMessage("マシンはまだありません"),
     "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage(
@@ -1595,7 +1599,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "オンにするとすべてのプロファイルに Tailscale ノードを保持します",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("状態を更新"),
-    "tailscaleRelayPath": m81,
+    "tailscaleRelayPath": m82,
     "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
       "キーを置き換えます。キーは削除され、この端末はブラウザでサインインします。",
     ),
@@ -1635,11 +1639,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("アップロード量"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxyポート"),
     "traffic": MessageLookupByLibrary.simpleMessage("通信量"),
-    "trafficPeak": m82,
-    "trafficTotal": m83,
+    "trafficPeak": m83,
+    "trafficTotal": m84,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("トラフィック統計"),
     "transport": MessageLookupByLibrary.simpleMessage("トランスポート"),
-    "transportHeaders": m84,
+    "transportHeaders": m85,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN の権限を取得できなかったため、オフにしました。",
@@ -1667,7 +1671,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("アップロード"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("アップロード帯域幅"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m85,
+    "urlTip": m86,
     "useHosts": MessageLookupByLibrary.simpleMessage("Hostsを使用"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("システムのHostsを使用"),
     "usedShort": MessageLookupByLibrary.simpleMessage("使用済み"),
@@ -1690,8 +1694,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "システムに書き込むを有効にするとシステムクロックも設定します。Android では無視されます。",
     ),
-    "yearsAgo": m86,
-    "yearsAgoShort": m87,
+    "yearsAgo": m87,
+    "yearsAgoShort": m88,
     "yes": MessageLookupByLibrary.simpleMessage("はい"),
     "zhCN": MessageLookupByLibrary.simpleMessage("簡体字中国語"),
   };

@@ -203,40 +203,43 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m72(count, label) =>
       "${Intl.plural(count, one: '1 rule', other: '${label} rules')}";
 
-  static String m73(appName) => "${appName} (Safe mode)";
+  static String m73(count, skipped) =>
+      "${count} rules imported, ${skipped} skipped";
 
-  static String m74(count) =>
+  static String m74(appName) => "${appName} (Safe mode)";
+
+  static String m75(count) =>
       "${Intl.plural(count, one: '1 second', other: '${count} seconds')}";
 
-  static String m75(count) => "${count} in effect";
-
-  static String m76(count) =>
-      "${Intl.plural(count, one: '1 issue', other: '${count} issues')}";
+  static String m76(count) => "${count} in effect";
 
   static String m77(count) =>
+      "${Intl.plural(count, one: '1 issue', other: '${count} issues')}";
+
+  static String m78(count) =>
       "${Intl.plural(count, one: '1 setting', other: '${count} settings')}";
 
-  static String m78(link) => "No proxy could be read from ${link}";
+  static String m79(link) => "No proxy could be read from ${link}";
 
-  static String m79(label) => "${label} must be a single item";
+  static String m80(label) => "${label} must be a single item";
 
-  static String m80(count) =>
+  static String m81(count) =>
       "${Intl.plural(count, one: '1 machine', other: '${count} machines')}";
 
-  static String m81(relay) => "Relay ${relay}";
+  static String m82(relay) => "Relay ${relay}";
 
-  static String m82(value) => "Peak ${value}";
+  static String m83(value) => "Peak ${value}";
 
-  static String m83(value) => "Total ${value}";
+  static String m84(value) => "Total ${value}";
 
-  static String m84(transport) => "${transport} Headers";
+  static String m85(transport) => "${transport} Headers";
 
-  static String m85(label) => "${label} must be a URL";
+  static String m86(label) => "${label} must be a URL";
 
-  static String m86(count) =>
+  static String m87(count) =>
       "${Intl.plural(count, one: '1 year ago', other: '${count} years ago')}";
 
-  static String m87(count) => "${Intl.plural(count, other: '${count}y ago')}";
+  static String m88(count) => "${Intl.plural(count, other: '${count}y ago')}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -1622,11 +1625,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "rules": MessageLookupByLibrary.simpleMessage("Rules"),
     "rulesCount": m72,
+    "rulesImportResult": m73,
     "runTime": MessageLookupByLibrary.simpleMessage("Run time"),
     "running": MessageLookupByLibrary.simpleMessage("Running"),
     "runtimeConfig": MessageLookupByLibrary.simpleMessage("Runtime config"),
     "safeMode": MessageLookupByLibrary.simpleMessage("Safe mode"),
-    "safeModeAppTitle": m73,
+    "safeModeAppTitle": m74,
     "saturation": MessageLookupByLibrary.simpleMessage("Saturation"),
     "save": MessageLookupByLibrary.simpleMessage("Save"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("Save the changes?"),
@@ -1639,9 +1643,9 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "search": MessageLookupByLibrary.simpleMessage("Search"),
     "seconds": MessageLookupByLibrary.simpleMessage("seconds"),
-    "secondsCount": m74,
+    "secondsCount": m75,
     "secretKey": MessageLookupByLibrary.simpleMessage("Key"),
-    "sectionsInEffect": m75,
+    "sectionsInEffect": m76,
     "select": MessageLookupByLibrary.simpleMessage("Select"),
     "selectAll": MessageLookupByLibrary.simpleMessage("Select all"),
     "selectRuleSet": MessageLookupByLibrary.simpleMessage(
@@ -1674,7 +1678,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Scan the code with your phone\'s camera and paste the link on the page that opens. Both devices need to be on the same network.",
     ),
     "server": MessageLookupByLibrary.simpleMessage("Server"),
-    "serviceAbnormalCount": m76,
+    "serviceAbnormalCount": m77,
     "serviceAllAvailable": MessageLookupByLibrary.simpleMessage(
       "All available",
     ),
@@ -1704,8 +1708,8 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "settingEntries": MessageLookupByLibrary.simpleMessage("settings"),
     "settings": MessageLookupByLibrary.simpleMessage("Settings"),
-    "settingsCount": m77,
-    "shareLinkUnreadable": m78,
+    "settingsCount": m78,
+    "shareLinkUnreadable": m79,
     "shareLinksInvalid": MessageLookupByLibrary.simpleMessage(
       "No proxy could be read from the links",
     ),
@@ -1732,7 +1736,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "singleShareLinkOnly": MessageLookupByLibrary.simpleMessage(
       "Enter one link here; edit several from the quick edit of the list",
     ),
-    "singleValueTip": m79,
+    "singleValueTip": m80,
     "size": MessageLookupByLibrary.simpleMessage("Size"),
     "skipCertVerify": MessageLookupByLibrary.simpleMessage(
       "Skip certificate verification",
@@ -1840,7 +1844,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tailscaleMachine": MessageLookupByLibrary.simpleMessage("Machine name"),
     "tailscaleMachines": MessageLookupByLibrary.simpleMessage("Machines"),
-    "tailscaleMachinesCount": m80,
+    "tailscaleMachinesCount": m81,
     "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage(
       "Sign-in required",
     ),
@@ -1856,7 +1860,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Turn this on to keep a Tailscale node in every profile",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("Refresh status"),
-    "tailscaleRelayPath": m81,
+    "tailscaleRelayPath": m82,
     "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
       "This replaces the key: the key is cleared and this device signs in through a browser instead.",
     ),
@@ -1898,11 +1902,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("Uploaded"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("TProxy port"),
     "traffic": MessageLookupByLibrary.simpleMessage("Traffic"),
-    "trafficPeak": m82,
-    "trafficTotal": m83,
+    "trafficPeak": m83,
+    "trafficTotal": m84,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("Traffic usage"),
     "transport": MessageLookupByLibrary.simpleMessage("Transport"),
-    "transportHeaders": m84,
+    "transportHeaders": m85,
     "tun": MessageLookupByLibrary.simpleMessage("TUN"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "TUN could not be authorized, so it was turned off.",
@@ -1934,7 +1938,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("Upload"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("Upload bandwidth"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m85,
+    "urlTip": m86,
     "useHosts": MessageLookupByLibrary.simpleMessage("Use hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("Use system hosts"),
     "usedShort": MessageLookupByLibrary.simpleMessage("used"),
@@ -1959,8 +1963,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "Write to system also sets the system clock; Android ignores it.",
     ),
-    "yearsAgo": m86,
-    "yearsAgoShort": m87,
+    "yearsAgo": m87,
+    "yearsAgoShort": m88,
     "yes": MessageLookupByLibrary.simpleMessage("Yes"),
     "zhCN": MessageLookupByLibrary.simpleMessage("Simplified Chinese"),
   };

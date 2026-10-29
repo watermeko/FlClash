@@ -1,11 +1,17 @@
+import 'dart:convert';
+
 import 'package:fl_clash/common/common.dart';
+import 'package:fl_clash/enum/enum.dart';
 import 'package:fl_clash/features/features.dart';
 import 'package:fl_clash/models/clash_config.dart';
 import 'package:fl_clash/providers/providers.dart';
+import 'package:fl_clash/state.dart';
 import 'package:fl_clash/ui/icons/icons.dart';
 import 'package:fl_clash/widgets/widgets.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+const _exportFileName = 'rules.yaml';
 
 class AddedRulesView extends ConsumerStatefulWidget {
   const AddedRulesView({super.key});
@@ -49,6 +55,82 @@ class _AddedRulesViewState extends ConsumerState<AddedRulesView> {
         onAdd: (rules) => ref.read(globalRulesProvider.notifier).putAll(rules),
       ),
     );
+  }
+
+  Future<void> _handleImport() async {
+    final appLocalizations = context.appLocalizations;
+    final file = await globalState.safeRun(picker.pickerFile);
+    if (file == null || !mounted) {
+      return;
+    }
+    final content = await globalState.safeRun(
+      () async => utf8.decode(await file.readBytes()),
+    );
+    if (content == null || !mounted) {
+      return;
+    }
+    final ({List<Rule> rules, int skipped}) imported;
+    try {
+      imported = readAddedRulesImport(
+        content,
+        existing: ref.read(globalRulesProvider).value ?? const [],
+      );
+    } on RuleImportException catch (error) {
+      await _showImportIssue(error);
+      return;
+    }
+    if (imported.rules.isEmpty && imported.skipped == 0) {
+      await dialogs.showAlert(
+        title: appLocalizations.importFile,
+        message: TextSpan(text: appLocalizations.ruleListInvalid),
+      );
+      return;
+    }
+    ref.read(globalRulesProvider.notifier).putAll(imported.rules);
+    if (!mounted) {
+      return;
+    }
+    context.showNotifier(
+      appLocalizations.rulesImportResult(
+        imported.rules.length,
+        imported.skipped,
+      ),
+      level: MessageLevel.success,
+    );
+  }
+
+  Future<void> _showImportIssue(RuleImportException error) {
+    final appLocalizations = context.appLocalizations;
+    final message = switch (error.issue) {
+      RuleImportIssue.text => appLocalizations.ruleTextInvalid,
+      RuleImportIssue.payload => error.payloadError!.getMessage(context),
+      RuleImportIssue.content => appLocalizations.contentNotEmpty,
+      RuleImportIssue.target => appLocalizations.splitStrategyNotEmpty,
+    };
+    return dialogs.showAlert(
+      title: appLocalizations.importFile,
+      message: TextSpan(
+        text: appLocalizations.lineIssueTip(error.line, message),
+      ),
+    );
+  }
+
+  Future<void> _handleExport() async {
+    final appLocalizations = context.appLocalizations;
+    final rules = ref.read(globalRulesProvider).value ?? const <Rule>[];
+    final res = await globalState.safeRun<bool>(() async {
+      final uri = await picker.saveFile(
+        _exportFileName,
+        utf8.encode('rules:\n${encodeRuleList(rules)}'),
+      );
+      return uri != null;
+    }, title: appLocalizations.exportFile);
+    if (res == true && mounted) {
+      context.showNotifier(
+        appLocalizations.exportSuccess,
+        level: MessageLevel.success,
+      );
+    }
   }
 
   void _handleSelected(int ruleId) {
@@ -137,6 +219,20 @@ class _AddedRulesViewState extends ConsumerState<AddedRulesView> {
               tooltip: appLocalizations.quickActions,
             ),
         ],
+        menuItems: isSelecting
+            ? const []
+            : [
+                CommonPopupMenuItem(
+                  glyph: AppGlyphs.importFile,
+                  label: appLocalizations.importFile,
+                  onPressed: _handleImport,
+                ),
+                CommonPopupMenuItem(
+                  glyph: AppGlyphs.export,
+                  label: appLocalizations.exportFile,
+                  onPressed: _handleExport,
+                ),
+              ],
         selectionActions: isSelecting ? selectionActions : const [],
         body: NullStatusSwitcher(
           isLoading: rulesState.isLoading,

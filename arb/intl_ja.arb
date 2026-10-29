@@ -998,5 +998,6 @@
   "tailscaleReplaceAuthKeyTip": "キーを置き換えます。キーは削除され、この端末はブラウザでサインインします。",
   "tailscaleLoginDone": "ブラウザでサインイン済み",
   "tailscaleDesc": "Tailnet の状態・アドレス・サインイン方法",
-  "tailscaleMachinesCount": "{count, plural, =1{1 台のデバイス} other{{count} 台のデバイス}}"
+  "tailscaleMachinesCount": "{count, plural, =1{1 台のデバイス} other{{count} 台のデバイス}}",
+  "rulesImportResult": "{count}件のルールをインポート、{skipped}件をスキップしました"
 }

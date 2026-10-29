@@ -998,5 +998,6 @@
   "tailscaleReplaceAuthKeyTip": "Это заменит ключ: ключ будет удалён, а устройство войдёт через браузер.",
   "tailscaleLoginDone": "Выполнен вход через браузер",
   "tailscaleDesc": "Состояние tailnet, адрес и способ входа",
-  "tailscaleMachinesCount": "{count, plural, =1{1 устройство} other{{count} устройств}}"
+  "tailscaleMachinesCount": "{count, plural, =1{1 устройство} other{{count} устройств}}",
+  "rulesImportResult": "Импортировано правил: {count}, пропущено: {skipped}"
 }

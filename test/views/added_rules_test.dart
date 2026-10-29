@@ -111,6 +111,18 @@ void main() {
     expect(find.text('b.com'), findsOneWidget);
   });
 
+  testWidgets('offers import and export from the overflow menu', (
+    tester,
+  ) async {
+    await pumpRules(tester, [_rule(1, 'a.com')]);
+
+    await tester.tap(find.byGlyph(AppGlyphs.more).hitTestable());
+    await tester.pumpAndSettle();
+
+    expect(find.text(currentAppLocalizations.importFile), findsOneWidget);
+    expect(find.text(currentAppLocalizations.exportFile), findsOneWidget);
+  });
+
   testWidgets('checking a rule enters selection mode', (tester) async {
     await pumpRules(tester, [_rule(1, 'a.com'), _rule(2, 'b.com')]);
 

@@ -998,5 +998,6 @@
   "tailscaleReplaceAuthKeyTip": "키 인증을 대체합니다. 키가 삭제되고 이 기기는 브라우저로 로그인합니다.",
   "tailscaleLoginDone": "브라우저로 로그인됨",
   "tailscaleDesc": "Tailnet 상태, 주소 및 로그인 방식",
-  "tailscaleMachinesCount": "{count, plural, =1{기기 1대} other{기기 {count}대}}"
+  "tailscaleMachinesCount": "{count, plural, =1{기기 1대} other{기기 {count}대}}",
+  "rulesImportResult": "규칙 {count}개 가져옴, {skipped}개 건너뜀"
 }

@@ -8369,6 +8369,16 @@ class AppLocalizations {
       args: [count],
     );
   }
+
+  /// `{count} rules imported, {skipped} skipped`
+  String rulesImportResult(Object count, Object skipped) {
+    return Intl.message(
+      '$count rules imported, $skipped skipped',
+      name: 'rulesImportResult',
+      desc: '',
+      args: [count, skipped],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -998,5 +998,6 @@
   "tailscaleReplaceAuthKeyTip": "This replaces the key: the key is cleared and this device signs in through a browser instead.",
   "tailscaleLoginDone": "Signed in with a browser",
   "tailscaleDesc": "Tailnet status, address and how the node signed in",
-  "tailscaleMachinesCount": "{count, plural, =1{1 machine} other{{count} machines}}"
+  "tailscaleMachinesCount": "{count, plural, =1{1 machine} other{{count} machines}}",
+  "rulesImportResult": "{count} rules imported, {skipped} skipped"
 }

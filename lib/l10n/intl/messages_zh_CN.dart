@@ -178,36 +178,38 @@ class MessageLookup extends MessageLookupByLibrary {
   static String m72(count, label) =>
       "${Intl.plural(count, other: '${label} 条规则')}";
 
-  static String m73(appName) => "${appName}（安全模式）";
+  static String m73(count, skipped) => "已导入 ${count} 条规则，跳过 ${skipped} 条";
 
-  static String m74(count) => "${count} 秒";
+  static String m74(appName) => "${appName}（安全模式）";
 
-  static String m75(count) => "${count} 项生效";
+  static String m75(count) => "${count} 秒";
 
-  static String m76(count) => "${count} 项异常";
+  static String m76(count) => "${count} 项生效";
 
-  static String m77(count) => "${count} 项设置";
+  static String m77(count) => "${count} 项异常";
 
-  static String m78(link) => "无法从 ${link} 中读取代理";
+  static String m78(count) => "${count} 项设置";
 
-  static String m79(label) => "${label}只能是一项";
+  static String m79(link) => "无法从 ${link} 中读取代理";
 
-  static String m80(count) =>
+  static String m80(label) => "${label}只能是一项";
+
+  static String m81(count) =>
       "${Intl.plural(count, one: '1 台设备', other: '${count} 台设备')}";
 
-  static String m81(relay) => "中继 ${relay}";
+  static String m82(relay) => "中继 ${relay}";
 
-  static String m82(value) => "峰值 ${value}";
+  static String m83(value) => "峰值 ${value}";
 
-  static String m83(value) => "累计 ${value}";
+  static String m84(value) => "累计 ${value}";
 
-  static String m84(transport) => "${transport} 请求头";
+  static String m85(transport) => "${transport} 请求头";
 
-  static String m85(label) => "${label}必须为URL";
-
-  static String m86(count) => "${count} 年前";
+  static String m86(label) => "${label}必须为URL";
 
   static String m87(count) => "${count} 年前";
+
+  static String m88(count) => "${count} 年前";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -1266,11 +1268,12 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "rules": MessageLookupByLibrary.simpleMessage("规则"),
     "rulesCount": m72,
+    "rulesImportResult": m73,
     "runTime": MessageLookupByLibrary.simpleMessage("运行时长"),
     "running": MessageLookupByLibrary.simpleMessage("运行中"),
     "runtimeConfig": MessageLookupByLibrary.simpleMessage("运行时配置"),
     "safeMode": MessageLookupByLibrary.simpleMessage("安全模式"),
-    "safeModeAppTitle": m73,
+    "safeModeAppTitle": m74,
     "saturation": MessageLookupByLibrary.simpleMessage("饱和度"),
     "save": MessageLookupByLibrary.simpleMessage("保存"),
     "saveChanges": MessageLookupByLibrary.simpleMessage("是否保存更改？"),
@@ -1279,9 +1282,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "scrollToSelected": MessageLookupByLibrary.simpleMessage("滚动到已选"),
     "search": MessageLookupByLibrary.simpleMessage("搜索"),
     "seconds": MessageLookupByLibrary.simpleMessage("秒"),
-    "secondsCount": m74,
+    "secondsCount": m75,
     "secretKey": MessageLookupByLibrary.simpleMessage("密钥"),
-    "sectionsInEffect": m75,
+    "sectionsInEffect": m76,
     "select": MessageLookupByLibrary.simpleMessage("选中"),
     "selectAll": MessageLookupByLibrary.simpleMessage("全选"),
     "selectRuleSet": MessageLookupByLibrary.simpleMessage("请选择规则集"),
@@ -1310,7 +1313,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "用手机相机扫描二维码，在打开的页面里粘贴链接。两台设备需要连在同一个网络。",
     ),
     "server": MessageLookupByLibrary.simpleMessage("服务器"),
-    "serviceAbnormalCount": m76,
+    "serviceAbnormalCount": m77,
     "serviceAllAvailable": MessageLookupByLibrary.simpleMessage("全部可用"),
     "serviceAvailable": MessageLookupByLibrary.simpleMessage("可用"),
     "serviceBlocked": MessageLookupByLibrary.simpleMessage("已被封禁"),
@@ -1328,8 +1331,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "serviceUnsupportedRegion": MessageLookupByLibrary.simpleMessage("地区不支持"),
     "settingEntries": MessageLookupByLibrary.simpleMessage("设置项"),
     "settings": MessageLookupByLibrary.simpleMessage("设置"),
-    "settingsCount": m77,
-    "shareLinkUnreadable": m78,
+    "settingsCount": m78,
+    "shareLinkUnreadable": m79,
     "shareLinksInvalid": MessageLookupByLibrary.simpleMessage("无法从链接中读取代理"),
     "shareQrcodeTip": MessageLookupByLibrary.simpleMessage(
       "在另一台设备上用 FlClash 扫码即可导入此配置。",
@@ -1352,7 +1355,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "singleShareLinkOnly": MessageLookupByLibrary.simpleMessage(
       "这里只能填写一条链接，多条请在列表的快速编辑中填写",
     ),
-    "singleValueTip": m79,
+    "singleValueTip": m80,
     "size": MessageLookupByLibrary.simpleMessage("尺寸"),
     "skipCertVerify": MessageLookupByLibrary.simpleMessage("跳过证书验证"),
     "skipDomain": MessageLookupByLibrary.simpleMessage("跳过域名"),
@@ -1432,7 +1435,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "tailscaleMachine": MessageLookupByLibrary.simpleMessage("设备名"),
     "tailscaleMachines": MessageLookupByLibrary.simpleMessage("设备"),
-    "tailscaleMachinesCount": m80,
+    "tailscaleMachinesCount": m81,
     "tailscaleNeedsLogin": MessageLookupByLibrary.simpleMessage("需要登录"),
     "tailscaleNoMachines": MessageLookupByLibrary.simpleMessage("暂无设备"),
     "tailscaleNoMachinesTip": MessageLookupByLibrary.simpleMessage("本机登录后会出现"),
@@ -1442,7 +1445,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "开启后会在每个配置中保留一个 Tailscale 节点",
     ),
     "tailscaleRefresh": MessageLookupByLibrary.simpleMessage("刷新状态"),
-    "tailscaleRelayPath": m81,
+    "tailscaleRelayPath": m82,
     "tailscaleReplaceAuthKeyTip": MessageLookupByLibrary.simpleMessage(
       "这会替代密钥认证：密钥会被清除，本设备改用浏览器登录。",
     ),
@@ -1480,11 +1483,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "totalUpload": MessageLookupByLibrary.simpleMessage("上传总量"),
     "tproxyPort": MessageLookupByLibrary.simpleMessage("Tproxy端口"),
     "traffic": MessageLookupByLibrary.simpleMessage("流量"),
-    "trafficPeak": m82,
-    "trafficTotal": m83,
+    "trafficPeak": m83,
+    "trafficTotal": m84,
     "trafficUsage": MessageLookupByLibrary.simpleMessage("流量统计"),
     "transport": MessageLookupByLibrary.simpleMessage("传输协议"),
-    "transportHeaders": m84,
+    "transportHeaders": m85,
     "tun": MessageLookupByLibrary.simpleMessage("虚拟网卡"),
     "tunAuthorizationFailed": MessageLookupByLibrary.simpleMessage(
       "虚拟网卡授权失败，已关闭。",
@@ -1512,7 +1515,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "upload": MessageLookupByLibrary.simpleMessage("上传"),
     "uploadBandwidth": MessageLookupByLibrary.simpleMessage("上行带宽"),
     "url": MessageLookupByLibrary.simpleMessage("URL"),
-    "urlTip": m85,
+    "urlTip": m86,
     "useHosts": MessageLookupByLibrary.simpleMessage("使用Hosts"),
     "useSystemHosts": MessageLookupByLibrary.simpleMessage("使用系统Hosts"),
     "usedShort": MessageLookupByLibrary.simpleMessage("已用"),
@@ -1535,8 +1538,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "writeToSystemDesc": MessageLookupByLibrary.simpleMessage(
       "写入系统会同时设置系统时钟，Android 上不生效。",
     ),
-    "yearsAgo": m86,
-    "yearsAgoShort": m87,
+    "yearsAgo": m87,
+    "yearsAgoShort": m88,
     "yes": MessageLookupByLibrary.simpleMessage("是"),
     "zhCN": MessageLookupByLibrary.simpleMessage("中文简体"),
   };

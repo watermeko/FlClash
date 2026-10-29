@@ -299,6 +299,57 @@ void main() {
     });
   });
 
+  group('added rules import', () {
+    test('takes the lines the added-rules form can hold', () {
+      final imported = readAddedRulesImport(
+        'rules:\n'
+        '- DOMAIN,a.com,PROXY\n'
+        '- MATCH,DIRECT\n'
+        '- RULE-SET,Ads,REJECT\n'
+        '- SUB-RULE,(NETWORK,UDP),nested\n'
+        '- DOMAIN-SUFFIX,b.com,DIRECT\n',
+      );
+
+      expect(imported.rules.map((rule) => rule.rawValue), [
+        'DOMAIN,a.com,PROXY',
+        'DOMAIN-SUFFIX,b.com,DIRECT',
+      ]);
+      expect(imported.skipped, 3);
+    });
+
+    test('leaves out a line it holds or already took', () {
+      final imported = readAddedRulesImport(
+        '- DOMAIN,a.com,PROXY\n- DOMAIN,a.com,PROXY\n- DOMAIN,b.com,DIRECT',
+        existing: [Rule.parse('DOMAIN,a.com,PROXY')],
+      );
+
+      expect(imported.rules.map((rule) => rule.rawValue), [
+        'DOMAIN,b.com,DIRECT',
+      ]);
+      expect(imported.skipped, 2);
+      expect(imported.rules.single.id, isNot(-1));
+    });
+
+    test('names the line it cannot take', () {
+      for (final (content, line, issue) in [
+        ('- DOMAIN,a.com,DIRECT\n- example.com', 2, RuleImportIssue.text),
+        ('- NETWORK,icmp,DIRECT', 1, RuleImportIssue.payload),
+        ('- DOMAIN,a.com,DIRECT\n- DOMAIN,,DIRECT', 2, RuleImportIssue.content),
+        ('- DOMAIN,a.com', 1, RuleImportIssue.target),
+      ]) {
+        expect(
+          () => readAddedRulesImport(content),
+          throwsA(
+            isA<RuleImportException>()
+                .having((error) => error.line, 'line', line)
+                .having((error) => error.issue, 'issue', issue),
+          ),
+          reason: content,
+        );
+      }
+    });
+  });
+
   group('rule sets', () {
     test('reads the sets a logic rule nests at any depth', () {
       expect(Rule.parse('RULE-SET,Ads,REJECT').ruleSets, ['Ads']);

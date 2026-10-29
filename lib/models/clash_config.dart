@@ -1939,6 +1939,19 @@ final class RuleLineException implements Exception {
   const RuleLineException(this.line);
 }
 
+enum RuleImportIssue { text, payload, content, target }
+
+final class RuleImportException implements Exception {
+  final int line;
+  final RuleImportIssue issue;
+  final RulePayloadError? payloadError;
+
+  const RuleImportException(this.line, this.issue, {this.payloadError});
+
+  @override
+  String toString() => 'RuleImportException(${issue.name}, line $line)';
+}
+
 String encodeRuleList(Iterable<Rule> rules) {
   return rules.map((rule) => '- ${_ruleScalar(rule.rawValue)}\n').join();
 }
@@ -1968,6 +1981,48 @@ List<({int line, Rule rule})> decodeRuleList(
               !_rulesHeader.hasMatch(text))
         (line: index + 1, rule: _ruleAt(_ruleText(text), index + 1, unusedIds)),
   ];
+}
+
+/// Takes only the actions the added-rules form offers, each rule once and
+/// none of [existing], and counts the lines left out as skipped.
+({List<Rule> rules, int skipped}) readAddedRulesImport(
+  String content, {
+  Iterable<Rule> existing = const [],
+}) {
+  final held = {for (final rule in existing) rule.rawValue};
+  final addedActions = RuleAction.addedRuleActions;
+  final seen = <String>{};
+  final rules = <Rule>[];
+  var skipped = 0;
+  final List<({int line, Rule rule})> decoded;
+  try {
+    decoded = decodeRuleList(content);
+  } on RuleLineException catch (error) {
+    throw RuleImportException(error.line, RuleImportIssue.text);
+  }
+  for (final (:line, :rule) in decoded) {
+    if (!addedActions.contains(rule.ruleAction) ||
+        !seen.add(rule.rawValue) ||
+        held.contains(rule.rawValue)) {
+      skipped++;
+      continue;
+    }
+    if (rule.payloadError case final payloadError?) {
+      throw RuleImportException(
+        line,
+        RuleImportIssue.payload,
+        payloadError: payloadError,
+      );
+    }
+    if (rule.realContent?.isNotEmpty != true) {
+      throw RuleImportException(line, RuleImportIssue.content);
+    }
+    if (rule.realTarget?.isNotEmpty != true) {
+      throw RuleImportException(line, RuleImportIssue.target);
+    }
+    rules.add(rule);
+  }
+  return (rules: rules, skipped: skipped);
 }
 
 String _ruleText(String line) {

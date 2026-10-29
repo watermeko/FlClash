@@ -998,5 +998,6 @@
   "tailscaleReplaceAuthKeyTip": "Esto sustituye la clave: se borra y el dispositivo inicia sesión con el navegador.",
   "tailscaleLoginDone": "Sesión iniciada con el navegador",
   "tailscaleDesc": "Estado del tailnet, dirección y forma de inicio de sesión",
-  "tailscaleMachinesCount": "{count, plural, =1{1 máquina} other{{count} máquinas}}"
+  "tailscaleMachinesCount": "{count, plural, =1{1 máquina} other{{count} máquinas}}",
+  "rulesImportResult": "{count} reglas importadas, {skipped} omitidas"
 }

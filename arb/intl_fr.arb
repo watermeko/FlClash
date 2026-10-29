@@ -998,5 +998,6 @@
   "tailscaleReplaceAuthKeyTip": "Cela remplace la clé : elle est effacée et l'appareil se connecte avec un navigateur.",
   "tailscaleLoginDone": "Connecté via un navigateur",
   "tailscaleDesc": "État du tailnet, adresse et mode de connexion",
-  "tailscaleMachinesCount": "{count, plural, =1{1 machine} other{{count} machines}}"
+  "tailscaleMachinesCount": "{count, plural, =1{1 machine} other{{count} machines}}",
+  "rulesImportResult": "{count} règles importées, {skipped} ignorées"
 }
