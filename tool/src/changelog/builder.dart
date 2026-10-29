@@ -61,10 +61,7 @@ class ChangelogBuilder {
     final commitIdsByTag = <String, Set<String>>{};
 
     if (pending != null && !git.tagExists(pending.tag)) {
-      final commits = git.commits(
-        from: stable.isEmpty ? boundaryTag?.name : stable.first.name,
-        to: 'HEAD',
-      );
+      final commits = git.commits(from: _from(git, stable), to: 'HEAD');
       commitIdsByTag[pending.tag] = _idsOf(commits);
       versions.add(
         ChangelogVersion(
@@ -81,7 +78,7 @@ class ChangelogBuilder {
       final tag = stable[index];
       final previous = index + 1 < stable.length
           ? stable[index + 1].name
-          : boundaryTag?.name;
+          : _boundary(git, boundaryTag);
       final commits = git.commits(from: previous, to: tag.name);
       commitIdsByTag[tag.name] = _idsOf(commits);
       versions.add(
@@ -99,6 +96,35 @@ class ChangelogBuilder {
       warnings: parser.warnings,
       commitIdsByTag: commitIdsByTag,
     );
+  }
+
+  /// The revision a range starts at, or null for the beginning of history.
+  ///
+  /// A clone that carries only the tags it was asked for has no boundary tag,
+  /// and `git log` fails on a range naming a revision it does not have. Falling
+  /// back to the oldest tag it does carry keeps the derivation possible; a
+  /// checkout without the history still cannot be compared, which is why the
+  /// job that runs `verify` asks for all of it.
+  /// The revision the oldest version in the file starts at, or null when the
+  /// file reaches the beginning of history.
+  String? _from(Git git, List<VersionTag> stable) => stable.isEmpty
+      ? _boundary(git, VersionTag.tryParse(boundary))
+      : stable.first.name;
+
+  /// A clone without the boundary tag cannot derive the oldest version, and
+  /// starting its range at the beginning of history instead would silently fold
+  /// every earlier release into it, so name the tag that is missing.
+  String? _boundary(Git git, VersionTag? tag) {
+    if (tag == null) {
+      return null;
+    }
+    if (!git.tagExists(tag.name)) {
+      throw GitException(
+        'the changelog boundary ${tag.name} is not in this clone, so the '
+        'oldest version has no range of its own; fetch the tags first',
+      );
+    }
+    return tag.name;
   }
 
   Set<String> _idsOf(List<RawCommit> commits) =>
