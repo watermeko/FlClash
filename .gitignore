@@ -79,3 +79,6 @@ devtools_options.yaml
 .fvm/
 .fvmrc
 /coverage/lcov.info
+
+# Editor backups swept in by `git add -A`.
+*.bak

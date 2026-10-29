@@ -1,4 +1,0 @@
-@AGENTS.md
-# AGENTS.md override
-- 使用adb设备"liuqin"测试软件
-- 不要跑全量测试，只跑修改的模块的测试
