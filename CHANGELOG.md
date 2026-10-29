@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.9.4 (2026-10-30)
+
+**Features**
+
+- **config** Import and export the added rules as a rule list (11dc6a0)
+
 ## v0.9.3 (2026-10-29)
 
 **Features**
