@@ -635,8 +635,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           # The changelog is derived from the commits between two tags, so the
-          # job needs the history and the tags a shallow clone leaves behind.
+          # job needs the history and the tags a shallow clone leaves behind,
+          # and `flutter pub get` runs the Core's build hook, which reads the
+          # submodule.
           fetch-depth: 0
+          submodules: recursive
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
