@@ -13,6 +13,7 @@
 
 **Bug Fixes**
 
+- **android** Release builds keep the names the service models cross the channel as JSON with, so the Core answers again (bb41ef8)
 - **tailscale** Forget a status once the config drops the node (6b69128)
 - **proxies** A profile switch refreshes the proxies page instead of leaving the previous profile's nodes (45ac879)
 - **proxies** The refresh after a switch stops when the page is already gone (132f5ef)

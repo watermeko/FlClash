@@ -46,6 +46,11 @@
           "type": "fix",
           "entries": [
             {
+              "id": "bb41ef8",
+              "scope": "android",
+              "text": "Release builds keep the names the service models cross the channel as JSON with, so the Core answers again"
+            },
+            {
               "id": "6b69128",
               "scope": "tailscale",
               "text": "Forget a status once the config drops the node"
